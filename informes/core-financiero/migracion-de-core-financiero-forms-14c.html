@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- e^(iπ) + 1 = 0 — Identidad de Euler. Un saludo a quien esté revisando el código fuente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Migracion de Core Financiero - Forms 14c — Informes Operaciones TI CAFSA</title>
+<link rel="icon" href="../../assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="../../index.html" class="brand-logo-link" aria-label="Ir a la pantalla principal">
+      <img src="../../assets/img/logos/logo-cafsa-blanco.png" alt="CAFSA">
+    </a>
+    <div>
+      <h1>Informes de Operaciones de TI</h1>
+      <p class="subtitle">Gerencia Operativa de TI — CAFSA</p>
+    </div>
+  </div>
+</header>
+
+<p class="breadcrumb"><a href="../../index.html">&larr; Volver al índice de informes</a></p>
+
+<main>
+  <div class="card-top">
+    <span class="estado-badge estado-rojo">Atrasado</span>
+    <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
+  </div>
+  <h2 class="page-title">Migracion de Core Financiero - Forms 14c</h2>
+  <p class="page-meta">core-financiero · 2026-08-27 · Cumplimiento: En riesgo</p>
+
+  <div class="resumen-ejecutivo">
+    <strong>Resumen ejecutivo:</strong> Proyecto más crítico de TI: migración del núcleo financiero a Oracle Forms 14C. El proveedor (BestResource) ya migró el 90% del catálogo de objetos (503 en total). CAFSA lleva evaluado el 41.4% (208 objetos: 149 aprobados, 59 rechazados), pero solo el 29.6% del catálogo total está realmente aprobado — los 59 rechazados necesitan corrección y re-prueba, no cuentan como avance. Selección de proveedor cerrada. El módulo MAYOR tiene la tasa de rechazo más alta (35 de 64 objetos evaluados, es decir, apenas 18 aprobados); GENERALES es el más atrasado en pruebas (105 de 109 pendientes). Infraestructura de producción y pruebas por roles de usuario todavía no arrancan. Meta: 30/09/2026.
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-box">
+      <span class="kpi-valor">503</span>
+      <span class="kpi-label">Objetos totales en el plan de pruebas</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor pct-semaforo" data-pct="90">90%</span>
+      <span class="kpi-label">Migrado por el proveedor (BestResource)</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor">41.4%</span>
+      <span class="kpi-label">Evaluado por CAFSA (aprobado + rechazado)</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor pct-semaforo" data-pct="29.6">29.6%</span>
+      <span class="kpi-label">Aprobado por CAFSA — aceptación real</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor">59</span>
+      <span class="kpi-label">Objetos rechazados (11.7% del total)</span>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <h2>Avance por fase</h2>
+    <p class="chart-subtitulo">Estructura real del proyecto en Jira (Epic DES-1741 y sus 7 tareas hijas, agrupadas en 5 fases).</p>
+    <div class="chart-box" style="height:290px; max-width:640px;">
+      <canvas id="grafico-avance"></canvas>
+    </div>
+    <ul class="fases-lista">
+      <li><span class="fase-nombre">Seleccion de proveedor</span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
+      <li><span class="fase-nombre">Migracion y pruebas de modulos/objetos Abanks</span><span class="fase-pct pct-semaforo" data-pct="30">30%</span></li>
+      <li><span class="fase-nombre">Pruebas por roles de usuario</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
+      <li><span class="fase-nombre">Infraestructura de produccion</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
+      <li><span class="fase-nombre">Coordinacion y seguimiento tecnico con BestResource</span><span class="fase-pct pct-semaforo" data-pct="50">50%</span></li>
+    </ul>
+    <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%. La fase "Migración y pruebas de módulos/objetos" es la excepción: su 30% es una medición real, tomada del plan de pruebas — objetos aprobados sobre el total del catálogo (503). Un objeto evaluado y rechazado no cuenta como avance: necesita corrección y re-prueba.</p>
+  </div>
+
+  <div class="chart-container">
+    <h2>Plan de pruebas por módulo</h2>
+    <p class="chart-subtitulo">503 objetos · fuente: plan de pruebas en SharePoint (actualización constante) · corte al 27/08/2026.</p>
+    <div class="chart-box chart-box-ancho" style="height:260px;">
+      <canvas id="grafico-modulos"></canvas>
+    </div>
+    <div style="overflow-x:auto; margin-top:14px;">
+      <table class="tabla-datos">
+        <thead>
+          <tr><th>Módulo</th><th>Total</th><th>Pendiente</th><th>En proceso</th><th>Aprobado</th><th>Rechazado</th><th>% Evaluado</th><th>% Aprobado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>MAYOR</td><td>64</td><td>11</td><td>0</td><td>18</td><td>35</td><td>82.8%</td><td><span class="pct-semaforo" data-pct="28.1">28.1%</span></td></tr>
+          <tr><td>GENERALES</td><td>109</td><td>105</td><td>0</td><td>4</td><td>0</td><td>3.7%</td><td><span class="pct-semaforo" data-pct="3.7">3.7%</span></td></tr>
+          <tr><td>BRANCH</td><td>62</td><td>58</td><td>0</td><td>4</td><td>0</td><td>6.5%</td><td><span class="pct-semaforo" data-pct="6.5">6.5%</span></td></tr>
+          <tr><td>COLOCACIÓN</td><td>105</td><td>58</td><td>2</td><td>38</td><td>7</td><td>42.9%</td><td><span class="pct-semaforo" data-pct="36.2">36.2%</span></td></tr>
+          <tr><td>GARANTÍAS</td><td>49</td><td>14</td><td>1</td><td>21</td><td>13</td><td>69.4%</td><td><span class="pct-semaforo" data-pct="42.9">42.9%</span></td></tr>
+          <tr><td>BANCOS</td><td>39</td><td>26</td><td>0</td><td>10</td><td>3</td><td>33.3%</td><td><span class="pct-semaforo" data-pct="25.6">25.6%</span></td></tr>
+          <tr><td>SOLICITUDES</td><td>38</td><td>20</td><td>0</td><td>17</td><td>1</td><td>47.4%</td><td><span class="pct-semaforo" data-pct="44.7">44.7%</span></td></tr>
+          <tr><td>CAPTACIÓN</td><td>37</td><td>0</td><td>0</td><td>37</td><td>0</td><td>100.0%</td><td><span class="pct-semaforo" data-pct="100">100.0%</span></td></tr>
+          <tr class="tabla-datos-total"><td>Total general</td><td>503</td><td>292</td><td>3</td><td>149</td><td>59</td><td>41.4%</td><td><span class="pct-semaforo" data-pct="29.6">29.6%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fases-nota">Dos porcentajes distintos, a propósito: <strong>% Evaluado</strong> = (Aprobado + Rechazado) / Total — cuánto se ha revisado, sin importar el resultado (cobertura de pruebas). <strong>% Aprobado</strong> = Aprobado / Total — aceptación real, lo único que cuenta como avance genuino. El semáforo de color (rojo en 0%, ámbar en 50%, verde en 100%, transición suave vía coseno — ver <code>assets/js/color-semaforo.js</code>) se aplica solo a % Aprobado: es el número que refleja si un módulo de verdad avanza o solo fue tocado. Por eso MAYOR se ve en rojo pese a tener un 82.8% evaluado — de esos, más de la mitad fueron rechazados, así que su aceptación real es apenas 28.1%.</p>
+  </div>
+
+  <div class="detalle-links">
+    <h2>Recomendaciones por segmento</h2>
+    <div class="segmentos-recomendaciones">
+      <article class="segmento-recomendacion segmento-rojo">
+        <h3>MAYOR — prioridad máxima, hallazgo crítico</h3>
+        <p>De los 64 objetos de MAYOR, solo 18 están aprobados (28.1% de aceptación real). 35 fueron rechazados — el 54.7% de lo evaluado, la tasa de rechazo más alta de todo el plan. Es el módulo contable (libro mayor); una tasa de rechazo mayoritaria ahí tiene relación directa con integridad de estados financieros. Recomendación: sesión dedicada con el proveedor enfocada solo en causa raíz de estos rechazos antes de seguir empujando avance en otros módulos, y valorar si el hallazgo obliga a ajustar el cronograma del 30/09/2026.</p>
+      </article>
+      <article class="segmento-recomendacion segmento-rojo">
+        <h3>GENERALES — cuello de botella de volumen</h3>
+        <p>109 objetos (21.7% de todo el catálogo) y solo 3.7% de aceptación — prácticamente sin iniciar pruebas. Es la pestaña más grande del plan y la que menos se ha tocado. Recomendación: asignar fecha de arranque explícita cuanto antes; si no arranca en las próximas semanas, se vuelve difícil cerrarlo antes del 30/09/2026 junto con el resto.</p>
+      </article>
+      <article class="segmento-recomendacion segmento-rojo">
+        <h3>BRANCH — igual de atrasado</h3>
+        <p>93.5% pendiente (58 de 62), solo 4 aprobados y 0 rechazados — significa que casi nada se ha probado todavía, no que lo probado esté fallando. Recomendación: priorizar la sub-área de atención en ventanilla primero — es operación diaria de cara al cliente en agencias, mayor impacto si falla en producción.</p>
+      </article>
+      <article class="segmento-recomendacion segmento-amarillo">
+        <h3>COLOCACIÓN — el módulo más grande, con un hallazgo regulatorio puntual</h3>
+        <p>105 objetos, 55% pendiente, 36.2% de aceptación real. El bloque de Servicios al Cliente concentra el mayor volumen de pendientes de todo el plan. De los 7 objetos rechazados, 2 corresponden a reportes regulatorios SUGEF (calificación de clientes) — requieren seguimiento puntual, independiente del resto, dado el componente normativo.</p>
+      </article>
+      <article class="segmento-recomendacion segmento-amarillo">
+        <h3>GARANTÍAS — evaluado por delante, pero con rechazo concentrado</h3>
+        <p>69.4% evaluado (el segundo más alto después de MAYOR), pero de eso solo 42.9% terminó aprobado. De los 13 rechazados, la mayoría se concentra en dos sub-áreas de cierre/cobro (control de pólizas y procesos de fin de día) — el patrón sugiere un problema puntual de configuración o proceso, más que fallas aisladas. Recomendación: revisar causa raíz de esos dos bloques antes de cerrar el resto del módulo.</p>
+      </article>
+      <article class="segmento-recomendacion segmento-amarillo">
+        <h3>BANCOS — disperso, sin bloque dominante</h3>
+        <p>66.7% pendiente, repartido entre varias sub-áreas sin que ninguna concentre más del 18%. Recomendación: priorizar transacciones y procesos de fin de día por ser operación diaria y cierre contable respectivamente; el resto puede seguir el orden natural del plan.</p>
+      </article>
+      <article class="segmento-recomendacion segmento-amarillo">
+        <h3>SOLICITUDES — el mejor aprobado después de CAPTACIÓN</h3>
+        <p>44.7% de aceptación real, el segundo más alto del plan. El bloque de mantenimientos (el más grande del módulo) ya está mayormente aprobado. Recomendación: seguimiento estándar, sin urgencia particular más allá de cerrar los bloques menores que faltan.</p>
+      </article>
+      <article class="segmento-recomendacion segmento-verde">
+        <h3>CAPTACIÓN — cerrado, usar como línea base</h3>
+        <p>100% evaluado y aprobado (37 de 37) — único módulo completo. Recomendación: congelar cambios (control de regresión) y usarlo como referencia de aceptación para los demás módulos; solo requiere una pasada de regresión antes del go-live general.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="detalle-links">
+    <h2>Recomendaciones transversales</h2>
+    <ul>
+      <li>La brecha real es de <strong>capacidad de pruebas</strong>, no de entrega del proveedor (90% migrado vs. 29.6% aprobado; 41.4% ya evaluado). Con ~34 días al 30/09/2026 y 292 objetos pendientes más 59 rechazados por corregir y re-probar, vale la pena reforzar tiempo dedicado a pruebas en las próximas semanas — es el recurso limitante, no Jira ni el proveedor.</li>
+      <li>Infraestructura de producción y pruebas por roles de usuario siguen en "por hacer". Conviene planificarlos en paralelo a las pruebas de objetos (no esperar a tener el 100% de objetos aprobados) para no generar un cuello de botella secuencial al final del proyecto.</li>
+      <li>El pendiente de coordinación de infraestructura ya se actualizó con los 3 issues puntuales (servidores, componentes, Virtualizador de Oracle) en vez de referenciar solo la Épica — ver <a href="../../reportes/cristopher-perez-ugalde/index.html">Reportes y seguimientos</a>.</li>
+      <li>El campo de severidad/prioridad del plan de pruebas está subutilizado (menos del 1% de los objetos revisados están marcados "Crítica"); conviene definir un criterio explícito y consistente — por ejemplo, marcar como crítico todo lo vinculado a reportes regulatorios, cierre contable o atención en ventanilla — para que ese campo sea un filtro realmente útil en el siguiente corte.</li>
+    </ul>
+  </div>
+
+  <div class="detalle-links">
+    <h2>Más detalle</h2>
+    <ul>
+      <li><a href="https://cafsagroup.atlassian.net/browse/DES-1741" target="_blank" rel="noopener">Epica del proyecto (DES-1741)</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/DES-1742" target="_blank" rel="noopener">Seleccion de proveedor - Finalizada (DES-1742)</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/DES-1743" target="_blank" rel="noopener">Migracion y pruebas de modulos/objetos Abanks (DES-1743)</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/DES-1744" target="_blank" rel="noopener">Pruebas por roles de usuario (DES-1744)</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/DES-1745" target="_blank" rel="noopener">Instalacion de nuevos servidores y ambientes de produccion (DES-1745)</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/DES-1748" target="_blank" rel="noopener">Instalacion de componentes en los servidores (DES-1748)</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/DES-1753" target="_blank" rel="noopener">Instalacion de ambiente Virtualizador de Oracle (DES-1753)</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/DES-2707" target="_blank" rel="noopener">Sesiones de seguimiento con BestResource (DES-2707)</a></li>
+    </ul>
+  </div>
+
+  <button class="btn-consulta"
+          data-titulo="Migracion de Core Financiero - Forms 14c"
+          data-resumen="Proyecto mas critico de TI: migracion del nucleo financiero a Oracle Forms 14C. El proveedor (BestResource) ya migro el 90% del catalogo de objetos (503 en total). CAFSA lleva evaluado el 41.4% (149 aprobados, 59 rechazados), pero solo el 29.6% del catalogo esta realmente aprobado. Modulo MAYOR con la tasa de rechazo mas alta (54.7% de lo evaluado, solo 28.1% aprobado). GENERALES el mas atrasado en pruebas (96.3% pendiente). Meta: 30/09/2026."
+          onclick="enviarConsulta(this)">
+    Enviar consulta sobre este informe
+  </button>
+</main>
+
+<footer class="site-footer">
+  CAFSA — Informes de Operaciones de TI
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="../../assets/js/color-semaforo.js"></script>
+<script src="../../assets/js/mailto-consulta.js"></script>
+<script>
+  Chart.register(ChartDataLabels);
+
+  new Chart(document.getElementById('grafico-avance'), {
+    type: 'bar',
+    data: {
+      labels: ["Seleccion de proveedor", "Migracion y pruebas de modulos/objetos Abanks", "Pruebas por roles de usuario", "Infraestructura de produccion", "Coordinacion y seguimiento tecnico con BestResource"],
+      datasets: [{
+        label: '% avance',
+        data: [100, 30, 0, 0, 50],
+        backgroundColor: ["#2e7d32", "#b8860b", "#9a9a9a", "#9a9a9a", "#b8860b"]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+          color: (ctx) => colorSemaforoPct(ctx.dataset.data[ctx.dataIndex]),
+          font: { size: 11, weight: '600' },
+          formatter: (v) => `${v}%`
+        }
+      },
+      scales: { x: { beginAtZero: true, max: 100 } }
+    }
+  });
+
+  // Barras y etiquetas del plan de pruebas por módulo: color continuo por
+  // % APROBADO (aceptación real), no por % evaluado — un módulo con
+  // muchos rechazos no puede verse "bien" solo porque ya se revisó.
+  const datosModulos = [28.1, 3.7, 6.5, 36.2, 42.9, 25.6, 44.7, 100.0];
+  new Chart(document.getElementById('grafico-modulos'), {
+    type: 'bar',
+    data: {
+      labels: ['MAYOR', 'GENERALES', 'BRANCH', 'COLOCACIÓN', 'GARANTÍAS', 'BANCOS', 'SOLICITUDES', 'CAPTACIÓN'],
+      datasets: [{
+        label: '% aprobado',
+        data: datosModulos,
+        backgroundColor: datosModulos.map((v) => colorSemaforoPct(v))
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+          color: (ctx) => colorSemaforoPct(ctx.dataset.data[ctx.dataIndex]),
+          font: { size: 11, weight: '600' },
+          formatter: (v) => `${v}%`
+        }
+      },
+      scales: { x: { beginAtZero: true, max: 100 } }
+    }
+  });
+</script>
+
+</body>
+</html>

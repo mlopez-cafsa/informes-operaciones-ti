@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- e^(iπ) + 1 = 0 — Identidad de Euler. Un saludo a quien esté revisando el código fuente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Informes ejecutivos de Operaciones de TI para Gerencia — CAFSA">
+<meta name="theme-color" content="#111111">
+<title>Informes Operaciones TI — CAFSA</title>
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header" id="site-header">
+  <div class="brand">
+    <a href="index.html" class="brand-logo-link" aria-label="Ir a la pantalla principal">
+      <img src="assets/img/logos/logo-cafsa-blanco.png" alt="CAFSA">
+    </a>
+    <div>
+      <h1>Informes de Operaciones de TI</h1>
+      <p class="subtitle">Gerencia Operativa de TI — CAFSA</p>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <a href="reportes/index.html">Reportes y seguimientos</a>
+  </nav>
+</header>
+
+<main id="contenido">
+
+  <section class="seccion-reportes" aria-labelledby="titulo-reportes">
+    <div class="seccion-reportes-header">
+      <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px">Reportes y seguimientos</h2>
+      <a href="reportes/index.html" class="ver-todos">Ver todos los pendientes por persona &rarr;</a>
+    </div>
+    <p class="page-meta">
+      Solicitudes puntuales dirigidas a una persona específica, con enlace a
+      Jira y seguimiento · 2 persona(s) con pendientes registrados
+    </p>
+    <div class="personas-grid" id="grid-personas-reportes">
+    <div class="persona-card">
+      <div class="card-top">
+        <span class="cargo" title="Jefe de TI">Jefe de TI</span>
+        <span class="estado-badge estado-rojo">Atención requerida</span>
+      </div>
+      <h3><a href="reportes/cristopher-perez-ugalde/index.html">Cristopher Pérez Ugalde</a></h3>
+      <p class="conteo">1 pendiente(s) abierto(s) de 1 total</p>
+      <p class="formula-nota" title="Teorema de Pitágoras: magnitud = √(a²+b²) — a = pendientes abiertos, b = de esos, cuántos son de criticidad alta. Así lo de criticidad alta 'pesa' más que lineal en el total.">Magnitud de atención (√(a²+b²)): 1.41</p>
+      <a href="reportes/cristopher-perez-ugalde/index.html">Ver pendientes y solicitudes &rarr;</a>
+    </div>
+    <div class="persona-card">
+      <div class="card-top">
+        <span class="cargo" title="Coordinación de Proyectos">Coordinación de Proyectos</span>
+        <span class="estado-badge estado-rojo">Atención requerida</span>
+      </div>
+      <h3><a href="reportes/maria-cristina-hernandez/index.html">María Cristina Hernández</a></h3>
+      <p class="conteo">1 pendiente(s) abierto(s) de 1 total</p>
+      <p class="formula-nota" title="Teorema de Pitágoras: magnitud = √(a²+b²) — a = pendientes abiertos, b = de esos, cuántos son de criticidad alta. Así lo de criticidad alta 'pesa' más que lineal en el total.">Magnitud de atención (√(a²+b²)): 1.41</p>
+      <a href="reportes/maria-cristina-hernandez/index.html">Ver pendientes y solicitudes &rarr;</a>
+    </div>
+    </div>
+  </section>
+
+  <hr class="separador-seccion">
+
+  <section class="panel-consolidado" aria-labelledby="titulo-consolidado">
+    <div class="seccion-reportes-header">
+      <h2 id="titulo-consolidado" class="page-title" style="margin-bottom:2px">Mi seguimiento (Jira)</h2>
+      <a href="https://cafsagroup.atlassian.net/issues?jql=assignee%3DcurrentUser()%20AND%20statusCategory%20!%3D%20Done%20ORDER%20BY%20priority%20DESC%2C%20duedate%20ASC" class="ver-todos" target="_blank" rel="noopener">Ver los 44 pendientes en Jira &rarr;</a>
+    </div>
+    <p class="page-meta">
+      Consolidado de mis tareas abiertas asignadas en Jira, actualizado al 2026-08-27
+      · 44 pendiente(s) abierto(s)
+    </p>
+    <div class="kpi-grid kpi-grid-mini">
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">2</span><span class="kpi-label">Highest</span></div>
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">4</span><span class="kpi-label">High</span></div>
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">36</span><span class="kpi-label">Medium</span></div>
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">2</span><span class="kpi-label">Lowest</span></div>
+    </div>
+    <h3 class="radar-titulo">Radar de urgencia <span class="formula-nota" title="Los 5 pendientes con mayor F = (50 × peso de prioridad) / días_restantes², solo entre los que tienen fecha de vencimiento en Jira.">top 5 por urgencia calculada</span></h3>
+    <div class="radar-urgencia">
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-216" target="_blank" rel="noopener">
+        <span class="estado-badge estado-rojo">Highest</span>
+        <span class="radar-texto">
+          <strong>PP-216</strong> — XL-COR-01  Implementación del nuevo Cotizador
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 133 día(s) · F=250.0</span>
+        </span>
+      </a>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/GDT-100" target="_blank" rel="noopener">
+        <span class="estado-badge estado-rojo">High</span>
+        <span class="radar-texto">
+          <strong>GDT-100</strong> — XL-TEC-02 Gobierno y Cumplimiento Tecnológico (COBIT 2019 / CONASSIF 5-24) - Actualización y gestión de expedientes de Proveedores (renegociación de contratos)
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 217 día(s) · F=200.0</span>
+        </span>
+      </a>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/GDT-320" target="_blank" rel="noopener">
+        <span class="estado-badge estado-amarillo">Medium</span>
+        <span class="radar-texto">
+          <strong>GDT-320</strong> — EXPEDIENTE - SOFTLAND COSTA RICA SOCIEDAD DE RESPONSABILIDAD LIMITADA
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 199 día(s) · F=150.0</span>
+        </span>
+      </a>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/BMO-316" target="_blank" rel="noopener">
+        <span class="estado-badge estado-amarillo">Medium</span>
+        <span class="radar-texto">
+          <strong>BMO-316</strong> — 08 - 2026 | d.MLOPEZZ  - OPERACIONES DE TI
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 4 día(s) · F=9.38</span>
+        </span>
+      </a>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1741" target="_blank" rel="noopener">
+        <span class="estado-badge estado-rojo">Highest</span>
+        <span class="radar-texto">
+          <strong>DES-1741</strong> — Migración Core Financiero ABANKS - Forms 14c
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 34 día(s) · F=0.22</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <hr class="separador-seccion">
+
+  <h2 class="page-title">Informes</h2>
+  <p class="page-meta">
+    Actualizado a partir del seguimiento interno de Operaciones de TI del 2026-08-27
+    · <span id="contador-visibles">8</span> de 8 informe(s)
+  </p>
+
+  <div class="toolbar">
+    <div class="buscador-wrap">
+      <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="10.4" y1="10.4" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <input
+        type="search"
+        id="buscador"
+        placeholder="Buscar por título, categoría o palabra clave..."
+        aria-label="Buscar informes"
+        autocomplete="off">
+    </div>
+
+    <label class="orden-wrap" for="orden">
+      Ordenar por
+      <select id="orden" aria-label="Ordenar informes">
+        <option value="recientes">Más recientes</option>
+        <option value="prioridad">Prioridad</option>
+        <option value="estado">Estado (semáforo)</option>
+        <option value="titulo">Título (A-Z)</option>
+      </select>
+    </label>
+  </div>
+
+  <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría">
+    <button type="button" class="active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
+      <button type="button" data-filtro="backlog" role="tab" aria-selected="false">backlog</button>
+      <button type="button" data-filtro="comercial" role="tab" aria-selected="false">comercial</button>
+      <button type="button" data-filtro="core-financiero" role="tab" aria-selected="false">core-financiero</button>
+      <button type="button" data-filtro="finanzas-internas" role="tab" aria-selected="false">finanzas-internas</button>
+      <button type="button" data-filtro="gobierno-ti" role="tab" aria-selected="false">gobierno-ti</button>
+      <button type="button" data-filtro="infraestructura" role="tab" aria-selected="false">infraestructura</button>
+      <button type="button" data-filtro="operaciones" role="tab" aria-selected="false">operaciones</button>
+      <button type="button" data-filtro="riesgo-tecnologico" role="tab" aria-selected="false">riesgo-tecnologico</button>
+  </nav>
+
+  <p class="sin-resultados" id="sin-resultados" hidden>
+    No hay informes que coincidan con la búsqueda o el filtro seleccionado.
+  </p>
+
+  <div class="informes-grid" id="grid-informes" aria-live="polite">
+    <div class="informe-card" data-categoria="backlog" data-busqueda="backlog y mejoras continuas revisado contra jira en vivo (27/08/2026): ninguna de las 4 iniciativas de este backlog ha arrancado todavia. la que mas necesita seguimiento es bmo-118, implementacion, analisis y estabilizacion del framework etl | datawarehouse -- figura 'abierta', sin avance. le siguen mejoras en facturacion y transferencias (bmo-13), agilizar el analisis crediticio (pp-264) y un acuerdo operativo de comite pendiente de cerrar (st-2773). ninguna tiene fecha limite en jira todavia. backlog" data-prioridad="alta" data-fecha="2026-08-27" data-estado="amarillo">
+      <div class="card-top">
+        <span class="categoria">backlog</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
+          <span class="estado-badge estado-amarillo">En riesgo</span>
+        </div>
+      </div>
+      <h3><a href="informes/backlog/backlog-y-mejoras-continuas.html">Backlog y mejoras continuas</a></h3>
+      <p class="resumen">Revisado contra Jira en vivo (27/08/2026): ninguna de las 4 iniciativas de este backlog ha arrancado todavia. La que mas necesita seguimiento es BMO-118, Implementacion, Analisis y Estabilizacion del Framework ETL | DataWareHouse -- figura 'Abierta', sin avance. Le siguen mejoras en facturacion y transferencias (BMO-13), agilizar el analisis crediticio (PP-264) y un acuerdo operativo de Comite pendiente de cerrar (ST-2773). Ninguna tiene fecha limite en Jira todavia.</p>
+      <div class="progreso" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 4 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" style="width:0%"></div></div>
+        <span class="progreso-label">4 fase(s) · promedio (<span class="pct-semaforo" data-pct="0">0%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-08-27</span>
+        <a href="informes/backlog/backlog-y-mejoras-continuas.html">Ver informe &rarr;</a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="gobierno-ti" data-busqueda="gobierno de ti y cumplimiento (cobit / conassif) cluster de gobierno de ti (cobit 2019 / conassif 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. gdt-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'en curso' en jira -- es el mas urgente. gdt-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. se suman gdt-106 (mismo eje, plazo 31/12/2026), el expediente abierto de softland (gdt-320) y el seguimiento de gbm de costa rica (gdt-107). gobierno-ti" data-prioridad="alta" data-fecha="2026-08-27" data-estado="rojo">
+      <div class="card-top">
+        <span class="categoria">gobierno-ti</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
+          <span class="estado-badge estado-rojo">Atrasado</span>
+        </div>
+      </div>
+      <h3><a href="informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html">Gobierno de TI y Cumplimiento (COBIT / CONASSIF)</a></h3>
+      <p class="resumen">Cluster de gobierno de TI (COBIT 2019 / CONASSIF 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. GDT-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'En curso' en Jira -- es el mas urgente. GDT-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. Se suman GDT-106 (mismo eje, plazo 31/12/2026), el expediente abierto de Softland (GDT-320) y el seguimiento de GBM de Costa Rica (GDT-107).</p>
+      <div class="progreso" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" style="width:30%"></div></div>
+        <span class="progreso-label">5 fase(s) · promedio (<span class="pct-semaforo" data-pct="30">30%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-08-27 &middot; Vence: 22/01/2026 (vencido hace 217 días)</span>
+        <a href="informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html">Ver informe &rarr;</a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="core-financiero" data-busqueda="migracion de core financiero - forms 14c proyecto mas critico de ti: migracion del nucleo financiero a oracle forms 14c. el proveedor (bestresource) ya migro el 90% del catalogo de objetos (503 en total). cafsa lleva evaluado el 41.4% (208 objetos: 149 aprobados, 59 rechazados), pero solo el 29.6% del catalogo total esta realmente aprobado -- los 59 rechazados necesitan correccion y re-prueba, no cuentan como avance. seleccion de proveedor cerrada. el modulo mayor tiene la tasa de rechazo mas alta (35 de 64 objetos evaluados, es decir, apenas 18 aprobados); generales es el mas atrasado en pruebas (105 de 109 pendientes). infraestructura de produccion y pruebas por roles de usuario todavia no arrancan. meta: 30/09/2026. desglose completo del plan de pruebas por modulo y recomendaciones por segmento en el detalle de este informe. core-financiero" data-prioridad="alta" data-fecha="2026-08-27" data-estado="rojo">
+      <div class="card-top">
+        <span class="categoria">core-financiero</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
+          <span class="estado-badge estado-rojo">Atrasado</span>
+        </div>
+      </div>
+      <h3><a href="informes/core-financiero/migracion-de-core-financiero-forms-14c.html">Migracion de Core Financiero - Forms 14c</a></h3>
+      <p class="resumen">Proyecto mas critico de TI: migracion del nucleo financiero a Oracle Forms 14C. El proveedor (BestResource) ya migro el 90% del catalogo de objetos (503 en total). CAFSA lleva evaluado el 41.4% (208 objetos: 149 aprobados, 59 rechazados), pero solo el 29.6% del catalogo total esta realmente aprobado -- los 59 rechazados necesitan correccion y re-prueba, no cuentan como avance. Seleccion de proveedor cerrada. El modulo MAYOR tiene la tasa de rechazo mas alta (35 de 64 objetos evaluados, es decir, apenas 18 aprobados); GENERALES es el mas atrasado en pruebas (105 de 109 pendientes). Infraestructura de produccion y pruebas por roles de usuario todavia no arrancan. Meta: 30/09/2026. Desglose completo del plan de pruebas por modulo y recomendaciones por segmento en el detalle de este informe.</p>
+      <div class="progreso" role="progressbar" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" style="width:36%"></div></div>
+        <span class="progreso-label">5 fase(s) · promedio (<span class="pct-semaforo" data-pct="36">36%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-08-27 &middot; Vence: 30/09/2026 (faltan 34 días)</span>
+        <a href="informes/core-financiero/migracion-de-core-financiero-forms-14c.html">Ver informe &rarr;</a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="comercial" data-busqueda="modernizacion comercial - cotizador y vista 360 de cliente el nuevo cotizador fue implementado y esta finalizado (pendiente de reflejar el cierre formal en jira). las iniciativas relacionadas de integracion con otros sistemas quedan en evaluacion de prioridad y asignacion de recursos. comercial" data-prioridad="media" data-fecha="2026-08-21" data-estado="amarillo">
+      <div class="card-top">
+        <span class="categoria">comercial</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-media">Prioridad media</span>
+          <span class="estado-badge estado-amarillo">En riesgo</span>
+        </div>
+      </div>
+      <h3><a href="informes/comercial/modernizacion-comercial-cotizador-y-vista-360-de-cliente.html">Modernizacion comercial - Cotizador y Vista 360 de Cliente</a></h3>
+      <p class="resumen">El nuevo cotizador fue implementado y esta finalizado (pendiente de reflejar el cierre formal en Jira). Las iniciativas relacionadas de integracion con otros sistemas quedan en evaluacion de prioridad y asignacion de recursos.</p>
+      <div class="progreso" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 2 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" style="width:50%"></div></div>
+        <span class="progreso-label">2 fase(s) · promedio (<span class="pct-semaforo" data-pct="50">50%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-08-21</span>
+        <a href="informes/comercial/modernizacion-comercial-cotizador-y-vista-360-de-cliente.html">Ver informe &rarr;</a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="riesgo-tecnologico" data-busqueda="gestion de riesgo tecnologico y obsolescencia critica programa que agrupa tres iniciativas de modernizacion y mitigacion de riesgo tecnologico: migracion de sitio administrativo, integracion de canal de autenticacion alterno, y plan de mitigacion de riesgo de obsolescencia en bases de datos. meta mas cercana: 30/09/2026. riesgo-tecnologico" data-prioridad="media" data-fecha="2026-08-21" data-estado="amarillo">
+      <div class="card-top">
+        <span class="categoria">riesgo-tecnologico</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-media">Prioridad media</span>
+          <span class="estado-badge estado-amarillo">En riesgo</span>
+        </div>
+      </div>
+      <h3><a href="informes/riesgo-tecnologico/gestion-de-riesgo-tecnologico-y-obsolescencia-critica.html">Gestion de riesgo tecnologico y obsolescencia critica</a></h3>
+      <p class="resumen">Programa que agrupa tres iniciativas de modernizacion y mitigacion de riesgo tecnologico: migracion de sitio administrativo, integracion de canal de autenticacion alterno, y plan de mitigacion de riesgo de obsolescencia en bases de datos. Meta mas cercana: 30/09/2026.</p>
+      <div class="progreso" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 3 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" style="width:3%"></div></div>
+        <span class="progreso-label">3 fase(s) · promedio (<span class="pct-semaforo" data-pct="3">3%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-08-21 &middot; Vence: 30/09/2026 (faltan 34 días)</span>
+        <a href="informes/riesgo-tecnologico/gestion-de-riesgo-tecnologico-y-obsolescencia-critica.html">Ver informe &rarr;</a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="infraestructura" data-busqueda="modernizacion de infraestructura /gx actualizacion tecnologica y de seguridad de la plataforma /gx. preparacion tecnica y conectividad completadas; continua en curso el diseno de arquitectura, certificados y validaciones antes del pase a produccion. infraestructura" data-prioridad="alta" data-fecha="2026-08-21" data-estado="amarillo">
+      <div class="card-top">
+        <span class="categoria">infraestructura</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
+          <span class="estado-badge estado-amarillo">En riesgo</span>
+        </div>
+      </div>
+      <h3><a href="informes/infraestructura/modernizacion-de-infraestructura-gx.html">Modernizacion de infraestructura /gx</a></h3>
+      <p class="resumen">Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas; continua en curso el diseno de arquitectura, certificados y validaciones antes del pase a produccion.</p>
+      <div class="progreso" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 10 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" style="width:20%"></div></div>
+        <span class="progreso-label">10 fase(s) · promedio (<span class="pct-semaforo" data-pct="20">20%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-08-21</span>
+        <a href="informes/infraestructura/modernizacion-de-infraestructura-gx.html">Ver informe &rarr;</a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="finanzas-internas" data-busqueda="correccion de discrepancias en estimaciones contables correccion de discrepancias detectadas en calculos de estimaciones contables. coordinacion tecnica y documentacion completadas; continua el diagnostico y ajuste de los distintos componentes de calculo. finanzas-internas" data-prioridad="alta" data-fecha="2026-08-21" data-estado="amarillo">
+      <div class="card-top">
+        <span class="categoria">finanzas-internas</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
+          <span class="estado-badge estado-amarillo">En riesgo</span>
+        </div>
+      </div>
+      <h3><a href="informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html">Correccion de discrepancias en estimaciones contables</a></h3>
+      <p class="resumen">Correccion de discrepancias detectadas en calculos de estimaciones contables. Coordinacion tecnica y documentacion completadas; continua el diagnostico y ajuste de los distintos componentes de calculo.</p>
+      <div class="progreso" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 6 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" style="width:33%"></div></div>
+        <span class="progreso-label">6 fase(s) · promedio (<span class="pct-semaforo" data-pct="33">33%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-08-21</span>
+        <a href="informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html">Ver informe &rarr;</a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="operaciones" data-busqueda="operaciones diarias bitacora de labores diarias de ti: 530.5 horas documentadas en 58 dias habiles, del 05/06/2026 al 20/08/2026 (registro mas antiguo disponible). distribucion: 70% operaciones internas de cafsa, 30% gestion y coordinacion con proveedores externos. operaciones" data-prioridad="media" data-fecha="2026-08-21" data-estado="verde">
+      <div class="card-top">
+        <span class="categoria">operaciones</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-media">Prioridad media</span>
+          <span class="estado-badge estado-verde">A tiempo</span>
+        </div>
+      </div>
+      <h3><a href="informes/operaciones/operaciones-diarias.html">Operaciones Diarias</a></h3>
+      <p class="resumen">Bitacora de labores diarias de TI: 530.5 horas documentadas en 58 dias habiles, del 05/06/2026 al 20/08/2026 (registro mas antiguo disponible). Distribucion: 70% operaciones internas de CAFSA, 30% gestion y coordinacion con proveedores externos.</p>
+
+      <div class="card-footer">
+        <span>2026-08-21</span>
+        <a href="informes/operaciones/operaciones-diarias.html">Ver informe &rarr;</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  Generado automáticamente por scripts/manage_informes.py — no editar este archivo a mano.
+</footer>
+
+<script src="assets/js/color-semaforo.js"></script>
+<script>
+(function () {
+  const grid = document.getElementById('grid-informes');
+  const cards = Array.from(grid.querySelectorAll('.informe-card'));
+  const buscador = document.getElementById('buscador');
+  const orden = document.getElementById('orden');
+  const filtros = document.getElementById('filtros');
+  const sinResultados = document.getElementById('sin-resultados');
+  const contador = document.getElementById('contador-visibles');
+
+  let filtroActivo = 'todos';
+
+  function normalizar(texto) {
+    return texto
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
+
+  const PRIORIDAD_PESO = { alta: 0, media: 1, baja: 2, '': 3 };
+  const ESTADO_PESO = { rojo: 0, amarillo: 1, neutral: 2, verde: 3 };
+
+  function aplicarFiltros() {
+    const termino = normalizar(buscador.value.trim());
+    let visibles = 0;
+
+    cards.forEach(card => {
+      const coincideCategoria = filtroActivo === 'todos' || card.dataset.categoria === filtroActivo;
+      const coincideBusqueda = !termino || card.dataset.busqueda.includes(termino);
+      const visible = coincideCategoria && coincideBusqueda;
+      card.style.display = visible ? '' : 'none';
+      if (visible) visibles++;
+    });
+
+    sinResultados.hidden = visibles !== 0;
+    contador.textContent = visibles;
+  }
+
+  function aplicarOrden() {
+    const criterio = orden.value;
+    const ordenadas = [...cards].sort((a, b) => {
+      if (criterio === 'prioridad') {
+        return PRIORIDAD_PESO[a.dataset.prioridad] - PRIORIDAD_PESO[b.dataset.prioridad];
+      }
+      if (criterio === 'estado') {
+        return ESTADO_PESO[a.dataset.estado] - ESTADO_PESO[b.dataset.estado];
+      }
+      if (criterio === 'titulo') {
+        return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent, 'es');
+      }
+      // 'recientes' (default): por fecha descendente
+      return b.dataset.fecha.localeCompare(a.dataset.fecha);
+    });
+    ordenadas.forEach(card => grid.appendChild(card));
+  }
+
+  buscador.addEventListener('input', aplicarFiltros);
+  orden.addEventListener('change', aplicarOrden);
+
+  filtros.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      filtros.querySelectorAll('button').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      filtroActivo = btn.dataset.filtro;
+      aplicarFiltros();
+    });
+  });
+
+  // Header con sombra al hacer scroll (sticky ya es CSS; esto solo refuerza contraste).
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('con-sombra', window.scrollY > 4);
+  }, { passive: true });
+
+  aplicarFiltros();
+})();
+</script>
+
+</body>
+</html>

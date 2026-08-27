@@ -1,0 +1,1033 @@
+/* ==========================================================================
+   Informes Operaciones TI — CAFSA
+   Paleta corporativa: gris oscuro / negro / blanco
+   Acentos de estado (semáforo): calculados a partir de prioridad ×
+   cumplimiento — ver scripts/manage_informes.py y README.md.
+   ========================================================================== */
+
+:root {
+  /* Paleta CAFSA */
+  --cafsa-black: #111111;
+  --cafsa-dark: #2b2b2b;
+  --cafsa-gray: #5c5c5c;
+  --cafsa-gray-light: #9a9a9a;
+  --cafsa-gray-bg: #f2f2f2;
+  --cafsa-border: #dcdcdc;
+  --cafsa-white: #ffffff;
+
+  /* Semáforo de criticidad (accent only, no paleta general) */
+  --status-green: #2e7d32;
+  --status-green-bg: #e8f3e9;
+  --status-yellow: #b8860b;
+  --status-yellow-bg: #fbf1dc;
+  --status-red: #c62828;
+  --status-red-bg: #f9e3e3;
+  --status-neutral: #6e6e6e;
+  --status-neutral-bg: #ececec;
+
+  --font-base: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --radius: 6px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-lift: 0 6px 16px rgba(0, 0, 0, 0.14);
+  --focus-ring: 0 0 0 3px rgba(46, 125, 231, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  color: var(--cafsa-dark);
+  background: var(--cafsa-gray-bg);
+  line-height: 1.5;
+}
+
+a { color: var(--cafsa-black); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; }
+
+/* ---------- Accesibilidad: foco visible y skip link ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  background: var(--cafsa-white);
+  color: var(--cafsa-black);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--cafsa-black);
+  color: var(--cafsa-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  transition: box-shadow 0.15s ease;
+}
+
+.site-header.con-sombra { box-shadow: var(--shadow-lift); }
+
+.site-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.site-header .brand img { height: 36px; }
+
+.site-header .brand-logo-link {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  border-radius: 6px;
+  transition: opacity 0.15s ease;
+}
+
+.site-header .brand-logo-link:hover,
+.site-header .brand-logo-link:focus-visible {
+  opacity: 0.85;
+}
+
+.site-header .brand-logo-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.site-header h1 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.site-header .subtitle {
+  font-size: 0.78rem;
+  color: var(--cafsa-gray-light);
+  margin: 2px 0 0;
+}
+
+.site-header .header-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.site-header .header-nav a {
+  color: var(--cafsa-white);
+  font-size: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 7px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.site-header .header-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+}
+
+.site-header .header-nav a.activo {
+  background: var(--cafsa-white);
+  color: var(--cafsa-black);
+  border-color: var(--cafsa-white);
+}
+
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--cafsa-gray);
+  padding: 10px 28px 0;
+}
+.breadcrumb a { color: var(--cafsa-gray); }
+
+/* ---------- Layout ---------- */
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 28px 60px;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cafsa-black);
+  margin: 6px 0 4px;
+}
+
+.page-meta {
+  font-size: 0.85rem;
+  color: var(--cafsa-gray);
+  margin-bottom: 24px;
+}
+
+/* ---------- Barra de herramientas: buscador + orden ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.buscador-wrap {
+  position: relative;
+  flex: 1 1 320px;
+  max-width: 460px;
+}
+
+.icono-buscar {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cafsa-gray-light);
+  pointer-events: none;
+}
+
+#buscador {
+  width: 100%;
+  padding: 10px 14px 10px 36px;
+  border: 1px solid var(--cafsa-border);
+  border-radius: 999px;
+  background: var(--cafsa-white);
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: var(--cafsa-dark);
+}
+
+#buscador::placeholder { color: var(--cafsa-gray-light); }
+
+.orden-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--cafsa-gray);
+  white-space: nowrap;
+}
+
+.orden-wrap select {
+  border: 1px solid var(--cafsa-border);
+  background: var(--cafsa-white);
+  color: var(--cafsa-dark);
+  padding: 7px 10px;
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---------- Filtros (index) ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.filters button {
+  border: 1px solid var(--cafsa-border);
+  background: var(--cafsa-white);
+  color: var(--cafsa-dark);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+.filters button:hover { border-color: var(--cafsa-gray); }
+
+.filters button.active {
+  background: var(--cafsa-black);
+  color: var(--cafsa-white);
+  border-color: var(--cafsa-black);
+}
+
+.sin-resultados {
+  text-align: center;
+  color: var(--cafsa-gray);
+  font-size: 0.9rem;
+  padding: 32px 0;
+  border: 1px dashed var(--cafsa-border);
+  border-radius: var(--radius);
+  background: var(--cafsa-white);
+  margin-bottom: 18px;
+}
+
+/* ---------- Tarjetas de informe (index) ---------- */
+.informes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.informe-card {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.informe-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badges-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.informe-card .categoria {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cafsa-gray-light);
+}
+
+/* ---------- Badge de prioridad ---------- */
+.prioridad-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+.prioridad-alta { color: #9a3412; background: #fdf1ea; }
+.prioridad-media { color: #7a6a00; background: #fbf7e0; }
+.prioridad-baja { color: #3d5a80; background: #eaf1f8; }
+
+/* ---------- Barra de avance ---------- */
+.progreso { margin-top: 2px; }
+
+.progreso-barra {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--cafsa-gray-bg);
+  overflow: hidden;
+}
+
+.progreso-relleno {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cafsa-gray), var(--cafsa-black));
+  border-radius: 999px;
+}
+
+.progreso-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--cafsa-gray);
+  margin-top: 4px;
+}
+
+.informe-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.informe-card .resumen {
+  font-size: 0.87rem;
+  color: var(--cafsa-gray);
+  flex-grow: 1;
+}
+
+.informe-card .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--cafsa-gray-light);
+}
+
+/* ---------- Estado / semáforo ---------- */
+.estado-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.estado-badge::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.estado-verde { background: var(--status-green-bg); color: var(--status-green); }
+.estado-verde::before { background: var(--status-green); }
+
+.estado-amarillo { background: var(--status-yellow-bg); color: var(--status-yellow); }
+.estado-amarillo::before { background: var(--status-yellow); }
+
+.estado-rojo { background: var(--status-red-bg); color: var(--status-red); }
+.estado-rojo::before { background: var(--status-red); }
+
+.estado-neutral { background: var(--status-neutral-bg); color: var(--status-neutral); }
+.estado-neutral::before { background: var(--status-neutral); }
+
+/* ---------- Contenido de informe individual ---------- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.kpi-box {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kpi-valor {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cafsa-black);
+}
+
+.kpi-label {
+  font-size: 0.75rem;
+  color: var(--cafsa-gray);
+}
+
+.resumen-ejecutivo {
+  background: var(--cafsa-white);
+  border-left: 4px solid var(--cafsa-black);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+.chart-container {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+
+.chart-container h2 {
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.chart-container .chart-subtitulo {
+  font-size: 0.78rem;
+  color: var(--cafsa-gray);
+  margin: -6px 0 12px;
+}
+
+/* Contenedor de alto fijo: Chart.js con maintainAspectRatio:false llena
+   exactamente este alto en vez de calcular el suyo propio (que en pantallas
+   anchas terminaba mostrando gráficos desproporcionadamente grandes). */
+.chart-box {
+  position: relative;
+  height: 220px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.chart-box.chart-box-ancho {
+  max-width: 100%;
+  height: 200px;
+}
+
+.fases-lista {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fases-lista li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--cafsa-border);
+}
+
+.fase-nombre { color: var(--cafsa-dark); }
+.fase-pct { color: var(--cafsa-gray); font-weight: 600; }
+
+/* Semáforo de porcentajes de avance — el color de texto real lo pone
+   assets/js/color-semaforo.js al cargar la página (rojo->ámbar->verde,
+   ver ese archivo para la fórmula). Este color es solo el valor por
+   defecto antes de que corra el script / si JS está deshabilitado. */
+.pct-semaforo {
+  font-weight: 700;
+  color: var(--cafsa-dark);
+}
+
+.fases-nota {
+  font-size: 0.72rem;
+  color: var(--cafsa-gray-light);
+  margin: 12px 0 0;
+}
+
+/* ---------- Buscador embebido en una página de informe (ej. Operaciones Diarias) ---------- */
+.bitacora-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.buscador-bitacora {
+  flex: 1 1 280px;
+  max-width: 420px;
+  margin-bottom: 0;
+}
+
+/* El buscador de la bitácora reutiliza .buscador-wrap/.icono-buscar del
+   toolbar principal, pero necesita su propio selector de input porque
+   #buscador (índice principal) es un id, no una clase — sin esto el
+   input quedaba sin padding/borde y el ícono de lupa se montaba encima
+   del texto. */
+.buscador-bitacora input[type="search"] {
+  width: 100%;
+  padding: 10px 14px 10px 36px;
+  border: 1px solid var(--cafsa-border);
+  border-radius: 999px;
+  background: var(--cafsa-white);
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: var(--cafsa-dark);
+}
+
+.buscador-bitacora input[type="search"]::placeholder { color: var(--cafsa-gray-light); }
+
+.fecha-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--cafsa-gray);
+  white-space: nowrap;
+}
+
+.fecha-wrap input[type="date"] {
+  border: 1px solid var(--cafsa-border);
+  background: var(--cafsa-white);
+  color: var(--cafsa-dark);
+  padding: 7px 10px;
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  font-family: inherit;
+}
+
+.btn-limpiar-bitacora {
+  border: 1px solid var(--cafsa-border);
+  background: var(--cafsa-white);
+  color: var(--cafsa-gray);
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-limpiar-bitacora:hover { background: var(--cafsa-gray-bg); }
+
+.lista-bitacora {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bitacora-grupo {
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+}
+
+.bitacora-grupo-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bitacora-grupo-fecha {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--cafsa-black);
+  text-transform: capitalize;
+}
+
+.bitacora-grupo-jira {
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bitacora-proveedores {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bitacora-proveedores li {
+  background: var(--cafsa-gray-bg);
+  color: var(--cafsa-dark);
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.bitacora-proveedor-n {
+  color: var(--cafsa-gray-light);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .bitacora-controles { flex-direction: column; align-items: stretch; }
+  .buscador-bitacora { max-width: none; }
+  .fecha-wrap { justify-content: space-between; }
+}
+
+/* ---------- Tabla de datos genérica (ej. plan de pruebas por módulo) ---------- */
+.tabla-datos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.tabla-datos th,
+.tabla-datos td {
+  text-align: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--cafsa-border);
+  white-space: nowrap;
+}
+
+.tabla-datos th {
+  color: var(--cafsa-gray);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tabla-datos tbody tr:hover { background: var(--cafsa-gray-bg); }
+
+.tabla-datos th:first-child,
+.tabla-datos td:first-child {
+  text-align: left;
+}
+
+.tabla-datos-total td {
+  font-weight: 700;
+  border-top: 2px solid var(--cafsa-dark);
+  border-bottom: none;
+}
+
+/* ---------- Recomendaciones por segmento (bloques con borde de color) ---------- */
+.segmentos-recomendaciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.segmento-recomendacion {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-left: 4px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+}
+
+.segmento-recomendacion h3 {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+}
+
+.segmento-recomendacion p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--cafsa-dark);
+}
+
+.segmento-recomendacion.segmento-rojo { border-left-color: var(--status-red); }
+.segmento-recomendacion.segmento-amarillo { border-left-color: var(--status-yellow); }
+.segmento-recomendacion.segmento-verde { border-left-color: var(--status-green); }
+
+.detalle-links {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.detalle-links h2 {
+  font-size: 0.95rem;
+  margin-top: 0;
+}
+
+.detalle-links ul { margin: 8px 0 0; padding-left: 18px; }
+.detalle-links li { margin-bottom: 6px; font-size: 0.88rem; }
+
+/* ---------- Botón de consulta (mailto) ---------- */
+.btn-consulta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cafsa-black);
+  color: var(--cafsa-white);
+  border: none;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-consulta:hover { background: var(--cafsa-dark); }
+
+/* ---------- Sección "Reportes y seguimientos" embebida en el index ---------- */
+.seccion-reportes-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ver-todos {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.separador-seccion {
+  border: none;
+  border-top: 1px solid var(--cafsa-border);
+  margin: 32px 0;
+}
+
+/* ---------- Panel consolidado "Mi seguimiento" (Jira, index principal) ---------- */
+.panel-consolidado {
+  margin-bottom: 8px;
+}
+
+.kpi-grid-mini {
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  margin: 14px 0 22px;
+}
+
+.kpi-box-mini {
+  padding: 10px 14px;
+}
+
+.kpi-box-mini .kpi-valor {
+  font-size: 1.2rem;
+}
+
+.radar-titulo {
+  font-size: 0.95rem;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.radar-urgencia {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.314s ease, transform 0.314s ease;
+  text-decoration: none;
+}
+
+.radar-item:hover {
+  text-decoration: none;
+}
+
+.radar-item:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-1px);
+}
+
+.radar-item .estado-badge {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.radar-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.85rem;
+  color: var(--cafsa-dark);
+  min-width: 0;
+}
+
+.radar-texto strong {
+  color: var(--cafsa-black);
+}
+
+/* ==========================================================================
+   Módulo Reportes / Pendientes — solicitudes dirigidas a una persona
+   ========================================================================== */
+
+.personas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Cada card tiene la misma estructura de "carriles" (badge / cargo / título
+   reservado a 2 líneas / conteo / link fijado al fondo) para que todas
+   midan y alineen igual sin importar cuánto texto traiga cada una. */
+.persona-card {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  /* 0.314s ≈ π/10 — guiño a π en vez del 0.15s genérico de otras cards */
+  transition: box-shadow 0.314s ease, transform 0.314s ease;
+}
+
+.persona-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+.persona-card .card-top {
+  flex-wrap: nowrap;
+}
+
+.persona-card .card-top .estado-badge {
+  flex-shrink: 0;
+}
+
+.persona-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  min-height: 2.6em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.persona-card .cargo {
+  font-size: 0.8rem;
+  color: var(--cafsa-gray);
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.persona-card .conteo {
+  font-size: 0.78rem;
+  color: var(--cafsa-gray-light);
+  margin-top: 6px;
+}
+
+/* Notas de fórmula (gravitación, Pitágoras): pequeñas, con tooltip nativo
+   vía title="" — el subrayado punteado avisa que hay más info al pasar
+   el mouse. Compartida entre persona-card y pendiente-item. */
+.formula-nota {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--cafsa-gray-light);
+  margin: 2px 0 0;
+  cursor: help;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--cafsa-border);
+  width: fit-content;
+}
+
+.persona-card > a:last-child {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pendientes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pendiente-item {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+
+.pendiente-item h3 {
+  margin: 8px 0 4px;
+  font-size: 1.05rem;
+}
+
+.pendiente-item .solicitud {
+  font-size: 0.9rem;
+  color: var(--cafsa-dark);
+  margin: 6px 0;
+}
+
+.pendiente-item .plazo-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--cafsa-gray);
+  background: var(--cafsa-gray-bg);
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.recomendacion-box {
+  border-left: 4px solid var(--status-yellow);
+  background: var(--status-yellow-bg);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  margin: 10px 0;
+}
+
+.recomendacion-box strong { color: var(--status-yellow); }
+
+.pendiente-item .solicitud ul,
+.pendiente-item .solicitud ol,
+.recomendacion-box ul,
+.recomendacion-box ol {
+  margin: 6px 0 4px;
+  padding-left: 20px;
+}
+
+.pendiente-item .solicitud li,
+.recomendacion-box li {
+  margin: 4px 0;
+  line-height: 1.4;
+}
+
+.pendiente-item .solicitud strong,
+.recomendacion-box li strong {
+  color: var(--cafsa-black);
+}
+
+.pendiente-item .acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn-secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cafsa-white);
+  color: var(--cafsa-black);
+  border: 1px solid var(--cafsa-border);
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-secundario:hover { border-color: var(--cafsa-gray); text-decoration: none; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--cafsa-gray-light);
+  padding: 20px 0 40px;
+}
+
+@media (max-width: 640px) {
+  .site-header { padding: 12px 16px; }
+  main { padding: 18px 16px 40px; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .buscador-wrap { max-width: none; }
+  .orden-wrap { justify-content: space-between; }
+}

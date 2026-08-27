@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Memos fuente de reportes/pendientes: material de trabajo interno, nunca
+# se publica el .docx crudo — solo la versión destilada en pendientes.json.
+reportes/**/*.docx
+reportes/**/*.doc
+reportes/**/~$*
+
+# Memoria/contexto interno del proyecto (decisiones, nombres, correos,
+# detalle sin curar): no tiene razón de ser público. Recomendación
+# reversible — quitá esta línea si preferís versionarlo igual.
+contexto-proyecto/

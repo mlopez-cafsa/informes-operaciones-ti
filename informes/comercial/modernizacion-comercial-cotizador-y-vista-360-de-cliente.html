@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- e^(iπ) + 1 = 0 — Identidad de Euler. Un saludo a quien esté revisando el código fuente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Modernizacion comercial - Cotizador y Vista 360 de Cliente — Informes Operaciones TI CAFSA</title>
+<link rel="icon" href="../../assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="../../index.html" class="brand-logo-link" aria-label="Ir a la pantalla principal">
+      <img src="../../assets/img/logos/logo-cafsa-blanco.png" alt="CAFSA">
+    </a>
+    <div>
+      <h1>Informes de Operaciones de TI</h1>
+      <p class="subtitle">Gerencia Operativa de TI — CAFSA</p>
+    </div>
+  </div>
+</header>
+
+<p class="breadcrumb"><a href="../../index.html">&larr; Volver al índice de informes</a></p>
+
+<main>
+  <div class="card-top">
+    <span class="estado-badge estado-amarillo">En riesgo</span>
+    <span class="prioridad-badge prioridad-media">Prioridad media</span>
+  </div>
+  <h2 class="page-title">Modernizacion comercial - Cotizador y Vista 360 de Cliente</h2>
+  <p class="page-meta">comercial · 2026-08-21 · Cumplimiento: En riesgo</p>
+
+  <div class="resumen-ejecutivo">
+    <strong>Resumen ejecutivo:</strong> El nuevo cotizador fue implementado y esta finalizado (pendiente de reflejar el cierre formal en Jira). Las iniciativas relacionadas de integracion con otros sistemas quedan en evaluacion de prioridad y asignacion de recursos.
+  </div>
+
+  <div class="chart-container">
+    <h2>Avance por fase</h2>
+    <div class="chart-box" style="height:152px; max-width:640px;">
+      <canvas id="grafico-avance"></canvas>
+    </div>
+    <ul class="fases-lista">
+      <li><span class="fase-nombre">Cotizador</span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
+      <li><span class="fase-nombre">Propuestas de integracion relacionadas</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
+    </ul>
+    <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%.</p>
+  </div>
+
+  <div class="detalle-links">
+    <h2>Más detalle</h2>
+    <ul>
+      <li><a href="https://cafsagroup.atlassian.net/browse/PP-216" target="_blank" rel="noopener">Ver detalle en Jira (PP-216)</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/PP-208" target="_blank" rel="noopener">Ver detalle en Jira (PP-208)</a></li>
+    </ul>
+  </div>
+
+  <button class="btn-consulta"
+          data-titulo="Modernizacion comercial - Cotizador y Vista 360 de Cliente"
+          data-resumen="El nuevo cotizador fue implementado y esta finalizado (pendiente de reflejar el cierre formal en Jira). Las iniciativas relacionadas de integracion con otros sistemas quedan en evaluacion de prioridad y asignacion de recursos."
+          onclick="enviarConsulta(this)">
+    Enviar consulta sobre este informe
+  </button>
+</main>
+
+<footer class="site-footer">
+  CAFSA — Informes de Operaciones de TI
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="../../assets/js/color-semaforo.js"></script>
+<script src="../../assets/js/mailto-consulta.js"></script>
+<script>
+  Chart.register(ChartDataLabels);
+
+  new Chart(document.getElementById('grafico-avance'), {
+    type: 'bar',
+    data: {
+      labels: ["Cotizador", "Propuestas de integracion relacionadas"],
+      datasets: [{
+        label: '% avance',
+        data: [100, 0],
+        backgroundColor: ["#2e7d32", "#9a9a9a"]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+          color: (ctx) => colorSemaforoPct(ctx.dataset.data[ctx.dataIndex]),
+          font: { size: 11, weight: '600' },
+          formatter: (v) => `${v}%`
+        }
+      },
+      scales: { x: { beginAtZero: true, max: 100 } }
+    }
+  });
+</script>
+
+</body>
+</html>

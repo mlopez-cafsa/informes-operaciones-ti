@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- e^(iπ) + 1 = 0 — Identidad de Euler. Un saludo a quien esté revisando el código fuente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>{{TITULO}} — Informes Operaciones TI CAFSA</title>
+<link rel="icon" href="../../assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="../../index.html" class="brand-logo-link" aria-label="Ir a la pantalla principal">
+      <img src="../../assets/img/logos/logo-cafsa-blanco.png" alt="CAFSA">
+    </a>
+    <div>
+      <h1>Informes de Operaciones de TI</h1>
+      <p class="subtitle">Gerencia Operativa de TI — CAFSA</p>
+    </div>
+  </div>
+</header>
+
+<p class="breadcrumb"><a href="../../index.html">&larr; Volver al índice de informes</a></p>
+
+<main>
+  <div class="card-top">
+    <span class="estado-badge {{ESTADO_CLASE}}">{{ESTADO_LABEL}}</span>
+    <span class="prioridad-badge {{PRIORIDAD_CLASE}}">{{PRIORIDAD_LABEL}}</span>
+  </div>
+  <h2 class="page-title">{{TITULO}}</h2>
+  <p class="page-meta">{{CATEGORIA}} · {{FECHA}} · Cumplimiento: {{CUMPLIMIENTO_LABEL}}</p>
+
+  <div class="resumen-ejecutivo">
+    <strong>Resumen ejecutivo:</strong> {{RESUMEN}}
+  </div>
+
+  <div class="chart-container">
+    <h2>Avance por fase</h2>
+    <div class="chart-box" style="height:{{FASES_ALTURA}}px; max-width:640px;">
+      <canvas id="grafico-avance"></canvas>
+    </div>
+    <ul class="fases-lista">
+{{FASES_LISTA_HTML}}
+    </ul>
+    <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%.</p>
+  </div>
+
+  <div class="detalle-links">
+    <h2>Más detalle</h2>
+    <ul>
+{{DETALLE_LINKS_HTML}}
+    </ul>
+  </div>
+
+  <button class="btn-consulta"
+          data-titulo="{{TITULO}}"
+          data-resumen="{{RESUMEN}}"
+          onclick="enviarConsulta(this)">
+    Enviar consulta sobre este informe
+  </button>
+</main>
+
+<footer class="site-footer">
+  CAFSA — Informes de Operaciones de TI
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="../../assets/js/color-semaforo.js"></script>
+<script src="../../assets/js/mailto-consulta.js"></script>
+<script>
+  Chart.register(ChartDataLabels);
+
+  new Chart(document.getElementById('grafico-avance'), {
+    type: 'bar',
+    data: {
+      labels: {{FASES_LABELS_JSON}},
+      datasets: [{
+        label: '% avance',
+        data: {{FASES_DATA_JSON}},
+        backgroundColor: {{FASES_COLORS_JSON}}
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+          color: (ctx) => colorSemaforoPct(ctx.dataset.data[ctx.dataIndex]),
+          font: { size: 11, weight: '600' },
+          formatter: (v) => `${v}%`
+        }
+      },
+      scales: { x: { beginAtZero: true, max: 100 } }
+    }
+  });
+</script>
+
+</body>
+</html>

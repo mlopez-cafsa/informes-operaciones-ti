@@ -1,0 +1,448 @@
+{
+  "generado": "2026-08-27",
+  "fuente": "Jira (cafsagroup.atlassian.net), consulta en vivo vía MCP — assignee = currentUser() AND statusCategory != Done",
+  "filtro_jira_url": "https://cafsagroup.atlassian.net/issues?jql=assignee%3DcurrentUser()%20AND%20statusCategory%20!%3D%20Done%20ORDER%20BY%20priority%20DESC%2C%20duedate%20ASC",
+  "total": 44,
+  "issues": [
+    {
+      "key": "PP-216",
+      "proyecto": "PP",
+      "tipo": "Mejora a proceso",
+      "resumen": "XL-COR-01  Implementación del nuevo Cotizador",
+      "estado": "Evaluación de Viabilidad",
+      "prioridad": "Highest",
+      "vencimiento": "2026-04-16",
+      "url": "https://cafsagroup.atlassian.net/browse/PP-216"
+    },
+    {
+      "key": "DES-1741",
+      "proyecto": "DES",
+      "tipo": "Epic",
+      "resumen": "Migración Core Financiero ABANKS - Forms 14c",
+      "estado": "En curso",
+      "prioridad": "Highest",
+      "vencimiento": "2026-09-30",
+      "url": "https://cafsagroup.atlassian.net/browse/DES-1741"
+    },
+    {
+      "key": "GDT-100",
+      "proyecto": "GDT",
+      "tipo": "Epic",
+      "resumen": "XL-TEC-02 Gobierno y Cumplimiento Tecnológico (COBIT 2019 / CONASSIF 5-24) - Actualización y gestión de expedientes de Proveedores (renegociación de contratos)",
+      "estado": "En curso",
+      "prioridad": "High",
+      "vencimiento": "2026-01-22",
+      "url": "https://cafsagroup.atlassian.net/browse/GDT-100"
+    },
+    {
+      "key": "GDT-120",
+      "proyecto": "GDT",
+      "tipo": "Epic",
+      "resumen": "XL-TEC-02 Gobierno y Cumplimiento Tecnológico (COBIT 2019 / CONASSIF) - Aseguramiento de respaldos de información con proveedores",
+      "estado": "Abierta",
+      "prioridad": "High",
+      "vencimiento": "2026-12-31",
+      "url": "https://cafsagroup.atlassian.net/browse/GDT-120"
+    },
+    {
+      "key": "BMO-166",
+      "proyecto": "BMO",
+      "tipo": "Epic",
+      "resumen": "Actualización de Infraestructura & Seguridad /gx | BDConsultores",
+      "estado": "En curso",
+      "prioridad": "High",
+      "vencimiento": "2026-12-31",
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-166"
+    },
+    {
+      "key": "BMO-252",
+      "proyecto": "BMO",
+      "tipo": "Epic",
+      "resumen": "Quanto - Contabilidad | Corrección Discrepancias Estimaciones Histórico",
+      "estado": "Abierta",
+      "prioridad": "High",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-252"
+    },
+    {
+      "key": "GDT-320",
+      "proyecto": "GDT",
+      "tipo": "Tarea",
+      "resumen": "EXPEDIENTE - SOFTLAND COSTA RICA SOCIEDAD DE RESPONSABILIDAD LIMITADA",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": "2026-02-09",
+      "url": "https://cafsagroup.atlassian.net/browse/GDT-320"
+    },
+    {
+      "key": "BMO-316",
+      "proyecto": "BMO",
+      "tipo": "Epic",
+      "resumen": "08 - 2026 | d.MLOPEZZ  - OPERACIONES DE TI",
+      "estado": "En curso",
+      "prioridad": "Medium",
+      "vencimiento": "2026-08-31",
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-316"
+    },
+    {
+      "key": "PP-233",
+      "proyecto": "PP",
+      "tipo": "Mejora a proceso",
+      "resumen": "XL-TEC-01 Gestión de Riesgo Tecnológico y Obsolescencia Crítica - Integración GAUDI en CAFSA en Línea - FASE 1",
+      "estado": "Evaluación de Viabilidad",
+      "prioridad": "Medium",
+      "vencimiento": "2026-09-30",
+      "url": "https://cafsagroup.atlassian.net/browse/PP-233"
+    },
+    {
+      "key": "PP-229",
+      "proyecto": "PP",
+      "tipo": "Proyecto",
+      "resumen": "XL-TEC-01 Gestión de Riesgo Tecnológico y Obsolescencia Crítica - Plan de mitigación de Riesgo de afectación de Bases de datos, ABANKS y WebLogic (Obsolescencia tecnológica)",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": "2026-09-30",
+      "url": "https://cafsagroup.atlassian.net/browse/PP-229"
+    },
+    {
+      "key": "DES-1743",
+      "proyecto": "DES",
+      "tipo": "Tarea",
+      "resumen": "Migración Módulos, Objetos & Pantallas Abanks",
+      "estado": "En curso",
+      "prioridad": "Medium",
+      "vencimiento": "2026-09-30",
+      "url": "https://cafsagroup.atlassian.net/browse/DES-1743"
+    },
+    {
+      "key": "PP-232",
+      "proyecto": "PP",
+      "tipo": "Mejora a proceso",
+      "resumen": "XL-TEC-01 Gestión de Riesgo Tecnológico y Obsolescencia Crítica - Migración de sitio Admin de PEL(/gx) a nueva versión de PHP",
+      "estado": "Evaluación de Viabilidad",
+      "prioridad": "Medium",
+      "vencimiento": "2026-10-31",
+      "url": "https://cafsagroup.atlassian.net/browse/PP-232"
+    },
+    {
+      "key": "ST-2773",
+      "proyecto": "ST",
+      "tipo": "Tarea",
+      "resumen": "Acuerdo Comité Operativo Bloquear Abonos extraordinarios PIN",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/ST-2773"
+    },
+    {
+      "key": "PP-299",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-08 - Pruebas finales y Pase a Producción",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-299"
+    },
+    {
+      "key": "PP-298",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-07 - Seguridad y Refactor",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-298"
+    },
+    {
+      "key": "PP-297",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-06 - Migración de Vistas y JavaScript",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-297"
+    },
+    {
+      "key": "PP-296",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-05 - Migración de Modelos",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-296"
+    },
+    {
+      "key": "PP-295",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-04 - Migración del Controlador Admin",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-295"
+    },
+    {
+      "key": "PP-294",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-03 - Core y Autenticación",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-294"
+    },
+    {
+      "key": "PP-293",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-02 - Capa de Servicios SOAP",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-293"
+    },
+    {
+      "key": "PP-292",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-01 - Setup y estructura del proyecto",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-292"
+    },
+    {
+      "key": "PP-291",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-232-00 - Preparación y aprobación de alcance",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-291"
+    },
+    {
+      "key": "PP-289",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-09 - Pase a producción",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-289"
+    },
+    {
+      "key": "PP-288",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-08 - Revisión y firma de Acta de Aceptación",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-288"
+    },
+    {
+      "key": "PP-287",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-07 - Documentación",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-287"
+    },
+    {
+      "key": "PP-286",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-06 - Pruebas UI/UX y ajustes finales",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-286"
+    },
+    {
+      "key": "PP-285",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-05 - Simulador backend de respuestas GAUDI (pre-integración)",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-285"
+    },
+    {
+      "key": "PP-284",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-04 - Responsive Desktop/Móvil",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-284"
+    },
+    {
+      "key": "PP-283",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-03 - Frontend — Modal de identificación y accesibilidad",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-283"
+    },
+    {
+      "key": "PP-282",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-02 - Frontend — botón/opción de ingreso GAUDI",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-282"
+    },
+    {
+      "key": "PP-281",
+      "proyecto": "PP",
+      "tipo": "Criterio de aceptación",
+      "resumen": "PP-233-01 - Análisis y diseño funcional",
+      "estado": "Tareas por hacer",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/PP-281"
+    },
+    {
+      "key": "DES-2707",
+      "proyecto": "DES",
+      "tipo": "Tarea",
+      "resumen": "Sesiones de Seguimiento Migración 14c - BestResource",
+      "estado": "En pruebas de desarrollo",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/DES-2707"
+    },
+    {
+      "key": "BMO-266",
+      "proyecto": "BMO",
+      "tipo": "Subtarea",
+      "resumen": "4.2.Confirmar Tiempos de Respuesta desde Sistema Quanto",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-266"
+    },
+    {
+      "key": "BMO-264",
+      "proyecto": "BMO",
+      "tipo": "Subtarea",
+      "resumen": "3.2.Validación en Reporte de Quanto",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-264"
+    },
+    {
+      "key": "BMO-262",
+      "proyecto": "BMO",
+      "tipo": "Subtarea",
+      "resumen": "2.2.Despliegue y Validación de Segmentación en Reporte Quanto",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-262"
+    },
+    {
+      "key": "BMO-260",
+      "proyecto": "BMO",
+      "tipo": "Subtarea",
+      "resumen": "1.2.Validaciones y Definición de Negocio",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-260"
+    },
+    {
+      "key": "BMO-256",
+      "proyecto": "BMO",
+      "tipo": "Tarea",
+      "resumen": "4.Optimización Rendimiento Consultas BD",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-256"
+    },
+    {
+      "key": "BMO-255",
+      "proyecto": "BMO",
+      "tipo": "Tarea",
+      "resumen": "3.Cuentas por Cobrar",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-255"
+    },
+    {
+      "key": "BMO-254",
+      "proyecto": "BMO",
+      "tipo": "Tarea",
+      "resumen": "2.Segmentación Empresarial ",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-254"
+    },
+    {
+      "key": "BMO-253",
+      "proyecto": "BMO",
+      "tipo": "Tarea",
+      "resumen": "1.Montos Mitigadores Negativos",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-253"
+    },
+    {
+      "key": "BMO-175",
+      "proyecto": "BMO",
+      "tipo": "Subtarea",
+      "resumen": "2.3 Esquema de certificados SSL & Estrategia de migración HTTP → HTTPS",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-175"
+    },
+    {
+      "key": "BMO-118",
+      "proyecto": "BMO",
+      "tipo": "Epic",
+      "resumen": "Implementación, Análisis y Estabilización Framework ETL | DataWareHouse",
+      "estado": "Abierta",
+      "prioridad": "Medium",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-118"
+    },
+    {
+      "key": "PP-264",
+      "proyecto": "PP",
+      "tipo": "Iniciativa",
+      "resumen": "XL-CYC-02 (P=11.9) Fortalecer y agilizar el proceso de análisis crediticio",
+      "estado": "Abierta",
+      "prioridad": "Lowest",
+      "vencimiento": "2026-12-31",
+      "url": "https://cafsagroup.atlassian.net/browse/PP-264"
+    },
+    {
+      "key": "BMO-13",
+      "proyecto": "BMO",
+      "tipo": "Epic",
+      "resumen": "Mejoras en Sistema de Facturas y Transferencias",
+      "estado": "Abierta",
+      "prioridad": "Lowest",
+      "vencimiento": "2026-12-31",
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-13"
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- e^(iπ) + 1 = 0 — Identidad de Euler. Un saludo a quien esté revisando el código fuente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Informes ejecutivos de Operaciones de TI para Gerencia — CAFSA">
+<meta name="theme-color" content="#111111">
+<title>Informes Operaciones TI — CAFSA</title>
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header" id="site-header">
+  <div class="brand">
+    <a href="index.html" class="brand-logo-link" aria-label="Ir a la pantalla principal">
+      <img src="assets/img/logos/logo-cafsa-blanco.png" alt="CAFSA">
+    </a>
+    <div>
+      <h1>Informes de Operaciones de TI</h1>
+      <p class="subtitle">Gerencia Operativa de TI — CAFSA</p>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <a href="reportes/index.html">Reportes y seguimientos</a>
+  </nav>
+</header>
+
+<main id="contenido">
+
+  <section class="seccion-reportes" aria-labelledby="titulo-reportes">
+    <div class="seccion-reportes-header">
+      <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px">Reportes y seguimientos</h2>
+      <a href="reportes/index.html" class="ver-todos">Ver todos los pendientes por persona &rarr;</a>
+    </div>
+    <p class="page-meta">
+      Solicitudes puntuales dirigidas a una persona específica, con enlace a
+      Jira y seguimiento · {{TOTAL_PERSONAS_REPORTES}} persona(s) con pendientes registrados
+    </p>
+    <div class="personas-grid" id="grid-personas-reportes">
+<!--__REPORTES_PERSONAS_GRID__-->
+    </div>
+  </section>
+
+  <hr class="separador-seccion">
+
+<!--__PANEL_CONSOLIDADO__-->
+  <h2 class="page-title">Informes</h2>
+  <p class="page-meta">
+    Actualizado a partir del seguimiento interno de Operaciones de TI del {{FECHA_GENERACION}}
+    · <span id="contador-visibles">{{TOTAL_INFORMES}}</span> de {{TOTAL_INFORMES}} informe(s)
+  </p>
+
+  <div class="toolbar">
+    <div class="buscador-wrap">
+      <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="10.4" y1="10.4" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <input
+        type="search"
+        id="buscador"
+        placeholder="Buscar por título, categoría o palabra clave..."
+        aria-label="Buscar informes"
+        autocomplete="off">
+    </div>
+
+    <label class="orden-wrap" for="orden">
+      Ordenar por
+      <select id="orden" aria-label="Ordenar informes">
+        <option value="recientes">Más recientes</option>
+        <option value="prioridad">Prioridad</option>
+        <option value="estado">Estado (semáforo)</option>
+        <option value="titulo">Título (A-Z)</option>
+      </select>
+    </label>
+  </div>
+
+  <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría">
+    <button type="button" class="active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
+<!--__FILTROS_CATEGORIA__-->
+  </nav>
+
+  <p class="sin-resultados" id="sin-resultados" hidden>
+    No hay informes que coincidan con la búsqueda o el filtro seleccionado.
+  </p>
+
+  <div class="informes-grid" id="grid-informes" aria-live="polite">
+<!--__INFORMES_GRID__-->
+  </div>
+</main>
+
+<footer class="site-footer">
+  Generado automáticamente por scripts/manage_informes.py — no editar este archivo a mano.
+</footer>
+
+<script src="assets/js/color-semaforo.js"></script>
+<script>
+(function () {
+  const grid = document.getElementById('grid-informes');
+  const cards = Array.from(grid.querySelectorAll('.informe-card'));
+  const buscador = document.getElementById('buscador');
+  const orden = document.getElementById('orden');
+  const filtros = document.getElementById('filtros');
+  const sinResultados = document.getElementById('sin-resultados');
+  const contador = document.getElementById('contador-visibles');
+
+  let filtroActivo = 'todos';
+
+  function normalizar(texto) {
+    return texto
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
+
+  const PRIORIDAD_PESO = { alta: 0, media: 1, baja: 2, '': 3 };
+  const ESTADO_PESO = { rojo: 0, amarillo: 1, neutral: 2, verde: 3 };
+
+  function aplicarFiltros() {
+    const termino = normalizar(buscador.value.trim());
+    let visibles = 0;
+
+    cards.forEach(card => {
+      const coincideCategoria = filtroActivo === 'todos' || card.dataset.categoria === filtroActivo;
+      const coincideBusqueda = !termino || card.dataset.busqueda.includes(termino);
+      const visible = coincideCategoria && coincideBusqueda;
+      card.style.display = visible ? '' : 'none';
+      if (visible) visibles++;
+    });
+
+    sinResultados.hidden = visibles !== 0;
+    contador.textContent = visibles;
+  }
+
+  function aplicarOrden() {
+    const criterio = orden.value;
+    const ordenadas = [...cards].sort((a, b) => {
+      if (criterio === 'prioridad') {
+        return PRIORIDAD_PESO[a.dataset.prioridad] - PRIORIDAD_PESO[b.dataset.prioridad];
+      }
+      if (criterio === 'estado') {
+        return ESTADO_PESO[a.dataset.estado] - ESTADO_PESO[b.dataset.estado];
+      }
+      if (criterio === 'titulo') {
+        return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent, 'es');
+      }
+      // 'recientes' (default): por fecha descendente
+      return b.dataset.fecha.localeCompare(a.dataset.fecha);
+    });
+    ordenadas.forEach(card => grid.appendChild(card));
+  }
+
+  buscador.addEventListener('input', aplicarFiltros);
+  orden.addEventListener('change', aplicarOrden);
+
+  filtros.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      filtros.querySelectorAll('button').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      filtroActivo = btn.dataset.filtro;
+      aplicarFiltros();
+    });
+  });
+
+  // Header con sombra al hacer scroll (sticky ya es CSS; esto solo refuerza contraste).
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('con-sombra', window.scrollY > 4);
+  }, { passive: true });
+
+  aplicarFiltros();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- e^(iπ) + 1 = 0 — Identidad de Euler. Un saludo a quien esté revisando el código fuente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Gobierno de TI y Cumplimiento (COBIT / CONASSIF) — Informes Operaciones TI CAFSA</title>
+<link rel="icon" href="../../assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="../../index.html" class="brand-logo-link" aria-label="Ir a la pantalla principal">
+      <img src="../../assets/img/logos/logo-cafsa-blanco.png" alt="CAFSA">
+    </a>
+    <div>
+      <h1>Informes de Operaciones de TI</h1>
+      <p class="subtitle">Gerencia Operativa de TI — CAFSA</p>
+    </div>
+  </div>
+</header>
+
+<p class="breadcrumb"><a href="../../index.html">&larr; Volver al índice de informes</a></p>
+
+<main>
+  <div class="card-top">
+    <span class="estado-badge estado-rojo">Atrasado</span>
+    <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
+  </div>
+  <h2 class="page-title">Gobierno de TI y Cumplimiento (COBIT / CONASSIF)</h2>
+  <p class="page-meta">gobierno-ti · 2026-08-27 · Cumplimiento: Vencido</p>
+
+  <div class="resumen-ejecutivo">
+    <strong>Resumen ejecutivo:</strong> Cluster de gobierno de TI (COBIT 2019 / CONASSIF 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. GDT-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'En curso' en Jira -- es el mas urgente. GDT-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. Se suman GDT-106 (mismo eje, plazo 31/12/2026), el expediente abierto de Softland (GDT-320) y el seguimiento de GBM de Costa Rica (GDT-107).
+  </div>
+
+  <div class="chart-container">
+    <h2>Avance por fase</h2>
+    <div class="chart-box" style="height:290px; max-width:640px;">
+      <canvas id="grafico-avance"></canvas>
+    </div>
+    <ul class="fases-lista">
+      <li><span class="fase-nombre">Expedientes de proveedores - renegociacion (GDT-100)</span><span class="fase-pct pct-semaforo" data-pct="50">50%</span></li>
+      <li><span class="fase-nombre">Gobierno y cumplimiento tecnologico (GDT-106)</span><span class="fase-pct pct-semaforo" data-pct="50">50%</span></li>
+      <li><span class="fase-nombre">Respaldos de informacion con proveedores (GDT-120)</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
+      <li><span class="fase-nombre">Expediente Softland (GDT-320)</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
+      <li><span class="fase-nombre">GBM de Costa Rica (GDT-107)</span><span class="fase-pct pct-semaforo" data-pct="50">50%</span></li>
+    </ul>
+    <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%.</p>
+  </div>
+
+  <div class="detalle-links">
+    <h2>Más detalle</h2>
+    <ul>
+      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-100" target="_blank" rel="noopener">Ver GDT-100 en Jira</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-106" target="_blank" rel="noopener">Ver GDT-106 en Jira</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-120" target="_blank" rel="noopener">Ver GDT-120 en Jira</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-320" target="_blank" rel="noopener">Ver GDT-320 en Jira</a></li>
+      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-107" target="_blank" rel="noopener">Ver GDT-107 en Jira</a></li>
+    </ul>
+  </div>
+
+  <button class="btn-consulta"
+          data-titulo="Gobierno de TI y Cumplimiento (COBIT / CONASSIF)"
+          data-resumen="Cluster de gobierno de TI (COBIT 2019 / CONASSIF 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. GDT-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'En curso' en Jira -- es el mas urgente. GDT-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. Se suman GDT-106 (mismo eje, plazo 31/12/2026), el expediente abierto de Softland (GDT-320) y el seguimiento de GBM de Costa Rica (GDT-107)."
+          onclick="enviarConsulta(this)">
+    Enviar consulta sobre este informe
+  </button>
+</main>
+
+<footer class="site-footer">
+  CAFSA — Informes de Operaciones de TI
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="../../assets/js/color-semaforo.js"></script>
+<script src="../../assets/js/mailto-consulta.js"></script>
+<script>
+  Chart.register(ChartDataLabels);
+
+  new Chart(document.getElementById('grafico-avance'), {
+    type: 'bar',
+    data: {
+      labels: ["Expedientes de proveedores - renegociacion (GDT-100)", "Gobierno y cumplimiento tecnologico (GDT-106)", "Respaldos de informacion con proveedores (GDT-120)", "Expediente Softland (GDT-320)", "GBM de Costa Rica (GDT-107)"],
+      datasets: [{
+        label: '% avance',
+        data: [50, 50, 0, 0, 50],
+        backgroundColor: ["#b8860b", "#b8860b", "#9a9a9a", "#9a9a9a", "#b8860b"]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+          color: (ctx) => colorSemaforoPct(ctx.dataset.data[ctx.dataIndex]),
+          font: { size: 11, weight: '600' },
+          formatter: (v) => `${v}%`
+        }
+      },
+      scales: { x: { beginAtZero: true, max: 100 } }
+    }
+  });
+</script>
+
+</body>
+</html>

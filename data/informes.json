@@ -1,0 +1,398 @@
+[
+  {
+    "id": "2026-08-21-backlog-y-mejoras-continuas",
+    "titulo": "Backlog y mejoras continuas",
+    "fecha": "2026-08-27",
+    "categoria": "backlog",
+    "prioridad": "alta",
+    "cumplimiento": "sin_fecha",
+    "estado": "amarillo",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [
+      {
+        "nombre": "Framework ETL | DataWareHouse (BMO-118)",
+        "avance": 0
+      },
+      {
+        "nombre": "Mejoras en Facturas y Transferencias (BMO-13)",
+        "avance": 0
+      },
+      {
+        "nombre": "Agilizar analisis crediticio (PP-264)",
+        "avance": 0
+      },
+      {
+        "nombre": "Acuerdo Comite Operativo - Abonos PIN (ST-2773)",
+        "avance": 0
+      }
+    ],
+    "jira_urls": [
+      {
+        "label": "Ver detalle en Jira (BMO-118)",
+        "url": "https://cafsagroup.atlassian.net/browse/BMO-118"
+      },
+      {
+        "label": "Ver detalle en Jira (BMO-13)",
+        "url": "https://cafsagroup.atlassian.net/browse/BMO-13"
+      },
+      {
+        "label": "Ver detalle en Jira (PP-264)",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-264"
+      },
+      {
+        "label": "Ver detalle en Jira (ST-2773)",
+        "url": "https://cafsagroup.atlassian.net/browse/ST-2773"
+      }
+    ],
+    "resumen": "Revisado contra Jira en vivo (27/08/2026): ninguna de las 4 iniciativas de este backlog ha arrancado todavia. La que mas necesita seguimiento es BMO-118, Implementacion, Analisis y Estabilizacion del Framework ETL | DataWareHouse -- figura 'Abierta', sin avance. Le siguen mejoras en facturacion y transferencias (BMO-13), agilizar el analisis crediticio (PP-264) y un acuerdo operativo de Comite pendiente de cerrar (ST-2773). Ninguna tiene fecha limite en Jira todavia.",
+    "ruta": "informes/backlog/backlog-y-mejoras-continuas.html",
+    "destacado": true,
+    "vencimiento": null
+  },
+  {
+    "id": "2026-08-27-gobierno-de-ti-y-cumplimiento-cobit-conassif",
+    "titulo": "Gobierno de TI y Cumplimiento (COBIT / CONASSIF)",
+    "fecha": "2026-08-27",
+    "categoria": "gobierno-ti",
+    "prioridad": "alta",
+    "cumplimiento": "vencido",
+    "estado": "rojo",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [
+      {
+        "nombre": "Expedientes de proveedores - renegociacion (GDT-100)",
+        "avance": 50
+      },
+      {
+        "nombre": "Gobierno y cumplimiento tecnologico (GDT-106)",
+        "avance": 50
+      },
+      {
+        "nombre": "Respaldos de informacion con proveedores (GDT-120)",
+        "avance": 0
+      },
+      {
+        "nombre": "Expediente Softland (GDT-320)",
+        "avance": 0
+      },
+      {
+        "nombre": "GBM de Costa Rica (GDT-107)",
+        "avance": 50
+      }
+    ],
+    "jira_urls": [
+      {
+        "label": "Ver GDT-100 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/GDT-100"
+      },
+      {
+        "label": "Ver GDT-106 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/GDT-106"
+      },
+      {
+        "label": "Ver GDT-120 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/GDT-120"
+      },
+      {
+        "label": "Ver GDT-320 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/GDT-320"
+      },
+      {
+        "label": "Ver GDT-107 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/GDT-107"
+      }
+    ],
+    "resumen": "Cluster de gobierno de TI (COBIT 2019 / CONASSIF 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. GDT-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'En curso' en Jira -- es el mas urgente. GDT-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. Se suman GDT-106 (mismo eje, plazo 31/12/2026), el expediente abierto de Softland (GDT-320) y el seguimiento de GBM de Costa Rica (GDT-107).",
+    "ruta": "informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html",
+    "destacado": true,
+    "vencimiento": "2026-01-22"
+  },
+  {
+    "id": "2026-08-21-migracion-de-core-financiero-forms-14c",
+    "titulo": "Migracion de Core Financiero - Forms 14c",
+    "fecha": "2026-08-27",
+    "categoria": "core-financiero",
+    "prioridad": "alta",
+    "cumplimiento": "en_riesgo",
+    "estado": "rojo",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [
+      {
+        "nombre": "Seleccion de proveedor",
+        "avance": 100
+      },
+      {
+        "nombre": "Migracion y pruebas de modulos/objetos Abanks",
+        "avance": 30
+      },
+      {
+        "nombre": "Pruebas por roles de usuario",
+        "avance": 0
+      },
+      {
+        "nombre": "Infraestructura de produccion",
+        "avance": 0
+      },
+      {
+        "nombre": "Coordinacion y seguimiento tecnico con BestResource",
+        "avance": 50
+      }
+    ],
+    "jira_urls": [
+      {
+        "label": "Epica del proyecto (DES-1741)",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1741"
+      },
+      {
+        "label": "Seleccion de proveedor - Finalizada (DES-1742)",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1742"
+      },
+      {
+        "label": "Migracion y pruebas de modulos/objetos Abanks (DES-1743)",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1743"
+      },
+      {
+        "label": "Pruebas por roles de usuario (DES-1744)",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1744"
+      },
+      {
+        "label": "Instalacion de nuevos servidores y ambientes de produccion (DES-1745)",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1745"
+      },
+      {
+        "label": "Instalacion de componentes en los servidores (DES-1748)",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1748"
+      },
+      {
+        "label": "Instalacion de ambiente Virtualizador de Oracle (DES-1753)",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1753"
+      },
+      {
+        "label": "Sesiones de seguimiento con BestResource (DES-2707)",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-2707"
+      }
+    ],
+    "resumen": "Proyecto mas critico de TI: migracion del nucleo financiero a Oracle Forms 14C. El proveedor (BestResource) ya migro el 90% del catalogo de objetos (503 en total). CAFSA lleva evaluado el 41.4% (208 objetos: 149 aprobados, 59 rechazados), pero solo el 29.6% del catalogo total esta realmente aprobado -- los 59 rechazados necesitan correccion y re-prueba, no cuentan como avance. Seleccion de proveedor cerrada. El modulo MAYOR tiene la tasa de rechazo mas alta (35 de 64 objetos evaluados, es decir, apenas 18 aprobados); GENERALES es el mas atrasado en pruebas (105 de 109 pendientes). Infraestructura de produccion y pruebas por roles de usuario todavia no arrancan. Meta: 30/09/2026. Desglose completo del plan de pruebas por modulo y recomendaciones por segmento en el detalle de este informe.",
+    "ruta": "informes/core-financiero/migracion-de-core-financiero-forms-14c.html",
+    "destacado": true,
+    "personalizado": true,
+    "vencimiento": "2026-09-30"
+  },
+  {
+    "id": "2026-08-21-modernizacion-comercial-cotizador-y-vista-360-de-cliente",
+    "titulo": "Modernizacion comercial - Cotizador y Vista 360 de Cliente",
+    "fecha": "2026-08-21",
+    "categoria": "comercial",
+    "prioridad": "media",
+    "cumplimiento": "en_riesgo",
+    "estado": "amarillo",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [
+      {
+        "nombre": "Cotizador",
+        "avance": 100
+      },
+      {
+        "nombre": "Propuestas de integracion relacionadas",
+        "avance": 0
+      }
+    ],
+    "jira_urls": [
+      {
+        "label": "Ver detalle en Jira (PP-216)",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-216"
+      },
+      {
+        "label": "Ver detalle en Jira (PP-208)",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-208"
+      }
+    ],
+    "resumen": "El nuevo cotizador fue implementado y esta finalizado (pendiente de reflejar el cierre formal en Jira). Las iniciativas relacionadas de integracion con otros sistemas quedan en evaluacion de prioridad y asignacion de recursos.",
+    "ruta": "informes/comercial/modernizacion-comercial-cotizador-y-vista-360-de-cliente.html",
+    "destacado": false,
+    "vencimiento": null
+  },
+  {
+    "id": "2026-08-21-gestion-de-riesgo-tecnologico-y-obsolescencia-critica",
+    "titulo": "Gestion de riesgo tecnologico y obsolescencia critica",
+    "fecha": "2026-08-21",
+    "categoria": "riesgo-tecnologico",
+    "prioridad": "media",
+    "cumplimiento": "en_riesgo",
+    "estado": "amarillo",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [
+      {
+        "nombre": "Migracion de sitio administrativo (PP-232)",
+        "avance": 0
+      },
+      {
+        "nombre": "Integracion de canal de autenticacion alterno (PP-233)",
+        "avance": 10
+      },
+      {
+        "nombre": "Mitigacion de riesgo en bases de datos (PP-229)",
+        "avance": 0
+      }
+    ],
+    "jira_urls": [
+      {
+        "label": "Ver detalle en Jira (PP-232)",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-232"
+      },
+      {
+        "label": "Ver detalle en Jira (PP-233)",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-233"
+      },
+      {
+        "label": "Ver detalle en Jira (PP-229)",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-229"
+      }
+    ],
+    "resumen": "Programa que agrupa tres iniciativas de modernizacion y mitigacion de riesgo tecnologico: migracion de sitio administrativo, integracion de canal de autenticacion alterno, y plan de mitigacion de riesgo de obsolescencia en bases de datos. Meta mas cercana: 30/09/2026.",
+    "ruta": "informes/riesgo-tecnologico/gestion-de-riesgo-tecnologico-y-obsolescencia-critica.html",
+    "destacado": false,
+    "vencimiento": "2026-09-30"
+  },
+  {
+    "id": "2026-08-21-modernizacion-de-infraestructura-gx",
+    "titulo": "Modernizacion de infraestructura /gx",
+    "fecha": "2026-08-21",
+    "categoria": "infraestructura",
+    "prioridad": "alta",
+    "cumplimiento": "sin_fecha",
+    "estado": "amarillo",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [
+      {
+        "nombre": "Preparacion y alineacion tecnica",
+        "avance": 100
+      },
+      {
+        "nombre": "Diseno de arquitectura objetivo",
+        "avance": 0
+      },
+      {
+        "nombre": "Configuracion de seguridad de red",
+        "avance": 0
+      },
+      {
+        "nombre": "Implementacion de certificados",
+        "avance": 0
+      },
+      {
+        "nombre": "Configuracion de conectividad",
+        "avance": 100
+      },
+      {
+        "nombre": "Ajuste de integraciones y servicios",
+        "avance": 0
+      },
+      {
+        "nombre": "Configuracion de ambiente de pruebas",
+        "avance": 0
+      },
+      {
+        "nombre": "Validaciones integrales",
+        "avance": 0
+      },
+      {
+        "nombre": "Pase a produccion y estabilizacion",
+        "avance": 0
+      },
+      {
+        "nombre": "Seguimiento con el proveedor",
+        "avance": 0
+      }
+    ],
+    "jira_urls": [
+      {
+        "label": "Ver detalle en Jira (BMO-166)",
+        "url": "https://cafsagroup.atlassian.net/browse/BMO-166"
+      }
+    ],
+    "resumen": "Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas; continua en curso el diseno de arquitectura, certificados y validaciones antes del pase a produccion.",
+    "ruta": "informes/infraestructura/modernizacion-de-infraestructura-gx.html",
+    "destacado": false,
+    "vencimiento": null
+  },
+  {
+    "id": "2026-08-21-correccion-de-discrepancias-en-estimaciones-contables",
+    "titulo": "Correccion de discrepancias en estimaciones contables",
+    "fecha": "2026-08-21",
+    "categoria": "finanzas-internas",
+    "prioridad": "alta",
+    "cumplimiento": "sin_fecha",
+    "estado": "amarillo",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [
+      {
+        "nombre": "Revision de montos mitigadores",
+        "avance": 0
+      },
+      {
+        "nombre": "Segmentacion empresarial",
+        "avance": 0
+      },
+      {
+        "nombre": "Cuentas por cobrar",
+        "avance": 0
+      },
+      {
+        "nombre": "Optimizacion de consultas",
+        "avance": 0
+      },
+      {
+        "nombre": "Coordinacion tecnica y configuracion",
+        "avance": 100
+      },
+      {
+        "nombre": "Documentacion y consolidacion",
+        "avance": 100
+      }
+    ],
+    "jira_urls": [
+      {
+        "label": "Ver detalle en Jira (BMO-252)",
+        "url": "https://cafsagroup.atlassian.net/browse/BMO-252"
+      }
+    ],
+    "resumen": "Correccion de discrepancias detectadas en calculos de estimaciones contables. Coordinacion tecnica y documentacion completadas; continua el diagnostico y ajuste de los distintos componentes de calculo.",
+    "ruta": "informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html",
+    "destacado": false,
+    "vencimiento": null
+  },
+  {
+    "id": "2026-08-21-operaciones-diarias",
+    "titulo": "Operaciones Diarias",
+    "fecha": "2026-08-21",
+    "categoria": "operaciones",
+    "prioridad": "media",
+    "cumplimiento": "a_tiempo",
+    "estado": "verde",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [],
+    "jira_urls": [],
+    "resumen": "Bitacora de labores diarias de TI: 530.5 horas documentadas en 58 dias habiles, del 05/06/2026 al 20/08/2026 (registro mas antiguo disponible). Distribucion: 70% operaciones internas de CAFSA, 30% gestion y coordinacion con proveedores externos.",
+    "ruta": "informes/operaciones/operaciones-diarias.html",
+    "destacado": false,
+    "personalizado": true,
+    "vencimiento": null
+  }
+]

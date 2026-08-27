@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- e^(iπ) + 1 = 0 — Identidad de Euler. Un saludo a quien esté revisando el código fuente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Operaciones Diarias — Informes Operaciones TI CAFSA</title>
+<link rel="icon" href="../../assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="../../index.html" class="brand-logo-link" aria-label="Ir a la pantalla principal">
+      <img src="../../assets/img/logos/logo-cafsa-blanco.png" alt="CAFSA">
+    </a>
+    <div>
+      <h1>Informes de Operaciones de TI</h1>
+      <p class="subtitle">Gerencia Operativa de TI — CAFSA</p>
+    </div>
+  </div>
+</header>
+
+<p class="breadcrumb"><a href="../../index.html">&larr; Volver al índice de informes</a></p>
+
+<main>
+  <div class="card-top">
+    <span class="estado-badge estado-verde">A tiempo</span>
+    <span class="prioridad-badge prioridad-media">Prioridad media</span>
+  </div>
+  <h2 class="page-title">Operaciones Diarias</h2>
+  <p class="page-meta">operaciones · 2026-08-21 · Cumplimiento: A tiempo</p>
+
+  <div class="resumen-ejecutivo">
+    <strong>Resumen ejecutivo:</strong> Bitácora de labores diarias de TI, con registro documentado del 05/06/2026 al 20/08/2026 (rango más antiguo disponible en la bitácora actual). Se centraliza aquí para dar seguimiento práctico a la carga operativa real, sin exponer el detalle granular de cada tarea (ese detalle vive en el seguimiento interno).
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-box">
+      <span class="kpi-valor">530.5</span>
+      <span class="kpi-label">Horas documentadas</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor">58</span>
+      <span class="kpi-label">Días hábiles registrados</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor">9.1</span>
+      <span class="kpi-label">Horas/día en promedio</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor">70% / 30%</span>
+      <span class="kpi-label">CAFSA interno / proveedores externos</span>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <h2>Horas registradas por mes</h2>
+    <p class="chart-subtitulo">Total de horas documentadas en la bitácora, agrupadas por mes calendario.</p>
+    <div class="chart-box chart-box-ancho">
+      <canvas id="grafico-horas-mes"></canvas>
+    </div>
+    <p class="fases-nota">Junio y julio están completos; agosto va parcial (corte al 20/08/2026).</p>
+  </div>
+
+  <div class="chart-container">
+    <h2>Distribución de la carga (interno vs. externo)</h2>
+    <p class="chart-subtitulo">% de las 530.5 horas totales dedicadas a operaciones internas de CAFSA vs. coordinación con proveedores.</p>
+    <div class="chart-box">
+      <canvas id="grafico-distribucion"></canvas>
+    </div>
+    <p class="fases-nota">"Externo" agrupa toda coordinación con proveedores, sin desglosar por proveedor individual (detalle disponible en el seguimiento interno, no en este portal público).</p>
+  </div>
+
+  <div class="chart-container">
+    <h2>Buscar en la bitácora</h2>
+    <p class="chart-subtitulo">17 días registrados en agosto/2026 — filtra por fecha con el calendario, o busca por proveedor / issue de Jira. Agrupado por fecha y, dentro de cada fecha, por proveedor.</p>
+
+    <div class="bitacora-controles">
+      <div class="buscador-wrap buscador-bitacora">
+        <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <line x1="10.4" y1="10.4" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <input
+          type="search"
+          id="buscador-bitacora"
+          placeholder="Buscar por proveedor o issue (ej. Quanto, BMO-333)..."
+          aria-label="Buscar en la bitácora de Operaciones Diarias"
+          autocomplete="off">
+      </div>
+      <label class="fecha-wrap" for="fecha-bitacora">
+        Ir a fecha
+        <input type="date" id="fecha-bitacora" min="2026-08-03" max="2026-08-25">
+      </label>
+      <button type="button" id="limpiar-bitacora" class="btn-limpiar-bitacora" hidden>Quitar filtros</button>
+    </div>
+
+    <p class="page-meta" id="resumen-bitacora" style="margin:10px 0 12px;"></p>
+    <div id="lista-bitacora" class="lista-bitacora"></div>
+
+    <p class="fases-nota">No se muestran horas ni la descripción de cada tarea: ese texto libre trae nombres de personas y detalle operativo de proveedores/incidentes que no aplica exponer en un repositorio público (ver README, disciplina de contenido). Para el detalle completo, consultar el seguimiento interno.</p>
+  </div>
+
+  <div class="detalle-links">
+    <h2>Más detalle</h2>
+    <ul>
+      <li>El detalle narrativo día a día (correos, reuniones, incidentes) se mantiene en la bitácora interna — no se publica aquí por política de contenido del portal (ver README del repositorio).</li>
+    </ul>
+  </div>
+
+  <button class="btn-consulta"
+          data-titulo="Operaciones Diarias"
+          data-resumen="Bitacora de labores diarias de TI: 530.5 horas documentadas en 58 dias habiles, del 05/06/2026 al 20/08/2026 (registro mas antiguo disponible). Distribucion: 70% operaciones internas de CAFSA, 30% gestion y coordinacion con proveedores externos."
+          onclick="enviarConsulta(this)">
+    Enviar consulta sobre este informe
+  </button>
+</main>
+
+<footer class="site-footer">
+  CAFSA — Informes de Operaciones de TI
+</footer>
+
+<script id="datos-bitacora" type="application/json">
+{"generado":"2026-08-27","rango":["2026-08-03","2026-08-25"],"total_horas":169.5,"registros":[
+{"fecha":"2026-08-03","jira_key":"BMO-319","proveedor":"Quanto","horas":1.0},
+{"fecha":"2026-08-03","jira_key":"BMO-319","proveedor":"CAFSA","horas":3.0},
+{"fecha":"2026-08-03","jira_key":"BMO-319","proveedor":"CAFSA","horas":4.5},
+{"fecha":"2026-08-04","jira_key":"BMO-320","proveedor":"Quanto","horas":1.0},
+{"fecha":"2026-08-04","jira_key":"BMO-320","proveedor":"BD Finance (PELgx)","horas":1.0},
+{"fecha":"2026-08-04","jira_key":"BMO-320","proveedor":"CAFSA","horas":1.5},
+{"fecha":"2026-08-04","jira_key":"BMO-320","proveedor":"BestResource (BestR)","horas":3.0},
+{"fecha":"2026-08-04","jira_key":"BMO-320","proveedor":"CAFSA","horas":1.5},
+{"fecha":"2026-08-04","jira_key":"BMO-320","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-05","jira_key":"BMO-321","proveedor":"BestResource (BestR)","horas":1.0},
+{"fecha":"2026-08-05","jira_key":"BMO-321","proveedor":"Quanto","horas":3.0},
+{"fecha":"2026-08-05","jira_key":"BMO-321","proveedor":"CAFSA","horas":4.5},
+{"fecha":"2026-08-06","jira_key":"BMO-322","proveedor":"BestResource (BestR)","horas":3.0},
+{"fecha":"2026-08-06","jira_key":"BMO-322","proveedor":"CAFSA","horas":5.5},
+{"fecha":"2026-08-07","jira_key":"BMO-323","proveedor":"BD Finance (PELgx)","horas":1.0},
+{"fecha":"2026-08-07","jira_key":"BMO-323","proveedor":"CAFSA","horas":3.0},
+{"fecha":"2026-08-07","jira_key":"BMO-323","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-07","jira_key":"BMO-323","proveedor":"CAFSA","horas":1.0},
+{"fecha":"2026-08-07","jira_key":"BMO-323","proveedor":"BestResource (BestR)","horas":3.0},
+{"fecha":"2026-08-07","jira_key":"BMO-323","proveedor":"CAFSA","horas":2.0},
+{"fecha":"2026-08-10","jira_key":"BMO-325","proveedor":"BestResource (BestR)","horas":1.0},
+{"fecha":"2026-08-10","jira_key":"BMO-325","proveedor":"CAFSA","horas":3.0},
+{"fecha":"2026-08-10","jira_key":"BMO-325","proveedor":"CAFSA","horas":1.5},
+{"fecha":"2026-08-10","jira_key":"BMO-325","proveedor":"CAFSA","horas":1.0},
+{"fecha":"2026-08-10","jira_key":"BMO-325","proveedor":"CAFSA","horas":1.0},
+{"fecha":"2026-08-10","jira_key":"BMO-325","proveedor":"CAFSA","horas":4.0},
+{"fecha":"2026-08-10","jira_key":"BMO-325","proveedor":"CAFSA","horas":4.0},
+{"fecha":"2026-08-11","jira_key":"BMO-326","proveedor":"Quanto","horas":4.0},
+{"fecha":"2026-08-11","jira_key":"BMO-326","proveedor":"CAFSA","horas":3.0},
+{"fecha":"2026-08-11","jira_key":"BMO-326","proveedor":"Quanto","horas":1.0},
+{"fecha":"2026-08-11","jira_key":"BMO-326","proveedor":"Quanto","horas":4.0},
+{"fecha":"2026-08-11","jira_key":"BMO-326","proveedor":"Quanto","horas":3.0},
+{"fecha":"2026-08-11","jira_key":"BMO-326","proveedor":"Quanto","horas":1.0},
+{"fecha":"2026-08-11","jira_key":"BMO-326","proveedor":"Quanto","horas":4.0},
+{"fecha":"2026-08-12","jira_key":"BMO-327","proveedor":"CAFSA","horas":3.0},
+{"fecha":"2026-08-12","jira_key":"BMO-327","proveedor":"CAFSA","horas":1.5},
+{"fecha":"2026-08-12","jira_key":"BMO-327","proveedor":"CAFSA","horas":1.5},
+{"fecha":"2026-08-12","jira_key":"BMO-327","proveedor":"CAFSA","horas":2.5},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"CAFSA","horas":4.0},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"BestResource (BestR)","horas":0.5},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"Ladonware","horas":1.5},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"Quanto","horas":0.3},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"GBM","horas":0.5},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"BestResource (BestR)","horas":0.3},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"BestResource (BestR)","horas":0.2},
+{"fecha":"2026-08-13","jira_key":"BMO-328","proveedor":"CAFSA","horas":0.6},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"BD Finance (PELgx)","horas":2.0},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"DWH (consultor externo)","horas":0.3},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"CAFSA","horas":1.0},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"Ladonware","horas":0.5},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"BestResource (BestR)","horas":0.3},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"CAFSA","horas":0.2},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"CAFSA","horas":2.0},
+{"fecha":"2026-08-14","jira_key":"BMO-333","proveedor":"CAFSA","horas":0.4},
+{"fecha":"2026-08-17","jira_key":"BMO-334","proveedor":"Ladonware","horas":1.5},
+{"fecha":"2026-08-17","jira_key":"BMO-334","proveedor":"DWH (consultor externo)","horas":1.0},
+{"fecha":"2026-08-17","jira_key":"BMO-334","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-17","jira_key":"BMO-334","proveedor":"GBM","horas":1.0},
+{"fecha":"2026-08-17","jira_key":"BMO-334","proveedor":"Softland","horas":0.3},
+{"fecha":"2026-08-17","jira_key":"BMO-334","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-17","jira_key":"BMO-334","proveedor":"BestResource (BestR)","horas":0.3},
+{"fecha":"2026-08-17","jira_key":"BMO-334","proveedor":"CAFSA","horas":3.4},
+{"fecha":"2026-08-18","jira_key":"BMO-335","proveedor":"CAFSA","horas":11.0},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"BestResource (BestR)","horas":1.5},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"BestResource (BestR)","horas":1.0},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"CAFSA","horas":1.0},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"GBM","horas":0.5},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"Quanto","horas":0.5},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"BestResource (BestR)","horas":0.5},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"Softland","horas":0.3},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-19","jira_key":"BMO-336","proveedor":"CAFSA","horas":2.9},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"BestResource (BestR)","horas":0.5},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"Quanto","horas":0.3},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"BD Consultores / BD Digital Serv","horas":1.5},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"GBM","horas":0.3},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"CAFSA","horas":0.7},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"CAFSA","horas":0.8},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"CAFSA","horas":0.8},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-20","jira_key":"BMO-337","proveedor":"CAFSA","horas":2.7},
+{"fecha":"2026-08-21","jira_key":"BMO-338","proveedor":"CAFSA","horas":1.5},
+{"fecha":"2026-08-21","jira_key":"BMO-338","proveedor":"BD Consultores / BD Digital Serv","horas":0.5},
+{"fecha":"2026-08-21","jira_key":"BMO-338","proveedor":"BestResource (BestR)","horas":3.3},
+{"fecha":"2026-08-21","jira_key":"BMO-338","proveedor":"Quanto","horas":0.5},
+{"fecha":"2026-08-21","jira_key":"BMO-338","proveedor":"CAFSA","horas":2.7},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"Sentinel","horas":1.0},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"CAFSA","horas":1.2},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"CAFSA","horas":1.3},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"GBM","horas":0.3},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"Quanto","horas":0.3},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"Softland","horas":0.2},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"CAFSA","horas":0.2},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"BestResource","horas":0.5},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"CAFSA","horas":0.4},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"CAFSA","horas":2.0},
+{"fecha":"2026-08-24","jira_key":"BMO-340","proveedor":"CAFSA","horas":2.3},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"BD Consultores / BD Digital Serv","horas":1.5},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"Softland","horas":0.3},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"GBM","horas":0.8},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"BestResource (BestR)","horas":1.0},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"CAFSA","horas":0.8},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"CAFSA","horas":0.5},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"CAFSA","horas":0.4},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"Quanto","horas":0.3},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"CAFSA","horas":0.3},
+{"fecha":"2026-08-25","jira_key":"BMO-341","proveedor":"CAFSA","horas":2.6}
+]}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="../../assets/js/mailto-consulta.js"></script>
+<script>
+  Chart.register(ChartDataLabels);
+
+  new Chart(document.getElementById('grafico-horas-mes'), {
+    type: 'bar',
+    data: {
+      labels: ['Junio 2026', 'Julio 2026', 'Agosto 2026 (parcial)'],
+      datasets: [{
+        label: 'Horas registradas',
+        data: [175.5, 203.5, 151.5],
+        backgroundColor: ['#5c5c5c', '#5c5c5c', '#9a9a9a']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          color: '#2b2b2b',
+          font: { size: 11, weight: '600' },
+          formatter: (v) => `${v}h`
+        }
+      },
+      scales: { y: { beginAtZero: true, grace: '12%' } }
+    }
+  });
+
+  new Chart(document.getElementById('grafico-distribucion'), {
+    type: 'doughnut',
+    data: {
+      labels: ['CAFSA (interno)', 'Proveedores externos'],
+      datasets: [{
+        data: [70, 30],
+        backgroundColor: ['#111111', '#9a9a9a']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        datalabels: {
+          color: '#ffffff',
+          font: { size: 13, weight: '700' },
+          formatter: (v) => `${v}%`
+        }
+      }
+    }
+  });
+
+  // Buscador de la bitácora — calendario (fecha exacta) + texto libre
+  // (proveedor / issue de Jira), agrupado por fecha y luego por proveedor.
+  // Todo corre en el navegador sobre los datos ya embebidos arriba (sin
+  // backend, sin fetch): solo campos estructurados, nunca horas ni el
+  // texto libre de cada tarea (ver nota junto al buscador).
+  (function () {
+    const datos = JSON.parse(document.getElementById('datos-bitacora').textContent);
+    const registros = datos.registros;
+    const inputTexto = document.getElementById('buscador-bitacora');
+    const inputFecha = document.getElementById('fecha-bitacora');
+    const btnLimpiar = document.getElementById('limpiar-bitacora');
+    const lista = document.getElementById('lista-bitacora');
+    const resumen = document.getElementById('resumen-bitacora');
+
+    const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+    const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto',
+      'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+    function normalizar(texto) {
+      return texto
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+    }
+
+    function tituloFecha(fecha) {
+      const d = new Date(`${fecha}T00:00:00`);
+      return `${DIAS[d.getDay()]} ${d.getDate()} de ${MESES[d.getMonth()]}`;
+    }
+
+    // Agrupa por fecha (cada fecha == un issue de bitácora en Jira) y,
+    // dentro de cada fecha, cuenta cuántas veces aparece cada proveedor
+    // (sin mostrar horas — solo el conteo de tareas si es más de una).
+    function agrupar(filtrados) {
+      const porFecha = new Map();
+      filtrados.forEach(r => {
+        if (!porFecha.has(r.fecha)) {
+          porFecha.set(r.fecha, { jira: r.jira_key, proveedores: new Map() });
+        }
+        const grupo = porFecha.get(r.fecha);
+        grupo.proveedores.set(r.proveedor, (grupo.proveedores.get(r.proveedor) || 0) + 1);
+      });
+      return [...porFecha.entries()].sort((a, b) => b[0].localeCompare(a[0]));
+    }
+
+    function render() {
+      const termino = normalizar(inputTexto.value.trim());
+      const fechaElegida = inputFecha.value;
+
+      const filtrados = registros.filter(r => {
+        const coincideFecha = !fechaElegida || r.fecha === fechaElegida;
+        const coincideTexto = !termino || normalizar(`${r.jira_key} ${r.proveedor}`).includes(termino);
+        return coincideFecha && coincideTexto;
+      });
+
+      const grupos = agrupar(filtrados);
+
+      lista.innerHTML = grupos.length
+        ? grupos.map(([fecha, grupo]) => `
+          <div class="bitacora-grupo">
+            <div class="bitacora-grupo-header">
+              <span class="bitacora-grupo-fecha">${tituloFecha(fecha)}</span>
+              <a class="bitacora-grupo-jira" href="https://cafsagroup.atlassian.net/browse/${grupo.jira}" target="_blank" rel="noopener">${grupo.jira}</a>
+            </div>
+            <ul class="bitacora-proveedores">
+              ${[...grupo.proveedores.entries()]
+                .sort((a, b) => a[0].localeCompare(b[0]))
+                .map(([proveedor, n]) => `<li>${proveedor}${n > 1 ? ` <span class="bitacora-proveedor-n">×${n}</span>` : ''}</li>`)
+                .join('')}
+            </ul>
+          </div>
+        `).join('')
+        : '<p class="page-meta">Sin resultados para esa búsqueda.</p>';
+
+      resumen.textContent = fechaElegida
+        ? `${filtrados.length} registro(s) el ${tituloFecha(fechaElegida)}`
+        : `${grupos.length} día(s) · ${filtrados.length} registro(s)`;
+
+      btnLimpiar.hidden = !termino && !fechaElegida;
+    }
+
+    inputTexto.addEventListener('input', render);
+    inputFecha.addEventListener('change', render);
+    btnLimpiar.addEventListener('click', () => {
+      inputTexto.value = '';
+      inputFecha.value = '';
+      render();
+    });
+
+    render();
+  })();
+</script>
+
+</body>
+</html>

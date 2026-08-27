@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- e^(iπ) + 1 = 0 — Identidad de Euler. Un saludo a quien esté revisando el código fuente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Pendientes de {{PERSONA_NOMBRE}} — Informes Operaciones TI CAFSA</title>
+<link rel="icon" href="../../assets/img/favicon.png" type="image/png">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="../../index.html" class="brand-logo-link" aria-label="Ir a la pantalla principal">
+      <img src="../../assets/img/logos/logo-cafsa-blanco.png" alt="CAFSA">
+    </a>
+    <div>
+      <h1>Informes de Operaciones de TI</h1>
+      <p class="subtitle">Gerencia Operativa de TI — CAFSA</p>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <a href="../../index.html">Informes</a>
+    <a href="../index.html" class="activo">Reportes y seguimientos</a>
+  </nav>
+</header>
+
+<p class="breadcrumb"><a href="../index.html">&larr; Volver a Reportes y seguimientos</a></p>
+
+<main>
+  <h2 class="page-title">Pendientes de {{PERSONA_NOMBRE}}</h2>
+  <p class="page-meta">{{PERSONA_CARGO}} · actualizado al {{FECHA_GENERACION}} · {{TOTAL_PENDIENTES}} pendiente(s)</p>
+
+  <div class="pendientes-lista">
+<!--__PENDIENTES_LISTA__-->
+  </div>
+</main>
+
+<footer class="site-footer">
+  CAFSA — Informes de Operaciones de TI
+</footer>
+
+<script src="../../assets/js/mailto-consulta.js"></script>
+
+</body>
+</html>

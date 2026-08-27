@@ -1,0 +1,60 @@
+[
+  {
+    "id": "cristopher-perez-ugalde-2026-08-27-des-1741-migracion-core-financiero-abanks-forms-14",
+    "persona_slug": "cristopher-perez-ugalde",
+    "persona_nombre": "Cristopher Pérez Ugalde",
+    "persona_cargo": "Jefe de TI",
+    "fecha": "2026-08-27",
+    "tema": "DES-1741 — Migración Core Financiero ABANKS (Forms 14c)",
+    "solicitud": "Indicar con quien coordinar la instalacion de servidores/componentes de produccion (DES-1745, DES-1748) y del ambiente Virtualizador de Oracle (DES-1753), para asignar tiempos y responsables. Debe priorizarse por el plazo: es el tema mas urgente de este seguimiento.",
+    "plazo": "2026-09-30",
+    "criticidad": "alta",
+    "recomendacion": "Se sugiere involucrar al equipo de Infraestructura para coordinar la instalacion de servidores/componentes de produccion (DES-1745, DES-1748) y del ambiente Virtualizador de Oracle (DES-1753).",
+    "jira_urls": [
+      {
+        "label": "Ver DES-1741 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1741"
+      },
+      {
+        "label": "Ver DES-1745 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1745"
+      },
+      {
+        "label": "Ver DES-1748 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1748"
+      },
+      {
+        "label": "Ver DES-1753 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/DES-1753"
+      }
+    ],
+    "estado_item": "pendiente"
+  },
+  {
+    "id": "maria-cristina-hernandez-2026-08-27-pp-216-xl-cor-01-consolidado",
+    "persona_slug": "maria-cristina-hernandez",
+    "persona_nombre": "María Cristina Hernández",
+    "persona_cargo": "Coordinación de Proyectos",
+    "fecha": "2026-08-27",
+    "tema": "PP-216 (XL-COR-01) — Vista 360 Cliente + Cotizador: seguimiento consolidado",
+    "solicitud": "Consolidado de seguimiento de la iniciativa <strong>XL-COR-01 — Vista 360 Cliente + Cotizador</strong> (ticket madre: PP-216, prioridad Highest, vencimiento original 16/04/2026, ya vencido). Puntos pendientes por referencia:<ul><li><strong>PP-216 (XL-COR-01):</strong> el estado en Jira figura como &quot;Evaluación de Viabilidad&quot;, pero el trabajo ya fue finalizado — falta coordinar la actualización del estado en Jira.</li><li><strong>PP-208:</strong> propuestas de integración con MIRA — pendiente de definición y seguimiento.</li><li><strong>PR-63 (Workflow, PRD):</strong> las subtareas no tienen responsable asignado.</li><li><strong>Presolicitudes en Workflow + One Entry Point (Time to Yes):</strong> sin alcance definido, sin responsables, sin plan de acción.</li><li><strong>Integración Cotizador–Salesforce:</strong> ya está finalizada, incluida la documentación — pero existe otra tarea (sin ticket propio identificado en la revisión) que la duplica y además le suma integración con Workflow.</li></ul>En general hay tareas hijas de XL-COR-01 que se solapan entre sí — hace falta un barrido para unificar duplicados antes de seguir sumando trabajo nuevo.",
+    "plazo": "2026-04-16",
+    "criticidad": "alta",
+    "recomendacion": "Plan de acción sugerido, en orden de prioridad:<ol><li>Actualizar el estado de PP-216 en Jira (ya no corresponde &quot;Evaluación de Viabilidad&quot;).</li><li>Asignar responsable a las subtareas de PR-63.</li><li>Definir alcance, responsables y plan de acción de presolicitudes/OEP.</li><li>Decidir si la tarea duplicada de Salesforce+Workflow se separa (cerrar lo ya hecho, dejar solo lo nuevo de Workflow) o se fusiona con la que ya está finalizada.</li><li>Dar seguimiento al estado de PP-208 (integración con MIRA).</li><li>Barrido completo de XL-COR-01 para detectar y cerrar duplicados antes de seguir creando tareas nuevas.</li></ol>",
+    "jira_urls": [
+      {
+        "label": "Ver PP-216 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-216"
+      },
+      {
+        "label": "Ver PP-208 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-208"
+      },
+      {
+        "label": "Ver PR-63 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/PR-63"
+      }
+    ],
+    "estado_item": "pendiente"
+  }
+]
