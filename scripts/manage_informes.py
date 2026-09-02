@@ -82,7 +82,7 @@ from datetime import date
 from pathlib import Path
 
 from common import ROOT, slugify, parse_jira_url
-from reportes_lib import agrupar_por_persona, cargar_pendientes, render_persona_card, texto_plazo
+from reportes_lib import agrupar_por_persona, cargar_pendientes, orden_persona, render_persona_card, texto_plazo
 
 DATA_FILE = ROOT / "data" / "informes.json"
 JIRA_SNAPSHOT_FILE = ROOT / "data" / "jira_snapshot.json"
@@ -275,9 +275,13 @@ def render_seccion_reportes() -> str:
     por_persona = agrupar_por_persona(pendientes)
     if not por_persona:
         return '    <p class="page-meta">Todavía no hay reportes/pendientes registrados.</p>'
+    # Orden por jerarquía organizacional (Gerencia > Jefatura > PMO/
+    # Coordinación > Contacto operativo), no alfabético — ver orden_persona()
+    # en reportes_lib.py. Mismo criterio que reportes/index.html.
+    orden = sorted(por_persona.items(), key=lambda kv: orden_persona(kv[1]))
     return "\n".join(
         render_persona_card(slug, items, base_path="reportes/")
-        for slug, items in sorted(por_persona.items())
+        for slug, items in orden
     )
 
 

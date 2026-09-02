@@ -33,11 +33,87 @@ alimentan ningún cálculo, son un saludo para quien lea el código fuente.
 
 import json
 import math
+import re
+import unicodedata
 from datetime import date
 
 from common import ROOT, slugify  # noqa: F401  (slugify re-exportado por conveniencia)
 
 PENDIENTES_FILE = ROOT / "data" / "pendientes.json"
+
+# ---------- Jerarquía organizacional (petición explícita, 2026-08-29) ----------
+# Se usa para ORDENAR y ETIQUETAR las tarjetas de persona (mayor jerarquía
+# primero: Gerencia > Jefatura > PMO/Coordinación > Contacto operativo). NO
+# cambia la criticidad de cada pendiente individual, que sigue siendo un dato
+# declarado aparte por ítem — esto es una capa distinta, sobre la PERSONA.
+#
+# Se infiere del texto de `persona_cargo` por palabra clave, no de una lista
+# aparte de nombres: en cuanto se registra un pendiente con un cargo que
+# matchee, la persona queda clasificada automáticamente. Esto es deliberado:
+# evita mantener un "directorio" separado de nombres+cargos, y evita crear
+# tarjetas para personas que todavía no tienen ningún pendiente registrado
+# (ver nota en CONTEXTO.md sobre Luis Aguilar / Geovanny).
+NIVELES_JERARQUICOS = [
+    # (orden, etiqueta, palabras clave sin tildes/minúsculas)
+    # Etiquetas cortas y de largo parejo a propósito (2026-08-29): una
+    # palabra cada una, para que el badge quepa en la card compacta junto
+    # al estado sin desbordarse, sin importar cuál combinación salga.
+    (1, "Gerencia", ("gerente", "gerencia", "director", "direccion")),
+    (2, "Jefatura", ("jefe", "jefatura")),
+    (3, "PMO", ("pmo", "coordinaci")),
+]
+NIVEL_DEFECTO = (4, "Operativo")
+
+
+def _sin_tildes(texto: str) -> str:
+    return unicodedata.normalize("NFKD", texto or "").encode("ascii", "ignore").decode("ascii").lower()
+
+
+def nivel_jerarquico(persona_cargo: str):
+    """(orden:int, etiqueta:str) según palabras clave del cargo declarado.
+    Orden más bajo = más jerarquía (1=Gerencia). Se recalcula del texto de
+    `persona_cargo` en cada build — no es un dato manual por persona."""
+    cargo_normalizado = _sin_tildes(persona_cargo)
+    for orden, etiqueta, claves in NIVELES_JERARQUICOS:
+        if any(clave in cargo_normalizado for clave in claves):
+            return orden, etiqueta
+    return NIVEL_DEFECTO
+
+
+def orden_persona(items: list):
+    """Clave de orden para las tarjetas de persona: primero por jerarquía
+    organizacional (menor número = más jerarquía), y dentro del mismo
+    nivel, por magnitud de atención descendente (quien más necesita
+    atención primero dentro de su propio nivel)."""
+    orden, _ = nivel_jerarquico(items[0]["persona_cargo"])
+    return (orden, -magnitud_atencion(items), items[0]["persona_nombre"])
+
+
+def texto_plano(html: str) -> str:
+    """Convierte a texto plano el HTML simple que usan solicitud/
+    recomendacion (listas <ul>/<ol>/<li>, <strong>, <br>) para poder
+    meterlo en el cuerpo de un correo (mailto: no interpreta HTML). No es
+    un parser HTML completo — alcanza para el subconjunto de etiquetas que
+    este sistema genera.
+
+    IMPORTANTE: el resultado se embebe en un atributo HTML (`data-cuerpo`),
+    así que las entidades (`&quot;`, `&amp;`, etc.) se dejan tal cual —
+    NO se decodifican acá. El navegador ya las decodifica solo al leer el
+    atributo (`element.dataset.cuerpo`), que es donde deben volverse texto
+    real. Decodificarlas en Python metería comillas/ampersands crudos
+    dentro del atributo y rompería el HTML generado."""
+    if not html:
+        return ""
+    texto = html
+    texto = re.sub(r"<(ul|ol)>", "\n", texto)
+    texto = re.sub(r"</(ul|ol)>", "\n", texto)
+    texto = re.sub(r"<li>", "- ", texto)
+    texto = re.sub(r"</li>", "\n", texto)
+    texto = re.sub(r"<br\s*/?>", "\n", texto)
+    texto = re.sub(r"</p>", "\n\n", texto)
+    texto = re.sub(r"<[^>]+>", "", texto)
+    texto = re.sub(r"\n{3,}", "\n\n", texto)
+    return texto.strip()
 
 CRITICIDADES_VALIDAS = {
     "alta": "Criticidad alta",
@@ -213,6 +289,15 @@ def render_pendiente_item(item: dict) -> str:
         for j in item.get("jira_urls", [])
     )
 
+    # Cuerpo en texto plano para el botón "Redactar correo" — sin destinatario
+    # fijo (no tenemos la dirección real de correo de cada persona en el
+    # sistema; el usuario la completa él mismo al abrir el borrador). Ver
+    # redactarCorreo() en mailto-consulta.js.
+    partes_cuerpo = [f"Tema: {item['tema']}", "", texto_plano(item["solicitud"])]
+    if item.get("recomendacion"):
+        partes_cuerpo += ["", f"Recomendación: {texto_plano(item['recomendacion'])}"]
+    cuerpo_correo = "\n".join(partes_cuerpo)
+
     return f"""    <article class="pendiente-item">
       <div class="card-top">
         <span class="estado-badge {estado_clase}">{estado_label}</span>
@@ -228,6 +313,9 @@ def render_pendiente_item(item: dict) -> str:
 {jira_botones}
         <button class="btn-consulta" data-tema="{item['tema']}" onclick="confirmarSeguimiento(this)">
           Confirmar seguimiento
+        </button>
+        <button class="btn-secundario btn-redactar" data-persona="{item['persona_nombre']}" data-tema="{item['tema']}" data-cuerpo="{cuerpo_correo}" onclick="redactarCorreo(this)">
+          Redactar correo a {item['persona_nombre'].split()[0]}
         </button>
       </div>
     </article>"""
@@ -252,13 +340,15 @@ def render_persona_card(persona_slug: str, items: list, base_path: str = "") -> 
     'reportes/' cuando se renderiza en el index.html principal (los links
     deben ser 'reportes/slug/...').
 
-    Estructura fija de 'carriles' (badge / cargo / título / conteo /
-    magnitud / link) para que todas las cards midan igual sin importar el
-    largo del nombre o el cargo — ver .persona-card en style.css."""
+    Estructura fija de 'carriles' (jerarquía / estado / título / cargo /
+    conteo / magnitud / link) para que todas las cards midan igual sin
+    importar el largo del nombre o el cargo — ver .persona-card en
+    style.css. Orden de las cards en el grid: ver orden_persona()."""
     abiertos = [i for i in items if i["estado_item"] != "resuelto"]
     nombre = items[0]["persona_nombre"]
     cargo = items[0]["persona_cargo"]
     clase_badge, label_badge = resumen_persona(items)
+    nivel_orden, nivel_etiqueta = nivel_jerarquico(cargo)
     conteo = (
         f"{len(abiertos)} pendiente(s) abierto(s) de {len(items)} total"
         if abiertos else f"Sin pendientes abiertos ({len(items)} en historial)"
@@ -267,10 +357,11 @@ def render_persona_card(persona_slug: str, items: list, base_path: str = "") -> 
     href = f"{base_path}{persona_slug}/index.html"
     return f"""    <div class="persona-card">
       <div class="card-top">
-        <span class="cargo" title="{cargo}">{cargo}</span>
+        <span class="jerarquia-badge jerarquia-{nivel_orden}" title="Jerarquía organizacional: se infiere del cargo declarado (Gerencia &gt; Jefatura &gt; PMO/Coordinación &gt; Contacto operativo). Define el orden de las tarjetas, no la criticidad de cada pendiente.">{nivel_etiqueta}</span>
         <span class="estado-badge {clase_badge}">{label_badge}</span>
       </div>
       <h3><a href="{href}">{nombre}</a></h3>
+      <p class="cargo" title="{cargo}">{cargo}</p>
       <p class="conteo">{conteo}</p>
       <p class="formula-nota" title="Teorema de Pitágoras: magnitud = √(a²+b²) — a = pendientes abiertos, b = de esos, cuántos son de criticidad alta. Así lo de criticidad alta 'pesa' más que lineal en el total.">Magnitud de atención (√(a²+b²)): {magnitud}</p>
       <a href="{href}">Ver pendientes y solicitudes &rarr;</a>

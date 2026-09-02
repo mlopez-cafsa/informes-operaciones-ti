@@ -846,23 +846,26 @@ main {
 
 .personas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
   align-items: stretch;
 }
 
-/* Cada card tiene la misma estructura de "carriles" (badge / cargo / título
-   reservado a 2 líneas / conteo / link fijado al fondo) para que todas
-   midan y alineen igual sin importar cuánto texto traiga cada una. */
+/* Cada card tiene la misma estructura de "carriles" (jerarquía+estado /
+   título / cargo / conteo / magnitud / link) para que todas midan y
+   alineen igual sin importar cuánto texto traiga cada una. Tamaño
+   reducido a propósito (2026-08-29) respecto a otras cards del sitio: al
+   ordenarse por jerarquía organizacional, conviene que quepan varias de
+   un vistazo sin scroll. */
 .persona-card {
   background: var(--cafsa-white);
   border: 1px solid var(--cafsa-border);
   border-radius: var(--radius);
-  padding: 18px;
+  padding: 13px 14px;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   height: 100%;
   /* 0.314s ≈ π/10 — guiño a π en vez del 0.15s genérico de otras cards */
   transition: box-shadow 0.314s ease, transform 0.314s ease;
@@ -874,18 +877,26 @@ main {
 }
 
 .persona-card .card-top {
-  flex-wrap: nowrap;
+  /* Antes forzaba flex-wrap: nowrap -- con la card compacta (2026-08-29)
+     eso hacía que jerarquia-badge + estado-badge se salieran del borde en
+     combinaciones largas (ej. "PMO" + "Atención requerida"). Ahora se
+     permite pasar a una segunda línea en vez de desbordarse, y ambos
+     badges pueden encogerse un poco antes de eso. */
+  flex-wrap: wrap;
+  row-gap: 4px;
 }
 
-.persona-card .card-top .estado-badge {
-  flex-shrink: 0;
+.persona-card .card-top .estado-badge,
+.persona-card .card-top .jerarquia-badge {
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .persona-card h3 {
-  margin: 0;
-  font-size: 1.05rem;
+  margin: 2px 0 0;
+  font-size: 0.98rem;
   line-height: 1.3;
-  min-height: 2.6em;
+  min-height: 2.4em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -893,20 +904,40 @@ main {
 }
 
 .persona-card .cargo {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   color: var(--cafsa-gray);
-  min-width: 0;
-  flex: 1 1 auto;
+  margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .persona-card .conteo {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: var(--cafsa-gray-light);
-  margin-top: 6px;
+  margin-top: 4px;
 }
+
+/* Badge de jerarquía organizacional: se infiere del cargo declarado (ver
+   reportes_lib.nivel_jerarquico()). Define el ORDEN de las cards, no la
+   criticidad de cada pendiente individual (eso sigue siendo aparte, por
+   ítem). Degradado de oscuro a claro = de mayor a menor jerarquía, para
+   que se lea de un vistazo sin tener que comparar etiquetas. */
+.jerarquia-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+}
+
+.jerarquia-1 { background: var(--cafsa-black); color: #fff; }
+.jerarquia-2 { background: var(--cafsa-dark); color: #fff; }
+.jerarquia-3 { background: var(--status-yellow-bg); color: var(--status-yellow); }
+.jerarquia-4 { background: var(--cafsa-gray-bg); color: var(--cafsa-gray); }
 
 /* Notas de fórmula (gravitación, Pitágoras): pequeñas, con tooltip nativo
    vía title="" — el subrayado punteado avisa que hay más info al pasar

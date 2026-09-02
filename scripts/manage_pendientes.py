@@ -61,6 +61,7 @@ from reportes_lib import (
     cargar_pendientes,
     entropia_sistema,
     guardar_pendientes,
+    orden_persona,
     render_pendiente_item,
     render_persona_card,
     urgencia_gravitacional,
@@ -98,8 +99,11 @@ def render_persona_page(items: list) -> str:
 
 def build_reportes_index(por_persona: dict, pendientes: list) -> None:
     plantilla_index = (TEMPLATES_DIR / "reportes_index_template.html").read_text(encoding="utf-8")
+    # Orden por jerarquía organizacional (Gerencia > Jefatura > PMO/
+    # Coordinación > Contacto operativo), no alfabético — ver orden_persona().
+    orden = sorted(por_persona.items(), key=lambda kv: orden_persona(kv[1]))
     tarjetas = "\n".join(
-        render_persona_card(slug, items) for slug, items in sorted(por_persona.items())
+        render_persona_card(slug, items) for slug, items in orden
     ) if por_persona else '    <p class="page-meta">Todavía no hay pendientes registrados.</p>'
 
     entropia = entropia_sistema(pendientes)

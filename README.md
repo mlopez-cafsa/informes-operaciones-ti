@@ -9,6 +9,11 @@ Portal estático de Operaciones de TI (CAFSA), con dos módulos:
   confirmación de seguimiento, y recomendación cuando aplica involucrar a
   otro equipo). Un link evergreen por persona (`reportes/<persona>/`).
 
+Este README es la **referencia técnica** (cómo usar cada script y cada
+opción). Para el **paso a paso operativo** — cuándo y en qué orden correr
+cada procedimiento, con su verificación y su plan de rollback — ver
+**`SOP.md`** en la raíz del repo.
+
 ## ⚠️ Repositorio público — disciplina de contenido
 
 Este repositorio es **público** (requisito de GitHub Pages en su plan
@@ -93,11 +98,13 @@ navegador (sin backend), así que no requiere tocar el script para usarse.
 ```
 informes-operaciones-ti/
 ├── index.html                  # Generado por el script — NO editar a mano
+├── README.md                    # Referencia técnica (cómo usar cada script)
+├── SOP.md                       # Procedimiento estándar paso a paso (cuándo/en qué orden)
 ├── robots.txt
 ├── logos-cafsa/                # Logos originales (fuente, sin optimizar)
 ├── assets/
 │   ├── css/style.css           # Paleta CAFSA (gris oscuro/negro/blanco) + semáforo
-│   ├── js/mailto-consulta.js   # Botones de mailto (consulta / confirmar seguimiento)
+│   ├── js/mailto-consulta.js   # Botones de mailto (consulta / confirmar seguimiento / redactar correo)
 │   ├── js/color-semaforo.js    # Semáforo de color para % de avance (ver sección de matemáticas)
 │   └── img/logos/              # Logos optimizados para web + favicon
 ├── informes/
@@ -222,6 +229,30 @@ Abre un borrador de correo (`mailto:`) dirigido siempre a
 `mlopezz@cafsa.fi.cr`, con el título y resumen del informe como contexto.
 No envía nada automáticamente: primero pide confirmación en el navegador, y
 luego el usuario revisa y envía desde su propio cliente de correo.
+
+## Jerarquía organizacional en "Reportes y seguimientos" (2026-08-29)
+
+Las tarjetas de persona (`reportes/index.html` y la sección del index
+principal) se ordenan por **jerarquía organizacional**, no alfabéticamente:
+Gerencia > Jefatura > PMO > Operativo (etiquetas cortas a propósito, para
+que el badge no se desborde de la card compacta). Se infiere
+automáticamente de palabras clave en `persona_cargo` (`nivel_jerarquico()`
+en `scripts/reportes_lib.py`) — no hay que mantener una lista aparte de
+nombres. Dentro de un mismo nivel, se ordena por magnitud de atención
+descendente (`orden_persona()`).
+
+Una card solo aparece si esa persona tiene al menos un pendiente
+registrado en `data/pendientes.json` — el sistema no genera cards para
+un "directorio" de contactos sin pendientes reales.
+
+Botón **"Redactar correo a &lt;Persona&gt;"** (junto a "Confirmar
+seguimiento" en cada pendiente): a diferencia de ese otro botón — que
+siempre le escribe a Marco mismo, como registro — este arma un borrador
+dirigido a la persona del pendiente, con la solicitud/recomendación como
+cuerpo. El campo "Para" queda **vacío a propósito**: el sistema no
+almacena direcciones de correo reales de terceros, así que hay que
+completarlo a mano antes de enviar (`redactarCorreo()` en
+`assets/js/mailto-consulta.js`).
 
 ## Panel consolidado "Mi seguimiento" (index principal)
 

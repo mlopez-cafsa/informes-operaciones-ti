@@ -34,7 +34,7 @@
     "id": "maria-cristina-hernandez-2026-08-27-pp-216-xl-cor-01-consolidado",
     "persona_slug": "maria-cristina-hernandez",
     "persona_nombre": "María Cristina Hernández",
-    "persona_cargo": "Coordinación de Proyectos",
+    "persona_cargo": "PMO — Coordinación de Proyectos",
     "fecha": "2026-08-27",
     "tema": "PP-216 (XL-COR-01) — Vista 360 Cliente + Cotizador: seguimiento consolidado",
     "solicitud": "Consolidado de seguimiento de la iniciativa <strong>XL-COR-01 — Vista 360 Cliente + Cotizador</strong> (ticket madre: PP-216, prioridad Highest, vencimiento original 16/04/2026, ya vencido). Puntos pendientes por referencia:<ul><li><strong>PP-216 (XL-COR-01):</strong> el estado en Jira figura como &quot;Evaluación de Viabilidad&quot;, pero el trabajo ya fue finalizado — falta coordinar la actualización del estado en Jira.</li><li><strong>PP-208:</strong> propuestas de integración con MIRA — pendiente de definición y seguimiento.</li><li><strong>PR-63 (Workflow, PRD):</strong> las subtareas no tienen responsable asignado.</li><li><strong>Presolicitudes en Workflow + One Entry Point (Time to Yes):</strong> sin alcance definido, sin responsables, sin plan de acción.</li><li><strong>Integración Cotizador–Salesforce:</strong> ya está finalizada, incluida la documentación — pero existe otra tarea (sin ticket propio identificado en la revisión) que la duplica y además le suma integración con Workflow.</li></ul>En general hay tareas hijas de XL-COR-01 que se solapan entre sí — hace falta un barrido para unificar duplicados antes de seguir sumando trabajo nuevo.",

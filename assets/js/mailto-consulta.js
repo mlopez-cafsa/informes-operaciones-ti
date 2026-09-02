@@ -85,3 +85,49 @@ function confirmarSeguimiento(boton) {
     window.location.href = mailtoUrl;
   }
 }
+
+/**
+ * Botón "Redactar correo a <Persona>" (módulo reportes/pendientes).
+ * A diferencia de confirmarSeguimiento() (que se envía a uno mismo como
+ * registro), este botón arma un correo dirigido a la persona del
+ * pendiente, con la solicitud/recomendación como cuerpo. NO tiene un
+ * destinatario fijo: el sistema no guarda direcciones de correo reales de
+ * terceros, así que el campo "Para" queda vacío y hay que completarlo a
+ * mano antes de enviar. Mismo mecanismo de confirmación previa; nunca se
+ * envía nada automáticamente.
+ *
+ * Uso en el HTML:
+ *   <button class="btn-secundario btn-redactar"
+ *           data-persona="María Cristina Hernández"
+ *           data-tema="PP-216 — Actualizar estado en Jira"
+ *           data-cuerpo="Tema: ...\nSolicitud: ..."
+ *           onclick="redactarCorreo(this)">
+ *     Redactar correo a María Cristina
+ *   </button>
+ */
+function redactarCorreo(boton) {
+  const persona = boton.dataset.persona || "la persona asignada";
+  const tema = boton.dataset.tema || document.title;
+  const cuerpo = boton.dataset.cuerpo || "";
+  const url = window.location.href;
+
+  const asunto = `Seguimiento: ${tema}`;
+  const cuerpoCompleto = `${cuerpo}\n\nLink de referencia: ${url}\n`;
+
+  const mailtoUrl =
+    `mailto:` +
+    `?subject=${encodeURIComponent(asunto)}` +
+    `&body=${encodeURIComponent(cuerpoCompleto)}`;
+
+  const confirmado = window.confirm(
+    `Se abrirá un borrador de correo con la solicitud/recomendación para ${persona}.\n` +
+    `El sistema no guarda su dirección de correo real, así que el campo "Para" queda ` +
+    `vacío — deberás completarlo tú mismo antes de enviar.\n` +
+    `El correo NO se envía automáticamente: podrás revisarlo en tu cliente de correo.\n\n` +
+    `¿Deseas continuar?`
+  );
+
+  if (confirmado) {
+    window.location.href = mailtoUrl;
+  }
+}
