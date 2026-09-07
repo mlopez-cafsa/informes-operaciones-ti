@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | Código | SOP-IOTI-001 |
-| Versión | 1.1 |
+| Versión | 1.2 |
 | Propietario / responsable | Marco Vinicio López Zamora — Ingeniero de Operaciones de TI |
 | Fecha de emisión | 2026-08-29 |
 | Última revisión | 2026-09-07 |
@@ -166,6 +166,7 @@ Antes de cerrar cualquier sesión de trabajo sobre este proyecto:
 - [ ] Las páginas `personalizado: true` siguen intactas — buscar `[SKIP]` en la salida de `regenerar-paginas`, nunca `[OK] Regenerado` para esas rutas.
 - [ ] Ningún dato nuevo viola el checklist de sensibilidad (SOP-11).
 - [ ] El color de semáforo de cualquier card nueva/editada se calculó solo (prioridad × cumplimiento), no se asignó a mano.
+- [ ] Si el cambio agrega contenido que solo le sirve a Marco (una nota interna, un botón de acción), ¿lleva `data-modo-local="bloque"` o `="boton"`? (ver README, "Vista local vs. vista pública"). Si no lleva nada, se muestra en ambos modos por defecto — confirmar que eso es lo que corresponde.
 
 ### SOP-11 — Checklist de disciplina de contenido y sensibilidad
 
@@ -240,3 +241,4 @@ EOF
 |---|---|---|
 | 1.0 | 2026-08-29 | Versión inicial — cubre publicación en git, alta/edición de informes y pendientes, jerarquía organizacional, runbook de incidentes de git, checklists de verificación y sensibilidad, y activación de GitHub Pages. |
 | 1.1 | 2026-09-07 | Agregado SOP-13 (mantener el glosario de palabras clave en `utilidades/`, sección de "Utilidades únicas del sistema"). |
+| 1.2 | 2026-09-07 | Agregado ítem en SOP-10 sobre marcar contenido "solo local" con `data-modo-local` (ver README, "Vista local vs. vista pública"). |

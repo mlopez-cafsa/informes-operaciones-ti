@@ -32,6 +32,19 @@
   --focus-ring: 0 0 0 3px rgba(46, 125, 231, 0.35);
 }
 
+/* ---------- Vista local (Marco) vs. vista pública (Jefatura/PMO/
+   Gerencia en GitHub Pages) — 2026-09-07 ----------
+   Clase agregada a <html> por assets/js/modo-vista.js según el dominio.
+   Oculto por defecto (seguro: si el JS no corre, gana la vista pública/
+   resumida) y se revela solo en el modo que corresponde. */
+/* !important a propósito: .btn-consulta/.btn-secundario ya declaran su
+   propio `display` más abajo en este archivo, con la misma especificidad
+   — sin !important, esa regla ganaría por orden de aparición y el botón
+   se vería igual en ambos modos. */
+[data-modo-local] { display: none !important; }
+html.modo-local [data-modo-local="bloque"] { display: block !important; }
+html.modo-local [data-modo-local="boton"] { display: inline-flex !important; }
+
 * { box-sizing: border-box; }
 
 body {

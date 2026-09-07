@@ -103,6 +103,26 @@
   propios datos) o si varias personas comparten la misma hoja de ruta;
   todavía sin resolver (ver arquitectura, sección 9.1).
 
+## Vista local vs. vista pública (2026-09-07)
+
+- **Vista local** — cómo se ve el sitio corriendo en tu propia máquina
+  (`python -m http.server`, `localhost`): contenido completo, incluidas
+  notas de "Recomendación", botones de acción, y la sección de
+  utilidades del sistema.
+- **Vista pública** — cómo se ve el mismo sitio publicado en GitHub
+  Pages: versión resumida, pensada para que Jefatura/PMO/Gerencia revise
+  estado y avance sin el detalle que solo te sirve a vos para dar
+  seguimiento.
+- **`modo-vista.js`** — script que detecta el dominio (`localhost` vs.
+  cualquier otro) y agrega la clase `modo-local` o `modo-publico` a
+  `<html>`, antes de que la página se pinte, para evitar parpadeos.
+- **`data-modo-local="bloque"` / `="boton"`** — atributo que marca un
+  elemento del HTML generado como "solo vista local"; oculto por defecto,
+  se revela solo cuando corre en `localhost`.
+- **`data-texto-local`** — atributo con el texto personalizado (segunda
+  persona, dirigido a Marco) que reemplaza el texto neutral cuando el
+  sitio corre en modo local.
+
 ## Utilidades del sistema
 
 - **Utilidades únicas del sistema** — sección del portal con

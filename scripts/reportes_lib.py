@@ -277,10 +277,13 @@ def render_pendiente_item(item: dict) -> str:
                 f'Urgencia (F=G·m/r²): {F}</p>'
             )
 
+    # data-modo-local="bloque": nota interna de Marco para su propio
+    # seguimiento — se oculta en la vista pública (GitHub Pages) y solo se
+    # ve corriendo el sistema en localhost. Ver assets/js/modo-vista.js.
     recomendacion_html = ""
     if item.get("recomendacion"):
         recomendacion_html = (
-            f'      <div class="recomendacion-box"><strong>Recomendación:</strong> '
+            f'      <div class="recomendacion-box" data-modo-local="bloque"><strong>Recomendación:</strong> '
             f'{_con_saltos(item["recomendacion"])}</div>'
         )
 
@@ -311,10 +314,10 @@ def render_pendiente_item(item: dict) -> str:
 {recomendacion_html}
       <div class="acciones">
 {jira_botones}
-        <button class="btn-consulta" data-tema="{item['tema']}" onclick="confirmarSeguimiento(this)">
+        <button class="btn-consulta" data-modo-local="boton" data-tema="{item['tema']}" onclick="confirmarSeguimiento(this)">
           Confirmar seguimiento
         </button>
-        <button class="btn-secundario btn-redactar" data-persona="{item['persona_nombre']}" data-tema="{item['tema']}" data-cuerpo="{cuerpo_correo}" onclick="redactarCorreo(this)">
+        <button class="btn-secundario btn-redactar" data-modo-local="boton" data-persona="{item['persona_nombre']}" data-tema="{item['tema']}" data-cuerpo="{cuerpo_correo}" onclick="redactarCorreo(this)">
           Redactar correo a {item['persona_nombre'].split()[0]}
         </button>
       </div>

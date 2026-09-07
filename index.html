@@ -10,6 +10,7 @@
 <title>Informes Operaciones TI — CAFSA</title>
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/modo-vista.js"></script>
 </head>
 <body>
 
@@ -54,7 +55,7 @@
 
   <section class="seccion-reportes" aria-labelledby="titulo-reportes">
     <div class="seccion-reportes-header">
-      <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px">Reportes y seguimientos</h2>
+      <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px" data-texto-local="Tu seguimiento de personas, Marco">Reportes y seguimientos</h2>
       <a href="reportes/index.html" class="ver-todos">Ver todos los pendientes por persona &rarr;</a>
     </div>
     <p class="page-meta">
@@ -146,7 +147,7 @@
 
   <hr class="separador-seccion">
 
-  <h2 class="page-title">Informes</h2>
+  <h2 class="page-title" data-texto-local="Tus informes">Informes</h2>
   <p class="page-meta">
     Actualizado a partir del seguimiento interno de Operaciones de TI del 2026-09-07
     · <span id="contador-visibles">8</span> de 8 informe(s)
@@ -347,8 +348,15 @@
 
   <hr class="separador-seccion">
 
-  <section class="seccion-utilidades" aria-labelledby="titulo-utilidades">
-    <h2 id="titulo-utilidades" class="page-title" style="margin-bottom:2px">Utilidades únicas del sistema</h2>
+  <!--
+    Sección solo para Marco (2026-09-07): son plantillas de mantenimiento
+    del propio sistema, no algo que le sirva a Jefatura/PMO/Gerencia
+    revisando desde afuera. Se oculta entera en la vista pública vía
+    data-modo-local — ver assets/js/modo-vista.js y las reglas
+    [data-modo-local] en style.css.
+  -->
+  <section class="seccion-utilidades" aria-labelledby="titulo-utilidades" data-modo-local="bloque">
+    <h2 id="titulo-utilidades" class="page-title" style="margin-bottom:2px" data-texto-local="Tus utilidades del sistema">Utilidades únicas del sistema</h2>
     <p class="page-meta">
       Plantillas descargables con el contexto de qué registrar y dónde,
       para mantener el proyecto al día · esta sección crece con el tiempo

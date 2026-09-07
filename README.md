@@ -106,6 +106,8 @@ informes-operaciones-ti/
 │   ├── css/style.css           # Paleta CAFSA (gris oscuro/negro/blanco) + semáforo
 │   ├── js/mailto-consulta.js   # Botones de mailto (consulta / confirmar seguimiento / redactar correo)
 │   ├── js/color-semaforo.js    # Semáforo de color para % de avance (ver sección de matemáticas)
+│   ├── js/modo-vista.js        # Vista local (Marco) vs. pública (Jefatura/PMO/Gerencia) — ver sección dedicada
+│   ├── js/brief-viewer.js      # Botón + <dialog> del brief diario (solo aparece si briefs/manifest.json existe)
 │   └── img/logos/              # Logos optimizados para web + favicon
 ├── informes/
 │   └── <categoria>/<slug>.html # Un archivo HTML por informe
@@ -250,6 +252,42 @@ completo para una tarea de rutina. El glosario es un documento vivo: se
 agrega un término cada vez que el proyecto crea uno nuevo (ver SOP-13 en
 `SOP.md`). Contenido no sensible — vive en el repo público, igual que
 `README.md`/`SOP.md`.
+
+## Vista local vs. vista pública (2026-09-07)
+
+El mismo `index.html`/`reportes/` se comporta distinto según **dónde se
+abre**, sin generar dos sitios ni mantener dos versiones:
+
+- **Local** (`python -m http.server`, `hostname` = `localhost`/
+  `127.0.0.1`): vista completa — recuadros de "Recomendación" (notas
+  internas de Marco), botones de acción ("Confirmar seguimiento",
+  "Redactar correo"), la sección "Utilidades únicas del sistema", y
+  algunos encabezados dirigidos a Marco en segunda persona ("Tu
+  seguimiento de...", "Tus informes").
+- **Pública** (GitHub Pages, cualquier otro dominio): vista resumida —
+  solo lo que le sirve a Jefatura/PMO/Gerencia revisando desde afuera:
+  estado (semáforo), % de avance, prioridad/criticidad, links de Jira.
+  Sin notas internas, sin botones de acción que son tareas de Marco, sin
+  la sección de utilidades de mantenimiento.
+
+**Cómo funciona:** `assets/js/modo-vista.js` detecta `location.hostname`
+y agrega la clase `modo-local` o `modo-publico` a `<html>` — se carga
+**sin `defer`**, lo más arriba posible en `<head>`, para que la clase
+exista antes de que el navegador pinte el `<body>` (sin parpadeo). El
+CSS (`[data-modo-local]` en `style.css`) oculta por defecto cualquier
+elemento marcado y solo lo revela en el modo que corresponde — si el JS
+no llega a correr por algún motivo, **gana la vista pública/resumida**
+(falla hacia el lado seguro). Los textos personalizados usan el atributo
+`data-texto-local="..."`, reemplazados por JS después de que el DOM
+carga (un posible parpadeo de una fracción de segundo ahí no es
+problema, porque no es contenido sensible, solo tono).
+
+**Para marcar contenido como "solo local":** agregar
+`data-modo-local="bloque"` (elementos tipo `<div>`/`<section>`) o
+`data-modo-local="boton"` (elementos tipo `<button>`/`<a>` con
+`display: inline-flex`) al HTML generado por los scripts (ver
+`scripts/reportes_lib.py`, `render_pendiente_item()`, como ejemplo ya
+implementado).
 
 ## Jerarquía organizacional en "Reportes y seguimientos" (2026-08-29)
 
