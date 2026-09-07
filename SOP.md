@@ -5,10 +5,10 @@
 | Campo | Valor |
 |---|---|
 | Código | SOP-IOTI-001 |
-| Versión | 1.0 |
+| Versión | 1.1 |
 | Propietario / responsable | Marco Vinicio López Zamora — Ingeniero de Operaciones de TI |
 | Fecha de emisión | 2026-08-29 |
-| Última revisión | 2026-08-29 |
+| Última revisión | 2026-09-07 |
 | Ciclo de revisión sugerido | Cada vez que cambie un procedimiento, o cada 6 meses |
 | Documentos relacionados | `README.md` (referencia técnica de scripts y opciones), `contexto-proyecto/CONTEXTO.md` (historial de decisiones e interpretación de contexto, uso interno) |
 | Repositorio | `https://github.com/mlopez-cafsa/informes-operaciones-ti` |
@@ -56,7 +56,9 @@ data/pendientes.json       # Fuente de verdad de reportes/
 data/jira_snapshot.json    # Foto manual de pendientes de Jira (panel "Mi seguimiento")
 scripts/manage_informes.py    # nuevo | build | regenerar-paginas
 scripts/manage_pendientes.py  # nuevo | editar | eliminar | actualizar-persona | build
+scripts/manage_briefs.py      # build (genera briefs/manifest.json — ver SOP correspondiente)
 scripts/reportes_lib.py       # Lógica compartida (jerarquía, fórmulas, render de cards)
+utilidades/                   # Plantillas descargables + glosario (ver SOP-13)
 ```
 
 ---
@@ -183,6 +185,36 @@ Antes de publicar cualquier contenido nuevo en este repositorio (público):
 
 **Verificación:** la URL pública (`https://mlopez-cafsa.github.io/informes-operaciones-ti/`) carga correctamente el `index.html`.
 
+### SOP-13 — Actualizar el glosario de palabras clave (2026-09-07)
+
+**Objetivo:** que `utilidades/glosario-palabras-clave.md` refleje siempre
+todos los términos/conceptos que el proyecto ha ido creando, para que
+cualquiera (incluido Marco, semanas después) pueda entender el sistema
+sin tener que releer el historial completo de `CONTEXTO.md`.
+
+**Cuándo aplica:** cada vez que se introduce un concepto nuevo en el
+sistema — un campo nuevo, una función con nombre propio
+(`nivel_jerarquico`, `orden_persona`, etc.), un patrón de diseño nuevo
+("degradación elegante"), o una convención nueva (ej. el formato de
+nombre de los briefs).
+
+**Pasos:**
+1. Abrir `utilidades/glosario-palabras-clave.md`.
+2. Agregar el término en la sección que corresponda (crear una sección
+   nueva si ninguna encaja) con una definición corta, en el mismo tono
+   directo del resto del glosario.
+3. Si el término es parte de un módulo todavía en diseño (ej. memoria de
+   casos), agregarlo igual, pero dejar explícito que el módulo no está
+   implementado — no hay que esperar a construirlo para documentarlo.
+
+**Verificación:** el término aparece en el glosario y, si tiene una
+plantilla relacionada (`utilidades/plantilla-*.md`), se agregó también a
+la lista de "Palabras clave relacionadas" al final de esa plantilla.
+
+**Qué hacer si falla:** si no es obvio en qué sección va, agregarlo de
+todos modos en la sección más cercana — es preferible un glosario
+"un poco desordenado pero completo" a uno prolijo pero incompleto.
+
 ---
 
 ## Anexo A — Verificación de balance de etiquetas HTML
@@ -207,3 +239,4 @@ EOF
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0 | 2026-08-29 | Versión inicial — cubre publicación en git, alta/edición de informes y pendientes, jerarquía organizacional, runbook de incidentes de git, checklists de verificación y sensibilidad, y activación de GitHub Pages. |
+| 1.1 | 2026-09-07 | Agregado SOP-13 (mantener el glosario de palabras clave en `utilidades/`, sección de "Utilidades únicas del sistema"). |

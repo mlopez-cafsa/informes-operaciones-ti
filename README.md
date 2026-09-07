@@ -118,6 +118,12 @@ informes-operaciones-ti/
 │   ├── pendientes.json         # Fuente de verdad de reportes/
 │   ├── jira_snapshot.json      # Foto de mis pendientes en Jira (panel "Mi seguimiento")
 │   └── bitacora_operaciones.json # Registros estructurados para el buscador de Operaciones Diarias
+├── utilidades/                 # Plantillas descargables + glosario (sección "Utilidades únicas del sistema")
+│   ├── plantilla-nuevo-informe.md
+│   ├── plantilla-nuevo-pendiente.md
+│   ├── plantilla-actualizar-persona.md
+│   ├── plantilla-brief-diario.md
+│   └── glosario-palabras-clave.md
 ├── templates/
 │   ├── index_template.html            # Plantilla del índice de informes
 │   ├── informe_template.html          # Plantilla de un informe nuevo
@@ -229,6 +235,21 @@ Abre un borrador de correo (`mailto:`) dirigido siempre a
 `mlopezz@cafsa.fi.cr`, con el título y resumen del informe como contexto.
 No envía nada automáticamente: primero pide confirmación en el navegador, y
 luego el usuario revisa y envía desde su propio cliente de correo.
+
+## Utilidades únicas del sistema (2026-09-07)
+
+Sección nueva al final del `index.html`, con tarjetas descargables
+(`<a ... download>`, sin JS) hacia `utilidades/`: una plantilla por cada
+operación de mantenimiento del sistema (registrar informe, registrar
+pendiente, actualizar persona, registrar brief) más un
+`glosario-palabras-clave.md` con todos los términos acuñados en el
+proyecto. Cada plantilla resume, en una sola página, qué campos tener a
+mano, la ruta exacta donde vive el dato, el comando a correr y un
+checklist de verificación — pensado para no tener que abrir este README
+completo para una tarea de rutina. El glosario es un documento vivo: se
+agrega un término cada vez que el proyecto crea uno nuevo (ver SOP-13 en
+`SOP.md`). Contenido no sensible — vive en el repo público, igual que
+`README.md`/`SOP.md`.
 
 ## Jerarquía organizacional en "Reportes y seguimientos" (2026-08-29)
 

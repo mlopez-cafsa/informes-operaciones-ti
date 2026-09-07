@@ -27,8 +27,28 @@
   </div>
   <nav class="header-nav">
     <a href="reportes/index.html">Reportes y seguimientos</a>
+    <button type="button" id="btn-abrir-brief" class="btn-brief-dia" hidden>Brief del día</button>
   </nav>
 </header>
+
+<!--
+  Visor de brief diario (2026-09-07): el botón de arriba arranca oculto
+  (atributo `hidden`) y solo se muestra si assets/js/brief-viewer.js logra
+  leer briefs/manifest.json. Esa carpeta está excluida de git a propósito
+  (contiene correos y datos reales de negocio) y por lo tanto NUNCA existe
+  en el sitio publicado en GitHub Pages: ahí el fetch da 404, el catch lo
+  absorbe en silencio, y el botón se queda oculto. En la copia local de
+  Marco sí existe, así que el botón aparece y abre el brief más reciente
+  en este <dialog>. No editar a mano el contenido del iframe: viene de
+  briefs/*.html, generado fuera de este sistema.
+-->
+<dialog id="dialog-brief" class="dialog-brief" aria-labelledby="titulo-dialog-brief">
+  <div class="dialog-brief-header">
+    <h2 id="titulo-dialog-brief">Brief del día</h2>
+    <button type="button" id="btn-cerrar-brief" class="btn-cerrar-dialog" aria-label="Cerrar brief">&times;</button>
+  </div>
+  <iframe id="iframe-brief" class="iframe-brief" title="Brief diario" loading="lazy"></iframe>
+</dialog>
 
 <main id="contenido">
 
@@ -90,35 +110,35 @@
         <span class="estado-badge estado-rojo">Highest</span>
         <span class="radar-texto">
           <strong>PP-216</strong> — XL-COR-01  Implementación del nuevo Cotizador
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 135 día(s) · F=250.0</span>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 144 día(s) · F=250.0</span>
         </span>
       </a>
       <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/GDT-100" target="_blank" rel="noopener">
         <span class="estado-badge estado-rojo">High</span>
         <span class="radar-texto">
           <strong>GDT-100</strong> — XL-TEC-02 Gobierno y Cumplimiento Tecnológico (COBIT 2019 / CONASSIF 5-24) - Actualización y gestión de expedientes de Proveedores (renegociación de contratos)
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 219 día(s) · F=200.0</span>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 228 día(s) · F=200.0</span>
         </span>
       </a>
       <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/GDT-320" target="_blank" rel="noopener">
         <span class="estado-badge estado-amarillo">Medium</span>
         <span class="radar-texto">
           <strong>GDT-320</strong> — EXPEDIENTE - SOFTLAND COSTA RICA SOCIEDAD DE RESPONSABILIDAD LIMITADA
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 201 día(s) · F=150.0</span>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 210 día(s) · F=150.0</span>
         </span>
       </a>
       <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/BMO-316" target="_blank" rel="noopener">
         <span class="estado-badge estado-amarillo">Medium</span>
         <span class="radar-texto">
           <strong>BMO-316</strong> — 08 - 2026 | d.MLOPEZZ  - OPERACIONES DE TI
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 2 día(s) · F=37.5</span>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 7 día(s) · F=150.0</span>
         </span>
       </a>
       <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1741" target="_blank" rel="noopener">
         <span class="estado-badge estado-rojo">Highest</span>
         <span class="radar-texto">
           <strong>DES-1741</strong> — Migración Core Financiero ABANKS - Forms 14c
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 32 día(s) · F=0.24</span>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 23 día(s) · F=0.47</span>
         </span>
       </a>
     </div>
@@ -128,7 +148,7 @@
 
   <h2 class="page-title">Informes</h2>
   <p class="page-meta">
-    Actualizado a partir del seguimiento interno de Operaciones de TI del 2026-08-29
+    Actualizado a partir del seguimiento interno de Operaciones de TI del 2026-09-07
     · <span id="contador-visibles">8</span> de 8 informe(s)
   </p>
 
@@ -208,7 +228,7 @@
         <span class="progreso-label">5 fase(s) · promedio (<span class="pct-semaforo" data-pct="30">30%</span>)</span>
       </div>
       <div class="card-footer">
-        <span>2026-08-27 &middot; Vence: 22/01/2026 (vencido hace 219 días)</span>
+        <span>2026-08-27 &middot; Vence: 22/01/2026 (vencido hace 228 días)</span>
         <a href="informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html">Ver informe &rarr;</a>
       </div>
     </div>
@@ -227,7 +247,7 @@
         <span class="progreso-label">5 fase(s) · promedio (<span class="pct-semaforo" data-pct="36">36%</span>)</span>
       </div>
       <div class="card-footer">
-        <span>2026-08-27 &middot; Vence: 30/09/2026 (faltan 32 días)</span>
+        <span>2026-08-27 &middot; Vence: 30/09/2026 (faltan 23 días)</span>
         <a href="informes/core-financiero/migracion-de-core-financiero-forms-14c.html">Ver informe &rarr;</a>
       </div>
     </div>
@@ -265,7 +285,7 @@
         <span class="progreso-label">3 fase(s) · promedio (<span class="pct-semaforo" data-pct="3">3%</span>)</span>
       </div>
       <div class="card-footer">
-        <span>2026-08-21 &middot; Vence: 30/09/2026 (faltan 32 días)</span>
+        <span>2026-08-21 &middot; Vence: 30/09/2026 (faltan 23 días)</span>
         <a href="informes/riesgo-tecnologico/gestion-de-riesgo-tecnologico-y-obsolescencia-critica.html">Ver informe &rarr;</a>
       </div>
     </div>
@@ -324,6 +344,43 @@
       </div>
     </div>
   </div>
+
+  <hr class="separador-seccion">
+
+  <section class="seccion-utilidades" aria-labelledby="titulo-utilidades">
+    <h2 id="titulo-utilidades" class="page-title" style="margin-bottom:2px">Utilidades únicas del sistema</h2>
+    <p class="page-meta">
+      Plantillas descargables con el contexto de qué registrar y dónde,
+      para mantener el proyecto al día · esta sección crece con el tiempo
+    </p>
+    <div class="utilidades-grid">
+      <a class="utilidad-card" href="utilidades/plantilla-nuevo-informe.md" download>
+        <h3>Registrar un informe nuevo</h3>
+        <p>Campos, comando y checklist para <code>informes/</code>.</p>
+        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
+      </a>
+      <a class="utilidad-card" href="utilidades/plantilla-nuevo-pendiente.md" download>
+        <h3>Registrar un pendiente nuevo</h3>
+        <p>Campos, comando y checklist para "Reportes y seguimientos".</p>
+        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
+      </a>
+      <a class="utilidad-card" href="utilidades/plantilla-actualizar-persona.md" download>
+        <h3>Actualizar cargo de una persona</h3>
+        <p>Cómo se clasifica la jerarquía y qué comando corre.</p>
+        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
+      </a>
+      <a class="utilidad-card" href="utilidades/plantilla-brief-diario.md" download>
+        <h3>Registrar un brief diario</h3>
+        <p>Convención de nombre y verificación de seguridad (local).</p>
+        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
+      </a>
+      <a class="utilidad-card utilidad-glosario" href="utilidades/glosario-palabras-clave.md" download>
+        <h3>Glosario de palabras clave</h3>
+        <p>Todos los términos que hemos ido creando en el proyecto, explicados.</p>
+        <span class="utilidad-descargar">Descargar glosario &darr;</span>
+      </a>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -331,6 +388,7 @@
 </footer>
 
 <script src="assets/js/color-semaforo.js"></script>
+<script src="assets/js/brief-viewer.js" defer></script>
 <script>
 (function () {
   const grid = document.getElementById('grid-informes');

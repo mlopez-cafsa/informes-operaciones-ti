@@ -14,3 +14,12 @@ reportes/**/~$*
 # detalle sin curar): no tiene razón de ser público. Recomendación
 # reversible — quitá esta línea si preferís versionarlo igual.
 contexto-proyecto/
+
+# Briefs diarios (2026-09-07): contienen correos reales de colegas y
+# proveedores, detalle de negociación de contratos (ej. Ciberisk),
+# montos/facturas, y casos de clientes con datos operativos (OP/tickets).
+# Excluido por seguridad hasta definir con el usuario dónde debe vivir
+# este contenido — NO debe llegar al historial público de git bajo
+# ninguna circunstancia mientras tenga este nivel de detalle. Ver
+# conversación del 2026-09-07 en contexto-proyecto/CONTEXTO.md.
+briefs/

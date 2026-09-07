@@ -153,6 +153,84 @@ select:focus-visible {
   border-color: var(--cafsa-white);
 }
 
+/* Botón "Brief del día" (2026-09-07) — mismo pill que header-nav a, con
+   acento amarillo para distinguirlo como contenido del día, vivo/dinámico.
+   Arranca oculto vía atributo `hidden`; brief-viewer.js lo revela solo si
+   briefs/manifest.json existe (nunca en el sitio público). */
+.site-header .header-nav .btn-brief-dia {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--status-yellow-bg);
+  background: rgba(184, 134, 11, 0.28);
+  border: 1px solid rgba(251, 241, 220, 0.55);
+  padding: 7px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.site-header .header-nav .btn-brief-dia:hover,
+.site-header .header-nav .btn-brief-dia:focus-visible {
+  background: rgba(184, 134, 11, 0.42);
+}
+
+/* Modal del brief diario: <dialog> nativo (foco atrapado y ESC-para-cerrar
+   vienen gratis del navegador) con un <iframe> adentro para aislar el CSS
+   propio del brief (clases que podrían chocar con style.css). */
+.dialog-brief {
+  width: min(920px, 92vw);
+  height: min(820px, 88vh);
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.dialog-brief::backdrop {
+  background: rgba(17, 17, 17, 0.55);
+}
+
+.dialog-brief-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: var(--cafsa-black);
+  color: var(--cafsa-white);
+}
+
+.dialog-brief-header h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.btn-cerrar-dialog {
+  font: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--cafsa-white);
+  background: transparent;
+  border: none;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.btn-cerrar-dialog:hover,
+.btn-cerrar-dialog:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.iframe-brief {
+  display: block;
+  width: 100%;
+  height: calc(100% - 45px);
+  border: none;
+}
+
 .breadcrumb {
   font-size: 0.82rem;
   color: var(--cafsa-gray);
@@ -299,6 +377,57 @@ main {
 .informe-card:hover {
   box-shadow: var(--shadow-lift);
   transform: translateY(-2px);
+}
+
+/* ---------- Utilidades únicas del sistema (2026-09-07) ---------- */
+.utilidades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.utilidad-card {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--cafsa-dark);
+  text-decoration: none;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.utilidad-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.utilidad-card h3 {
+  font-size: 0.95rem;
+  margin: 0;
+  color: var(--cafsa-black);
+}
+
+.utilidad-card p {
+  font-size: 0.82rem;
+  color: var(--cafsa-gray);
+  margin: 0;
+  flex-grow: 1;
+}
+
+.utilidad-descargar {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--status-yellow);
+}
+
+.utilidad-card.utilidad-glosario {
+  border-color: var(--cafsa-dark);
 }
 
 .card-top {
