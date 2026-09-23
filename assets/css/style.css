@@ -15,6 +15,21 @@
   --cafsa-border: #dcdcdc;
   --cafsa-white: #ffffff;
 
+  /* Acento (2026-09-18, ajustado a verde musgo oscuro el mismo día —
+     Marco pidió un tono más neutral que el azul original) — agregado
+     explícitamente para dar más "vida" a la interfaz sin tocar la
+     paleta corporativa base (gris/negro/blanco). Se usa SOLO para
+     elementos de interacción genéricos: links, foco, hover de "ver más",
+     barra de avance, íconos de encabezado de sección. El semáforo
+     (verde/amarillo/rojo) sigue siendo el único código de color con
+     significado de estado/riesgo; este verde musgo es deliberadamente
+     más oscuro/apagado (oliva) que el --status-green para no confundirse
+     con "aprobado/a tiempo" al verse uno junto al otro. */
+  --accent: #556b2f;
+  --accent-dark: #3d4f24;
+  --accent-bg: #eef2e6;
+  --accent-soft: #cddab8;
+
   /* Semáforo de criticidad (accent only, no paleta general) */
   --status-green: #2e7d32;
   --status-green-bg: #e8f3e9;
@@ -26,10 +41,24 @@
   --status-neutral-bg: #ececec;
 
   --font-base: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-  --radius: 6px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  --shadow-lift: 0 6px 16px rgba(0, 0, 0, 0.14);
-  --focus-ring: 0 0 0 3px rgba(46, 125, 231, 0.35);
+  --radius: 10px;
+  --radius-sm: 6px;
+  /* Sombras "en capas" (dos sombras superpuestas, tinte neutro-azulado en
+     vez de negro puro) — técnica estándar de elevación en interfaces
+     actuales (más realista que una sola sombra plana). */
+  --shadow: 0 1px 2px rgba(17, 24, 39, 0.05), 0 1px 3px rgba(17, 24, 39, 0.08);
+  --shadow-lift: 0 4px 10px rgba(17, 24, 39, 0.07), 0 14px 28px rgba(17, 24, 39, 0.12);
+  --focus-ring: 0 0 0 3px rgba(85, 107, 47, 0.35);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout del index principal — carril fijo del sidebar "Mi seguimiento
+     (Jira)" (ver sección "Layout del index principal" más abajo). */
+  --sidebar-w: 340px;
+  --sidebar-w-real: min(var(--sidebar-w), 86vw);
+  /* 68px = padding (14+14) + contenido (~37px) + el borde inferior de
+     acento de 3px que se agregó al header (2026-09-18). Si el header
+     vuelve a cambiar de alto, ajustar acá. */
+  --header-h: 68px;
 }
 
 /* ---------- Vista local (Marco) vs. vista pública (Jefatura/PMO/
@@ -47,18 +76,57 @@ html.modo-local [data-modo-local="boton"] { display: inline-flex !important; }
 
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
   font-family: var(--font-base);
   color: var(--cafsa-dark);
   background: var(--cafsa-gray-bg);
   line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-a { color: var(--cafsa-black); text-decoration: none; }
+::selection { background: var(--accent-soft); color: var(--cafsa-black); }
+
+/* Links de contenido (dentro de párrafos/listas) usan el acento — los
+   links que SON botones (.btn-consulta, .btn-secundario) declaran su
+   propio color más abajo y no se ven afectados. Los títulos que además
+   son link (.informe-card h3 a, .persona-card h3 a) se fuerzan a color
+   neutro más abajo (2026-09-23, a pedido de Marco: "no me agrada del
+   verde" en títulos) — de lo contrario heredarían este acento solo por
+   ser un <a>, y un título no debería leerse como un link de color. */
+a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 img { max-width: 100%; }
+
+/* ---------- Ícono de encabezado de sección (2026-09-18, color ajustado 2026-09-23) ---------- */
+/* Envoltorio reutilizable para los <h2 class="page-title"> del sitio:
+   un ícono de línea (stroke, 20px, currentColor) + el texto, para que
+   cada sección se identifique de un vistazo. Puramente decorativo/de
+   orientación — no reemplaza ningún texto. Color: neutro estandarizado
+   (--cafsa-gray, el mismo gris ya usado en el resto del sitio para
+   iconografía secundaria como la lupa del buscador) — a pedido de
+   Marco, ningún ícono del sitio usa el acento. */
+.titulo-seccion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titulo-seccion .icono-seccion {
+  color: var(--cafsa-gray);
+  flex-shrink: 0;
+}
+
+.titulo-seccion .page-title { margin: 0; color: var(--cafsa-black); }
+
+/* Todo ícono de flecha (.icono-flecha) es neutro SIEMPRE, sin importar
+   el color del link que lo contiene (ver-todos, "Ver informe", "Ver
+   pendientes...") — un color de ícono propio y consistente en todo el
+   sitio, en vez de heredar currentColor del texto que lo acompaña. */
+.icono-flecha { color: var(--cafsa-gray); }
 
 /* ---------- Accesibilidad: foco visible y skip link ---------- */
 a:focus-visible,
@@ -98,6 +166,7 @@ select:focus-visible {
   top: 0;
   z-index: 20;
   transition: box-shadow 0.15s ease;
+  border-bottom: 3px solid var(--accent);
 }
 
 .site-header.con-sombra { box-shadow: var(--shadow-lift); }
@@ -153,10 +222,12 @@ select:focus-visible {
   padding: 7px 14px;
   border-radius: 999px;
   white-space: nowrap;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease);
 }
 
 .site-header .header-nav a:hover {
   background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
 }
 
@@ -259,8 +330,9 @@ main {
 }
 
 .page-title {
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   color: var(--cafsa-black);
   margin: 6px 0 4px;
 }
@@ -268,7 +340,7 @@ main {
 .page-meta {
   font-size: 0.85rem;
   color: var(--cafsa-gray);
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 /* ---------- Barra de herramientas: buscador + orden ---------- */
@@ -349,7 +421,10 @@ main {
   transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
 }
 
-.filters button:hover { border-color: var(--cafsa-gray); }
+.filters button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
 
 .filters button.active {
   background: var(--cafsa-black);
@@ -357,67 +432,83 @@ main {
   border-color: var(--cafsa-black);
 }
 
-.sin-resultados {
-  text-align: center;
-  color: var(--cafsa-gray);
-  font-size: 0.9rem;
-  padding: 32px 0;
-  border: 1px dashed var(--cafsa-border);
-  border-radius: var(--radius);
-  background: var(--cafsa-white);
-  margin-bottom: 18px;
+.filters button.active:hover {
+  color: var(--cafsa-white);
 }
 
 /* ---------- Tarjetas de informe (index) ---------- */
 .informes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 18px;
+  gap: 20px;
 }
 
 .informe-card {
   background: var(--cafsa-white);
   border: 1px solid var(--cafsa-border);
   border-radius: var(--radius);
-  padding: 18px;
+  padding: 20px;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  transition: box-shadow 0.18s var(--ease), transform 0.18s var(--ease), border-color 0.18s var(--ease);
 }
 
 .informe-card:hover {
   box-shadow: var(--shadow-lift);
   transform: translateY(-2px);
+  border-color: var(--accent-soft);
 }
 
-/* ---------- Utilidades únicas del sistema (2026-09-07) ---------- */
+/* ---------- Utilidades únicas del sistema — acordeón legible (2026-09-18) ----------
+   Antes: cada tarjeta descargaba un .md crudo (poco práctico de leer).
+   Ahora: <details>/<summary> nativos, sin JS, con el contenido completo
+   visible dentro de la misma página — lenguaje simple primero, el
+   comando técnico exacto queda al final de cada acordeón para quien lo
+   necesite copiar. */
 .utilidades-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
   margin-top: 6px;
+  align-items: start;
 }
 
 .utilidad-card {
   background: var(--cafsa-white);
   border: 1px solid var(--cafsa-border);
   border-radius: var(--radius);
-  padding: 16px;
   box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
   color: var(--cafsa-dark);
-  text-decoration: none;
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  transition: box-shadow 0.15s ease;
 }
 
+.utilidad-card[open],
 .utilidad-card:hover {
   box-shadow: var(--shadow-lift);
-  transform: translateY(-2px);
-  text-decoration: none;
+}
+
+.utilidad-card > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.utilidad-card > summary::-webkit-details-marker,
+.utilidad-card > summary::marker {
+  display: none;
+  content: "";
+}
+
+.utilidad-card summary .utilidad-encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .utilidad-card h3 {
@@ -426,21 +517,107 @@ main {
   color: var(--cafsa-black);
 }
 
-.utilidad-card p {
+.utilidad-card summary p {
   font-size: 0.82rem;
   color: var(--cafsa-gray);
   margin: 0;
-  flex-grow: 1;
 }
 
-.utilidad-descargar {
+.utilidad-toggle {
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--status-yellow);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
+
+.utilidad-toggle .txt-abierto { display: none; }
+.utilidad-card[open] .utilidad-toggle .txt-cerrado { display: none; }
+.utilidad-card[open] .utilidad-toggle .txt-abierto { display: inline; }
 
 .utilidad-card.utilidad-glosario {
   border-color: var(--cafsa-dark);
+}
+
+.utilidad-cuerpo {
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--cafsa-border);
+  padding-top: 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.utilidad-cuerpo h4 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cafsa-gray);
+  margin: 16px 0 6px;
+}
+
+.utilidad-cuerpo h4:first-child { margin-top: 0; }
+
+.utilidad-cuerpo ol,
+.utilidad-cuerpo ul {
+  margin: 0 0 4px;
+  padding-left: 20px;
+}
+
+.utilidad-cuerpo li { margin-bottom: 6px; }
+
+.utilidad-nota {
+  background: var(--cafsa-gray-bg);
+  border-left: 3px solid var(--cafsa-dark);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin: 10px 0;
+}
+
+.utilidad-comando {
+  background: var(--cafsa-black);
+  color: #e8e8e8;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-family: "Consolas", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+  margin: 6px 0 10px;
+}
+
+.utilidad-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin: 8px 0;
+}
+
+.utilidad-tabla th,
+.utilidad-tabla td {
+  border: 1px solid var(--cafsa-border);
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.utilidad-tabla th { background: var(--cafsa-gray-bg); }
+
+/* Glosario: agrupado por categoría, en definiciones término -> explicación
+   simple, en vez de una lista plana de bullets. */
+.glosario-grupo { margin-bottom: 18px; }
+.glosario-grupo:last-child { margin-bottom: 0; }
+.glosario-grupo h4 { margin-bottom: 8px; }
+.glosario-lista dt {
+  font-weight: 600;
+  color: var(--cafsa-black);
+  margin-top: 10px;
+}
+.glosario-lista dd {
+  margin: 2px 0 0;
+  color: var(--cafsa-dark);
 }
 
 .card-top {
@@ -491,8 +668,14 @@ main {
 
 .progreso-relleno {
   height: 100%;
-  background: linear-gradient(90deg, var(--cafsa-gray), var(--cafsa-black));
+  /* Respaldo si el JS no carga: acento suave -> acento. El color real
+     (semáforo claro según el % de avance) lo pone en caliente
+     initProgresoSemaforo() en assets/js/color-semaforo.js — 2026-09-23,
+     a pedido de Marco. El estilo inline que agrega esa función tiene más
+     especificidad que esta regla, así que la sustituye sin conflicto. */
+  background: linear-gradient(90deg, var(--accent-soft), var(--accent));
   border-radius: 999px;
+  transition: width 0.3s var(--ease);
 }
 
 .progreso-label {
@@ -507,10 +690,33 @@ main {
   font-size: 1.05rem;
 }
 
+.informe-card h3 a {
+  color: var(--cafsa-black);
+}
+
 .informe-card .resumen {
   font-size: 0.87rem;
   color: var(--cafsa-gray);
   flex-grow: 1;
+}
+
+/* Pista de coincidencia de búsqueda (2026-09-23): solo aparece cuando el
+   resultado coincidió por una referencia Jira que no se ve en la card
+   (título/resumen), para que el resultado sea práctico — se explica con
+   qué coincidió y se linkea directo a esa tarea. Oculta el resto del
+   tiempo (atributo hidden, ver JS). */
+.informe-card .coincidencia-busqueda {
+  font-size: 0.78rem;
+  color: var(--cafsa-gray);
+  background: var(--cafsa-gray-bg);
+  border-radius: var(--radius-sm);
+  padding: 5px 9px;
+  margin: -2px 0 0;
+}
+
+.informe-card .coincidencia-busqueda a {
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .informe-card .card-footer {
@@ -522,6 +728,25 @@ main {
   margin-top: 6px;
   font-size: 0.78rem;
   color: var(--cafsa-gray-light);
+}
+
+/* "Ver informe →": acento + el flecha se desliza un poco al pasar el
+   mouse — microinteracción típica de interfaces actuales, sutil y sin
+   depender de JS. */
+.informe-card .card-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.informe-card .card-footer a .icono-flecha {
+  transition: transform 0.18s var(--ease);
+}
+
+.informe-card .card-footer a:hover .icono-flecha {
+  transform: translateX(3px);
 }
 
 /* ---------- Estado / semáforo ---------- */
@@ -587,11 +812,12 @@ main {
 
 .resumen-ejecutivo {
   background: var(--cafsa-white);
-  border-left: 4px solid var(--cafsa-black);
+  border-left: 4px solid var(--accent);
   border-radius: var(--radius);
   padding: 16px 20px;
   margin-bottom: 24px;
   font-size: 0.95rem;
+  box-shadow: var(--shadow);
 }
 
 .chart-container {
@@ -649,6 +875,21 @@ main {
 .fase-nombre { color: var(--cafsa-dark); }
 .fase-pct { color: var(--cafsa-gray); font-weight: 600; }
 
+/* Cuando el nombre de la fase resuelve su propio ticket de Jira (ver
+   fase_nombre_html() en manage_informes.py), el nombre completo se
+   convierte en el enlace — reemplaza al bloque "Más detalle" para esos
+   informes, así que necesita leerse como un link real, no como texto
+   suelto. */
+.fase-nombre a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--cafsa-gray-light);
+}
+
+.fase-nombre a:hover {
+  border-bottom-style: solid;
+}
+
 /* Semáforo de porcentajes de avance — el color de texto real lo pone
    assets/js/color-semaforo.js al cargar la página (rojo->ámbar->verde,
    ver ese archivo para la fórmula). Este color es solo el valor por
@@ -662,6 +903,49 @@ main {
   font-size: 0.72rem;
   color: var(--cafsa-gray-light);
   margin: 12px 0 0;
+}
+
+/* ---------- Desglose de subtareas de Jira bajo una fase ---------- */
+/* Nace del pedido de dar seguimiento "especializado" a ciertas tareas
+   (2026-09-18): en vez de un solo % por fase, algunas fases muestran
+   también cada subtarea real de Jira que lo compone. Indentado y con
+   borde izquierdo tenue para que se lea claramente como "hijo" de la
+   fase de arriba, sin competir visualmente con la lista principal de
+   fases (ver .fases-lista arriba). */
+.subtareas-lista {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 2px 0 2px 16px;
+  border-left: 2px solid var(--cafsa-border);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.subtarea-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--cafsa-gray);
+}
+
+.subtarea-item a {
+  font-weight: 600;
+  color: var(--cafsa-dark);
+}
+
+.estado-badge-mini {
+  padding: 1px 8px;
+  font-size: 0.66rem;
+}
+
+.subtareas-nota {
+  font-size: 0.7rem;
+  color: var(--cafsa-gray-light);
+  margin: 0 0 10px 16px;
+  font-style: italic;
 }
 
 /* ---------- Buscador embebido en una página de informe (ej. Operaciones Diarias) ---------- */
@@ -784,6 +1068,22 @@ main {
   font-weight: 600;
 }
 
+/* Cruce sutil hacia el informe correspondiente (ver operaciones-diarias.html,
+   PROVEEDOR_INFORME) — un enlace discreto dentro de la misma "píldora" de
+   proveedor, no una tarjeta aparte, para no competir visualmente con la
+   lista de proveedores del día. */
+.bitacora-cruce {
+  display: inline-block;
+  margin-left: 6px;
+  padding-left: 6px;
+  border-left: 1px solid var(--cafsa-border);
+  color: var(--cafsa-black);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bitacora-cruce:hover { text-decoration: underline; }
+
 @media (max-width: 640px) {
   .bitacora-controles { flex-direction: column; align-items: stretch; }
   .buscador-bitacora { max-width: none; }
@@ -872,6 +1172,120 @@ main {
 .detalle-links ul { margin: 8px 0 0; padding-left: 18px; }
 .detalle-links li { margin-bottom: 6px; font-size: 0.88rem; }
 
+/* ---------- Frentes de trabajo (2026-09-23) ---------- */
+/* Nace del pedido de Marco de rehacer BMO-252 "orientado a la
+   visualización de contexto, claro y resumido al punto", en vez de
+   párrafos largos por cada tarea/subtarea de Jira. Una card compacta
+   por frente — mismo lenguaje visual que .informe-card/.kpi-box, no una
+   paleta nueva. */
+.frentes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.frente-card {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.frente-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.frente-jira {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.frente-card h3 {
+  margin: 2px 0 0;
+  font-size: 0.95rem;
+  color: var(--cafsa-black);
+}
+
+.frente-linea {
+  margin: 0;
+  font-size: 0.83rem;
+  color: var(--cafsa-gray);
+  line-height: 1.45;
+}
+
+.frente-linea strong { color: var(--cafsa-dark); }
+
+.frente-linea code {
+  background: var(--cafsa-gray-bg);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.82em;
+}
+
+.frente-evidencia {
+  margin: 2px 0 0;
+  font-size: 0.74rem;
+  color: var(--cafsa-gray-light);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ---------- Diagrama de objetos de BD (2026-09-23, BMO-258) ---------- */
+/* Reemplaza texto corrido describiendo objetos/relaciones de base de
+   datos por un diagrama SVG inline — sin dependencias externas, mismo
+   criterio que la iconografía del resto del sitio (currentColor no
+   aplica acá porque cada elemento del diagrama necesita su propio color
+   con significado: gris=confirmado, ámbar=pendiente de aclarar,
+   acento=usa caché). */
+.diagrama-bd-wrap {
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 14px;
+}
+
+.diagrama-bd-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.diagrama-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--cafsa-border);
+  font-size: 0.78rem;
+  color: var(--cafsa-gray);
+}
+
+.diagrama-leyenda .swatch {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  margin-right: 6px;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+.diagrama-leyenda .swatch-punteado {
+  background: none;
+  height: 0;
+  border-top: 2px dashed currentColor;
+}
+
 /* ---------- Botón de consulta (mailto) ---------- */
 .btn-consulta {
   display: inline-flex;
@@ -884,29 +1298,161 @@ main {
   border-radius: var(--radius);
   font-size: 0.85rem;
   cursor: pointer;
+  transition: background 0.15s var(--ease), transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
 }
 
-.btn-consulta:hover { background: var(--cafsa-dark); }
+.btn-consulta:hover {
+  background: var(--cafsa-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lift);
+}
+
+.btn-consulta svg,
+.btn-secundario svg {
+  flex-shrink: 0;
+}
 
 /* ---------- Sección "Reportes y seguimientos" embebida en el index ---------- */
 .seccion-reportes-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
 }
 
 .ver-todos {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: 0.85rem;
   font-weight: 600;
+  color: var(--accent);
   white-space: nowrap;
+}
+
+.ver-todos .icono-flecha {
+  transition: transform 0.18s var(--ease);
+}
+
+.ver-todos:hover .icono-flecha {
+  transform: translateX(3px);
 }
 
 .separador-seccion {
   border: none;
   border-top: 1px solid var(--cafsa-border);
-  margin: 32px 0;
+  margin: 44px 0;
+}
+
+/* ---------- Layout del index principal — panel fijo tipo "drawer" (2026-09-18, v2) ----------
+   Primera versión (sticky + flexbox) tenía dos problemas reportados por
+   Marco: (a) el contenido central cambiaba de ancho al mostrar/ocultar
+   el panel (porque flex:1 recalcula el espacio disponible), y (b) con
+   `position: sticky` el panel "bajaba un poco" al iniciar el scroll
+   (efecto de asentamiento contra el header, también sticky).
+
+   Patrón nuevo — el mismo que usan paneles laterales colapsables de
+   Notion/VS Code/Linear: el panel es `position: fixed` (nunca se mueve
+   ni se "asienta": su posición es siempre relativa al viewport, no al
+   documento, así que no hay salto alguno al scrollear) y vive dentro de
+   un carril reservado de ancho CONSTANTE (`--sidebar-w`) en el padding
+   izquierdo de `.main-index`. Ese carril NO cambia de tamaño nunca,
+   esté el panel abierto o cerrado — al cerrarlo, el panel solo se
+   desliza fuera de vista dentro de su propio carril (`translateX`), sin
+   tocar el ancho ni la posición de `.contenido-central`. El botón de
+   mostrar/ocultar vive fuera del panel (no se desliza con él) para
+   poder reabrirlo siempre desde el mismo lugar. Variables
+   `--sidebar-w`/`--header-h` declaradas en `:root`, arriba. */
+.main-index {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 24px 40px 60px calc(var(--sidebar-w) + 40px);
+  box-sizing: border-box;
+}
+
+.contenido-central {
+  max-width: 1520px;
+  margin: 0 auto;
+}
+
+/* ---------- Sidebar "Mi seguimiento (Jira)" — panel fijo colapsable ---------- */
+.sidebar-jira {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  width: var(--sidebar-w-real);
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  background: var(--cafsa-white);
+  border-right: 1px solid var(--cafsa-border);
+  padding: 20px 20px 40px;
+  box-sizing: border-box;
+  z-index: 15;
+  transform: translateX(0);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-jira.colapsado {
+  transform: translateX(-100%);
+}
+
+.sidebar-jira-header {
+  margin-bottom: 4px;
+}
+
+/* Botón flotante de mostrar/ocultar — deliberadamente FUERA de <aside>
+   para que nunca se deslice junto con el panel: es el "asa" fija que
+   siempre permite reabrirlo, sin importar el estado. */
+.btn-toggle-sidebar-flotante {
+  position: fixed;
+  top: calc(var(--header-h) + 16px);
+  left: calc(var(--sidebar-w-real) - 14px);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cafsa-white);
+  border: 1px solid var(--cafsa-border);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cafsa-gray);
+  cursor: pointer;
+  z-index: 16;
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.15s ease;
+}
+
+.btn-toggle-sidebar-flotante:hover { background: var(--cafsa-gray-bg); }
+
+.btn-toggle-sidebar-flotante .icono-chevron {
+  transition: transform 0.28s ease;
+}
+
+.btn-toggle-sidebar-flotante.colapsado {
+  left: 14px;
+}
+
+.btn-toggle-sidebar-flotante.colapsado .icono-chevron {
+  transform: rotate(180deg);
+}
+
+.sidebar-jira-cuerpo {
+  margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+  /* Pantallas angostas: no hay espacio para reservar un carril fijo sin
+     dejar el contenido central demasiado angosto. El panel pasa a modo
+     "overlay" puro (se superpone al contenido en vez de convivir en su
+     propio carril) — mismo patrón que un drawer de navegación móvil. */
+  .main-index {
+    padding-left: 24px;
+  }
+  .sidebar-jira {
+    box-shadow: var(--shadow-lift);
+  }
 }
 
 /* ---------- Panel consolidado "Mi seguimiento" (Jira, index principal) ---------- */
@@ -1045,6 +1591,10 @@ main {
   overflow: hidden;
 }
 
+.persona-card h3 a {
+  color: var(--cafsa-black);
+}
+
 .persona-card .cargo {
   font-size: 0.76rem;
   color: var(--cafsa-gray);
@@ -1096,10 +1646,22 @@ main {
 }
 
 .persona-card > a:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   margin-top: auto;
   padding-top: 8px;
   font-size: 0.85rem;
   font-weight: 600;
+  color: var(--accent);
+}
+
+.persona-card > a:last-child .icono-flecha {
+  transition: transform 0.18s var(--ease);
+}
+
+.persona-card > a:last-child:hover .icono-flecha {
+  transform: translateX(3px);
 }
 
 .pendientes-lista {
@@ -1187,7 +1749,17 @@ main {
   cursor: pointer;
 }
 
-.btn-secundario:hover { border-color: var(--cafsa-gray); text-decoration: none; }
+.btn-secundario {
+  transition: border-color 0.15s var(--ease), color 0.15s var(--ease), transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+
+.btn-secundario:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
 
 /* ---------- Footer ---------- */
 .site-footer {

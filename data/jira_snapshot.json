@@ -1,8 +1,8 @@
 {
-  "generado": "2026-08-27",
+  "generado": "2026-09-18",
   "fuente": "Jira (cafsagroup.atlassian.net), consulta en vivo vía MCP — assignee = currentUser() AND statusCategory != Done",
   "filtro_jira_url": "https://cafsagroup.atlassian.net/issues?jql=assignee%3DcurrentUser()%20AND%20statusCategory%20!%3D%20Done%20ORDER%20BY%20priority%20DESC%2C%20duedate%20ASC",
-  "total": 44,
+  "total": 39,
   "issues": [
     {
       "key": "PP-216",
@@ -23,16 +23,6 @@
       "prioridad": "Highest",
       "vencimiento": "2026-09-30",
       "url": "https://cafsagroup.atlassian.net/browse/DES-1741"
-    },
-    {
-      "key": "GDT-100",
-      "proyecto": "GDT",
-      "tipo": "Epic",
-      "resumen": "XL-TEC-02 Gobierno y Cumplimiento Tecnológico (COBIT 2019 / CONASSIF 5-24) - Actualización y gestión de expedientes de Proveedores (renegociación de contratos)",
-      "estado": "En curso",
-      "prioridad": "High",
-      "vencimiento": "2026-01-22",
-      "url": "https://cafsagroup.atlassian.net/browse/GDT-100"
     },
     {
       "key": "GDT-120",
@@ -63,26 +53,6 @@
       "prioridad": "High",
       "vencimiento": null,
       "url": "https://cafsagroup.atlassian.net/browse/BMO-252"
-    },
-    {
-      "key": "GDT-320",
-      "proyecto": "GDT",
-      "tipo": "Tarea",
-      "resumen": "EXPEDIENTE - SOFTLAND COSTA RICA SOCIEDAD DE RESPONSABILIDAD LIMITADA",
-      "estado": "Abierta",
-      "prioridad": "Medium",
-      "vencimiento": "2026-02-09",
-      "url": "https://cafsagroup.atlassian.net/browse/GDT-320"
-    },
-    {
-      "key": "BMO-316",
-      "proyecto": "BMO",
-      "tipo": "Epic",
-      "resumen": "08 - 2026 | d.MLOPEZZ  - OPERACIONES DE TI",
-      "estado": "En curso",
-      "prioridad": "Medium",
-      "vencimiento": "2026-08-31",
-      "url": "https://cafsagroup.atlassian.net/browse/BMO-316"
     },
     {
       "key": "PP-233",
@@ -165,26 +135,6 @@
       "url": "https://cafsagroup.atlassian.net/browse/PP-297"
     },
     {
-      "key": "PP-296",
-      "proyecto": "PP",
-      "tipo": "Criterio de aceptación",
-      "resumen": "PP-232-05 - Migración de Modelos",
-      "estado": "Tareas por hacer",
-      "prioridad": "Medium",
-      "vencimiento": null,
-      "url": "https://cafsagroup.atlassian.net/browse/PP-296"
-    },
-    {
-      "key": "PP-295",
-      "proyecto": "PP",
-      "tipo": "Criterio de aceptación",
-      "resumen": "PP-232-04 - Migración del Controlador Admin",
-      "estado": "Tareas por hacer",
-      "prioridad": "Medium",
-      "vencimiento": null,
-      "url": "https://cafsagroup.atlassian.net/browse/PP-295"
-    },
-    {
       "key": "PP-294",
       "proyecto": "PP",
       "tipo": "Criterio de aceptación",
@@ -193,16 +143,6 @@
       "prioridad": "Medium",
       "vencimiento": null,
       "url": "https://cafsagroup.atlassian.net/browse/PP-294"
-    },
-    {
-      "key": "PP-293",
-      "proyecto": "PP",
-      "tipo": "Criterio de aceptación",
-      "resumen": "PP-232-02 - Capa de Servicios SOAP",
-      "estado": "Tareas por hacer",
-      "prioridad": "Medium",
-      "vencimiento": null,
-      "url": "https://cafsagroup.atlassian.net/browse/PP-293"
     },
     {
       "key": "PP-292",
@@ -423,6 +363,16 @@
       "prioridad": "Medium",
       "vencimiento": null,
       "url": "https://cafsagroup.atlassian.net/browse/BMO-118"
+    },
+    {
+      "key": "BMO-343",
+      "proyecto": "BMO",
+      "tipo": "Epic",
+      "resumen": "09 - 2026 | d.MLOPEZZ  - OPERACIONES DE TI",
+      "estado": "Abierta",
+      "prioridad": "Low",
+      "vencimiento": null,
+      "url": "https://cafsagroup.atlassian.net/browse/BMO-343"
     },
     {
       "key": "PP-264",

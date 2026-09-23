@@ -76,13 +76,36 @@ Uso:
 
 import argparse
 import json
+import re
 import sys
 import unicodedata
 from datetime import date
 from pathlib import Path
 
-from common import ROOT, slugify, parse_jira_url
-from reportes_lib import agrupar_por_persona, cargar_pendientes, orden_persona, render_persona_card, texto_plazo
+from common import (
+    ROOT,
+    esc,
+    guardar_json_atomico,
+    slugify,
+    parse_jira_url,
+    icono,
+    icono_flecha,
+    icono_seccion,
+    ICONO_TICKET,
+    ICONO_GRAFICO,
+    ICONO_LLAVE,
+    ICONO_EXTERNO,
+    ICONO_BUZON_VACIO,
+)
+from reportes_lib import (
+    agrupar_por_persona,
+    avance_de_subtareas,
+    cargar_pendientes,
+    orden_persona,
+    render_desglose_subtareas,
+    render_persona_card,
+    texto_plazo,
+)
 
 DATA_FILE = ROOT / "data" / "informes.json"
 JIRA_SNAPSHOT_FILE = ROOT / "data" / "jira_snapshot.json"
@@ -179,13 +202,25 @@ def cargar_informes() -> list:
 
 
 def guardar_informes(informes: list) -> None:
-    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
     informes_ordenados = sorted(
         informes, key=lambda x: (x.get("destacado", False), x["fecha"]), reverse=True
     )
-    with open(DATA_FILE, "w", encoding="utf-8") as f:
-        json.dump(informes_ordenados, f, ensure_ascii=False, indent=2)
-        f.write("\n")
+    guardar_json_atomico(DATA_FILE, informes_ordenados)
+
+
+def avance_efectivo_fase(fase: dict) -> int:
+    """Avance real de una fase. Si la fase declara "subtareas" (desglose
+    real de Jira), el avance ES el % de subtareas 'Finalizada' — un hecho
+    verificable que se recalcula siempre desde ese detalle, y por lo tanto
+    IGNORA cualquier número que haya quedado guardado en "avance" para esa
+    fase (para no arriesgar que ambos se desincronicen). Si la fase no
+    tiene desglose, se usa el número declarado a mano (estimación
+    editorial, ver convención Done=100/En curso=50/Por hacer=0 en el
+    docstring del módulo)."""
+    subtareas = fase.get("subtareas")
+    if subtareas:
+        return avance_de_subtareas(subtareas)
+    return fase["avance"]
 
 
 def avance_de(informe: dict):
@@ -193,7 +228,7 @@ def avance_de(informe: dict):
     Prioridad: fases > subtareas_completadas/total > avance explícito."""
     fases = informe.get("fases") or []
     if fases:
-        pct = round(sum(f["avance"] for f in fases) / len(fases))
+        pct = round(sum(avance_efectivo_fase(f) for f in fases) / len(fases))
         return pct, f"{len(fases)} fase(s) · promedio"
 
     completadas = informe.get("subtareas_completadas")
@@ -219,9 +254,15 @@ def render_progreso(informe: dict) -> str:
         return ""
     pct = max(0, min(100, pct))
     return f"""      <div class="progreso" role="progressbar" aria-valuenow="{pct}" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: {detalle}">
-        <div class="progreso-barra"><div class="progreso-relleno" style="width:{pct}%"></div></div>
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="{pct}" style="width:{pct}%"></div></div>
         <span class="progreso-label">{detalle} (<span class="pct-semaforo" data-pct="{pct}">{pct}%</span>)</span>
       </div>"""
+
+
+def _normalizar_busqueda(texto: str) -> str:
+    """Sin acentos, minúsculas, espacios colapsados — para el buscador en vivo."""
+    limpio = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode("ascii").lower()
+    return re.sub(r"\s+", " ", limpio).strip()
 
 
 def render_card(informe: dict) -> str:
@@ -235,9 +276,70 @@ def render_card(informe: dict) -> str:
     )
     progreso_html = render_progreso(informe)
 
-    # Texto normalizado (sin acentos, minúsculas) para el buscador en vivo.
-    texto_busqueda = f"{informe['titulo']} {informe['resumen']} {informe['categoria']}"
-    texto_busqueda = unicodedata.normalize("NFKD", texto_busqueda).encode("ascii", "ignore").decode("ascii").lower()
+    # Referencias Jira del informe: el/los ticket(s) principal(es) (jira_urls)
+    # + cada subtarea de cada fase (jira_key + resumen). Esto alimenta dos
+    # cosas en el front-end (ver index_template.html):
+    #   1. El índice de búsqueda ampliado (texto_busqueda de abajo), para que
+    #      buscar "Salesforce" o "BMO-155" encuentre este informe aunque esa
+    #      palabra no esté en el título/resumen visible de la card.
+    #   2. La "pista de coincidencia": cuando el match viene de una
+    #      referencia que no se ve en la card, se muestra igual cuál fue
+    #      (tarea Jira + su resumen) con link directo a Jira — resultado
+    #      práctico, no solo "sí aparece en la lista".
+    referencias = []
+    for ju in informe.get("jira_urls") or []:
+        referencias.append({
+            "key": re.search(r"[A-Z]+-\d+", ju.get("label", "") + " " + ju.get("url", "")).group(0)
+                   if re.search(r"[A-Z]+-\d+", ju.get("label", "") + " " + ju.get("url", "")) else "",
+            "resumen": ju.get("label", ""),
+            "url": ju.get("url", ""),
+        })
+    for fase in informe.get("fases") or []:
+        for sub in fase.get("subtareas") or []:
+            key = sub.get("jira_key", "")
+            referencias.append({
+                "key": key,
+                "resumen": sub.get("resumen", ""),
+                "url": f"https://cafsagroup.atlassian.net/browse/{key}" if key else "",
+            })
+    # Descarta referencias sin key ni resumen (ruido) y de-duplica por key.
+    vistos = set()
+    referencias_limpias = []
+    for r in referencias:
+        ident = r["key"] or r["resumen"]
+        if not ident or ident in vistos:
+            continue
+        vistos.add(ident)
+        referencias_limpias.append(r)
+
+    # Texto de búsqueda dividido en dos capas:
+    #   - data-busqueda: lo que la card YA muestra (título, resumen,
+    #     categoría, estado y prioridad "en palabras" — así "atrasado" o
+    #     "prioridad alta" también sirven como término). Si el match cae
+    #     acá, no hace falta explicar nada: se ve directo en la card.
+    #   - data-extra: nombres de fase — texto real del informe pero que no
+    #     aparece en la card. Amplía el "recall" sin quedar huérfano de
+    #     link (no hay URL de fase, así que no dispara la pista con
+    #     redireccionamiento; solo hace que la card aparezca en el
+    #     resultado).
+    # Las referencias Jira (data-referencias, ver abajo) son la tercera capa:
+    # si el match viene de ahí, el front-end sí muestra de qué tarea Jira se
+    # trata y linkea directo a ella — la "coincidencia aproximada, pero
+    # trazable a su referencia" que pidió Marco.
+    piezas_visibles = [
+        informe["titulo"], informe["resumen"], informe["categoria"],
+        estado_label, prioridad_label,
+    ]
+    texto_busqueda = _normalizar_busqueda(" ".join(p for p in piezas_visibles if p))
+
+    piezas_extra = [f.get("nombre", "") for f in (informe.get("fases") or [])]
+    texto_extra = _normalizar_busqueda(" ".join(p for p in piezas_extra if p))
+
+    # Referencias como JSON compacto en un atributo data-* (comillas simples
+    # en el HTML para poder llevar comillas dobles del JSON sin escapar cada
+    # una a mano).
+    referencias_json = json.dumps(referencias_limpias, ensure_ascii=False)
+    referencias_attr = referencias_json.replace("'", "&#39;")
 
     # Fecha de vencimiento: solo si el informe la tiene declarada (no todos la
     # tienen). Reutiliza texto_plazo() de reportes_lib para no tener dos
@@ -245,26 +347,35 @@ def render_card(informe: dict) -> str:
     vencimiento = informe.get("vencimiento")
     vencimiento_html = f" &middot; {texto_plazo(vencimiento)}" if vencimiento else ""
 
-    return f"""    <div class="informe-card" data-categoria="{informe['categoria']}" data-busqueda="{texto_busqueda}" data-prioridad="{prioridad or ''}" data-fecha="{informe['fecha']}" data-estado="{estado}">
+    # orden_atencion: prioridad de atención declarada a mano por Marco
+    # (2026-09-23), un ranking explícito 1..N distinto de "prioridad"
+    # (alta/media/baja, que alimenta el cálculo del semáforo) y distinto
+    # también del Radar de urgencia del sidebar (ese es automático, por
+    # fecha de vencimiento en Jira). Si un informe no lo declara, se manda
+    # al final (999) en vez de romper el orden de los que sí lo tienen.
+    orden_atencion = informe.get("orden_atencion", 999)
+
+    return f"""    <div class="informe-card" data-categoria="{esc(informe['categoria'])}" data-busqueda="{esc(texto_busqueda)}" data-extra="{esc(texto_extra)}" data-referencias='{referencias_attr}' data-prioridad="{esc(prioridad or '')}" data-orden-atencion="{orden_atencion}" data-fecha="{informe['fecha']}" data-estado="{estado}">
       <div class="card-top">
-        <span class="categoria">{informe['categoria']}</span>
+        <span class="categoria">{esc(informe['categoria'])}</span>
         <div class="badges-wrap">
           {prioridad_html}
           <span class="estado-badge estado-{estado}">{estado_label}</span>
         </div>
       </div>
-      <h3><a href="{informe['ruta']}">{informe['titulo']}</a></h3>
-      <p class="resumen">{informe['resumen']}</p>
+      <h3><a href="{informe['ruta']}">{esc(informe['titulo'])}</a></h3>
+      <p class="resumen">{esc(informe['resumen'])}</p>
+      <p class="coincidencia-busqueda" hidden></p>
 {progreso_html}
       <div class="card-footer">
         <span>{informe['fecha']}{vencimiento_html}</span>
-        <a href="{informe['ruta']}">Ver informe &rarr;</a>
+        <a href="{informe['ruta']}">Ver informe {icono_flecha()}</a>
       </div>
     </div>"""
 
 
 def render_filtro(categoria: str) -> str:
-    return f'      <button type="button" data-filtro="{categoria}" role="tab" aria-selected="false">{categoria}</button>'
+    return f'      <button type="button" data-filtro="{esc(categoria)}" role="tab" aria-selected="false">{esc(categoria)}</button>'
 
 
 def render_seccion_reportes() -> str:
@@ -319,10 +430,10 @@ def texto_plazo_jira(dias: int) -> str:
 
 def render_radar_item(F: float, dias: int, issue: dict) -> str:
     clase = PRIORIDAD_JIRA_ESTILO.get(issue.get("prioridad"), "neutral")
-    return f"""      <a class="radar-item" href="{issue['url']}" target="_blank" rel="noopener">
-        <span class="estado-badge estado-{clase}">{issue['prioridad']}</span>
+    return f"""      <a class="radar-item" href="{esc(issue['url'])}" target="_blank" rel="noopener">
+        <span class="estado-badge estado-{clase}">{esc(issue['prioridad'])}</span>
         <span class="radar-texto">
-          <strong>{issue['key']}</strong> — {issue['resumen']}
+          <strong>{esc(issue['key'])}</strong> — {esc(issue['resumen'])}
           <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">{texto_plazo_jira(dias)} · F={F}</span>
         </span>
       </a>"""
@@ -332,7 +443,18 @@ def render_panel_consolidado() -> str:
     """Panel 'Mi seguimiento' — consolidado de mis pendientes reales en Jira
     (data/jira_snapshot.json), con radar de urgencia (top 5 por fórmula
     gravitacional) y enlace directo al filtro en vivo de Jira. Si todavía no
-    se ha generado el snapshot, la sección se omite del index."""
+    se ha generado el snapshot, la sección se omite del index.
+
+    Desde 2026-09-18 se renderiza como <aside> con position:fixed (panel
+    tipo "drawer", ver .sidebar-jira en style.css) + un botón flotante
+    independiente (#btn-toggle-sidebar-jira, fuera del <aside> a
+    propósito, para que nunca se deslice junto con el panel). Ambos viven
+    dentro del carril reservado --sidebar-w en .main-index, así que
+    .contenido-central JAMÁS cambia de ancho al mostrar/ocultar el panel
+    (a diferencia de la primera versión con flexbox). Si esta función
+    devuelve "", ni el <aside> ni el botón existen en el DOM — el carril
+    reservado queda simplemente vacío (ver nota de Marco: está bien no
+    usar el 100% del ancho)."""
     snapshot = cargar_jira_snapshot()
     if not snapshot:
         return ""
@@ -367,26 +489,56 @@ def render_panel_consolidado() -> str:
     filtro_url = snapshot.get("filtro_jira_url", "#")
     generado = snapshot.get("generado", "")
 
-    return f"""  <section class="panel-consolidado" aria-labelledby="titulo-consolidado">
-    <div class="seccion-reportes-header">
-      <h2 id="titulo-consolidado" class="page-title" style="margin-bottom:2px">Mi seguimiento (Jira)</h2>
-      <a href="{filtro_url}" class="ver-todos" target="_blank" rel="noopener">Ver los {total} pendientes en Jira &rarr;</a>
-    </div>
-    <p class="page-meta">
-      Consolidado de mis tareas abiertas asignadas en Jira, actualizado al {generado}
-      · {total} pendiente(s) abierto(s)
-    </p>
-    <div class="kpi-grid kpi-grid-mini">
+    aside_html = f"""    <aside class="sidebar-jira" id="sidebar-jira" aria-label="Mi seguimiento (Jira)">
+      <div class="sidebar-jira-header">
+        <div class="titulo-seccion">
+          {icono_seccion(ICONO_TICKET, 18)}
+          <h2 id="titulo-consolidado" class="page-title" style="margin:0;font-size:1.05rem">Mi seguimiento (Jira)</h2>
+        </div>
+      </div>
+      <div id="sidebar-jira-cuerpo" class="sidebar-jira-cuerpo">
+        <a href="{esc(filtro_url)}" class="ver-todos" target="_blank" rel="noopener">Ver los {total} pendientes en Jira {icono_flecha()}</a>
+        <p class="page-meta" style="margin:8px 0 16px">
+          Consolidado de mis tareas abiertas asignadas en Jira, actualizado al {generado}
+          · {total} pendiente(s) abierto(s)
+        </p>
+        <div class="kpi-grid kpi-grid-mini">
 {desglose_html}
-    </div>
-    <h3 class="radar-titulo">Radar de urgencia <span class="formula-nota" title="Los 5 pendientes con mayor F = (50 × peso de prioridad) / días_restantes², solo entre los que tienen fecha de vencimiento en Jira.">top 5 por urgencia calculada</span></h3>
-    <div class="radar-urgencia">
+        </div>
+        <h3 class="radar-titulo">Radar de urgencia <span class="formula-nota" title="Los 5 pendientes con mayor F = (50 × peso de prioridad) / días_restantes², solo entre los que tienen fecha de vencimiento en Jira.">top 5</span></h3>
+        <div class="radar-urgencia">
 {radar_html}
-    </div>
-  </section>
+        </div>
+      </div>
+    </aside>
+    <button type="button" id="btn-toggle-sidebar-jira" class="btn-toggle-sidebar-flotante" aria-expanded="true" aria-controls="sidebar-jira-cuerpo" aria-label="Ocultar panel Mi seguimiento (Jira)">
+      <svg class="icono-chevron" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M10 4L6 8l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>"""
 
-  <hr class="separador-seccion">
+    # Script inline (no defer, corre apenas el parser llega acá) que
+    # restaura el estado colapsado/abierto ANTES de que el resto de la
+    # página termine de cargar — evita el parpadeo de "abrir y luego
+    # cerrarse" que tendría si esto se hiciera solo en el <script> grande
+    # al final de index_template.html (mismo principio que
+    # assets/js/modo-vista.js con la vista local/pública).
+    script_html = """    <script>
+    (function () {
+      var el = document.getElementById('sidebar-jira');
+      var btn = document.getElementById('btn-toggle-sidebar-jira');
+      if (!el || !btn) return;
+      if (localStorage.getItem('sidebarJiraColapsado') === '1') {
+        el.classList.add('colapsado');
+        btn.classList.add('colapsado');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Mostrar panel Mi seguimiento (Jira)');
+      }
+    })();
+    </script>
 """
+
+    return aside_html + "\n" + script_html
 
 
 def build_index() -> None:
@@ -395,7 +547,14 @@ def build_index() -> None:
 
     categorias = sorted({i["categoria"] for i in informes})
     filtros_html = "\n".join(render_filtro(c) for c in categorias)
-    grid_html = "\n".join(render_card(i) for i in informes) if informes else \
+    # Orden del markup fuente = orden_atencion (prioridad de atención,
+    # 2026-09-23) en vez del orden en que quedaron guardados en el JSON.
+    # Es el mismo criterio que el selector "Ordenar por" trae seleccionado
+    # por defecto en el front-end (ver index_template.html) — esto es solo
+    # el respaldo para cuando el JS no corre (accesibilidad / no-JS), para
+    # que ambos coincidan.
+    informes_por_atencion = sorted(informes, key=lambda i: i.get("orden_atencion", 999))
+    grid_html = "\n".join(render_card(i) for i in informes_por_atencion) if informes else \
         '    <p class="page-meta">Todavía no hay informes publicados.</p>'
 
     pendientes = cargar_pendientes()
@@ -416,6 +575,29 @@ def build_index() -> None:
     print(f"[OK] index.html regenerado con {len(informes)} informe(s) y {total_personas} persona(s) en seguimiento.")
 
 
+# Detecta una clave de Jira embebida entre paréntesis en el nombre de una
+# fase (convención ya usada en todo el JSON: "... (BMO-118)",
+# "... (GDT-120) - sin descripción..."). Petición explícita (2026-09-18):
+# cuando el nombre de la fase YA identifica su propio ticket, el nombre se
+# vuelve el enlace, y el bloque separado de "Más detalle" deja de tener
+# razón de ser para ese informe — ver JIRA_URL_BASE / fase_nombre_html() /
+# render_informe_html() más abajo.
+JIRA_KEY_EN_NOMBRE = re.compile(r"\(([A-Z]{2,10}-\d+)\)")
+JIRA_URL_BASE = "https://cafsagroup.atlassian.net/browse/"
+
+
+def jira_key_de_fase(nombre: str):
+    m = JIRA_KEY_EN_NOMBRE.search(nombre)
+    return m.group(1) if m else None
+
+
+def fase_nombre_html(fase: dict) -> str:
+    key = jira_key_de_fase(fase["nombre"])
+    if key:
+        return f'<a href="{JIRA_URL_BASE}{key}" target="_blank" rel="noopener">{esc(fase["nombre"])}</a>'
+    return esc(fase["nombre"])
+
+
 def color_de_fase(pct: int) -> str:
     if pct >= 100:
         return "#2e7d32"
@@ -434,7 +616,7 @@ def render_informe_html(informe: dict) -> str:
     fases = informe.get("fases") or []
     if fases:
         labels = [f["nombre"] for f in fases]
-        valores = [f["avance"] for f in fases]
+        valores = [avance_efectivo_fase(f) for f in fases]
         colores = [color_de_fase(v) for v in valores]
     else:
         pct, _ = avance_de(informe)
@@ -446,27 +628,55 @@ def render_informe_html(informe: dict) -> str:
     # para todos): pocas fases, gráfico chico; muchas fases, más espacio.
     altura_chart = max(140, min(560, 46 * len(labels) + 60))
 
+    # Cada <li> de fase puede traer, además, su desglose real de subtareas
+    # de Jira (render_desglose_subtareas, en reportes_lib.py) — el % que se
+    # muestra junto al nombre de la fase es avance_efectivo_fase(), que YA
+    # tiene en cuenta ese desglose cuando existe (ver docstring de esa
+    # función: hecho verificable vs. estimación editorial).
     fases_lista_html = "\n".join(
-        f'      <li><span class="fase-nombre">{f["nombre"]}</span>'
-        f'<span class="fase-pct pct-semaforo" data-pct="{f["avance"]}">{f["avance"]}%</span></li>'
+        f'      <li><span class="fase-nombre">{fase_nombre_html(f)}</span>'
+        f'<span class="fase-pct pct-semaforo" data-pct="{avance_efectivo_fase(f)}">{avance_efectivo_fase(f)}%</span></li>'
+        + (f"\n{render_desglose_subtareas(f['subtareas'])}" if f.get("subtareas") else "")
         for f in fases
     ) if fases else ""
 
-    detalle_urls = informe.get("jira_urls") or []
-    if detalle_urls:
-        detalle_html = "\n".join(
-            f'      <li><a href="{d["url"]}" target="_blank" rel="noopener">{d["label"]}</a></li>'
-            for d in detalle_urls
-        )
+    # "Más detalle" solo se muestra si NO todas las fases ya resuelven su
+    # propio enlace de Jira en el nombre (fase_nombre_html arriba) — si
+    # todas lo resuelven, el bloque sería un duplicado exacto de enlaces
+    # que ya están arriba, así que se omite del todo (petición explícita,
+    # 2026-09-18). Sigue existiendo como respaldo para informes con fases
+    # genéricas sin ticket propio (ej. "Modernización de infraestructura
+    # /gx", donde las fases son etapas de trabajo, no tickets separados).
+    todas_las_fases_con_link = bool(fases) and all(jira_key_de_fase(f["nombre"]) for f in fases)
+    if todas_las_fases_con_link:
+        detalle_section_html = ""
     else:
-        detalle_html = (
-            '      <li><a href="#" target="_blank" rel="noopener">Enlace a detalle ampliado (editar)</a></li>'
-        )
+        detalle_urls = informe.get("jira_urls") or []
+        if detalle_urls:
+            detalle_html = "\n".join(
+                f'      <li><a href="{esc(d["url"])}" target="_blank" rel="noopener">{esc(d["label"])}</a></li>'
+                for d in detalle_urls
+            )
+        else:
+            detalle_html = (
+                '      <li><a href="#" target="_blank" rel="noopener">Enlace a detalle ampliado (editar)</a></li>'
+            )
+        detalle_section_html = f"""  <div class="detalle-links">
+    <div class="titulo-seccion">
+      {icono_seccion(ICONO_EXTERNO, 18)}
+      <h2>Más detalle</h2>
+    </div>
+    <ul>
+{detalle_html}
+    </ul>
+  </div>
 
-    contenido = contenido.replace("{{TITULO}}", informe["titulo"])
+"""
+
+    contenido = contenido.replace("{{TITULO}}", esc(informe["titulo"]))
     contenido = contenido.replace("{{FECHA}}", informe["fecha"])
-    contenido = contenido.replace("{{CATEGORIA}}", informe["categoria"])
-    contenido = contenido.replace("{{RESUMEN}}", informe["resumen"])
+    contenido = contenido.replace("{{CATEGORIA}}", esc(informe["categoria"]))
+    contenido = contenido.replace("{{RESUMEN}}", esc(informe["resumen"]))
     contenido = contenido.replace("{{ESTADO_CLASE}}", f"estado-{informe['estado']}")
     contenido = contenido.replace("{{ESTADO_LABEL}}", ESTADOS_VALIDOS[informe["estado"]])
     contenido = contenido.replace("{{PRIORIDAD_LABEL}}", PRIORIDADES_VALIDAS[informe["prioridad"]])
@@ -477,7 +687,7 @@ def render_informe_html(informe: dict) -> str:
     contenido = contenido.replace("{{FASES_LABELS_JSON}}", json.dumps(labels, ensure_ascii=False))
     contenido = contenido.replace("{{FASES_DATA_JSON}}", json.dumps(valores))
     contenido = contenido.replace("{{FASES_COLORS_JSON}}", json.dumps(colores))
-    contenido = contenido.replace("{{DETALLE_LINKS_HTML}}", detalle_html)
+    contenido = contenido.replace("{{DETALLE_SECTION_HTML}}", detalle_section_html)
     return contenido
 
 
@@ -547,6 +757,27 @@ def crear_informe(args) -> None:
     print("[OK] index.html actualizado automáticamente.")
 
 
+def detectar_paginas_huerfanas(informes: list) -> list:
+    """Compara las rutas .html registradas en informes.json contra los
+    archivos .html que realmente existen bajo informes/ en disco.
+
+    2026-09-23 (auditoría): esta comparación fue la que encontró 4 páginas
+    huérfanas reales durante la auditoría (informes eliminados/renombrados
+    del JSON cuyo .html nunca se borró). Antes esa detección era un script
+    ad-hoc de un solo uso; ahora corre en cada 'regenerar-paginas' para que
+    la próxima vez que esto vuelva a pasar se vea de inmediato en vez de
+    acumularse en silencio. Solo AVISA — no borra nada automáticamente,
+    porque decidir si un huérfano es basura o un informe que se piensa
+    reactivar es un juicio editorial, no algo seguro de automatizar."""
+    rutas_registradas = {i["ruta"] for i in informes}
+    huerfanos = []
+    for archivo in sorted(INFORMES_DIR.rglob("*.html")):
+        ruta_relativa = str(archivo.relative_to(ROOT)).replace("\\", "/")
+        if ruta_relativa not in rutas_registradas:
+            huerfanos.append(ruta_relativa)
+    return huerfanos
+
+
 def regenerar_paginas(args) -> None:
     """Re-renderiza las páginas individuales desde informes.json (útil tras
     editar fases/jira_urls a mano en el JSON) y luego el índice.
@@ -568,6 +799,12 @@ def regenerar_paginas(args) -> None:
     for ruta in saltados:
         print(f"[SKIP] {ruta} (personalizado=true, no se toca)")
     build_index()
+
+    huerfanos = detectar_paginas_huerfanas(informes)
+    if huerfanos:
+        print(f"[AVISO] {len(huerfanos)} página(s) .html en informes/ sin registro en data/informes.json (posibles huérfanas, no se borran solas):")
+        for ruta in huerfanos:
+            print(f"    - {ruta}")
 
 
 def main():

@@ -51,18 +51,108 @@
   <iframe id="iframe-brief" class="iframe-brief" title="Brief diario" loading="lazy"></iframe>
 </dialog>
 
-<main id="contenido">
+<main id="contenido" class="main-index">
 
-  <section class="seccion-reportes" aria-labelledby="titulo-reportes">
-    <div class="seccion-reportes-header">
-      <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px" data-texto-local="Tu seguimiento de personas, Marco">Reportes y seguimientos</h2>
-      <a href="reportes/index.html" class="ver-todos">Ver todos los pendientes por persona &rarr;</a>
-    </div>
-    <p class="page-meta">
-      Solicitudes puntuales dirigidas a una persona específica, con enlace a
-      Jira y seguimiento · 2 persona(s) con pendientes registrados
-    </p>
-    <div class="personas-grid" id="grid-personas-reportes">
+    <aside class="sidebar-jira" id="sidebar-jira" aria-label="Mi seguimiento (Jira)">
+      <div class="sidebar-jira-header">
+        <div class="titulo-seccion">
+          <svg class="icono-seccion" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg>
+          <h2 id="titulo-consolidado" class="page-title" style="margin:0;font-size:1.05rem">Mi seguimiento (Jira)</h2>
+        </div>
+      </div>
+      <div id="sidebar-jira-cuerpo" class="sidebar-jira-cuerpo">
+        <a href="https://cafsagroup.atlassian.net/issues?jql=assignee%3DcurrentUser()%20AND%20statusCategory%20!%3D%20Done%20ORDER%20BY%20priority%20DESC%2C%20duedate%20ASC" class="ver-todos" target="_blank" rel="noopener">Ver los 39 pendientes en Jira <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <p class="page-meta" style="margin:8px 0 16px">
+          Consolidado de mis tareas abiertas asignadas en Jira, actualizado al 2026-09-18
+          · 39 pendiente(s) abierto(s)
+        </p>
+        <div class="kpi-grid kpi-grid-mini">
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">2</span><span class="kpi-label">Highest</span></div>
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">3</span><span class="kpi-label">High</span></div>
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">31</span><span class="kpi-label">Medium</span></div>
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">1</span><span class="kpi-label">Low</span></div>
+      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">2</span><span class="kpi-label">Lowest</span></div>
+        </div>
+        <h3 class="radar-titulo">Radar de urgencia <span class="formula-nota" title="Los 5 pendientes con mayor F = (50 × peso de prioridad) / días_restantes², solo entre los que tienen fecha de vencimiento en Jira.">top 5</span></h3>
+        <div class="radar-urgencia">
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-216" target="_blank" rel="noopener">
+        <span class="estado-badge estado-rojo">Highest</span>
+        <span class="radar-texto">
+          <strong>PP-216</strong> — XL-COR-01  Implementación del nuevo Cotizador
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 160 día(s) · F=250.0</span>
+        </span>
+      </a>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1741" target="_blank" rel="noopener">
+        <span class="estado-badge estado-rojo">Highest</span>
+        <span class="radar-texto">
+          <strong>DES-1741</strong> — Migración Core Financiero ABANKS - Forms 14c
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 7 día(s) · F=5.1</span>
+        </span>
+      </a>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-233" target="_blank" rel="noopener">
+        <span class="estado-badge estado-amarillo">Medium</span>
+        <span class="radar-texto">
+          <strong>PP-233</strong> — XL-TEC-01 Gestión de Riesgo Tecnológico y Obsolescencia Crítica - Integración GAUDI en CAFSA en Línea - FASE 1
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 7 día(s) · F=3.06</span>
+        </span>
+      </a>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-229" target="_blank" rel="noopener">
+        <span class="estado-badge estado-amarillo">Medium</span>
+        <span class="radar-texto">
+          <strong>PP-229</strong> — XL-TEC-01 Gestión de Riesgo Tecnológico y Obsolescencia Crítica - Plan de mitigación de Riesgo de afectación de Bases de datos, ABANKS y WebLogic (Obsolescencia tecnológica)
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 7 día(s) · F=3.06</span>
+        </span>
+      </a>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1743" target="_blank" rel="noopener">
+        <span class="estado-badge estado-amarillo">Medium</span>
+        <span class="radar-texto">
+          <strong>DES-1743</strong> — Migración Módulos, Objetos &amp; Pantallas Abanks
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 7 día(s) · F=3.06</span>
+        </span>
+      </a>
+        </div>
+      </div>
+    </aside>
+    <button type="button" id="btn-toggle-sidebar-jira" class="btn-toggle-sidebar-flotante" aria-expanded="true" aria-controls="sidebar-jira-cuerpo" aria-label="Ocultar panel Mi seguimiento (Jira)">
+      <svg class="icono-chevron" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M10 4L6 8l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <script>
+    (function () {
+      var el = document.getElementById('sidebar-jira');
+      var btn = document.getElementById('btn-toggle-sidebar-jira');
+      if (!el || !btn) return;
+      if (localStorage.getItem('sidebarJiraColapsado') === '1') {
+        el.classList.add('colapsado');
+        btn.classList.add('colapsado');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Mostrar panel Mi seguimiento (Jira)');
+      }
+    })();
+    </script>
+
+    <div class="contenido-central">
+
+      <section class="seccion-reportes" aria-labelledby="titulo-reportes">
+        <div class="seccion-reportes-header">
+          <div class="titulo-seccion">
+            <svg class="icono-seccion" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="3"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            </svg>
+            <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px" data-texto-local="Tu seguimiento de personas, Marco">Reportes y seguimientos</h2>
+          </div>
+          <a href="reportes/index.html" class="ver-todos">Ver todos los pendientes por persona
+            <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+        <p class="page-meta">
+          Solicitudes puntuales dirigidas a una persona específica, con enlace a
+          Jira y seguimiento · 2 persona(s) con pendientes registrados
+        </p>
+        <div class="personas-grid" id="grid-personas-reportes">
     <div class="persona-card">
       <div class="card-top">
         <span class="jerarquia-badge jerarquia-2" title="Jerarquía organizacional: se infiere del cargo declarado (Gerencia &gt; Jefatura &gt; PMO/Coordinación &gt; Contacto operativo). Define el orden de las tarjetas, no la criticidad de cada pendiente.">Jefatura</span>
@@ -72,7 +162,7 @@
       <p class="cargo" title="Jefe de TI">Jefe de TI</p>
       <p class="conteo">1 pendiente(s) abierto(s) de 1 total</p>
       <p class="formula-nota" title="Teorema de Pitágoras: magnitud = √(a²+b²) — a = pendientes abiertos, b = de esos, cuántos son de criticidad alta. Así lo de criticidad alta 'pesa' más que lineal en el total.">Magnitud de atención (√(a²+b²)): 1.41</p>
-      <a href="reportes/cristopher-perez-ugalde/index.html">Ver pendientes y solicitudes &rarr;</a>
+      <a href="reportes/cristopher-perez-ugalde/index.html">Ver pendientes y solicitudes <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
     <div class="persona-card">
       <div class="card-top">
@@ -83,157 +173,64 @@
       <p class="cargo" title="PMO — Coordinación de Proyectos">PMO — Coordinación de Proyectos</p>
       <p class="conteo">1 pendiente(s) abierto(s) de 1 total</p>
       <p class="formula-nota" title="Teorema de Pitágoras: magnitud = √(a²+b²) — a = pendientes abiertos, b = de esos, cuántos son de criticidad alta. Así lo de criticidad alta 'pesa' más que lineal en el total.">Magnitud de atención (√(a²+b²)): 1.41</p>
-      <a href="reportes/maria-cristina-hernandez/index.html">Ver pendientes y solicitudes &rarr;</a>
+      <a href="reportes/maria-cristina-hernandez/index.html">Ver pendientes y solicitudes <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
-    </div>
-  </section>
+        </div>
+      </section>
 
-  <hr class="separador-seccion">
+      <hr class="separador-seccion">
 
-  <section class="panel-consolidado" aria-labelledby="titulo-consolidado">
-    <div class="seccion-reportes-header">
-      <h2 id="titulo-consolidado" class="page-title" style="margin-bottom:2px">Mi seguimiento (Jira)</h2>
-      <a href="https://cafsagroup.atlassian.net/issues?jql=assignee%3DcurrentUser()%20AND%20statusCategory%20!%3D%20Done%20ORDER%20BY%20priority%20DESC%2C%20duedate%20ASC" class="ver-todos" target="_blank" rel="noopener">Ver los 44 pendientes en Jira &rarr;</a>
-    </div>
-    <p class="page-meta">
-      Consolidado de mis tareas abiertas asignadas en Jira, actualizado al 2026-08-27
-      · 44 pendiente(s) abierto(s)
-    </p>
-    <div class="kpi-grid kpi-grid-mini">
-      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">2</span><span class="kpi-label">Highest</span></div>
-      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">4</span><span class="kpi-label">High</span></div>
-      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">36</span><span class="kpi-label">Medium</span></div>
-      <div class="kpi-box kpi-box-mini"><span class="kpi-valor">2</span><span class="kpi-label">Lowest</span></div>
-    </div>
-    <h3 class="radar-titulo">Radar de urgencia <span class="formula-nota" title="Los 5 pendientes con mayor F = (50 × peso de prioridad) / días_restantes², solo entre los que tienen fecha de vencimiento en Jira.">top 5 por urgencia calculada</span></h3>
-    <div class="radar-urgencia">
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-216" target="_blank" rel="noopener">
-        <span class="estado-badge estado-rojo">Highest</span>
-        <span class="radar-texto">
-          <strong>PP-216</strong> — XL-COR-01  Implementación del nuevo Cotizador
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 144 día(s) · F=250.0</span>
-        </span>
-      </a>
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/GDT-100" target="_blank" rel="noopener">
-        <span class="estado-badge estado-rojo">High</span>
-        <span class="radar-texto">
-          <strong>GDT-100</strong> — XL-TEC-02 Gobierno y Cumplimiento Tecnológico (COBIT 2019 / CONASSIF 5-24) - Actualización y gestión de expedientes de Proveedores (renegociación de contratos)
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 228 día(s) · F=200.0</span>
-        </span>
-      </a>
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/GDT-320" target="_blank" rel="noopener">
-        <span class="estado-badge estado-amarillo">Medium</span>
-        <span class="radar-texto">
-          <strong>GDT-320</strong> — EXPEDIENTE - SOFTLAND COSTA RICA SOCIEDAD DE RESPONSABILIDAD LIMITADA
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 210 día(s) · F=150.0</span>
-        </span>
-      </a>
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/BMO-316" target="_blank" rel="noopener">
-        <span class="estado-badge estado-amarillo">Medium</span>
-        <span class="radar-texto">
-          <strong>BMO-316</strong> — 08 - 2026 | d.MLOPEZZ  - OPERACIONES DE TI
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 7 día(s) · F=150.0</span>
-        </span>
-      </a>
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1741" target="_blank" rel="noopener">
-        <span class="estado-badge estado-rojo">Highest</span>
-        <span class="radar-texto">
-          <strong>DES-1741</strong> — Migración Core Financiero ABANKS - Forms 14c
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 23 día(s) · F=0.47</span>
-        </span>
-      </a>
-    </div>
-  </section>
+      <section class="seccion-informes" aria-labelledby="titulo-informes">
+        <div class="titulo-seccion">
+          <svg class="icono-seccion" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/>
+          </svg>
+          <h2 id="titulo-informes" class="page-title" data-texto-local="Tus informes">Informes</h2>
+        </div>
+        <p class="page-meta">
+          Actualizado a partir del seguimiento interno de Operaciones de TI del 2026-09-23
+          · <span id="contador-visibles">8</span> de 8 informe(s)
+        </p>
 
-  <hr class="separador-seccion">
+        <div class="toolbar">
+          <div class="buscador-wrap">
+            <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <line x1="10.4" y1="10.4" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <input
+              type="search"
+              id="buscador"
+              placeholder="Buscar por título, categoría, tarea Jira o palabra clave..."
+              aria-label="Buscar informes"
+              autocomplete="off">
+          </div>
 
-  <h2 class="page-title" data-texto-local="Tus informes">Informes</h2>
-  <p class="page-meta">
-    Actualizado a partir del seguimiento interno de Operaciones de TI del 2026-09-07
-    · <span id="contador-visibles">8</span> de 8 informe(s)
-  </p>
+          <label class="orden-wrap" for="orden">
+            Ordenar por
+            <select id="orden" aria-label="Ordenar informes">
+              <option value="atencion" selected>Prioridad de atención</option>
+              <option value="recientes">Más recientes</option>
+              <option value="prioridad">Prioridad (alta/media/baja)</option>
+              <option value="estado">Estado (semáforo)</option>
+              <option value="titulo">Título (A-Z)</option>
+            </select>
+          </label>
+        </div>
 
-  <div class="toolbar">
-    <div class="buscador-wrap">
-      <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-        <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
-        <line x1="10.4" y1="10.4" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-      <input
-        type="search"
-        id="buscador"
-        placeholder="Buscar por título, categoría o palabra clave..."
-        aria-label="Buscar informes"
-        autocomplete="off">
-    </div>
-
-    <label class="orden-wrap" for="orden">
-      Ordenar por
-      <select id="orden" aria-label="Ordenar informes">
-        <option value="recientes">Más recientes</option>
-        <option value="prioridad">Prioridad</option>
-        <option value="estado">Estado (semáforo)</option>
-        <option value="titulo">Título (A-Z)</option>
-      </select>
-    </label>
-  </div>
-
-  <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría">
-    <button type="button" class="active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
-      <button type="button" data-filtro="backlog" role="tab" aria-selected="false">backlog</button>
-      <button type="button" data-filtro="comercial" role="tab" aria-selected="false">comercial</button>
+        <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría">
+          <button type="button" class="active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
       <button type="button" data-filtro="core-financiero" role="tab" aria-selected="false">core-financiero</button>
+      <button type="button" data-filtro="datos-etl" role="tab" aria-selected="false">datos-etl</button>
       <button type="button" data-filtro="finanzas-internas" role="tab" aria-selected="false">finanzas-internas</button>
       <button type="button" data-filtro="gobierno-ti" role="tab" aria-selected="false">gobierno-ti</button>
       <button type="button" data-filtro="infraestructura" role="tab" aria-selected="false">infraestructura</button>
       <button type="button" data-filtro="operaciones" role="tab" aria-selected="false">operaciones</button>
       <button type="button" data-filtro="riesgo-tecnologico" role="tab" aria-selected="false">riesgo-tecnologico</button>
-  </nav>
+        </nav>
 
-  <p class="sin-resultados" id="sin-resultados" hidden>
-    No hay informes que coincidan con la búsqueda o el filtro seleccionado.
-  </p>
-
-  <div class="informes-grid" id="grid-informes" aria-live="polite">
-    <div class="informe-card" data-categoria="backlog" data-busqueda="backlog y mejoras continuas revisado contra jira en vivo (27/08/2026): ninguna de las 4 iniciativas de este backlog ha arrancado todavia. la que mas necesita seguimiento es bmo-118, implementacion, analisis y estabilizacion del framework etl | datawarehouse -- figura 'abierta', sin avance. le siguen mejoras en facturacion y transferencias (bmo-13), agilizar el analisis crediticio (pp-264) y un acuerdo operativo de comite pendiente de cerrar (st-2773). ninguna tiene fecha limite en jira todavia. backlog" data-prioridad="alta" data-fecha="2026-08-27" data-estado="amarillo">
-      <div class="card-top">
-        <span class="categoria">backlog</span>
-        <div class="badges-wrap">
-          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
-          <span class="estado-badge estado-amarillo">En riesgo</span>
-        </div>
-      </div>
-      <h3><a href="informes/backlog/backlog-y-mejoras-continuas.html">Backlog y mejoras continuas</a></h3>
-      <p class="resumen">Revisado contra Jira en vivo (27/08/2026): ninguna de las 4 iniciativas de este backlog ha arrancado todavia. La que mas necesita seguimiento es BMO-118, Implementacion, Analisis y Estabilizacion del Framework ETL | DataWareHouse -- figura 'Abierta', sin avance. Le siguen mejoras en facturacion y transferencias (BMO-13), agilizar el analisis crediticio (PP-264) y un acuerdo operativo de Comite pendiente de cerrar (ST-2773). Ninguna tiene fecha limite en Jira todavia.</p>
-      <div class="progreso" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 4 fase(s) · promedio">
-        <div class="progreso-barra"><div class="progreso-relleno" style="width:0%"></div></div>
-        <span class="progreso-label">4 fase(s) · promedio (<span class="pct-semaforo" data-pct="0">0%</span>)</span>
-      </div>
-      <div class="card-footer">
-        <span>2026-08-27</span>
-        <a href="informes/backlog/backlog-y-mejoras-continuas.html">Ver informe &rarr;</a>
-      </div>
-    </div>
-    <div class="informe-card" data-categoria="gobierno-ti" data-busqueda="gobierno de ti y cumplimiento (cobit / conassif) cluster de gobierno de ti (cobit 2019 / conassif 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. gdt-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'en curso' en jira -- es el mas urgente. gdt-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. se suman gdt-106 (mismo eje, plazo 31/12/2026), el expediente abierto de softland (gdt-320) y el seguimiento de gbm de costa rica (gdt-107). gobierno-ti" data-prioridad="alta" data-fecha="2026-08-27" data-estado="rojo">
-      <div class="card-top">
-        <span class="categoria">gobierno-ti</span>
-        <div class="badges-wrap">
-          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
-          <span class="estado-badge estado-rojo">Atrasado</span>
-        </div>
-      </div>
-      <h3><a href="informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html">Gobierno de TI y Cumplimiento (COBIT / CONASSIF)</a></h3>
-      <p class="resumen">Cluster de gobierno de TI (COBIT 2019 / CONASSIF 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. GDT-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'En curso' en Jira -- es el mas urgente. GDT-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. Se suman GDT-106 (mismo eje, plazo 31/12/2026), el expediente abierto de Softland (GDT-320) y el seguimiento de GBM de Costa Rica (GDT-107).</p>
-      <div class="progreso" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 fase(s) · promedio">
-        <div class="progreso-barra"><div class="progreso-relleno" style="width:30%"></div></div>
-        <span class="progreso-label">5 fase(s) · promedio (<span class="pct-semaforo" data-pct="30">30%</span>)</span>
-      </div>
-      <div class="card-footer">
-        <span>2026-08-27 &middot; Vence: 22/01/2026 (vencido hace 228 días)</span>
-        <a href="informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html">Ver informe &rarr;</a>
-      </div>
-    </div>
-    <div class="informe-card" data-categoria="core-financiero" data-busqueda="migracion de core financiero - forms 14c proyecto mas critico de ti: migracion del nucleo financiero a oracle forms 14c. el proveedor (bestresource) ya migro el 90% del catalogo de objetos (503 en total). cafsa lleva evaluado el 41.4% (208 objetos: 149 aprobados, 59 rechazados), pero solo el 29.6% del catalogo total esta realmente aprobado -- los 59 rechazados necesitan correccion y re-prueba, no cuentan como avance. seleccion de proveedor cerrada. el modulo mayor tiene la tasa de rechazo mas alta (35 de 64 objetos evaluados, es decir, apenas 18 aprobados); generales es el mas atrasado en pruebas (105 de 109 pendientes). infraestructura de produccion y pruebas por roles de usuario todavia no arrancan. meta: 30/09/2026. desglose completo del plan de pruebas por modulo y recomendaciones por segmento en el detalle de este informe. core-financiero" data-prioridad="alta" data-fecha="2026-08-27" data-estado="rojo">
+        <div class="informes-grid" id="grid-informes" aria-live="polite">
+    <div class="informe-card" data-categoria="core-financiero" data-busqueda="migracion de core financiero - forms 14c proyecto mas critico de ti: migracion del core financiero a oracle forms 14c. corte 23/09/2026: bestresource migro el 95% del catalogo (504 objetos); cafsa aprobo el 67.3% (339 de 504), un salto de +15.9 puntos en solo 5 dias, el ritmo mas rapido del proyecto. generales se destrabo (de 3.7% a 53.2%) pero ahora concentra 22 de los 41 rechazos totales. branch es el nuevo riesgo: 38.7%, sin ningun cambio desde el corte anterior. quedan 7 dias para el 30/09/2026. infraestructura de produccion y pruebas por roles aun no arrancan. detalle completo por modulo en el informe. core-financiero atrasado prioridad alta" data-extra="seleccion de proveedor migracion y pruebas de modulos/objetos abanks pruebas por roles de usuario infraestructura de produccion coordinacion y seguimiento tecnico con bestresource" data-referencias='[{"key": "DES-1741", "resumen": "Epica del proyecto (DES-1741)", "url": "https://cafsagroup.atlassian.net/browse/DES-1741"}, {"key": "DES-1742", "resumen": "Seleccion de proveedor - Finalizada (DES-1742)", "url": "https://cafsagroup.atlassian.net/browse/DES-1742"}, {"key": "DES-1743", "resumen": "Migracion y pruebas de modulos/objetos Abanks (DES-1743)", "url": "https://cafsagroup.atlassian.net/browse/DES-1743"}, {"key": "DES-1744", "resumen": "Pruebas por roles de usuario (DES-1744)", "url": "https://cafsagroup.atlassian.net/browse/DES-1744"}, {"key": "DES-1745", "resumen": "Instalacion de nuevos servidores y ambientes de produccion (DES-1745)", "url": "https://cafsagroup.atlassian.net/browse/DES-1745"}, {"key": "DES-1748", "resumen": "Instalacion de componentes en los servidores (DES-1748)", "url": "https://cafsagroup.atlassian.net/browse/DES-1748"}, {"key": "DES-1753", "resumen": "Instalacion de ambiente Virtualizador de Oracle (DES-1753)", "url": "https://cafsagroup.atlassian.net/browse/DES-1753"}, {"key": "DES-2707", "resumen": "Sesiones de seguimiento con BestResource (DES-2707)", "url": "https://cafsagroup.atlassian.net/browse/DES-2707"}]' data-prioridad="alta" data-orden-atencion="1" data-fecha="2026-09-23" data-estado="rojo">
       <div class="card-top">
         <span class="categoria">core-financiero</span>
         <div class="badges-wrap">
@@ -242,55 +239,78 @@
         </div>
       </div>
       <h3><a href="informes/core-financiero/migracion-de-core-financiero-forms-14c.html">Migracion de Core Financiero - Forms 14c</a></h3>
-      <p class="resumen">Proyecto mas critico de TI: migracion del nucleo financiero a Oracle Forms 14C. El proveedor (BestResource) ya migro el 90% del catalogo de objetos (503 en total). CAFSA lleva evaluado el 41.4% (208 objetos: 149 aprobados, 59 rechazados), pero solo el 29.6% del catalogo total esta realmente aprobado -- los 59 rechazados necesitan correccion y re-prueba, no cuentan como avance. Seleccion de proveedor cerrada. El modulo MAYOR tiene la tasa de rechazo mas alta (35 de 64 objetos evaluados, es decir, apenas 18 aprobados); GENERALES es el mas atrasado en pruebas (105 de 109 pendientes). Infraestructura de produccion y pruebas por roles de usuario todavia no arrancan. Meta: 30/09/2026. Desglose completo del plan de pruebas por modulo y recomendaciones por segmento en el detalle de este informe.</p>
-      <div class="progreso" role="progressbar" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 fase(s) · promedio">
-        <div class="progreso-barra"><div class="progreso-relleno" style="width:36%"></div></div>
-        <span class="progreso-label">5 fase(s) · promedio (<span class="pct-semaforo" data-pct="36">36%</span>)</span>
+      <p class="resumen">Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 23/09/2026: BestResource migro el 95% del catalogo (504 objetos); CAFSA aprobo el 67.3% (339 de 504), un salto de +15.9 puntos en solo 5 dias, el ritmo mas rapido del proyecto. GENERALES se destrabo (de 3.7% a 53.2%) pero ahora concentra 22 de los 41 rechazos totales. BRANCH es el nuevo riesgo: 38.7%, sin ningun cambio desde el corte anterior. Quedan 7 dias para el 30/09/2026. Infraestructura de produccion y pruebas por roles aun no arrancan. Detalle completo por modulo en el informe.</p>
+      <p class="coincidencia-busqueda" hidden></p>
+      <div class="progreso" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="43" style="width:43%"></div></div>
+        <span class="progreso-label">5 fase(s) · promedio (<span class="pct-semaforo" data-pct="43">43%</span>)</span>
       </div>
       <div class="card-footer">
-        <span>2026-08-27 &middot; Vence: 30/09/2026 (faltan 23 días)</span>
-        <a href="informes/core-financiero/migracion-de-core-financiero-forms-14c.html">Ver informe &rarr;</a>
+        <span>2026-09-23 &middot; Vence: 30/09/2026 (faltan 7 días)</span>
+        <a href="informes/core-financiero/migracion-de-core-financiero-forms-14c.html">Ver informe <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
-    <div class="informe-card" data-categoria="comercial" data-busqueda="modernizacion comercial - cotizador y vista 360 de cliente el nuevo cotizador fue implementado y esta finalizado (pendiente de reflejar el cierre formal en jira). las iniciativas relacionadas de integracion con otros sistemas quedan en evaluacion de prioridad y asignacion de recursos. comercial" data-prioridad="media" data-fecha="2026-08-21" data-estado="amarillo">
+    <div class="informe-card" data-categoria="finanzas-internas" data-busqueda="quanto - contabilidad | correccion discrepancias estimaciones historico (bmo-252) correccion de discrepancias en estimaciones contables del sistema quanto (bmo-252). 83% de avance real (5 de 6 frentes finalizados, actualizado 23/09/2026): segmentacion empresarial, cuentas por cobrar, optimizacion de rendimiento, coordinacion con quanto y documentacion tecnica ya cerrados. unico pendiente: montos mitigadores negativos (bmo-253), corregido y confirmado por quanto pero bloqueado por 2 subtareas abiertas. sin fecha limite en jira. finanzas-internas en riesgo prioridad alta" data-extra="correccion de discrepancias en estimaciones contables (bmo-252)" data-referencias='[{"key": "BMO-252", "resumen": "Ver detalle en Jira (BMO-252)", "url": "https://cafsagroup.atlassian.net/browse/BMO-252"}, {"key": "BMO-253", "resumen": "Montos Mitigadores Negativos", "url": "https://cafsagroup.atlassian.net/browse/BMO-253"}, {"key": "BMO-254", "resumen": "Segmentacion Empresarial", "url": "https://cafsagroup.atlassian.net/browse/BMO-254"}, {"key": "BMO-255", "resumen": "Cuentas por Cobrar", "url": "https://cafsagroup.atlassian.net/browse/BMO-255"}, {"key": "BMO-256", "resumen": "Optimizacion Rendimiento Consultas BD", "url": "https://cafsagroup.atlassian.net/browse/BMO-256"}, {"key": "BMO-257", "resumen": "Coordinacion Tecnica y Configuracion", "url": "https://cafsagroup.atlassian.net/browse/BMO-257"}, {"key": "BMO-258", "resumen": "Documentacion y Consolidacion", "url": "https://cafsagroup.atlassian.net/browse/BMO-258"}]' data-prioridad="alta" data-orden-atencion="2" data-fecha="2026-09-23" data-estado="amarillo">
       <div class="card-top">
-        <span class="categoria">comercial</span>
+        <span class="categoria">finanzas-internas</span>
         <div class="badges-wrap">
-          <span class="prioridad-badge prioridad-media">Prioridad media</span>
+          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
           <span class="estado-badge estado-amarillo">En riesgo</span>
         </div>
       </div>
-      <h3><a href="informes/comercial/modernizacion-comercial-cotizador-y-vista-360-de-cliente.html">Modernizacion comercial - Cotizador y Vista 360 de Cliente</a></h3>
-      <p class="resumen">El nuevo cotizador fue implementado y esta finalizado (pendiente de reflejar el cierre formal en Jira). Las iniciativas relacionadas de integracion con otros sistemas quedan en evaluacion de prioridad y asignacion de recursos.</p>
-      <div class="progreso" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 2 fase(s) · promedio">
-        <div class="progreso-barra"><div class="progreso-relleno" style="width:50%"></div></div>
-        <span class="progreso-label">2 fase(s) · promedio (<span class="pct-semaforo" data-pct="50">50%</span>)</span>
+      <h3><a href="informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html">Quanto - Contabilidad | Correccion Discrepancias Estimaciones Historico (BMO-252)</a></h3>
+      <p class="resumen">Correccion de discrepancias en estimaciones contables del sistema Quanto (BMO-252). 83% de avance real (5 de 6 frentes finalizados, actualizado 23/09/2026): segmentacion empresarial, cuentas por cobrar, optimizacion de rendimiento, coordinacion con Quanto y documentacion tecnica ya cerrados. Unico pendiente: montos mitigadores negativos (BMO-253), corregido y confirmado por Quanto pero bloqueado por 2 subtareas abiertas. Sin fecha limite en Jira.</p>
+      <p class="coincidencia-busqueda" hidden></p>
+      <div class="progreso" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 1 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="83" style="width:83%"></div></div>
+        <span class="progreso-label">1 fase(s) · promedio (<span class="pct-semaforo" data-pct="83">83%</span>)</span>
       </div>
       <div class="card-footer">
-        <span>2026-08-21</span>
-        <a href="informes/comercial/modernizacion-comercial-cotizador-y-vista-360-de-cliente.html">Ver informe &rarr;</a>
+        <span>2026-09-23</span>
+        <a href="informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html">Ver informe <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
-    <div class="informe-card" data-categoria="riesgo-tecnologico" data-busqueda="gestion de riesgo tecnologico y obsolescencia critica programa que agrupa tres iniciativas de modernizacion y mitigacion de riesgo tecnologico: migracion de sitio administrativo, integracion de canal de autenticacion alterno, y plan de mitigacion de riesgo de obsolescencia en bases de datos. meta mas cercana: 30/09/2026. riesgo-tecnologico" data-prioridad="media" data-fecha="2026-08-21" data-estado="amarillo">
+    <div class="informe-card" data-categoria="riesgo-tecnologico" data-busqueda="integracion gaudi en cafsa en linea - fase 1 (pp-233) integracion gaudi en cafsa en linea, fase 1, epica xl-tec-01 (independiente de pp-232). 10% de avance real: 1 de 10 criterios finalizado (diseno de login). vence 30/09/2026, la fecha mas proxima del eje xl-tec-01. nota: en teams (16-17/09) se reporto 80-85% de avance, aun no reflejado en jira. riesgo-tecnologico atrasado prioridad alta" data-extra="integracion gaudi en cafsa en linea - fase 1 (pp-233)" data-referencias='[{"key": "PP-233", "resumen": "Ver detalle en Jira (PP-233)", "url": "https://cafsagroup.atlassian.net/browse/PP-233"}, {"key": "PP-280", "resumen": "Entrega de diseno de login ajustado a GAUDI", "url": "https://cafsagroup.atlassian.net/browse/PP-280"}, {"key": "PP-281", "resumen": "Analisis y diseno funcional", "url": "https://cafsagroup.atlassian.net/browse/PP-281"}, {"key": "PP-282", "resumen": "Frontend - boton/opcion de ingreso GAUDI", "url": "https://cafsagroup.atlassian.net/browse/PP-282"}, {"key": "PP-283", "resumen": "Frontend - Modal de identificacion y accesibilidad", "url": "https://cafsagroup.atlassian.net/browse/PP-283"}, {"key": "PP-284", "resumen": "Responsive Desktop/Movil", "url": "https://cafsagroup.atlassian.net/browse/PP-284"}, {"key": "PP-285", "resumen": "Simulador backend de respuestas GAUDI (pre-integracion)", "url": "https://cafsagroup.atlassian.net/browse/PP-285"}, {"key": "PP-286", "resumen": "Pruebas UI/UX y ajustes finales", "url": "https://cafsagroup.atlassian.net/browse/PP-286"}, {"key": "PP-287", "resumen": "Documentacion", "url": "https://cafsagroup.atlassian.net/browse/PP-287"}, {"key": "PP-288", "resumen": "Revision y firma de Acta de Aceptacion", "url": "https://cafsagroup.atlassian.net/browse/PP-288"}, {"key": "PP-289", "resumen": "Pase a produccion", "url": "https://cafsagroup.atlassian.net/browse/PP-289"}]' data-prioridad="alta" data-orden-atencion="3" data-fecha="2026-09-18" data-estado="rojo">
       <div class="card-top">
         <span class="categoria">riesgo-tecnologico</span>
         <div class="badges-wrap">
-          <span class="prioridad-badge prioridad-media">Prioridad media</span>
+          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
+          <span class="estado-badge estado-rojo">Atrasado</span>
+        </div>
+      </div>
+      <h3><a href="informes/riesgo-tecnologico/integracion-gaudi-cafsa-en-linea.html">Integracion GAUDI en CAFSA en Linea - FASE 1 (PP-233)</a></h3>
+      <p class="resumen">Integracion GAUDI en CAFSA en Linea, Fase 1, epica XL-TEC-01 (independiente de PP-232). 10% de avance real: 1 de 10 criterios finalizado (diseno de login). Vence 30/09/2026, la fecha mas proxima del eje XL-TEC-01. Nota: en Teams (16-17/09) se reporto 80-85% de avance, aun no reflejado en Jira.</p>
+      <p class="coincidencia-busqueda" hidden></p>
+      <div class="progreso" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 1 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="10" style="width:10%"></div></div>
+        <span class="progreso-label">1 fase(s) · promedio (<span class="pct-semaforo" data-pct="10">10%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-09-18 &middot; Vence: 30/09/2026 (faltan 7 días)</span>
+        <a href="informes/riesgo-tecnologico/integracion-gaudi-cafsa-en-linea.html">Ver informe <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="gobierno-ti" data-busqueda="gobierno de ti y cumplimiento (cobit / conassif) gobierno de ti (cobit 2019 / conassif 5-24): 4 de 5 frentes completados (gdt-100, gdt-106, gdt-320, gdt-107). pendiente: gdt-120 (respaldos de informacion con proveedores), sin arrancar, sin descripcion ni subtareas en jira. vence 31/12/2026. gobierno-ti en riesgo prioridad alta" data-extra="expedientes de proveedores - renegociacion (gdt-100) gobierno y cumplimiento tecnologico (gdt-106) respaldos de informacion con proveedores (gdt-120) - sin descripcion ni subtareas en jira expediente softland (gdt-320) gbm de costa rica (gdt-107)" data-referencias='[{"key": "GDT-100", "resumen": "Ver GDT-100 en Jira", "url": "https://cafsagroup.atlassian.net/browse/GDT-100"}, {"key": "GDT-106", "resumen": "Ver GDT-106 en Jira", "url": "https://cafsagroup.atlassian.net/browse/GDT-106"}, {"key": "GDT-120", "resumen": "Ver GDT-120 en Jira", "url": "https://cafsagroup.atlassian.net/browse/GDT-120"}, {"key": "GDT-320", "resumen": "Ver GDT-320 en Jira", "url": "https://cafsagroup.atlassian.net/browse/GDT-320"}, {"key": "GDT-107", "resumen": "Ver GDT-107 en Jira", "url": "https://cafsagroup.atlassian.net/browse/GDT-107"}]' data-prioridad="alta" data-orden-atencion="4" data-fecha="2026-09-18" data-estado="amarillo">
+      <div class="card-top">
+        <span class="categoria">gobierno-ti</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
           <span class="estado-badge estado-amarillo">En riesgo</span>
         </div>
       </div>
-      <h3><a href="informes/riesgo-tecnologico/gestion-de-riesgo-tecnologico-y-obsolescencia-critica.html">Gestion de riesgo tecnologico y obsolescencia critica</a></h3>
-      <p class="resumen">Programa que agrupa tres iniciativas de modernizacion y mitigacion de riesgo tecnologico: migracion de sitio administrativo, integracion de canal de autenticacion alterno, y plan de mitigacion de riesgo de obsolescencia en bases de datos. Meta mas cercana: 30/09/2026.</p>
-      <div class="progreso" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 3 fase(s) · promedio">
-        <div class="progreso-barra"><div class="progreso-relleno" style="width:3%"></div></div>
-        <span class="progreso-label">3 fase(s) · promedio (<span class="pct-semaforo" data-pct="3">3%</span>)</span>
+      <h3><a href="informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html">Gobierno de TI y Cumplimiento (COBIT / CONASSIF)</a></h3>
+      <p class="resumen">Gobierno de TI (COBIT 2019 / CONASSIF 5-24): 4 de 5 frentes completados (GDT-100, GDT-106, GDT-320, GDT-107). Pendiente: GDT-120 (respaldos de informacion con proveedores), sin arrancar, sin descripcion ni subtareas en Jira. Vence 31/12/2026.</p>
+      <p class="coincidencia-busqueda" hidden></p>
+      <div class="progreso" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="80" style="width:80%"></div></div>
+        <span class="progreso-label">5 fase(s) · promedio (<span class="pct-semaforo" data-pct="80">80%</span>)</span>
       </div>
       <div class="card-footer">
-        <span>2026-08-21 &middot; Vence: 30/09/2026 (faltan 23 días)</span>
-        <a href="informes/riesgo-tecnologico/gestion-de-riesgo-tecnologico-y-obsolescencia-critica.html">Ver informe &rarr;</a>
+        <span>2026-09-18 &middot; Vence: 31/12/2026 (faltan 99 días)</span>
+        <a href="informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html">Ver informe <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
-    <div class="informe-card" data-categoria="infraestructura" data-busqueda="modernizacion de infraestructura /gx actualizacion tecnologica y de seguridad de la plataforma /gx. preparacion tecnica y conectividad completadas; continua en curso el diseno de arquitectura, certificados y validaciones antes del pase a produccion. infraestructura" data-prioridad="alta" data-fecha="2026-08-21" data-estado="amarillo">
+    <div class="informe-card" data-categoria="infraestructura" data-busqueda="modernizacion de infraestructura /gx actualizacion tecnologica y de seguridad de la plataforma /gx. preparacion tecnica y conectividad completadas. en curso: diseno de arquitectura, certificados y validaciones antes del pase a produccion. infraestructura en riesgo prioridad alta" data-extra="preparacion y alineacion tecnica diseno de arquitectura objetivo configuracion de seguridad de red implementacion de certificados configuracion de conectividad ajuste de integraciones y servicios configuracion de ambiente de pruebas validaciones integrales pase a produccion y estabilizacion seguimiento con el proveedor" data-referencias='[{"key": "BMO-166", "resumen": "Ver detalle en Jira (BMO-166)", "url": "https://cafsagroup.atlassian.net/browse/BMO-166"}]' data-prioridad="alta" data-orden-atencion="5" data-fecha="2026-08-21" data-estado="amarillo">
       <div class="card-top">
         <span class="categoria">infraestructura</span>
         <div class="badges-wrap">
@@ -299,36 +319,58 @@
         </div>
       </div>
       <h3><a href="informes/infraestructura/modernizacion-de-infraestructura-gx.html">Modernizacion de infraestructura /gx</a></h3>
-      <p class="resumen">Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas; continua en curso el diseno de arquitectura, certificados y validaciones antes del pase a produccion.</p>
+      <p class="resumen">Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas. En curso: diseno de arquitectura, certificados y validaciones antes del pase a produccion.</p>
+      <p class="coincidencia-busqueda" hidden></p>
       <div class="progreso" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 10 fase(s) · promedio">
-        <div class="progreso-barra"><div class="progreso-relleno" style="width:20%"></div></div>
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="20" style="width:20%"></div></div>
         <span class="progreso-label">10 fase(s) · promedio (<span class="pct-semaforo" data-pct="20">20%</span>)</span>
       </div>
       <div class="card-footer">
         <span>2026-08-21</span>
-        <a href="informes/infraestructura/modernizacion-de-infraestructura-gx.html">Ver informe &rarr;</a>
+        <a href="informes/infraestructura/modernizacion-de-infraestructura-gx.html">Ver informe <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
-    <div class="informe-card" data-categoria="finanzas-internas" data-busqueda="correccion de discrepancias en estimaciones contables correccion de discrepancias detectadas en calculos de estimaciones contables. coordinacion tecnica y documentacion completadas; continua el diagnostico y ajuste de los distintos componentes de calculo. finanzas-internas" data-prioridad="alta" data-fecha="2026-08-21" data-estado="amarillo">
+    <div class="informe-card" data-categoria="riesgo-tecnologico" data-busqueda="migracion de sitio admin de pel(/gx) a nueva version de php (pp-232) migracion del sitio admin de pel(/gx) a php, epica xl-tec-01 (independiente de pp-233). 33% de avance real: 3 de 9 criterios de aceptacion finalizados (capa de servicios soap, controlador admin, modelos). vence 31/10/2026. riesgo-tecnologico en riesgo prioridad media" data-extra="migracion de sitio admin de pel(/gx) a nueva version de php (pp-232)" data-referencias='[{"key": "PP-232", "resumen": "Ver detalle en Jira (PP-232)", "url": "https://cafsagroup.atlassian.net/browse/PP-232"}, {"key": "PP-291", "resumen": "Preparacion y aprobacion de alcance", "url": "https://cafsagroup.atlassian.net/browse/PP-291"}, {"key": "PP-292", "resumen": "Setup y estructura del proyecto", "url": "https://cafsagroup.atlassian.net/browse/PP-292"}, {"key": "PP-293", "resumen": "Capa de Servicios SOAP", "url": "https://cafsagroup.atlassian.net/browse/PP-293"}, {"key": "PP-294", "resumen": "Core y Autenticacion", "url": "https://cafsagroup.atlassian.net/browse/PP-294"}, {"key": "PP-295", "resumen": "Migracion del Controlador Admin", "url": "https://cafsagroup.atlassian.net/browse/PP-295"}, {"key": "PP-296", "resumen": "Migracion de Modelos", "url": "https://cafsagroup.atlassian.net/browse/PP-296"}, {"key": "PP-297", "resumen": "Migracion de Vistas y JavaScript", "url": "https://cafsagroup.atlassian.net/browse/PP-297"}, {"key": "PP-298", "resumen": "Seguridad y Refactor", "url": "https://cafsagroup.atlassian.net/browse/PP-298"}, {"key": "PP-299", "resumen": "Pruebas finales y Pase a Produccion", "url": "https://cafsagroup.atlassian.net/browse/PP-299"}]' data-prioridad="media" data-orden-atencion="6" data-fecha="2026-09-18" data-estado="amarillo">
       <div class="card-top">
-        <span class="categoria">finanzas-internas</span>
+        <span class="categoria">riesgo-tecnologico</span>
+        <div class="badges-wrap">
+          <span class="prioridad-badge prioridad-media">Prioridad media</span>
+          <span class="estado-badge estado-amarillo">En riesgo</span>
+        </div>
+      </div>
+      <h3><a href="informes/riesgo-tecnologico/migracion-pel-admin-a-php.html">Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)</a></h3>
+      <p class="resumen">Migracion del sitio Admin de PEL(/gx) a PHP, epica XL-TEC-01 (independiente de PP-233). 33% de avance real: 3 de 9 criterios de aceptacion finalizados (Capa de Servicios SOAP, Controlador Admin, Modelos). Vence 31/10/2026.</p>
+      <p class="coincidencia-busqueda" hidden></p>
+      <div class="progreso" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 1 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="33" style="width:33%"></div></div>
+        <span class="progreso-label">1 fase(s) · promedio (<span class="pct-semaforo" data-pct="33">33%</span>)</span>
+      </div>
+      <div class="card-footer">
+        <span>2026-09-18 &middot; Vence: 31/10/2026 (faltan 38 días)</span>
+        <a href="informes/riesgo-tecnologico/migracion-pel-admin-a-php.html">Ver informe <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+    <div class="informe-card" data-categoria="datos-etl" data-busqueda="implementacion, analisis y estabilizacion framework etl | datawarehouse framework etl / datawarehouse (bmo-118): 17% de avance real (1 de 6 subtareas finalizada). pendientes: analisis del framework, correccion de errores ssis, validacion de jobs, pruebas unitarias/integrales e integracion con salesforce (bmo-155). riesgo de dependencia para otras integraciones de datos; sin fecha limite en jira. datos-etl en riesgo prioridad alta" data-extra="framework etl | datawarehouse (bmo-118)" data-referencias='[{"key": "BMO-118", "resumen": "Ver detalle en Jira (BMO-118)", "url": "https://cafsagroup.atlassian.net/browse/BMO-118"}, {"key": "BMO-145", "resumen": "Sesiones de Entendimiento y Capacitacion del Framework ETL en SQL Server & Net", "url": "https://cafsagroup.atlassian.net/browse/BMO-145"}, {"key": "BMO-148", "resumen": "Analisis del Framework, Logica SSIS, SQL Server & Net", "url": "https://cafsagroup.atlassian.net/browse/BMO-148"}, {"key": "BMO-151", "resumen": "Correccion, Clasificacion y Documentacion de errores SSIS & Net", "url": "https://cafsagroup.atlassian.net/browse/BMO-151"}, {"key": "BMO-152", "resumen": "Validacion, Revision, Ajustes y Pruebas de Jobs SQL Server", "url": "https://cafsagroup.atlassian.net/browse/BMO-152"}, {"key": "BMO-153", "resumen": "Pruebas Unitarias e Integrales por Esquemas & Proyectos Productivos", "url": "https://cafsagroup.atlassian.net/browse/BMO-153"}, {"key": "BMO-155", "resumen": "Integracion con Salesforce", "url": "https://cafsagroup.atlassian.net/browse/BMO-155"}]' data-prioridad="alta" data-orden-atencion="7" data-fecha="2026-09-18" data-estado="amarillo">
+      <div class="card-top">
+        <span class="categoria">datos-etl</span>
         <div class="badges-wrap">
           <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
           <span class="estado-badge estado-amarillo">En riesgo</span>
         </div>
       </div>
-      <h3><a href="informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html">Correccion de discrepancias en estimaciones contables</a></h3>
-      <p class="resumen">Correccion de discrepancias detectadas en calculos de estimaciones contables. Coordinacion tecnica y documentacion completadas; continua el diagnostico y ajuste de los distintos componentes de calculo.</p>
-      <div class="progreso" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 6 fase(s) · promedio">
-        <div class="progreso-barra"><div class="progreso-relleno" style="width:33%"></div></div>
-        <span class="progreso-label">6 fase(s) · promedio (<span class="pct-semaforo" data-pct="33">33%</span>)</span>
+      <h3><a href="informes/datos-etl/framework-etl-datawarehouse.html">Implementacion, Analisis y Estabilizacion Framework ETL | DataWareHouse</a></h3>
+      <p class="resumen">Framework ETL / DataWareHouse (BMO-118): 17% de avance real (1 de 6 subtareas finalizada). Pendientes: analisis del framework, correccion de errores SSIS, validacion de jobs, pruebas unitarias/integrales e integracion con Salesforce (BMO-155). Riesgo de dependencia para otras integraciones de datos; sin fecha limite en Jira.</p>
+      <p class="coincidencia-busqueda" hidden></p>
+      <div class="progreso" role="progressbar" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 1 fase(s) · promedio">
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="17" style="width:17%"></div></div>
+        <span class="progreso-label">1 fase(s) · promedio (<span class="pct-semaforo" data-pct="17">17%</span>)</span>
       </div>
       <div class="card-footer">
-        <span>2026-08-21</span>
-        <a href="informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html">Ver informe &rarr;</a>
+        <span>2026-09-18</span>
+        <a href="informes/datos-etl/framework-etl-datawarehouse.html">Ver informe <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
-    <div class="informe-card" data-categoria="operaciones" data-busqueda="operaciones diarias bitacora de labores diarias de ti: 530.5 horas documentadas en 58 dias habiles, del 05/06/2026 al 20/08/2026 (registro mas antiguo disponible). distribucion: 70% operaciones internas de cafsa, 30% gestion y coordinacion con proveedores externos. operaciones" data-prioridad="media" data-fecha="2026-08-21" data-estado="verde">
+    <div class="informe-card" data-categoria="operaciones" data-busqueda="operaciones diarias bitacora de labores diarias de ti: 530.5 horas en 58 dias habiles (05/06/2026 - 20/08/2026). distribucion: 70% operaciones internas, 30% gestion con proveedores externos. operaciones a tiempo prioridad media" data-extra="" data-referencias='[]' data-prioridad="media" data-orden-atencion="8" data-fecha="2026-08-21" data-estado="verde">
       <div class="card-top">
         <span class="categoria">operaciones</span>
         <div class="badges-wrap">
@@ -337,14 +379,18 @@
         </div>
       </div>
       <h3><a href="informes/operaciones/operaciones-diarias.html">Operaciones Diarias</a></h3>
-      <p class="resumen">Bitacora de labores diarias de TI: 530.5 horas documentadas en 58 dias habiles, del 05/06/2026 al 20/08/2026 (registro mas antiguo disponible). Distribucion: 70% operaciones internas de CAFSA, 30% gestion y coordinacion con proveedores externos.</p>
+      <p class="resumen">Bitacora de labores diarias de TI: 530.5 horas en 58 dias habiles (05/06/2026 - 20/08/2026). Distribucion: 70% operaciones internas, 30% gestion con proveedores externos.</p>
+      <p class="coincidencia-busqueda" hidden></p>
 
       <div class="card-footer">
         <span>2026-08-21</span>
-        <a href="informes/operaciones/operaciones-diarias.html">Ver informe &rarr;</a>
+        <a href="informes/operaciones/operaciones-diarias.html">Ver informe <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
-  </div>
+        </div>
+      </section>
+
+    </div>
 
   <hr class="separador-seccion">
 
@@ -356,37 +402,188 @@
     [data-modo-local] en style.css.
   -->
   <section class="seccion-utilidades" aria-labelledby="titulo-utilidades" data-modo-local="bloque">
-    <h2 id="titulo-utilidades" class="page-title" style="margin-bottom:2px" data-texto-local="Tus utilidades del sistema">Utilidades únicas del sistema</h2>
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M14.7 6.3a4 4 0 1 0-5.66 5.66L3 18v3h3l6.04-6.04a4 4 0 0 0 5.66-5.66l-2.83 2.83-2-2 2.83-2.83z"/>
+      </svg>
+      <h2 id="titulo-utilidades" class="page-title" style="margin-bottom:2px" data-texto-local="Tus utilidades del sistema">Utilidades únicas del sistema</h2>
+    </div>
     <p class="page-meta">
-      Plantillas descargables con el contexto de qué registrar y dónde,
-      para mantener el proyecto al día · esta sección crece con el tiempo
+      Guías prácticas de qué registrar y dónde, para mantener el proyecto al
+      día · hacé clic en cada una para ver el detalle completo, sin
+      necesidad de descargar nada · esta sección crece con el tiempo
     </p>
     <div class="utilidades-grid">
-      <a class="utilidad-card" href="utilidades/plantilla-nuevo-informe.md" download>
-        <h3>Registrar un informe nuevo</h3>
-        <p>Campos, comando y checklist para <code>informes/</code>.</p>
-        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
-      </a>
-      <a class="utilidad-card" href="utilidades/plantilla-nuevo-pendiente.md" download>
-        <h3>Registrar un pendiente nuevo</h3>
-        <p>Campos, comando y checklist para "Reportes y seguimientos".</p>
-        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
-      </a>
-      <a class="utilidad-card" href="utilidades/plantilla-actualizar-persona.md" download>
-        <h3>Actualizar cargo de una persona</h3>
-        <p>Cómo se clasifica la jerarquía y qué comando corre.</p>
-        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
-      </a>
-      <a class="utilidad-card" href="utilidades/plantilla-brief-diario.md" download>
-        <h3>Registrar un brief diario</h3>
-        <p>Convención de nombre y verificación de seguridad (local).</p>
-        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
-      </a>
-      <a class="utilidad-card utilidad-glosario" href="utilidades/glosario-palabras-clave.md" download>
-        <h3>Glosario de palabras clave</h3>
-        <p>Todos los términos que hemos ido creando en el proyecto, explicados.</p>
-        <span class="utilidad-descargar">Descargar glosario &darr;</span>
-      </a>
+
+      <details class="utilidad-card">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Registrar un informe nuevo</h3>
+            <p>Cuando arranca un proyecto o iniciativa de TI que Jefatura/Gerencia debe poder ver.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <h4>Antes de empezar, tené a mano</h4>
+          <ul>
+            <li>Título del informe.</li>
+            <li>Categoría (por ejemplo: infraestructura, core-financiero, gobierno-ti).</li>
+            <li>Un resumen breve, de 1 a 2 líneas.</li>
+            <li>Prioridad: alta, media o baja.</li>
+            <li>Estado del semáforo: verde (a tiempo), amarillo (en riesgo) o rojo (atrasado).</li>
+            <li>Fecha límite, si aplica.</li>
+            <li>Enlace(s) de Jira, si aplica.</li>
+          </ul>
+          <h4>Pasos</h4>
+          <ol>
+            <li>Abrí una terminal en la carpeta del proyecto.</li>
+            <li>Corré el comando de abajo, cambiando los valores entre comillas por los tuyos.</li>
+            <li>Confirmá que la terminal muestre <strong>"Informe creado"</strong> sin errores.</li>
+            <li>Abrí <code>index.html</code> en el navegador y revisá que el informe aparezca con el semáforo y la prioridad correctos.</li>
+            <li>Subí los cambios a git (commit y push) — ver SOP-01 en <code>SOP.md</code>.</li>
+          </ol>
+          <h4>Comando</h4>
+          <pre class="utilidad-comando">python3 scripts/manage_informes.py nuevo \
+  --titulo "Título del informe" \
+  --categoria "Categoría" \
+  --resumen "Resumen ejecutivo en 1-2 líneas." \
+  --prioridad alta \
+  --cumplimiento en_riesgo \
+  --estado amarillo \
+  --avance 40 \
+  --jira-url "https://cafsagroup.atlassian.net/browse/XXX-000" \
+  --vencimiento 2026-12-31</pre>
+          <p class="utilidad-nota">Si el informe necesita contenido especial hecho a mano (una tabla o un gráfico propio), avisá antes de correr el comando: hay una forma de "proteger" esa página para que no se borre la próxima vez que el sitio se actualiza.</p>
+        </div>
+      </details>
+
+      <details class="utilidad-card">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Registrar un pendiente nuevo</h3>
+            <p>Para anotar una solicitud puntual dirigida a una persona, con seguimiento en el tiempo.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <h4>Antes de empezar, tené a mano</h4>
+          <ul>
+            <li>Nombre completo y cargo de la persona.</li>
+            <li>Tema, en pocas palabras.</li>
+            <li>Descripción de la solicitud.</li>
+            <li>Nivel de importancia: alta, media o baja.</li>
+            <li>Fecha límite, si aplica.</li>
+            <li>Enlace(s) de Jira, si aplica.</li>
+          </ul>
+          <h4>Comando</h4>
+          <pre class="utilidad-comando">python3 scripts/manage_pendientes.py nuevo \
+  --persona-nombre "Nombre Apellido" \
+  --persona-cargo "Cargo — Área" \
+  --tema "Tema breve" \
+  --solicitud "Descripción de la solicitud." \
+  --criticidad media \
+  --plazo 2026-12-31 \
+  --jira-url "https://cafsagroup.atlassian.net/browse/XXX-000"</pre>
+          <h4>Editar o cerrar uno que ya existe</h4>
+          <p>Con el <code>--id</code> exacto (lo encontrás en <code>data/pendientes.json</code>):</p>
+          <pre class="utilidad-comando">python3 scripts/manage_pendientes.py editar --id &lt;id&gt; --estado-item resuelto</pre>
+          <p class="utilidad-nota">El sistema nunca guarda ni inventa una dirección de correo real: el botón "Redactar correo" siempre se abre con el campo "Para" vacío, a propósito — la decisión de a quién enviarlo es siempre tuya.</p>
+        </div>
+      </details>
+
+      <details class="utilidad-card">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Actualizar el cargo de una persona</h3>
+            <p>Cuando alguien cambia de puesto, o su etiqueta de jerarquía no es la correcta.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <h4>Cómo funciona</h4>
+          <p>La etiqueta de color (Gerencia / Jefatura / PMO / Operativo) no se escoge a mano: el sistema la calcula solo, buscando palabras clave dentro del texto del cargo.</p>
+          <table class="utilidad-tabla">
+            <thead><tr><th>Si el cargo contiene...</th><th>Se clasifica como</th></tr></thead>
+            <tbody>
+              <tr><td>"gerente", "gerencia", "director", "dirección"</td><td>Gerencia</td></tr>
+              <tr><td>"jefe", "jefatura"</td><td>Jefatura</td></tr>
+              <tr><td>"pmo", "coordinación" / "coordinador"</td><td>PMO</td></tr>
+              <tr><td>cualquier otra cosa</td><td>Operativo</td></tr>
+            </tbody>
+          </table>
+          <h4>Comando</h4>
+          <pre class="utilidad-comando">python3 scripts/manage_pendientes.py actualizar-persona \
+  --persona-slug &lt;slug-tal-como-aparece-en-reportes/&gt; \
+  --persona-cargo "Nuevo cargo — Área"</pre>
+          <p class="utilidad-nota">Si el badge queda mal clasificado, no hay forma de forzarlo a mano: hay que ajustar el texto del cargo para que incluya una de las palabras de la tabla. Es intencional, para que la clasificación sea siempre consistente.</p>
+        </div>
+      </details>
+
+      <details class="utilidad-card">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Registrar un brief diario</h3>
+            <p>Un resumen de uso estrictamente personal — nunca se publica en el sitio.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <h4>Nombre del archivo (obligatorio)</h4>
+          <p><code>DD-##-MM-YYYY-brief.html</code> — por ejemplo, <code>07-01-09-2026-brief.html</code> es el 7 de septiembre de 2026, brief número 1 del día.</p>
+          <h4>Pasos</h4>
+          <ol>
+            <li>Colocá el archivo <code>.html</code> dentro de la carpeta <code>briefs/</code>, con el nombre en ese formato exacto.</li>
+            <li>Corré <code>python3 scripts/manage_briefs.py build</code>.</li>
+            <li>Abrí (o refrescá) <code>index.html</code> en tu computadora — el botón "Brief del día" aparece solo.</li>
+          </ol>
+          <p class="utilidad-nota">Seguridad: la carpeta <code>briefs/</code> nunca se sube a git — trae correos y datos reales. Si en algún momento ves que git la quiere subir, detenete y no continúes con la publicación.</p>
+        </div>
+      </details>
+
+      <details class="utilidad-card utilidad-glosario">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Glosario de palabras clave</h3>
+            <p>Todos los términos que hemos ido creando en el proyecto, explicados en simple.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <div class="glosario-grupo">
+            <h4>Estructura del sistema</h4>
+            <dl class="glosario-lista">
+              <dt>Informe</dt><dd>El estado de un proyecto para Gerencia — lo que ves en "Tus informes".</dd>
+              <dt>Pendiente</dt><dd>Una solicitud puntual dirigida a una persona específica, con seguimiento.</dd>
+              <dt>Página de persona</dt><dd>Cada persona con pendientes tiene su propia página, que acumula su historial completo en el tiempo.</dd>
+              <dt>Brief diario</dt><dd>Un resumen que hacés fuera del sistema (correo/Teams/Jira) y guardás solo en tu computadora — nunca se publica.</dd>
+            </dl>
+          </div>
+          <div class="glosario-grupo">
+            <h4>Jerarquía y orden ("Reportes y seguimientos")</h4>
+            <dl class="glosario-lista">
+              <dt>Etiqueta de jerarquía</dt><dd>Gerencia / Jefatura / PMO / Operativo — se calcula sola a partir del cargo de la persona (ver la utilidad "Actualizar el cargo de una persona").</dd>
+              <dt>Orden de las tarjetas</dt><dd>Primero por jerarquía, luego por cuántos pendientes críticos tiene cada persona, y por último por nombre.</dd>
+              <dt>Botón "Redactar correo"</dt><dd>Abre un borrador con el campo "Para" siempre vacío — el sistema nunca guarda direcciones de correo reales.</dd>
+            </dl>
+          </div>
+          <div class="glosario-grupo">
+            <h4>Cómo se calcula la urgencia</h4>
+            <dl class="glosario-lista">
+              <dt>Radar de urgencia</dt><dd>El panel "Mi seguimiento (Jira)" ordena los pendientes por qué tan urgentes son, combinando prioridad y cercanía al plazo — a menor plazo y mayor prioridad, más arriba aparece.</dd>
+              <dt>Semáforo de avance</dt><dd>El color (rojo, amarillo, verde) de cualquier porcentaje se calcula con una transición suave, no con saltos bruscos entre colores.</dd>
+            </dl>
+          </div>
+          <div class="glosario-grupo">
+            <h4>Seguridad y contenido</h4>
+            <dl class="glosario-lista">
+              <dt>Disciplina de contenido</dt><dd>Reglas sobre qué nunca puede aparecer en el sitio público: contratos de proveedores, hallazgos de auditoría/SUGEF/CONASSIF, credenciales, IPs internas, o datos sensibles de personas.</dd>
+              <dt>Vista local vs. vista pública</dt><dd>En tu computadora ves el detalle completo (incluida esta sección). En el sitio publicado, Jefatura/PMO/Gerencia ven una versión resumida, sin lo que solo te sirve a vos.</dd>
+              <dt>Página "protegida" (<code>personalizado</code>)</dt><dd>Una página hecha a mano que el sistema nunca sobrescribe al actualizar el sitio.</dd>
+            </dl>
+          </div>
+        </div>
+      </details>
+
     </div>
   </section>
 </main>
@@ -404,7 +601,6 @@
   const buscador = document.getElementById('buscador');
   const orden = document.getElementById('orden');
   const filtros = document.getElementById('filtros');
-  const sinResultados = document.getElementById('sin-resultados');
   const contador = document.getElementById('contador-visibles');
 
   let filtroActivo = 'todos';
@@ -419,25 +615,157 @@
   const PRIORIDAD_PESO = { alta: 0, media: 1, baja: 2, '': 3 };
   const ESTADO_PESO = { rojo: 0, amarillo: 1, neutral: 2, verde: 3 };
 
+  // ---------------------------------------------------------------------
+  // B\u00fasqueda flexible/aproximada (2026-09-23, a pedido de Marco: "la
+  // b\u00fasqueda debe ser flexible... todo lo relacionado o aproximado a la
+  // b\u00fasqueda", con resultado pr\u00e1ctico que muestre la tarea de referencia
+  // y el redireccionamiento a ella).
+  //
+  // Reemplaza el `includes()` de una sola frase exacta por:
+  //   1. Tokens: la b\u00fasqueda se parte en palabras: cada palabra se busca
+  //      por separado (AND entre ellas) \u2014 no importa el orden ni que sea
+  //      la frase completa ("core financiero" y "financiero core"
+  //      encuentran lo mismo).
+  //   2. Tolerancia a errores: si una palabra de 4+ letras no aparece
+  //      como substring exacto, se acepta si hay una palabra parecida
+  //      (distancia de edici\u00f3n <=1, o <=2 en palabras largas) \u2014 cubre
+  //      typos y variantes ("salesforc" ~ "salesforce").
+  //   3. Tres capas de datos por card: lo visible (t\u00edtulo/resumen/
+  //      categor\u00eda/estado/prioridad), lo "extra" (nombres de fase, texto
+  //      real pero no impreso en la card) y las referencias Jira (ticket +
+  //      resumen de cada subtarea). Si el match solo aparece en la
+  //      tercera capa, se informa cu\u00e1l fue la referencia y se linkea
+  //      directo a Jira \u2014 la card no se limita a "aparecer en la lista"
+  //      sin explicar por qu\u00e9.
+  // ---------------------------------------------------------------------
+
+  function distanciaEdicion(a, b, limite) {
+    if (Math.abs(a.length - b.length) > limite) return limite + 1;
+    const fila = new Array(b.length + 1);
+    for (let j = 0; j <= b.length; j++) fila[j] = j;
+    for (let i = 1; i <= a.length; i++) {
+      let anterior = fila[0];
+      fila[0] = i;
+      for (let j = 1; j <= b.length; j++) {
+        const temp = fila[j];
+        fila[j] = a[i - 1] === b[j - 1]
+          ? anterior
+          : 1 + Math.min(anterior, fila[j], fila[j - 1]);
+        anterior = temp;
+      }
+    }
+    return fila[b.length];
+  }
+
+  function coincideAproximado(palabraTexto, token) {
+    if (palabraTexto.length < 3 || token.length < 3) return false;
+    const limite = token.length >= 7 ? 2 : 1;
+    return distanciaEdicion(palabraTexto, token, limite) <= limite;
+  }
+
+  // token encontrado en `texto` (substring exacto, o aproximado contra
+  // cada palabra del texto si el token tiene 4+ letras).
+  function tokenEnTexto(texto, token) {
+    if (!texto) return false;
+    if (texto.includes(token)) return true;
+    if (token.length < 4) return false;
+    return texto.split(/[^a-z0-9]+/).some(palabra => coincideAproximado(palabra, token));
+  }
+
+  const referenciasCache = new WeakMap();
+  function referenciasDe(card) {
+    if (referenciasCache.has(card)) return referenciasCache.get(card);
+    let refs = [];
+    try {
+      refs = JSON.parse(card.dataset.referencias || '[]').map(r => ({
+        ...r,
+        _busq: normalizar(`${r.key || ''} ${r.resumen || ''}`),
+      }));
+    } catch (e) { /* referencias mal formadas: se ignoran, no rompe la b\u00fasqueda */ }
+    referenciasCache.set(card, refs);
+    return refs;
+  }
+
+  function evaluarCard(card, tokens) {
+    if (tokens.length === 0) return { visible: true, score: 0, coincidenciaExtra: null };
+    const visibleTxt = card.dataset.busqueda || '';
+    const extraTxt = card.dataset.extra || '';
+    const refs = referenciasDe(card);
+    let score = 0;
+    let coincidenciaExtra = null;
+
+    for (const token of tokens) {
+      if (visibleTxt.includes(token)) { score += 3; continue; }
+      if (tokenEnTexto(visibleTxt, token)) { score += 2; continue; }
+      if (tokenEnTexto(extraTxt, token)) { score += 1; continue; }
+      const ref = refs.find(r => tokenEnTexto(r._busq, token));
+      if (ref) {
+        score += 1;
+        if (!coincidenciaExtra) coincidenciaExtra = ref;
+        continue;
+      }
+      return { visible: false, score: 0, coincidenciaExtra: null }; // token sin match -> descarta (AND)
+    }
+    return { visible: true, score, coincidenciaExtra };
+  }
+
   function aplicarFiltros() {
     const termino = normalizar(buscador.value.trim());
+    const tokens = termino ? termino.split(/\s+/).filter(Boolean) : [];
     let visibles = 0;
 
     cards.forEach(card => {
       const coincideCategoria = filtroActivo === 'todos' || card.dataset.categoria === filtroActivo;
-      const coincideBusqueda = !termino || card.dataset.busqueda.includes(termino);
+      const { visible: coincideBusqueda, score, coincidenciaExtra } = evaluarCard(card, tokens);
       const visible = coincideCategoria && coincideBusqueda;
       card.style.display = visible ? '' : 'none';
+      card.dataset.score = score;
+
+      const pista = card.querySelector('.coincidencia-busqueda');
+      if (pista) {
+        if (visible && coincidenciaExtra) {
+          const key = coincidenciaExtra.key ? `${coincidenciaExtra.key} \u2014 ` : '';
+          const texto = `Coincide con: ${key}${coincidenciaExtra.resumen || ''}`;
+          if (coincidenciaExtra.url) {
+            pista.innerHTML = `${texto.replace(/</g, '&lt;')} <a href="${coincidenciaExtra.url}" target="_blank" rel="noopener">Ver en Jira &rarr;</a>`;
+          } else {
+            pista.textContent = texto;
+          }
+          pista.hidden = false;
+        } else {
+          pista.hidden = true;
+          pista.textContent = '';
+        }
+      }
+
       if (visible) visibles++;
     });
 
-    sinResultados.hidden = visibles !== 0;
+    // Con b\u00fasqueda activa, lo m\u00e1s relevante primero (m\u00e1s tokens
+    // encontrados y en el lugar m\u00e1s visible de la card); sin b\u00fasqueda,
+    // manda el criterio del selector "Ordenar por".
+    if (tokens.length > 0) {
+      const ordenadas = [...cards].sort((a, b) => (Number(b.dataset.score) || 0) - (Number(a.dataset.score) || 0));
+      ordenadas.forEach(card => grid.appendChild(card));
+    } else {
+      aplicarOrden();
+    }
+
     contador.textContent = visibles;
   }
 
   function aplicarOrden() {
     const criterio = orden.value;
     const ordenadas = [...cards].sort((a, b) => {
+      if (criterio === 'atencion') {
+        // Prioridad de atención (2026-09-23): ranking explícito 1..N
+        // declarado a mano por Marco en data/informes.json
+        // (orden_atencion), NO calculado — distinto del Radar de
+        // urgencia del sidebar (ese sí es automático, por fecha de
+        // vencimiento en Jira, y no se toca acá). Informes sin este
+        // campo declarado se mandan al final (999).
+        return (Number(a.dataset.ordenAtencion) || 999) - (Number(b.dataset.ordenAtencion) || 999);
+      }
       if (criterio === 'prioridad') {
         return PRIORIDAD_PESO[a.dataset.prioridad] - PRIORIDAD_PESO[b.dataset.prioridad];
       }
@@ -447,7 +775,7 @@
       if (criterio === 'titulo') {
         return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent, 'es');
       }
-      // 'recientes' (default): por fecha descendente
+      // 'recientes': por fecha descendente
       return b.dataset.fecha.localeCompare(a.dataset.fecha);
     });
     ordenadas.forEach(card => grid.appendChild(card));
@@ -474,6 +802,32 @@
   window.addEventListener('scroll', () => {
     header.classList.toggle('con-sombra', window.scrollY > 4);
   }, { passive: true });
+
+  // Sidebar "Mi seguimiento (Jira)" — mostrar/ocultar (2026-09-18).
+  // El estado inicial (colapsado o no) ya se aplicó en el <script> propio
+  // que genera render_panel_consolidado(), justo después del <aside>, para
+  // evitar el parpadeo de "se ve abierto y luego se cierra". Este bloque
+  // solo conecta el click. Si no hay snapshot de Jira todavía, ni el
+  // <aside> ni el botón existen y este bloque no encuentra nada que
+  // conectar (comprobación de null de rigor, sin romper el resto del script).
+  const sidebarJira = document.getElementById('sidebar-jira');
+  const btnToggleSidebar = document.getElementById('btn-toggle-sidebar-jira');
+  if (sidebarJira && btnToggleSidebar) {
+    const CLAVE_LOCALSTORAGE = 'sidebarJiraColapsado';
+    const aplicarEstadoSidebar = (colapsado) => {
+      sidebarJira.classList.toggle('colapsado', colapsado);
+      btnToggleSidebar.classList.toggle('colapsado', colapsado);
+      btnToggleSidebar.setAttribute('aria-expanded', String(!colapsado));
+      btnToggleSidebar.setAttribute('aria-label', colapsado
+        ? 'Mostrar panel Mi seguimiento (Jira)'
+        : 'Ocultar panel Mi seguimiento (Jira)');
+    };
+    btnToggleSidebar.addEventListener('click', () => {
+      const colapsado = !sidebarJira.classList.contains('colapsado');
+      aplicarEstadoSidebar(colapsado);
+      localStorage.setItem(CLAVE_LOCALSTORAGE, colapsado ? '1' : '0');
+    });
+  }
 
   aplicarFiltros();
 })();

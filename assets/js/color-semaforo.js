@@ -29,6 +29,7 @@
   var ROJO = [198, 40, 40];    // --status-red    #c62828
   var AMBAR = [184, 134, 11];  // --status-yellow #b8860b
   var VERDE = [46, 125, 50];   // --status-green  #2e7d32
+  var BLANCO = [255, 255, 255];
 
   function lerp(a, b, t) {
     return Math.round(a + (b - a) * t);
@@ -45,15 +46,34 @@
     }).join("");
   }
 
-  function colorSemaforoPct(pct, invertido) {
+  // RGB puro del semáforo interpolado (rojo -> ámbar -> verde, curva en S)
+  // sin convertir a hex todavía — lo reutilizan tanto colorSemaforoPct()
+  // (texto, tono fuerte) como colorSemaforoPctSuave() (relleno de barra,
+  // tono claro) para no duplicar la fórmula de interpolación.
+  function colorSemaforoRGB(pct, invertido) {
     var p = Math.max(0, Math.min(100, Number(pct) || 0));
     var t = p / 100;
     if (invertido) t = 1 - t;
     var e = (1 - Math.cos(Math.PI * t)) / 2;
-    var rgb = e <= 0.5
+    return e <= 0.5
       ? mezclar(ROJO, AMBAR, e / 0.5)
       : mezclar(AMBAR, VERDE, (e - 0.5) / 0.5);
-    return aHex(rgb);
+  }
+
+  function colorSemaforoPct(pct, invertido) {
+    return aHex(colorSemaforoRGB(pct, invertido));
+  }
+
+  // Variante clara/"sensible" (2026-09-23, a pedido de Marco: la barra de
+  // avance de "Tus informes" debe tener color de semáforo según el % pero
+  // "en una tonalidad más clara y sensible" — no el mismo rojo/ámbar/verde
+  // saturado que ya usa el badge de estado, para no competir visualmente
+  // con él). Se logra mezclando el mismo RGB interpolado con blanco;
+  // `mezclaBlanco` (0 a 1) es cuánto blanco se le agrega — más alto =
+  // más claro/pastel.
+  function colorSemaforoPctSuave(pct, invertido, mezclaBlanco) {
+    var m = mezclaBlanco == null ? 0.55 : mezclaBlanco;
+    return aHex(mezclar(colorSemaforoRGB(pct, invertido), BLANCO, m));
   }
 
   function initPctSemaforo(root) {
@@ -63,12 +83,33 @@
     });
   }
 
+  // Barra de avance de "Tus informes" (.progreso-relleno[data-pct]):
+  // degradado sutil de un tono muy claro a uno moderadamente claro del
+  // mismo color de semáforo, conservando la sensación de profundidad que
+  // ya tenía la barra (antes acento claro -> acento), ahora coloreada
+  // según el % en vez de un color fijo.
+  function initProgresoSemaforo(root) {
+    (root || document).querySelectorAll(".progreso-relleno[data-pct]").forEach(function (el) {
+      var invertido = el.dataset.invertido === "true";
+      var claro = colorSemaforoPctSuave(el.dataset.pct, invertido, 0.72);
+      var medio = colorSemaforoPctSuave(el.dataset.pct, invertido, 0.4);
+      el.style.background = "linear-gradient(90deg, " + claro + ", " + medio + ")";
+    });
+  }
+
   global.colorSemaforoPct = colorSemaforoPct;
+  global.colorSemaforoPctSuave = colorSemaforoPctSuave;
   global.initPctSemaforo = initPctSemaforo;
+  global.initProgresoSemaforo = initProgresoSemaforo;
+
+  function initAll(root) {
+    initPctSemaforo(root);
+    initProgresoSemaforo(root);
+  }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { initPctSemaforo(); });
+    document.addEventListener("DOMContentLoaded", function () { initAll(); });
   } else {
-    initPctSemaforo();
+    initAll();
   }
 })(window);

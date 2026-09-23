@@ -5,10 +5,10 @@
 | Campo | Valor |
 |---|---|
 | Código | SOP-IOTI-001 |
-| Versión | 1.2 |
+| Versión | 1.18 |
 | Propietario / responsable | Marco Vinicio López Zamora — Ingeniero de Operaciones de TI |
 | Fecha de emisión | 2026-08-29 |
-| Última revisión | 2026-09-07 |
+| Última revisión | 2026-09-23 |
 | Ciclo de revisión sugerido | Cada vez que cambie un procedimiento, o cada 6 meses |
 | Documentos relacionados | `README.md` (referencia técnica de scripts y opciones), `contexto-proyecto/CONTEXTO.md` (historial de decisiones e interpretación de contexto, uso interno) |
 | Repositorio | `https://github.com/mlopez-cafsa/informes-operaciones-ti` |
@@ -186,12 +186,12 @@ Antes de publicar cualquier contenido nuevo en este repositorio (público):
 
 **Verificación:** la URL pública (`https://mlopez-cafsa.github.io/informes-operaciones-ti/`) carga correctamente el `index.html`.
 
-### SOP-13 — Actualizar el glosario de palabras clave (2026-09-07)
+### SOP-13 — Actualizar el glosario de palabras clave (2026-09-07, ajustado 2026-09-18)
 
-**Objetivo:** que `utilidades/glosario-palabras-clave.md` refleje siempre
-todos los términos/conceptos que el proyecto ha ido creando, para que
-cualquiera (incluido Marco, semanas después) pueda entender el sistema
-sin tener que releer el historial completo de `CONTEXTO.md`.
+**Objetivo:** que el glosario refleje siempre todos los términos/conceptos
+que el proyecto ha ido creando, para que cualquiera (incluido Marco,
+semanas después) pueda entender el sistema sin tener que releer el
+historial completo de `CONTEXTO.md`.
 
 **Cuándo aplica:** cada vez que se introduce un concepto nuevo en el
 sistema — un campo nuevo, una función con nombre propio
@@ -199,22 +199,68 @@ sistema — un campo nuevo, una función con nombre propio
 ("degradación elegante"), o una convención nueva (ej. el formato de
 nombre de los briefs).
 
+> **Nota (2026-09-18):** desde el rediseño de "Utilidades únicas del
+> sistema", el glosario que ve cualquier usuario del sitio es el
+> acordeón `.utilidad-glosario` dentro de
+> `templates/index_template.html` (agrupado por categoría, `<dl
+> class="glosario-lista">`) — ya no se descarga como `.md`.
+> `utilidades/glosario-palabras-clave.md` se mantiene como referencia de
+> texto plano, pero **hay que actualizar ambos** cuando se agrega un
+> término, o van a quedar desincronizados.
+
 **Pasos:**
-1. Abrir `utilidades/glosario-palabras-clave.md`.
-2. Agregar el término en la sección que corresponda (crear una sección
-   nueva si ninguna encaja) con una definición corta, en el mismo tono
-   directo del resto del glosario.
+1. Agregar el término en `templates/index_template.html`, dentro del
+   `<div class="glosario-grupo">` que corresponda (crear uno nuevo con su
+   propio `<h4>` si ninguno encaja), como un par `<dt>`/`<dd>` con una
+   definición corta y en lenguaje simple.
+2. Reflejar el mismo término en `utilidades/glosario-palabras-clave.md`
+   (referencia de texto plano), en la sección equivalente.
 3. Si el término es parte de un módulo todavía en diseño (ej. memoria de
    casos), agregarlo igual, pero dejar explícito que el módulo no está
    implementado — no hay que esperar a construirlo para documentarlo.
+4. Correr `python3 scripts/manage_informes.py build` para que
+   `index.html` refleje el cambio del template.
 
-**Verificación:** el término aparece en el glosario y, si tiene una
-plantilla relacionada (`utilidades/plantilla-*.md`), se agregó también a
-la lista de "Palabras clave relacionadas" al final de esa plantilla.
+**Verificación:** el término aparece en el acordeón del glosario en
+`index.html` (abrirlo y confirmar visualmente) y en
+`utilidades/glosario-palabras-clave.md`.
 
-**Qué hacer si falla:** si no es obvio en qué sección va, agregarlo de
-todos modos en la sección más cercana — es preferible un glosario
+**Qué hacer si falla:** si no es obvio en qué categoría va, agregarlo de
+todos modos en la más cercana — es preferible un glosario
 "un poco desordenado pero completo" a uno prolijo pero incompleto.
+
+### SOP-14 — Dar de alta el desglose de subtareas de una fase (2026-09-18)
+
+**Objetivo:** cuando Marco pide seguimiento "especializado" de una tarea
+(que se vea el % real por subtarea, no solo un número agregado), o cuando
+una tarea necesita salir de un card genérico a uno propio.
+
+**Pasos:**
+1. Verificar en Jira la estructura real con `parent = <CLAVE>` — **nunca**
+   asumir relación padre-hijo por cercanía en un snapshot o listado previo
+   (ver CONTEXTO.md, sección de errores, el caso BMO-175/BMO-252).
+2. Si la tarea va a tener card propio: crear la entrada nueva en
+   `data/informes.json` (o mover la fase existente) y quitarla del card de
+   origen (fase + `jira_urls` correspondiente), dejando una nota en el
+   `resumen` del card de origen sobre dónde quedó.
+3. En la fase, agregar `"subtareas": [{"jira_key", "resumen", "estado"}]`
+   con el estado **textual exacto** que tiene en Jira (`"Finalizada"`,
+   `"Abierta"`, `"Tareas por hacer"`, etc. — el cálculo de avance busca la
+   palabra exacta `"Finalizada"`, ver README).
+4. Correr `python3 scripts/manage_informes.py regenerar-paginas`.
+5. Verificar balance de HTML (Anexo A) y que el % mostrado en la fase
+   coincida con el conteo manual de subtareas Finalizadas/total.
+
+**Verificación:** el nuevo `%` de la fase es el resultado de
+`avance_de_subtareas()`, no un número puesto a mano — si se edita
+`avance` de una fase que ya tiene `subtareas`, ese valor se ignora en el
+render (es intencional, ver README).
+
+**Nota (2026-09-18):** si el `nombre` de la fase trae la clave de Jira
+entre paréntesis, ese nombre se vuelve automáticamente el hipervínculo al
+issue (no hace falta hacer nada extra) y, si TODAS las fases del informe
+tienen esa clave, la sección "Más detalle" desaparece sola del HTML
+generado — ver README, "Nombre de fase como hipervínculo".
 
 ---
 
@@ -242,3 +288,18 @@ EOF
 | 1.0 | 2026-08-29 | Versión inicial — cubre publicación en git, alta/edición de informes y pendientes, jerarquía organizacional, runbook de incidentes de git, checklists de verificación y sensibilidad, y activación de GitHub Pages. |
 | 1.1 | 2026-09-07 | Agregado SOP-13 (mantener el glosario de palabras clave en `utilidades/`, sección de "Utilidades únicas del sistema"). |
 | 1.2 | 2026-09-07 | Agregado ítem en SOP-10 sobre marcar contenido "solo local" con `data-modo-local` (ver README, "Vista local vs. vista pública"). |
+| 1.3 | 2026-09-18 | Agregado SOP-14 (desglose de subtareas por fase y separación de cards para seguimiento especializado). |
+| 1.4 | 2026-09-18 | Se quitaron los cards "Backlog y mejoras continuas", "Modernización comercial - Cotizador y Vista 360 de Cliente" y "Gestión de riesgo tecnológico y obsolescencia crítica" (a pedido). Nombre de fase como hipervínculo directo a Jira + remoción automática de "Más detalle" cuando aplica (SOP-14). PP-232 y PP-233 pasaron de un card combinado a dos cards independientes. |
+| 1.5 | 2026-09-18 | Layout de dos columnas en el index principal: "Mi seguimiento (Jira)" pasó a sidebar izquierdo colapsable (`.sidebar-jira`, botón + `localStorage`); "Tu seguimiento de personas, Marco" y "Tus informes" quedaron en la columna central (`.contenido-central`). "Utilidades únicas del sistema" dejó de descargar `.md` crudo: ahora es un acordeón (`<details>`) legible directo en la página, en lenguaje simple, con el comando técnico al final de cada uno. SOP-13 ajustado para reflejar las dos copias del glosario (template + `.md` de referencia). |
+| 1.6 | 2026-09-18 | Rediseño del sidebar "Mi seguimiento (Jira)" (feedback de Marco sobre la v1.5): pasó de `position: sticky` + flexbox a `position: fixed` dentro de un carril reservado de ancho constante (`--sidebar-w`), para que el contenido central nunca cambie de ancho al mostrar/ocultar el panel y para que no "baje" al hacer scroll. Botón de mostrar/ocultar movido fuera del `<aside>` (no se desliza con el panel). Contenido central ampliado a hasta 1520px (antes 1320px). |
+| 1.7 | 2026-09-18 | Rediseño visual de todo el sitio (a pedido de Marco): color de acento (`--accent`, azul) agregado para links/hover/foco/barra de avance, sin tocar el semáforo de estado; radio de borde ampliado (6px→10px) y sombras "en capas" más suaves en todas las cards; iconografía SVG inline (sin dependencias externas) en encabezados de sección, botones principales (correo, confirmar, Jira, ver más) y estado vacío — set compartido en `scripts/common.py` (`icono()`/`icono_seccion()`/`icono_flecha()`/`ICONO_*`); más aire entre secciones (`separador-seccion` 32px→44px); microinteracciones sutiles (flecha que se desliza al hover, botones con leve elevación). Aplicado a las 4 plantillas generadas y replicado a mano en las 2 páginas `personalizado:true` (Forms 14C, Operaciones Diarias). |
+| 1.8 | 2026-09-18 | Color de acento cambiado de azul a verde musgo oscuro (`--accent: #556b2f`, a pedido de Marco — "un color neutral, verde musgo oscuro"). Cambio aislado a las 4 variables `--accent*` y `--focus-ring` en `:root`; ningún otro archivo tocado, porque todo el uso del acento pasa por esas variables. Deliberadamente más oscuro/apagado (oliva) que `--status-green` (#2e7d32) para no confundirse con el semáforo "aprobado/a tiempo" al verse uno junto al otro. |
+| 1.9 | 2026-09-23 | A pedido de Marco ("no me agrada del verde" en títulos/íconos): los íconos de encabezado de sección y todo `.icono-flecha` pasaron de color acento a `--cafsa-gray` (neutro, estandarizado — mismo gris ya usado en el resto del sitio). Los títulos que además son link (`.informe-card h3 a`, `.persona-card h3 a`) se fuerzan a `--cafsa-black` en vez de heredar el acento del selector `a` global — un título no debe leerse como un link de color. El acento (`--accent`) sigue vivo en botones/hover/barra de avance/borde del header, que no fueron parte del pedido. |
+| 1.10 | 2026-09-23 | Buscador de "Tus informes" rehecho para ser flexible/aproximado (a pedido de Marco). `render_card()` en `manage_informes.py` ahora genera 3 capas de índice por card: `data-busqueda` (lo visible: título, resumen, categoría, estado y prioridad en palabras), `data-extra` (nombres de fase — texto real pero no impreso en la card) y `data-referencias` (JSON con cada ticket Jira del informe y cada subtarea: key + resumen + URL). En el front-end (`index_template.html`), la búsqueda se parte en tokens (AND entre palabras, sin importar el orden) y cada token se acepta por substring exacto o por distancia de edición ≤1/≤2 (typos). Si una card coincide solo por una referencia Jira no visible, se muestra una pista bajo el resumen ("Coincide con: BMO-155 — ...") con link directo a Jira (`.coincidencia-busqueda` en `style.css`). Con búsqueda activa, los resultados se reordenan por relevancia (más peso si el match está en el título/resumen que si viene de una referencia); sin búsqueda, manda el selector "Ordenar por" de siempre. |
+| 1.11 | 2026-09-23 | Barra de avance de "Tus informes" (`.progreso-relleno`) pasó de un color fijo (acento) a un semáforo por porcentaje, en tono claro (a pedido de Marco: "tonalidad más clara y sensible"). `assets/js/color-semaforo.js` ganó `colorSemaforoRGB()` (refactor: extrae la interpolación rojo→ámbar→verde que ya usaba `colorSemaforoPct()`), `colorSemaforoPctSuave(pct, invertido, mezclaBlanco)` (mezcla ese RGB con blanco — 0.55 por defecto) e `initProgresoSemaforo()`, que colorea cada `.progreso-relleno[data-pct]` con un degradado de dos tonos claros (mezclaBlanco 0.72 → 0.4) del color correspondiente al %. `render_progreso()` en `manage_informes.py` agrega `data-pct` al div de relleno (antes solo tenía el `width` inline). El degradado fijo anterior en CSS queda como respaldo si el JS no carga (el `style` inline que pone la función tiene más especificidad). Deliberadamente más pálido que los badges de estado (`--status-rojo/ambar/verde`) para no competir visualmente con el semáforo "oficial" del estado del informe — mismo criterio que ya se aplicó al elegir el acento verde musgo (v1.8). |
+| 1.12 | 2026-09-23 | Nuevo campo `orden_atencion` (entero 1..8) en cada informe de `data/informes.json`, declarado a mano por Marco como el orden de prioridad de atención real (distinto de `prioridad` alta/media/baja, que alimenta el semáforo, y explícitamente distinto del Radar de urgencia del sidebar — ese sigue siendo automático por fecha de vencimiento en Jira, sin cambios). Orden pedido: Forms 14C (1), Quanto BMO-252 (2), GAUDI PP-233 (3), Gobierno de TI (4), Infraestructura /gx (5), PEL Admin PHP PP-232 (6), Framework ETL (7), Operaciones Diarias (8). `render_card()` agrega `data-orden-atencion`; `build_index()` ahora genera el HTML del grid ordenado por ese campo (antes seguía el orden de guardado del JSON, ordenado por fecha/destacado). En el front-end, nueva opción "Prioridad de atención" en el selector "Ordenar por" (`index_template.html`), puesta como **valor por defecto** (antes el default era "Más recientes"); la opción vieja se renombró a "Prioridad (alta/media/baja)" para no confundirla. `aplicarOrden()` suma el criterio `atencion`, ordenando por `data-orden-atencion` ascendente (informes sin el campo se van al final, peso 999). |
+| 1.14 | 2026-09-23 | Informe BMO-252 (Quanto - Contabilidad) actualizado con datos reales de Jira (Marco actualizó estado de épica/tareas/subtareas antes de pedir el refresh) y rediseñado para "visualización de contexto" en vez de texto corrido. `data/informes.json`: subtareas BMO-254/255/256/257/258 pasaron de "Abierta" a "Finalizada" (solo BMO-253 sigue abierta, bloqueada por BMO-260 y BMO-361) → avance real 83% (5/6); `personalizado: true` agregado; `resumen` y `fecha` actualizados. `informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html` reescrito a mano: reemplaza Chart.js por la barra `.progreso-barra`/`.progreso-relleno` ya existente (data-pct="83"), agrega sección "Frentes de trabajo" con una card compacta por tarea (`.frentes-grid`/`.frente-card`, nuevas en `style.css`) en vez de párrafos largos, y agrega un diagrama SVG inline de los 5 objetos de base de datos documentados en BMO-258 (2 vistas, 1 función, 1 paquete de caché, 1 catálogo) con sus relaciones (`.diagrama-bd-wrap`/`.diagrama-leyenda`, nuevas en `style.css`) — construido a partir de los comentarios técnicos reales de ese ticket, no inventado. |
+| 1.15 | 2026-09-23 | Informe Forms 14C actualizado al corte del nuevo Excel de plan de pruebas (`contexto-proyecto/23092026-2026 - PLAN DE PRUEBAS MIGRACIÓN 14C - CAFSA - BESTR.xlsx`, 5 días después del corte anterior): migración del proveedor 90%→95%, aprobación real 51.4%→67.3% (+15.9 puntos, el ritmo más rápido del proyecto). `data/informes.json`: fase "Migración y pruebas de módulos/objetos Abanks" 51→67 (medición real, no estimación); `resumen`/`fecha` actualizados. `migracion-de-core-financiero-forms-14c.html`: KPIs, gráficos y tabla por módulo recalculados desde cero con los números nuevos (Total/Pendiente/En proceso/Aprobado/Rechazado por módulo); "Recomendaciones por segmento" reescritas — GENERALES se destrabó (3.7%→53.2%) pero ahora concentra 22 de los 41 rechazos del proyecto, BRANCH pasó a ser el módulo sin ningún movimiento (nuevo riesgo #1), y se señalan rechazos nuevos en BANCOS y COLOCACIÓN pese al buen avance. Se consultó también DES-1743 en Jira (a pedido de Marco, para documentar la migración por módulo desde ahí): el ticket no tiene subtareas, descripción ni adjuntos con detalle por objeto — solo un checklist genérico y fecha límite — así que el desglose sigue viniendo únicamente del Excel; se dejó nota explícita de este hallazgo en "Recomendaciones transversales" en vez de omitirlo. |
+| 1.16 | 2026-09-23 | Quitado el bloque "No hay informes que coincidan con la búsqueda o el filtro seleccionado." de "Tus informes" (a pedido de Marco). Eliminados de `index_template.html`: el `<p class="sin-resultados" id="sin-resultados">` (con su ícono SVG), la constante JS `sinResultados` y las 2 líneas que la usaban en `aplicarFiltros()`. Eliminadas de `style.css` las reglas `.sin-resultados`/`.sin-resultados .icono-vacio`, que quedaban huérfanas. El contador "N de M informes" (`#contador-visibles`) sigue funcionando igual; ahora, si un filtro/búsqueda no encuentra nada, el grid simplemente queda vacío sin mensaje. |
+| 1.18 | 2026-09-23 | Puesta al día de la documentación (a pedido de Marco, tras la auditoría v1.17): `README.md` ganó las secciones que faltaban desde hacía varias versiones — subcomandos de `manage_informes.py` (`build`/`regenerar-paginas`, con la nueva detección de huérfanos), subcomandos de `manage_pendientes.py` (`editar`/`eliminar`/`actualizar-persona`, no documentados antes), un módulo nuevo "Briefs diarios" describiendo `manage_briefs.py build` y la carpeta `briefs/`, y "Estándares internos de desarrollo" explicando `esc()`/`guardar_json_atomico()`/detección de huérfanos como convención a seguir en cualquier código nuevo. El árbol de `Estructura` se actualizó para incluir `briefs/` y `manage_briefs.py`. `contexto-proyecto/CONTEXTO.md` ganó una sección nueva **§1.1 "Estado actual del sistema"** con el snapshot vigente de los 8 informes y 2 pendientes activos, marcando explícitamente que §4 (fechada 2026-08-27) quedó como registro histórico y ya no representa el catálogo actual — evita que alguien retomando el proyecto confunda una foto vieja con el estado real. |
+| 1.17 | 2026-09-23 | Auditoría integral del sistema (a pedido de Marco: "recorre todo el sistema, audita y aplica mejoras arquitectónicas y estándares generales"). Cuatro mejoras concretas, sin tocar diseño ni contenido: **(1) Limpieza de huérfanos** — eliminadas 4 páginas `.html` en `informes/` sin registro en `data/informes.json` (proyectos ya retirados de las cards en versiones anteriores, cuyo archivo nunca se borró), y las 2 carpetas que quedaron vacías. `logos-cafsa/` se tocó por error durante esta limpieza (parecía un duplicado de `assets/img/logos/`) y se restauró de inmediato vía `git checkout` al confirmar en `README.md`/`CONTEXTO.md` que es la carpeta de logos fuente sin optimizar, deliberada — no hubo pérdida de datos. **(2) Escritura atómica de JSON** — nueva función `guardar_json_atomico()` en `scripts/common.py` (escribe a un temporal en el mismo directorio y solo al final hace `os.replace()`); adoptada por `guardar_informes()`, `guardar_pendientes()` y el manifiesto de `manage_briefs.py`. Antes, una interrupción a mitad de escritura (Ctrl+C, corte de luz) podía dejar `data/informes.json` o `data/pendientes.json` truncado e inválido; ahora el archivo original queda intacto si algo falla a mitad de camino. **(3) Escapado HTML centralizado** — nueva función `esc()` en `common.py` (envoltorio de `html.escape`), aplicada a todos los campos de texto plano interpolados en HTML (título, resumen, categoría, nombre, cargo, tema, labels/keys de Jira, nombres de fase, filtros, radar de urgencia) en `manage_informes.py`, `reportes_lib.py` y `manage_pendientes.py`. Deliberadamente NO aplicada a `solicitud`/`recomendacion` de `data/pendientes.json`, que llevan HTML enriquecido a propósito (`<strong>`, `<ol>`, `<li>` — ver `render_pendiente_item()`); escaparlos destruiría ese formato. Sin este cambio, un título o nombre futuro con `&`/`<`/`>` (copiado de Jira o de un correo) habría generado HTML mal formado — nunca pasó porque nadie lo puso todavía, no porque el código lo impidiera. **(4) Detección de páginas huérfanas** — `regenerar-paginas` ahora compara, al final de cada corrida, las rutas de `data/informes.json` contra los `.html` reales bajo `informes/` y avisa (no borra) si aparece un huérfano nuevo, para que el hallazgo del punto (1) no se repita en silencio. Verificación tras los 4 cambios: balance de etiquetas HTML (12 páginas, 0 errores), balance de llaves en `style.css` (0 errores), `node --check` en todos los `<script>` inline (0 errores; un falso positivo inicial en el bloque `<script type="application/json">` de Operaciones Diarias, descartado por no ser JS ejecutable) y regeneración completa del sitio sin fallos. Fuera de alcance, quedan como recomendación para decisión futura de Marco: pruebas automatizadas, estructura de paquete Python (`src/` + `pyproject.toml`), linting/type-checking en CI, y validación de esquema para los JSON de datos. |

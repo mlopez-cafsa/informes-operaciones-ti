@@ -38,7 +38,12 @@
   </div>
 
   <div class="chart-container">
-    <h2>Avance por fase</h2>
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>
+      </svg>
+      <h2 style="margin:0">Avance por fase</h2>
+    </div>
     <div class="chart-box" style="height:{{FASES_ALTURA}}px; max-width:640px;">
       <canvas id="grafico-avance"></canvas>
     </div>
@@ -48,17 +53,14 @@
     <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%.</p>
   </div>
 
-  <div class="detalle-links">
-    <h2>Más detalle</h2>
-    <ul>
-{{DETALLE_LINKS_HTML}}
-    </ul>
-  </div>
-
+{{DETALLE_SECTION_HTML}}
   <button class="btn-consulta"
           data-titulo="{{TITULO}}"
           data-resumen="{{RESUMEN}}"
           onclick="enviarConsulta(this)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/>
+    </svg>
     Enviar consulta sobre este informe
   </button>
 </main>

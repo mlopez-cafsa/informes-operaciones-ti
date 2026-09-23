@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Correccion de discrepancias en estimaciones contables — Informes Operaciones TI CAFSA</title>
+<title>Quanto - Contabilidad | Correccion Discrepancias Estimaciones Historico (BMO-252) — Informes Operaciones TI CAFSA</title>
 <link rel="icon" href="../../assets/img/favicon.png" type="image/png">
 <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
@@ -30,40 +30,230 @@
     <span class="estado-badge estado-amarillo">En riesgo</span>
     <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
   </div>
-  <h2 class="page-title">Correccion de discrepancias en estimaciones contables</h2>
-  <p class="page-meta">finanzas-internas · 2026-08-21 · Cumplimiento: Sin fecha definida</p>
+  <h2 class="page-title">Quanto - Contabilidad | Correccion Discrepancias Estimaciones Historico (BMO-252)</h2>
+  <p class="page-meta">finanzas-internas · 2026-09-23 · Cumplimiento: Sin fecha definida</p>
 
   <div class="resumen-ejecutivo">
-    <strong>Resumen ejecutivo:</strong> Correccion de discrepancias detectadas en calculos de estimaciones contables. Coordinacion tecnica y documentacion completadas; continua el diagnostico y ajuste de los distintos componentes de calculo.
+    <strong>Resumen ejecutivo:</strong> 83% de avance real (5 de 6 frentes cerrados en Jira, actualizado 23/09/2026). Los 4 componentes de cálculo con hallazgo (mitigadores negativos, segmentación empresarial, cuentas por cobrar, rendimiento) ya tienen su causa raíz corregida y confirmada por Quanto; la coordinación con el proveedor y la documentación técnica también están finalizadas. Único frente abierto: <strong>Montos Mitigadores Negativos (BMO-253)</strong> — la corrección ya está confirmada, pero la tarea sigue abierta mientras se cierran 2 subtareas (validación del universo de 400 operaciones y fechas de garantía). Sin fecha límite en Jira.
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-box">
+      <span class="kpi-valor">6</span>
+      <span class="kpi-label">Frentes de trabajo (tareas hijas de la épica)</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor" style="color:var(--status-green)">5</span>
+      <span class="kpi-label">Finalizados</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor" style="color:var(--status-yellow)">1</span>
+      <span class="kpi-label">Abierto (BMO-253, bloqueado por 2 subtareas)</span>
+    </div>
+    <div class="kpi-box">
+      <span class="kpi-valor pct-semaforo" data-pct="83">83%</span>
+      <span class="kpi-label">Avance real — % de frentes Finalizados en Jira</span>
+    </div>
   </div>
 
   <div class="chart-container">
-    <h2>Avance por fase</h2>
-    <div class="chart-box" style="height:336px; max-width:640px;">
-      <canvas id="grafico-avance"></canvas>
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>
+      </svg>
+      <h2 style="margin:0">Avance general</h2>
     </div>
-    <ul class="fases-lista">
-      <li><span class="fase-nombre">Revision de montos mitigadores</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
-      <li><span class="fase-nombre">Segmentacion empresarial</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
-      <li><span class="fase-nombre">Cuentas por cobrar</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
-      <li><span class="fase-nombre">Optimizacion de consultas</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
-      <li><span class="fase-nombre">Coordinacion tecnica y configuracion</span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
-      <li><span class="fase-nombre">Documentacion y consolidacion</span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
-    </ul>
-    <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%.</p>
+    <p class="chart-subtitulo">Épica BMO-252 · 6 tareas hijas en Jira, sin sub-fases declaradas a mano — el % es un hecho verificable (frentes Finalizada / total), no una estimación.</p>
+    <div class="progreso" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 de 6 frentes finalizados">
+      <div class="progreso-barra"><div class="progreso-relleno" data-pct="83" style="width:83%"></div></div>
+      <span class="progreso-label">5 de 6 frentes finalizados (<span class="pct-semaforo" data-pct="83">83%</span>)</span>
+    </div>
   </div>
 
   <div class="detalle-links">
-    <h2>Más detalle</h2>
-    <ul>
-      <li><a href="https://cafsagroup.atlassian.net/browse/BMO-252" target="_blank" rel="noopener">Ver detalle en Jira (BMO-252)</a></li>
-    </ul>
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+      </svg>
+      <h2 style="margin:0">Frentes de trabajo</h2>
+    </div>
+    <p class="chart-subtitulo">Estado real de cada tarea en Jira al 23/09/2026 — causa raíz, resultado y evidencia, al punto.</p>
+
+    <div class="frentes-grid">
+
+      <article class="frente-card">
+        <div class="frente-top">
+          <span class="estado-badge estado-badge-mini estado-amarillo">Abierta</span>
+          <a class="frente-jira" href="https://cafsagroup.atlassian.net/browse/BMO-253" target="_blank" rel="noopener">BMO-253</a>
+        </div>
+        <h3>1. Montos Mitigadores Negativos</h3>
+        <p class="frente-linea"><strong>Causa raíz:</strong> la función de garantía no manejaba con excepción propia los préstamos cancelados — <code>PORC_RESP=-1</code> en 400 operaciones del corte octubre 2025.</p>
+        <p class="frente-linea"><strong>Resultado:</strong> corrección desplegada (lectura desde tablas de historización) y confirmada por Quanto, 0 diferencias inesperadas.</p>
+        <p class="frente-linea"><strong>Pendiente:</strong> cerrar BMO-260 (validación del universo de 400 operaciones) y BMO-361 (fechas de garantía).</p>
+        <p class="frente-evidencia">Evidencia: script-valida-PORC_RESP.sql — 120 COINCIDE + 288 SIN_HISTORICO_FUNCION_OK, 0 casos inesperados.</p>
+      </article>
+
+      <article class="frente-card">
+        <div class="frente-top">
+          <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span>
+          <a class="frente-jira" href="https://cafsagroup.atlassian.net/browse/BMO-254" target="_blank" rel="noopener">BMO-254</a>
+        </div>
+        <h3>2. Segmentación Empresarial</h3>
+        <p class="frente-linea"><strong>Causa raíz:</strong> <code>ID_GRUPO</code> fijo en <code>'N'</code> para 138 operaciones que sí tenían grupo económico real.</p>
+        <p class="frente-linea"><strong>Resultado:</strong> corregido con <code>DECODE</code> sobre deudores historizados; Quanto confirmó reclasificación correcta.</p>
+        <p class="frente-linea"><strong>Pendiente menor:</strong> la vista viva aún no tiene este fix aplicado.</p>
+        <p class="frente-evidencia">Evidencia: 99.3% de coincidencia (10.275/10.347) validada 23/09/2026 contra la fuente original del hallazgo.</p>
+      </article>
+
+      <article class="frente-card">
+        <div class="frente-top">
+          <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span>
+          <a class="frente-jira" href="https://cafsagroup.atlassian.net/browse/BMO-255" target="_blank" rel="noopener">BMO-255</a>
+        </div>
+        <h3>3. Cuentas por Cobrar</h3>
+        <p class="frente-linea"><strong>Causa raíz:</strong> el saldo por cobrar de 175 operaciones (₡10.540.672,47) no se sumaba al saldo total adeudado.</p>
+        <p class="frente-linea"><strong>Resultado:</strong> confirmado y corregido por Quanto de su lado — no requirió cambios en objetos propios de CAFSA.</p>
+        <p class="frente-linea"><strong>Pendiente menor (deprioritizado):</strong> discrepancia de conteo 163 vs. 175 operaciones sin investigar a fondo.</p>
+      </article>
+
+      <article class="frente-card">
+        <div class="frente-top">
+          <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span>
+          <a class="frente-jira" href="https://cafsagroup.atlassian.net/browse/BMO-256" target="_blank" rel="noopener">BMO-256</a>
+        </div>
+        <h3>4. Optimización Rendimiento Consultas BD</h3>
+        <p class="frente-linea"><strong>Causa raíz:</strong> tras el fix de mitigadores, las tablas de historización sin índices + relectura repetida del mismo XML pesado por fila.</p>
+        <p class="frente-linea"><strong>Resultado:</strong> índices + estadísticas actualizadas + paquete de caché de sesión desplegados.</p>
+        <p class="frente-evidencia">Evidencia: vista viva (ROWNUM≤5) 14s; vista histórica (COUNT(*) del corte) 16s. Nota: el detalle técnico registrado en Jira aún anota como pendiente confirmar si la vista viva invoca la función ya optimizada — el ticket figura Finalizada, se deja la nota por transparencia.</p>
+      </article>
+
+      <article class="frente-card">
+        <div class="frente-top">
+          <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span>
+          <a class="frente-jira" href="https://cafsagroup.atlassian.net/browse/BMO-257" target="_blank" rel="noopener">BMO-257</a>
+        </div>
+        <h3>5. Coordinación Técnica y Configuración</h3>
+        <p class="frente-linea"><strong>Resultado:</strong> cambios notificados a Quanto; se detectó y reportó una vista mal configurada en su sistema, apuntando a un objeto inexistente en los ambientes de CAFSA.</p>
+        <p class="frente-evidencia">Evidencia: correo del 05/08/2026 con conteos exactos compartidos (11.379 / 10.118 / 877.055 filas) para que Quanto reconfigurara su extracción.</p>
+      </article>
+
+      <article class="frente-card">
+        <div class="frente-top">
+          <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span>
+          <a class="frente-jira" href="https://cafsagroup.atlassian.net/browse/BMO-258" target="_blank" rel="noopener">BMO-258</a>
+        </div>
+        <h3>6. Documentación y Consolidación</h3>
+        <p class="frente-linea"><strong>Resultado:</strong> estructura técnica de los 5 objetos de base de datos documentada con evidencia verificada — ver diagrama abajo.</p>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="detalle-links">
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4"/>
+      </svg>
+      <h2 style="margin:0">Documentación técnica (BMO-258) — objetos y relaciones de base de datos</h2>
+    </div>
+    <p class="chart-subtitulo">Mapa de los 5 objetos involucrados y cómo se conectan — reemplaza la descripción larga en texto de Jira por un vistazo directo a la arquitectura.</p>
+
+    <div class="diagrama-bd-wrap">
+      <svg viewBox="0 0 900 580" role="img" aria-label="Diagrama de objetos de base de datos: dos vistas de estimaciones llaman a una función de cálculo de garantía, que a su vez usa un paquete de caché de sesión y consulta varias fuentes de datos; una tabla de deudores historizada alimenta el campo ID_GRUPO de la vista histórica." font-family="Segoe UI, system-ui, -apple-system, Roboto, Arial, sans-serif">
+        <defs>
+          <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#5c5c5c"/>
+          </marker>
+          <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#b8860b"/>
+          </marker>
+          <marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#556b2f"/>
+          </marker>
+        </defs>
+
+        <!-- Conexión deudores historizados -> vista histórica (ID_GRUPO) -->
+        <path d="M205,500 L205,485 L15,485 L15,70 L40,70" fill="none" stroke="#9a9a9a" stroke-width="1.5"/>
+        <text x="20" y="60" font-size="11" fill="#5c5c5c" paint-order="stroke" stroke="#ffffff" stroke-width="4">ID_GRUPO (BMO-254)</text>
+
+        <!-- Vista histórica -->
+        <rect x="40" y="30" width="370" height="84" rx="8" fill="#ffffff" stroke="#dcdcdc" stroke-width="1.5"/>
+        <text x="225" y="52" font-size="13" font-weight="700" fill="#111111" text-anchor="middle">MG_V_DATOS_CALC_ESTIM_HIST</text>
+        <text x="225" y="72" font-size="11" fill="#5c5c5c" text-anchor="middle">Vista histórica · UNION ALL 4 ramas · 59 columnas</text>
+        <text x="225" y="90" font-size="11" fill="#2e7d32" text-anchor="middle">ID_GRUPO corregido (BMO-254)</text>
+        <text x="225" y="106" font-size="10" fill="#9a9a9a" text-anchor="middle">Solo la rama préstamos llama a la función de garantía</text>
+
+        <!-- Vista viva -->
+        <rect x="490" y="30" width="370" height="84" rx="8" fill="#ffffff" stroke="#dcdcdc" stroke-width="1.5"/>
+        <text x="675" y="52" font-size="13" font-weight="700" fill="#111111" text-anchor="middle">MG_V_DATOS_CALC_ESTIMACION</text>
+        <text x="675" y="72" font-size="11" fill="#5c5c5c" text-anchor="middle">Vista viva · 1 rama (préstamos) · 59 columnas</text>
+        <text x="675" y="90" font-size="11" fill="#b8860b" text-anchor="middle">ID_GRUPO aún fijo en 'N' — fix pendiente</text>
+        <text x="675" y="106" font-size="10" fill="#9a9a9a" text-anchor="middle">Período = fecha de la corrida (no un corte fijo)</text>
+
+        <!-- Flechas hacia la función -->
+        <line x1="225" y1="114" x2="352" y2="175" stroke="#5c5c5c" stroke-width="1.8" marker-end="url(#arrow-gray)"/>
+        <text x="245" y="148" font-size="10.5" fill="#5c5c5c" paint-order="stroke" stroke="#ffffff" stroke-width="4">llamada con origen explícito</text>
+
+        <line x1="675" y1="114" x2="548" y2="175" stroke="#b8860b" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-amber)"/>
+        <text x="560" y="148" font-size="10.5" fill="#b8860b" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="4">llamada sin calificar origen</text>
+
+        <!-- Función de garantía -->
+        <rect x="265" y="175" width="370" height="84" rx="8" fill="#f2f2f2" stroke="#dcdcdc" stroke-width="1.5"/>
+        <text x="450" y="197" font-size="13" font-weight="700" fill="#111111" text-anchor="middle">GA_F_DATOS_GARANTIA_ESTIM</text>
+        <text x="450" y="217" font-size="11" fill="#5c5c5c" text-anchor="middle">Función · 16 "datos" según parámetro Gn_DatoConsultar</text>
+        <text x="450" y="235" font-size="10" fill="#9a9a9a" text-anchor="middle">Función local interna aísla la garantía correcta si hay varias</text>
+        <text x="450" y="251" font-size="10" fill="#9a9a9a" text-anchor="middle">(aplica a los datos 4, 6, 7, 8 y 14)</text>
+
+        <!-- Flechas desde la función -->
+        <line x1="360" y1="259" x2="290" y2="320" stroke="#5c5c5c" stroke-width="1.8" marker-end="url(#arrow-gray)"/>
+        <text x="300" y="290" font-size="10.5" fill="#5c5c5c" paint-order="stroke" stroke="#ffffff" stroke-width="4">12 de 16 datos</text>
+
+        <line x1="545" y1="259" x2="695" y2="320" stroke="#556b2f" stroke-width="1.8" marker-end="url(#arrow-accent)"/>
+        <text x="610" y="290" font-size="10.5" fill="#556b2f" paint-order="stroke" stroke="#ffffff" stroke-width="4">dato 4 (vía caché)</text>
+
+        <!-- Fuentes de datos -->
+        <rect x="60" y="320" width="430" height="150" rx="8" fill="#ffffff" stroke="#dcdcdc" stroke-width="1.5"/>
+        <text x="80" y="342" font-size="13" font-weight="700" fill="#111111">Fuentes de datos (sin caché)</text>
+        <text x="80" y="364" font-size="11" fill="#2b2b2b">• Garantías reales historizada — datos 1, 2, 3, 5, 13</text>
+        <text x="80" y="384" font-size="11" fill="#2b2b2b">• XML historizado, lectura directa — datos 6, 7, 8, 14</text>
+        <text x="80" y="404" font-size="11" fill="#2b2b2b">• Garantías de auto, consulta en vivo — datos 9, 10, 11</text>
+        <text x="80" y="424" font-size="11" fill="#2b2b2b">• Operaciones crediticias historizada — dato 15</text>
+        <text x="80" y="444" font-size="11" fill="#2b2b2b">• Cálculo compuesto en vivo — datos 12, 16</text>
+        <text x="80" y="462" font-size="10" fill="#9a9a9a">14 y 6/7/8 comparten función local si hay más de 1 garantía</text>
+
+        <!-- Caché de sesión -->
+        <rect x="560" y="320" width="290" height="110" rx="8" fill="#eef2e6" stroke="#556b2f" stroke-width="1.5"/>
+        <text x="705" y="342" font-size="13" font-weight="700" fill="#111111" text-anchor="middle">PKG_CACHE_GARANTIA_ESTIM</text>
+        <text x="705" y="364" font-size="11" fill="#3d4f24" text-anchor="middle">Paquete de caché de sesión</text>
+        <text x="705" y="384" font-size="10.5" fill="#2b2b2b" text-anchor="middle">GET_XML_GARANTIAS — activo (dato 4)</text>
+        <text x="705" y="402" font-size="10.5" fill="#9a9a9a" text-anchor="middle">GET_REALES_ROW — definido, sin uso hoy</text>
+
+        <!-- Tabla deudores historizada -->
+        <rect x="40" y="500" width="330" height="60" rx="8" fill="#ffffff" stroke="#dcdcdc" stroke-width="1.5"/>
+        <text x="205" y="524" font-size="12.5" font-weight="700" fill="#111111" text-anchor="middle">mg_deudores_hist</text>
+        <text x="205" y="544" font-size="10.5" fill="#5c5c5c" text-anchor="middle">Tabla de deudores historizada</text>
+
+        <!-- Catálogo de segmento de cartera (aparte, sin hallazgos) -->
+        <rect x="430" y="500" width="400" height="60" rx="8" fill="#ffffff" stroke="#9a9a9a" stroke-width="1.3" stroke-dasharray="4 3"/>
+        <text x="630" y="522" font-size="12" font-weight="700" fill="#5c5c5c" text-anchor="middle">PR_TIPOS_SEGMENTO_CARTERA + asignación</text>
+        <text x="630" y="542" font-size="10.5" fill="#9a9a9a" text-anchor="middle" font-style="italic">Documentado por completitud — sin hallazgos, sin conexión directa</text>
+      </svg>
+
+      <div class="diagrama-leyenda">
+        <span><span class="swatch" style="background:#5c5c5c"></span>Llamada / lectura ya confirmada</span>
+        <span><span class="swatch swatch-punteado" style="color:#b8860b"></span>Llamada sin calificar origen — ver nota en BMO-256</span>
+        <span><span class="swatch" style="background:#556b2f"></span>Ruta que usa el caché de sesión</span>
+      </div>
+    </div>
   </div>
 
   <button class="btn-consulta"
-          data-titulo="Correccion de discrepancias en estimaciones contables"
-          data-resumen="Correccion de discrepancias detectadas en calculos de estimaciones contables. Coordinacion tecnica y documentacion completadas; continua el diagnostico y ajuste de los distintos componentes de calculo."
+          data-titulo="Quanto - Contabilidad | Correccion Discrepancias Estimaciones Historico (BMO-252)"
+          data-resumen="83% de avance real (5 de 6 frentes cerrados en Jira, actualizado 23/09/2026). Unico frente abierto: Montos Mitigadores Negativos (BMO-253), corregido y confirmado por Quanto pero bloqueado por 2 subtareas (BMO-260, BMO-361). Documentacion tecnica completa de los 5 objetos de base de datos consolidada en BMO-258. Sin fecha limite en Jira."
           onclick="enviarConsulta(this)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/>
+    </svg>
     Enviar consulta sobre este informe
   </button>
 </main>
@@ -72,41 +262,8 @@
   CAFSA — Informes de Operaciones de TI
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script src="../../assets/js/color-semaforo.js"></script>
 <script src="../../assets/js/mailto-consulta.js"></script>
-<script>
-  Chart.register(ChartDataLabels);
-
-  new Chart(document.getElementById('grafico-avance'), {
-    type: 'bar',
-    data: {
-      labels: ["Revision de montos mitigadores", "Segmentacion empresarial", "Cuentas por cobrar", "Optimizacion de consultas", "Coordinacion tecnica y configuracion", "Documentacion y consolidacion"],
-      datasets: [{
-        label: '% avance',
-        data: [0, 0, 0, 0, 100, 100],
-        backgroundColor: ["#9a9a9a", "#9a9a9a", "#9a9a9a", "#9a9a9a", "#2e7d32", "#2e7d32"]
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: {
-        legend: { display: false },
-        datalabels: {
-          anchor: 'end',
-          align: 'end',
-          color: (ctx) => colorSemaforoPct(ctx.dataset.data[ctx.dataIndex]),
-          font: { size: 11, weight: '600' },
-          formatter: (v) => `${v}%`
-        }
-      },
-      scales: { x: { beginAtZero: true, max: 100 } }
-    }
-  });
-</script>
 
 </body>
 </html>

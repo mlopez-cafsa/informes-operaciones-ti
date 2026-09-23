@@ -34,11 +34,16 @@
   <p class="page-meta">infraestructura · 2026-08-21 · Cumplimiento: Sin fecha definida</p>
 
   <div class="resumen-ejecutivo">
-    <strong>Resumen ejecutivo:</strong> Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas; continua en curso el diseno de arquitectura, certificados y validaciones antes del pase a produccion.
+    <strong>Resumen ejecutivo:</strong> Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas. En curso: diseno de arquitectura, certificados y validaciones antes del pase a produccion.
   </div>
 
   <div class="chart-container">
-    <h2>Avance por fase</h2>
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>
+      </svg>
+      <h2 style="margin:0">Avance por fase</h2>
+    </div>
     <div class="chart-box" style="height:520px; max-width:640px;">
       <canvas id="grafico-avance"></canvas>
     </div>
@@ -58,16 +63,23 @@
   </div>
 
   <div class="detalle-links">
-    <h2>Más detalle</h2>
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      <h2>Más detalle</h2>
+    </div>
     <ul>
       <li><a href="https://cafsagroup.atlassian.net/browse/BMO-166" target="_blank" rel="noopener">Ver detalle en Jira (BMO-166)</a></li>
     </ul>
   </div>
 
+
   <button class="btn-consulta"
           data-titulo="Modernizacion de infraestructura /gx"
-          data-resumen="Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas; continua en curso el diseno de arquitectura, certificados y validaciones antes del pase a produccion."
+          data-resumen="Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas. En curso: diseno de arquitectura, certificados y validaciones antes del pase a produccion."
           onclick="enviarConsulta(this)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/>
+    </svg>
     Enviar consulta sobre este informe
   </button>
 </main>

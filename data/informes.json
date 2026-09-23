@@ -1,9 +1,10 @@
 [
   {
-    "id": "2026-08-21-backlog-y-mejoras-continuas",
-    "titulo": "Backlog y mejoras continuas",
-    "fecha": "2026-08-27",
-    "categoria": "backlog",
+    "id": "2026-09-18-framework-etl-datawarehouse",
+    "titulo": "Implementacion, Analisis y Estabilizacion Framework ETL | DataWareHouse",
+    "fecha": "2026-09-18",
+    "categoria": "datos-etl",
+    "orden_atencion": 7,
     "prioridad": "alta",
     "cumplimiento": "sin_fecha",
     "estado": "amarillo",
@@ -13,75 +14,84 @@
     "fases": [
       {
         "nombre": "Framework ETL | DataWareHouse (BMO-118)",
-        "avance": 0
-      },
-      {
-        "nombre": "Mejoras en Facturas y Transferencias (BMO-13)",
-        "avance": 0
-      },
-      {
-        "nombre": "Agilizar analisis crediticio (PP-264)",
-        "avance": 0
-      },
-      {
-        "nombre": "Acuerdo Comite Operativo - Abonos PIN (ST-2773)",
-        "avance": 0
+        "avance": 0,
+        "subtareas": [
+          {
+            "jira_key": "BMO-145",
+            "resumen": "Sesiones de Entendimiento y Capacitacion del Framework ETL en SQL Server & Net",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "BMO-148",
+            "resumen": "Analisis del Framework, Logica SSIS, SQL Server & Net",
+            "estado": "Abierta"
+          },
+          {
+            "jira_key": "BMO-151",
+            "resumen": "Correccion, Clasificacion y Documentacion de errores SSIS & Net",
+            "estado": "Abierta"
+          },
+          {
+            "jira_key": "BMO-152",
+            "resumen": "Validacion, Revision, Ajustes y Pruebas de Jobs SQL Server",
+            "estado": "Abierta"
+          },
+          {
+            "jira_key": "BMO-153",
+            "resumen": "Pruebas Unitarias e Integrales por Esquemas & Proyectos Productivos",
+            "estado": "Abierta"
+          },
+          {
+            "jira_key": "BMO-155",
+            "resumen": "Integracion con Salesforce",
+            "estado": "Abierta"
+          }
+        ]
       }
     ],
     "jira_urls": [
       {
         "label": "Ver detalle en Jira (BMO-118)",
         "url": "https://cafsagroup.atlassian.net/browse/BMO-118"
-      },
-      {
-        "label": "Ver detalle en Jira (BMO-13)",
-        "url": "https://cafsagroup.atlassian.net/browse/BMO-13"
-      },
-      {
-        "label": "Ver detalle en Jira (PP-264)",
-        "url": "https://cafsagroup.atlassian.net/browse/PP-264"
-      },
-      {
-        "label": "Ver detalle en Jira (ST-2773)",
-        "url": "https://cafsagroup.atlassian.net/browse/ST-2773"
       }
     ],
-    "resumen": "Revisado contra Jira en vivo (27/08/2026): ninguna de las 4 iniciativas de este backlog ha arrancado todavia. La que mas necesita seguimiento es BMO-118, Implementacion, Analisis y Estabilizacion del Framework ETL | DataWareHouse -- figura 'Abierta', sin avance. Le siguen mejoras en facturacion y transferencias (BMO-13), agilizar el analisis crediticio (PP-264) y un acuerdo operativo de Comite pendiente de cerrar (ST-2773). Ninguna tiene fecha limite en Jira todavia.",
-    "ruta": "informes/backlog/backlog-y-mejoras-continuas.html",
+    "resumen": "Framework ETL / DataWareHouse (BMO-118): 17% de avance real (1 de 6 subtareas finalizada). Pendientes: analisis del framework, correccion de errores SSIS, validacion de jobs, pruebas unitarias/integrales e integracion con Salesforce (BMO-155). Riesgo de dependencia para otras integraciones de datos; sin fecha limite en Jira.",
+    "ruta": "informes/datos-etl/framework-etl-datawarehouse.html",
     "destacado": true,
     "vencimiento": null
   },
   {
     "id": "2026-08-27-gobierno-de-ti-y-cumplimiento-cobit-conassif",
     "titulo": "Gobierno de TI y Cumplimiento (COBIT / CONASSIF)",
-    "fecha": "2026-08-27",
+    "fecha": "2026-09-18",
     "categoria": "gobierno-ti",
+    "orden_atencion": 4,
     "prioridad": "alta",
-    "cumplimiento": "vencido",
-    "estado": "rojo",
+    "cumplimiento": "a_tiempo",
+    "estado": "amarillo",
     "avance": null,
     "subtareas_completadas": null,
     "subtareas_total": null,
     "fases": [
       {
         "nombre": "Expedientes de proveedores - renegociacion (GDT-100)",
-        "avance": 50
+        "avance": 100
       },
       {
         "nombre": "Gobierno y cumplimiento tecnologico (GDT-106)",
-        "avance": 50
+        "avance": 100
       },
       {
-        "nombre": "Respaldos de informacion con proveedores (GDT-120)",
+        "nombre": "Respaldos de informacion con proveedores (GDT-120) - sin descripcion ni subtareas en Jira",
         "avance": 0
       },
       {
         "nombre": "Expediente Softland (GDT-320)",
-        "avance": 0
+        "avance": 100
       },
       {
         "nombre": "GBM de Costa Rica (GDT-107)",
-        "avance": 50
+        "avance": 100
       }
     ],
     "jira_urls": [
@@ -106,16 +116,17 @@
         "url": "https://cafsagroup.atlassian.net/browse/GDT-107"
       }
     ],
-    "resumen": "Cluster de gobierno de TI (COBIT 2019 / CONASSIF 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. GDT-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'En curso' en Jira -- es el mas urgente. GDT-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. Se suman GDT-106 (mismo eje, plazo 31/12/2026), el expediente abierto de Softland (GDT-320) y el seguimiento de GBM de Costa Rica (GDT-107).",
+    "resumen": "Gobierno de TI (COBIT 2019 / CONASSIF 5-24): 4 de 5 frentes completados (GDT-100, GDT-106, GDT-320, GDT-107). Pendiente: GDT-120 (respaldos de informacion con proveedores), sin arrancar, sin descripcion ni subtareas en Jira. Vence 31/12/2026.",
     "ruta": "informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html",
     "destacado": true,
-    "vencimiento": "2026-01-22"
+    "vencimiento": "2026-12-31"
   },
   {
     "id": "2026-08-21-migracion-de-core-financiero-forms-14c",
     "titulo": "Migracion de Core Financiero - Forms 14c",
-    "fecha": "2026-08-27",
+    "fecha": "2026-09-23",
     "categoria": "core-financiero",
+    "orden_atencion": 1,
     "prioridad": "alta",
     "cumplimiento": "en_riesgo",
     "estado": "rojo",
@@ -129,7 +140,7 @@
       },
       {
         "nombre": "Migracion y pruebas de modulos/objetos Abanks",
-        "avance": 30
+        "avance": 67
       },
       {
         "nombre": "Pruebas por roles de usuario",
@@ -178,53 +189,18 @@
         "url": "https://cafsagroup.atlassian.net/browse/DES-2707"
       }
     ],
-    "resumen": "Proyecto mas critico de TI: migracion del nucleo financiero a Oracle Forms 14C. El proveedor (BestResource) ya migro el 90% del catalogo de objetos (503 en total). CAFSA lleva evaluado el 41.4% (208 objetos: 149 aprobados, 59 rechazados), pero solo el 29.6% del catalogo total esta realmente aprobado -- los 59 rechazados necesitan correccion y re-prueba, no cuentan como avance. Seleccion de proveedor cerrada. El modulo MAYOR tiene la tasa de rechazo mas alta (35 de 64 objetos evaluados, es decir, apenas 18 aprobados); GENERALES es el mas atrasado en pruebas (105 de 109 pendientes). Infraestructura de produccion y pruebas por roles de usuario todavia no arrancan. Meta: 30/09/2026. Desglose completo del plan de pruebas por modulo y recomendaciones por segmento en el detalle de este informe.",
+    "resumen": "Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 23/09/2026: BestResource migro el 95% del catalogo (504 objetos); CAFSA aprobo el 67.3% (339 de 504), un salto de +15.9 puntos en solo 5 dias, el ritmo mas rapido del proyecto. GENERALES se destrabo (de 3.7% a 53.2%) pero ahora concentra 22 de los 41 rechazos totales. BRANCH es el nuevo riesgo: 38.7%, sin ningun cambio desde el corte anterior. Quedan 7 dias para el 30/09/2026. Infraestructura de produccion y pruebas por roles aun no arrancan. Detalle completo por modulo en el informe.",
     "ruta": "informes/core-financiero/migracion-de-core-financiero-forms-14c.html",
     "destacado": true,
     "personalizado": true,
     "vencimiento": "2026-09-30"
   },
   {
-    "id": "2026-08-21-modernizacion-comercial-cotizador-y-vista-360-de-cliente",
-    "titulo": "Modernizacion comercial - Cotizador y Vista 360 de Cliente",
-    "fecha": "2026-08-21",
-    "categoria": "comercial",
-    "prioridad": "media",
-    "cumplimiento": "en_riesgo",
-    "estado": "amarillo",
-    "avance": null,
-    "subtareas_completadas": null,
-    "subtareas_total": null,
-    "fases": [
-      {
-        "nombre": "Cotizador",
-        "avance": 100
-      },
-      {
-        "nombre": "Propuestas de integracion relacionadas",
-        "avance": 0
-      }
-    ],
-    "jira_urls": [
-      {
-        "label": "Ver detalle en Jira (PP-216)",
-        "url": "https://cafsagroup.atlassian.net/browse/PP-216"
-      },
-      {
-        "label": "Ver detalle en Jira (PP-208)",
-        "url": "https://cafsagroup.atlassian.net/browse/PP-208"
-      }
-    ],
-    "resumen": "El nuevo cotizador fue implementado y esta finalizado (pendiente de reflejar el cierre formal en Jira). Las iniciativas relacionadas de integracion con otros sistemas quedan en evaluacion de prioridad y asignacion de recursos.",
-    "ruta": "informes/comercial/modernizacion-comercial-cotizador-y-vista-360-de-cliente.html",
-    "destacado": false,
-    "vencimiento": null
-  },
-  {
-    "id": "2026-08-21-gestion-de-riesgo-tecnologico-y-obsolescencia-critica",
-    "titulo": "Gestion de riesgo tecnologico y obsolescencia critica",
-    "fecha": "2026-08-21",
+    "id": "2026-09-18-migracion-pel-admin-a-php",
+    "titulo": "Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)",
+    "fecha": "2026-09-18",
     "categoria": "riesgo-tecnologico",
+    "orden_atencion": 6,
     "prioridad": "media",
     "cumplimiento": "en_riesgo",
     "estado": "amarillo",
@@ -233,35 +209,71 @@
     "subtareas_total": null,
     "fases": [
       {
-        "nombre": "Migracion de sitio administrativo (PP-232)",
-        "avance": 0
-      },
-      {
-        "nombre": "Integracion de canal de autenticacion alterno (PP-233)",
-        "avance": 10
-      },
-      {
-        "nombre": "Mitigacion de riesgo en bases de datos (PP-229)",
-        "avance": 0
+        "nombre": "Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)",
+        "avance": 0,
+        "subtareas": [
+          {"jira_key": "PP-291", "resumen": "Preparacion y aprobacion de alcance", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-292", "resumen": "Setup y estructura del proyecto", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-293", "resumen": "Capa de Servicios SOAP", "estado": "Finalizada"},
+          {"jira_key": "PP-294", "resumen": "Core y Autenticacion", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-295", "resumen": "Migracion del Controlador Admin", "estado": "Finalizada"},
+          {"jira_key": "PP-296", "resumen": "Migracion de Modelos", "estado": "Finalizada"},
+          {"jira_key": "PP-297", "resumen": "Migracion de Vistas y JavaScript", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-298", "resumen": "Seguridad y Refactor", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-299", "resumen": "Pruebas finales y Pase a Produccion", "estado": "Tareas por hacer"}
+        ]
       }
     ],
     "jira_urls": [
       {
         "label": "Ver detalle en Jira (PP-232)",
         "url": "https://cafsagroup.atlassian.net/browse/PP-232"
-      },
+      }
+    ],
+    "resumen": "Migracion del sitio Admin de PEL(/gx) a PHP, epica XL-TEC-01 (independiente de PP-233). 33% de avance real: 3 de 9 criterios de aceptacion finalizados (Capa de Servicios SOAP, Controlador Admin, Modelos). Vence 31/10/2026.",
+    "ruta": "informes/riesgo-tecnologico/migracion-pel-admin-a-php.html",
+    "destacado": true,
+    "vencimiento": "2026-10-31"
+  },
+  {
+    "id": "2026-09-18-integracion-gaudi-cafsa-en-linea",
+    "titulo": "Integracion GAUDI en CAFSA en Linea - FASE 1 (PP-233)",
+    "fecha": "2026-09-18",
+    "categoria": "riesgo-tecnologico",
+    "orden_atencion": 3,
+    "prioridad": "alta",
+    "cumplimiento": "en_riesgo",
+    "estado": "rojo",
+    "avance": null,
+    "subtareas_completadas": null,
+    "subtareas_total": null,
+    "fases": [
+      {
+        "nombre": "Integracion GAUDI en CAFSA en Linea - FASE 1 (PP-233)",
+        "avance": 0,
+        "subtareas": [
+          {"jira_key": "PP-280", "resumen": "Entrega de diseno de login ajustado a GAUDI", "estado": "Finalizada"},
+          {"jira_key": "PP-281", "resumen": "Analisis y diseno funcional", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-282", "resumen": "Frontend - boton/opcion de ingreso GAUDI", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-283", "resumen": "Frontend - Modal de identificacion y accesibilidad", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-284", "resumen": "Responsive Desktop/Movil", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-285", "resumen": "Simulador backend de respuestas GAUDI (pre-integracion)", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-286", "resumen": "Pruebas UI/UX y ajustes finales", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-287", "resumen": "Documentacion", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-288", "resumen": "Revision y firma de Acta de Aceptacion", "estado": "Tareas por hacer"},
+          {"jira_key": "PP-289", "resumen": "Pase a produccion", "estado": "Tareas por hacer"}
+        ]
+      }
+    ],
+    "jira_urls": [
       {
         "label": "Ver detalle en Jira (PP-233)",
         "url": "https://cafsagroup.atlassian.net/browse/PP-233"
-      },
-      {
-        "label": "Ver detalle en Jira (PP-229)",
-        "url": "https://cafsagroup.atlassian.net/browse/PP-229"
       }
     ],
-    "resumen": "Programa que agrupa tres iniciativas de modernizacion y mitigacion de riesgo tecnologico: migracion de sitio administrativo, integracion de canal de autenticacion alterno, y plan de mitigacion de riesgo de obsolescencia en bases de datos. Meta mas cercana: 30/09/2026.",
-    "ruta": "informes/riesgo-tecnologico/gestion-de-riesgo-tecnologico-y-obsolescencia-critica.html",
-    "destacado": false,
+    "resumen": "Integracion GAUDI en CAFSA en Linea, Fase 1, epica XL-TEC-01 (independiente de PP-232). 10% de avance real: 1 de 10 criterios finalizado (diseno de login). Vence 30/09/2026, la fecha mas proxima del eje XL-TEC-01. Nota: en Teams (16-17/09) se reporto 80-85% de avance, aun no reflejado en Jira.",
+    "ruta": "informes/riesgo-tecnologico/integracion-gaudi-cafsa-en-linea.html",
+    "destacado": true,
     "vencimiento": "2026-09-30"
   },
   {
@@ -269,6 +281,7 @@
     "titulo": "Modernizacion de infraestructura /gx",
     "fecha": "2026-08-21",
     "categoria": "infraestructura",
+    "orden_atencion": 5,
     "prioridad": "alta",
     "cumplimiento": "sin_fecha",
     "estado": "amarillo",
@@ -323,46 +336,36 @@
         "url": "https://cafsagroup.atlassian.net/browse/BMO-166"
       }
     ],
-    "resumen": "Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas; continua en curso el diseno de arquitectura, certificados y validaciones antes del pase a produccion.",
+    "resumen": "Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas. En curso: diseno de arquitectura, certificados y validaciones antes del pase a produccion.",
     "ruta": "informes/infraestructura/modernizacion-de-infraestructura-gx.html",
     "destacado": false,
     "vencimiento": null
   },
   {
     "id": "2026-08-21-correccion-de-discrepancias-en-estimaciones-contables",
-    "titulo": "Correccion de discrepancias en estimaciones contables",
-    "fecha": "2026-08-21",
+    "titulo": "Quanto - Contabilidad | Correccion Discrepancias Estimaciones Historico (BMO-252)",
+    "fecha": "2026-09-23",
     "categoria": "finanzas-internas",
+    "orden_atencion": 2,
     "prioridad": "alta",
     "cumplimiento": "sin_fecha",
     "estado": "amarillo",
     "avance": null,
     "subtareas_completadas": null,
     "subtareas_total": null,
+    "personalizado": true,
     "fases": [
       {
-        "nombre": "Revision de montos mitigadores",
-        "avance": 0
-      },
-      {
-        "nombre": "Segmentacion empresarial",
-        "avance": 0
-      },
-      {
-        "nombre": "Cuentas por cobrar",
-        "avance": 0
-      },
-      {
-        "nombre": "Optimizacion de consultas",
-        "avance": 0
-      },
-      {
-        "nombre": "Coordinacion tecnica y configuracion",
-        "avance": 100
-      },
-      {
-        "nombre": "Documentacion y consolidacion",
-        "avance": 100
+        "nombre": "Correccion de discrepancias en estimaciones contables (BMO-252)",
+        "avance": 0,
+        "subtareas": [
+          {"jira_key": "BMO-253", "resumen": "Montos Mitigadores Negativos", "estado": "Abierta"},
+          {"jira_key": "BMO-254", "resumen": "Segmentacion Empresarial", "estado": "Finalizada"},
+          {"jira_key": "BMO-255", "resumen": "Cuentas por Cobrar", "estado": "Finalizada"},
+          {"jira_key": "BMO-256", "resumen": "Optimizacion Rendimiento Consultas BD", "estado": "Finalizada"},
+          {"jira_key": "BMO-257", "resumen": "Coordinacion Tecnica y Configuracion", "estado": "Finalizada"},
+          {"jira_key": "BMO-258", "resumen": "Documentacion y Consolidacion", "estado": "Finalizada"}
+        ]
       }
     ],
     "jira_urls": [
@@ -371,7 +374,7 @@
         "url": "https://cafsagroup.atlassian.net/browse/BMO-252"
       }
     ],
-    "resumen": "Correccion de discrepancias detectadas en calculos de estimaciones contables. Coordinacion tecnica y documentacion completadas; continua el diagnostico y ajuste de los distintos componentes de calculo.",
+    "resumen": "Correccion de discrepancias en estimaciones contables del sistema Quanto (BMO-252). 83% de avance real (5 de 6 frentes finalizados, actualizado 23/09/2026): segmentacion empresarial, cuentas por cobrar, optimizacion de rendimiento, coordinacion con Quanto y documentacion tecnica ya cerrados. Unico pendiente: montos mitigadores negativos (BMO-253), corregido y confirmado por Quanto pero bloqueado por 2 subtareas abiertas. Sin fecha limite en Jira.",
     "ruta": "informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html",
     "destacado": false,
     "vencimiento": null
@@ -381,6 +384,7 @@
     "titulo": "Operaciones Diarias",
     "fecha": "2026-08-21",
     "categoria": "operaciones",
+    "orden_atencion": 8,
     "prioridad": "media",
     "cumplimiento": "a_tiempo",
     "estado": "verde",
@@ -389,7 +393,7 @@
     "subtareas_total": null,
     "fases": [],
     "jira_urls": [],
-    "resumen": "Bitacora de labores diarias de TI: 530.5 horas documentadas en 58 dias habiles, del 05/06/2026 al 20/08/2026 (registro mas antiguo disponible). Distribucion: 70% operaciones internas de CAFSA, 30% gestion y coordinacion con proveedores externos.",
+    "resumen": "Bitacora de labores diarias de TI: 530.5 horas en 58 dias habiles (05/06/2026 - 20/08/2026). Distribucion: 70% operaciones internas, 30% gestion con proveedores externos.",
     "ruta": "informes/operaciones/operaciones-diarias.html",
     "destacado": false,
     "personalizado": true,

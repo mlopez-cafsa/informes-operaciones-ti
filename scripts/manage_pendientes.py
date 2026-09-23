@@ -52,7 +52,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from common import ROOT, slugify, parse_jira_url
+from common import ROOT, esc, slugify, parse_jira_url
 from reportes_lib import (
     CRITICIDADES_VALIDAS,
     ESTADOS_ITEM_VALIDOS,
@@ -89,8 +89,8 @@ def render_persona_page(items: list) -> str:
     items_html = "\n".join(render_pendiente_item(i) for i in items_ordenados)
 
     salida = plantilla
-    salida = salida.replace("{{PERSONA_NOMBRE}}", items[0]["persona_nombre"])
-    salida = salida.replace("{{PERSONA_CARGO}}", items[0]["persona_cargo"])
+    salida = salida.replace("{{PERSONA_NOMBRE}}", esc(items[0]["persona_nombre"]))
+    salida = salida.replace("{{PERSONA_CARGO}}", esc(items[0]["persona_cargo"]))
     salida = salida.replace("{{FECHA_GENERACION}}", date.today().isoformat())
     salida = salida.replace("{{TOTAL_PENDIENTES}}", str(len(items)))
     salida = salida.replace("<!--__PENDIENTES_LISTA__-->", items_html)

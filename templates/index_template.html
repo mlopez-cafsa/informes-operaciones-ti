@@ -51,68 +51,85 @@
   <iframe id="iframe-brief" class="iframe-brief" title="Brief diario" loading="lazy"></iframe>
 </dialog>
 
-<main id="contenido">
-
-  <section class="seccion-reportes" aria-labelledby="titulo-reportes">
-    <div class="seccion-reportes-header">
-      <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px" data-texto-local="Tu seguimiento de personas, Marco">Reportes y seguimientos</h2>
-      <a href="reportes/index.html" class="ver-todos">Ver todos los pendientes por persona &rarr;</a>
-    </div>
-    <p class="page-meta">
-      Solicitudes puntuales dirigidas a una persona específica, con enlace a
-      Jira y seguimiento · {{TOTAL_PERSONAS_REPORTES}} persona(s) con pendientes registrados
-    </p>
-    <div class="personas-grid" id="grid-personas-reportes">
-<!--__REPORTES_PERSONAS_GRID__-->
-    </div>
-  </section>
-
-  <hr class="separador-seccion">
+<main id="contenido" class="main-index">
 
 <!--__PANEL_CONSOLIDADO__-->
-  <h2 class="page-title" data-texto-local="Tus informes">Informes</h2>
-  <p class="page-meta">
-    Actualizado a partir del seguimiento interno de Operaciones de TI del {{FECHA_GENERACION}}
-    · <span id="contador-visibles">{{TOTAL_INFORMES}}</span> de {{TOTAL_INFORMES}} informe(s)
-  </p>
+    <div class="contenido-central">
 
-  <div class="toolbar">
-    <div class="buscador-wrap">
-      <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-        <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
-        <line x1="10.4" y1="10.4" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-      <input
-        type="search"
-        id="buscador"
-        placeholder="Buscar por título, categoría o palabra clave..."
-        aria-label="Buscar informes"
-        autocomplete="off">
-    </div>
+      <section class="seccion-reportes" aria-labelledby="titulo-reportes">
+        <div class="seccion-reportes-header">
+          <div class="titulo-seccion">
+            <svg class="icono-seccion" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="3"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            </svg>
+            <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px" data-texto-local="Tu seguimiento de personas, Marco">Reportes y seguimientos</h2>
+          </div>
+          <a href="reportes/index.html" class="ver-todos">Ver todos los pendientes por persona
+            <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+        <p class="page-meta">
+          Solicitudes puntuales dirigidas a una persona específica, con enlace a
+          Jira y seguimiento · {{TOTAL_PERSONAS_REPORTES}} persona(s) con pendientes registrados
+        </p>
+        <div class="personas-grid" id="grid-personas-reportes">
+<!--__REPORTES_PERSONAS_GRID__-->
+        </div>
+      </section>
 
-    <label class="orden-wrap" for="orden">
-      Ordenar por
-      <select id="orden" aria-label="Ordenar informes">
-        <option value="recientes">Más recientes</option>
-        <option value="prioridad">Prioridad</option>
-        <option value="estado">Estado (semáforo)</option>
-        <option value="titulo">Título (A-Z)</option>
-      </select>
-    </label>
-  </div>
+      <hr class="separador-seccion">
 
-  <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría">
-    <button type="button" class="active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
+      <section class="seccion-informes" aria-labelledby="titulo-informes">
+        <div class="titulo-seccion">
+          <svg class="icono-seccion" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/>
+          </svg>
+          <h2 id="titulo-informes" class="page-title" data-texto-local="Tus informes">Informes</h2>
+        </div>
+        <p class="page-meta">
+          Actualizado a partir del seguimiento interno de Operaciones de TI del {{FECHA_GENERACION}}
+          · <span id="contador-visibles">{{TOTAL_INFORMES}}</span> de {{TOTAL_INFORMES}} informe(s)
+        </p>
+
+        <div class="toolbar">
+          <div class="buscador-wrap">
+            <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <line x1="10.4" y1="10.4" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <input
+              type="search"
+              id="buscador"
+              placeholder="Buscar por título, categoría, tarea Jira o palabra clave..."
+              aria-label="Buscar informes"
+              autocomplete="off">
+          </div>
+
+          <label class="orden-wrap" for="orden">
+            Ordenar por
+            <select id="orden" aria-label="Ordenar informes">
+              <option value="atencion" selected>Prioridad de atención</option>
+              <option value="recientes">Más recientes</option>
+              <option value="prioridad">Prioridad (alta/media/baja)</option>
+              <option value="estado">Estado (semáforo)</option>
+              <option value="titulo">Título (A-Z)</option>
+            </select>
+          </label>
+        </div>
+
+        <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría">
+          <button type="button" class="active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
 <!--__FILTROS_CATEGORIA__-->
-  </nav>
+        </nav>
 
-  <p class="sin-resultados" id="sin-resultados" hidden>
-    No hay informes que coincidan con la búsqueda o el filtro seleccionado.
-  </p>
-
-  <div class="informes-grid" id="grid-informes" aria-live="polite">
+        <div class="informes-grid" id="grid-informes" aria-live="polite">
 <!--__INFORMES_GRID__-->
-  </div>
+        </div>
+      </section>
+
+    </div>
 
   <hr class="separador-seccion">
 
@@ -124,37 +141,188 @@
     [data-modo-local] en style.css.
   -->
   <section class="seccion-utilidades" aria-labelledby="titulo-utilidades" data-modo-local="bloque">
-    <h2 id="titulo-utilidades" class="page-title" style="margin-bottom:2px" data-texto-local="Tus utilidades del sistema">Utilidades únicas del sistema</h2>
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M14.7 6.3a4 4 0 1 0-5.66 5.66L3 18v3h3l6.04-6.04a4 4 0 0 0 5.66-5.66l-2.83 2.83-2-2 2.83-2.83z"/>
+      </svg>
+      <h2 id="titulo-utilidades" class="page-title" style="margin-bottom:2px" data-texto-local="Tus utilidades del sistema">Utilidades únicas del sistema</h2>
+    </div>
     <p class="page-meta">
-      Plantillas descargables con el contexto de qué registrar y dónde,
-      para mantener el proyecto al día · esta sección crece con el tiempo
+      Guías prácticas de qué registrar y dónde, para mantener el proyecto al
+      día · hacé clic en cada una para ver el detalle completo, sin
+      necesidad de descargar nada · esta sección crece con el tiempo
     </p>
     <div class="utilidades-grid">
-      <a class="utilidad-card" href="utilidades/plantilla-nuevo-informe.md" download>
-        <h3>Registrar un informe nuevo</h3>
-        <p>Campos, comando y checklist para <code>informes/</code>.</p>
-        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
-      </a>
-      <a class="utilidad-card" href="utilidades/plantilla-nuevo-pendiente.md" download>
-        <h3>Registrar un pendiente nuevo</h3>
-        <p>Campos, comando y checklist para "Reportes y seguimientos".</p>
-        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
-      </a>
-      <a class="utilidad-card" href="utilidades/plantilla-actualizar-persona.md" download>
-        <h3>Actualizar cargo de una persona</h3>
-        <p>Cómo se clasifica la jerarquía y qué comando corre.</p>
-        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
-      </a>
-      <a class="utilidad-card" href="utilidades/plantilla-brief-diario.md" download>
-        <h3>Registrar un brief diario</h3>
-        <p>Convención de nombre y verificación de seguridad (local).</p>
-        <span class="utilidad-descargar">Descargar plantilla &darr;</span>
-      </a>
-      <a class="utilidad-card utilidad-glosario" href="utilidades/glosario-palabras-clave.md" download>
-        <h3>Glosario de palabras clave</h3>
-        <p>Todos los términos que hemos ido creando en el proyecto, explicados.</p>
-        <span class="utilidad-descargar">Descargar glosario &darr;</span>
-      </a>
+
+      <details class="utilidad-card">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Registrar un informe nuevo</h3>
+            <p>Cuando arranca un proyecto o iniciativa de TI que Jefatura/Gerencia debe poder ver.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <h4>Antes de empezar, tené a mano</h4>
+          <ul>
+            <li>Título del informe.</li>
+            <li>Categoría (por ejemplo: infraestructura, core-financiero, gobierno-ti).</li>
+            <li>Un resumen breve, de 1 a 2 líneas.</li>
+            <li>Prioridad: alta, media o baja.</li>
+            <li>Estado del semáforo: verde (a tiempo), amarillo (en riesgo) o rojo (atrasado).</li>
+            <li>Fecha límite, si aplica.</li>
+            <li>Enlace(s) de Jira, si aplica.</li>
+          </ul>
+          <h4>Pasos</h4>
+          <ol>
+            <li>Abrí una terminal en la carpeta del proyecto.</li>
+            <li>Corré el comando de abajo, cambiando los valores entre comillas por los tuyos.</li>
+            <li>Confirmá que la terminal muestre <strong>"Informe creado"</strong> sin errores.</li>
+            <li>Abrí <code>index.html</code> en el navegador y revisá que el informe aparezca con el semáforo y la prioridad correctos.</li>
+            <li>Subí los cambios a git (commit y push) — ver SOP-01 en <code>SOP.md</code>.</li>
+          </ol>
+          <h4>Comando</h4>
+          <pre class="utilidad-comando">python3 scripts/manage_informes.py nuevo \
+  --titulo "Título del informe" \
+  --categoria "Categoría" \
+  --resumen "Resumen ejecutivo en 1-2 líneas." \
+  --prioridad alta \
+  --cumplimiento en_riesgo \
+  --estado amarillo \
+  --avance 40 \
+  --jira-url "https://cafsagroup.atlassian.net/browse/XXX-000" \
+  --vencimiento 2026-12-31</pre>
+          <p class="utilidad-nota">Si el informe necesita contenido especial hecho a mano (una tabla o un gráfico propio), avisá antes de correr el comando: hay una forma de "proteger" esa página para que no se borre la próxima vez que el sitio se actualiza.</p>
+        </div>
+      </details>
+
+      <details class="utilidad-card">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Registrar un pendiente nuevo</h3>
+            <p>Para anotar una solicitud puntual dirigida a una persona, con seguimiento en el tiempo.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <h4>Antes de empezar, tené a mano</h4>
+          <ul>
+            <li>Nombre completo y cargo de la persona.</li>
+            <li>Tema, en pocas palabras.</li>
+            <li>Descripción de la solicitud.</li>
+            <li>Nivel de importancia: alta, media o baja.</li>
+            <li>Fecha límite, si aplica.</li>
+            <li>Enlace(s) de Jira, si aplica.</li>
+          </ul>
+          <h4>Comando</h4>
+          <pre class="utilidad-comando">python3 scripts/manage_pendientes.py nuevo \
+  --persona-nombre "Nombre Apellido" \
+  --persona-cargo "Cargo — Área" \
+  --tema "Tema breve" \
+  --solicitud "Descripción de la solicitud." \
+  --criticidad media \
+  --plazo 2026-12-31 \
+  --jira-url "https://cafsagroup.atlassian.net/browse/XXX-000"</pre>
+          <h4>Editar o cerrar uno que ya existe</h4>
+          <p>Con el <code>--id</code> exacto (lo encontrás en <code>data/pendientes.json</code>):</p>
+          <pre class="utilidad-comando">python3 scripts/manage_pendientes.py editar --id &lt;id&gt; --estado-item resuelto</pre>
+          <p class="utilidad-nota">El sistema nunca guarda ni inventa una dirección de correo real: el botón "Redactar correo" siempre se abre con el campo "Para" vacío, a propósito — la decisión de a quién enviarlo es siempre tuya.</p>
+        </div>
+      </details>
+
+      <details class="utilidad-card">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Actualizar el cargo de una persona</h3>
+            <p>Cuando alguien cambia de puesto, o su etiqueta de jerarquía no es la correcta.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <h4>Cómo funciona</h4>
+          <p>La etiqueta de color (Gerencia / Jefatura / PMO / Operativo) no se escoge a mano: el sistema la calcula solo, buscando palabras clave dentro del texto del cargo.</p>
+          <table class="utilidad-tabla">
+            <thead><tr><th>Si el cargo contiene...</th><th>Se clasifica como</th></tr></thead>
+            <tbody>
+              <tr><td>"gerente", "gerencia", "director", "dirección"</td><td>Gerencia</td></tr>
+              <tr><td>"jefe", "jefatura"</td><td>Jefatura</td></tr>
+              <tr><td>"pmo", "coordinación" / "coordinador"</td><td>PMO</td></tr>
+              <tr><td>cualquier otra cosa</td><td>Operativo</td></tr>
+            </tbody>
+          </table>
+          <h4>Comando</h4>
+          <pre class="utilidad-comando">python3 scripts/manage_pendientes.py actualizar-persona \
+  --persona-slug &lt;slug-tal-como-aparece-en-reportes/&gt; \
+  --persona-cargo "Nuevo cargo — Área"</pre>
+          <p class="utilidad-nota">Si el badge queda mal clasificado, no hay forma de forzarlo a mano: hay que ajustar el texto del cargo para que incluya una de las palabras de la tabla. Es intencional, para que la clasificación sea siempre consistente.</p>
+        </div>
+      </details>
+
+      <details class="utilidad-card">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Registrar un brief diario</h3>
+            <p>Un resumen de uso estrictamente personal — nunca se publica en el sitio.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <h4>Nombre del archivo (obligatorio)</h4>
+          <p><code>DD-##-MM-YYYY-brief.html</code> — por ejemplo, <code>07-01-09-2026-brief.html</code> es el 7 de septiembre de 2026, brief número 1 del día.</p>
+          <h4>Pasos</h4>
+          <ol>
+            <li>Colocá el archivo <code>.html</code> dentro de la carpeta <code>briefs/</code>, con el nombre en ese formato exacto.</li>
+            <li>Corré <code>python3 scripts/manage_briefs.py build</code>.</li>
+            <li>Abrí (o refrescá) <code>index.html</code> en tu computadora — el botón "Brief del día" aparece solo.</li>
+          </ol>
+          <p class="utilidad-nota">Seguridad: la carpeta <code>briefs/</code> nunca se sube a git — trae correos y datos reales. Si en algún momento ves que git la quiere subir, detenete y no continúes con la publicación.</p>
+        </div>
+      </details>
+
+      <details class="utilidad-card utilidad-glosario">
+        <summary>
+          <span class="utilidad-encabezado">
+            <h3>Glosario de palabras clave</h3>
+            <p>Todos los términos que hemos ido creando en el proyecto, explicados en simple.</p>
+          </span>
+          <span class="utilidad-toggle"><span class="txt-cerrado">Ver detalle &darr;</span><span class="txt-abierto">Ocultar &uarr;</span></span>
+        </summary>
+        <div class="utilidad-cuerpo">
+          <div class="glosario-grupo">
+            <h4>Estructura del sistema</h4>
+            <dl class="glosario-lista">
+              <dt>Informe</dt><dd>El estado de un proyecto para Gerencia — lo que ves en "Tus informes".</dd>
+              <dt>Pendiente</dt><dd>Una solicitud puntual dirigida a una persona específica, con seguimiento.</dd>
+              <dt>Página de persona</dt><dd>Cada persona con pendientes tiene su propia página, que acumula su historial completo en el tiempo.</dd>
+              <dt>Brief diario</dt><dd>Un resumen que hacés fuera del sistema (correo/Teams/Jira) y guardás solo en tu computadora — nunca se publica.</dd>
+            </dl>
+          </div>
+          <div class="glosario-grupo">
+            <h4>Jerarquía y orden ("Reportes y seguimientos")</h4>
+            <dl class="glosario-lista">
+              <dt>Etiqueta de jerarquía</dt><dd>Gerencia / Jefatura / PMO / Operativo — se calcula sola a partir del cargo de la persona (ver la utilidad "Actualizar el cargo de una persona").</dd>
+              <dt>Orden de las tarjetas</dt><dd>Primero por jerarquía, luego por cuántos pendientes críticos tiene cada persona, y por último por nombre.</dd>
+              <dt>Botón "Redactar correo"</dt><dd>Abre un borrador con el campo "Para" siempre vacío — el sistema nunca guarda direcciones de correo reales.</dd>
+            </dl>
+          </div>
+          <div class="glosario-grupo">
+            <h4>Cómo se calcula la urgencia</h4>
+            <dl class="glosario-lista">
+              <dt>Radar de urgencia</dt><dd>El panel "Mi seguimiento (Jira)" ordena los pendientes por qué tan urgentes son, combinando prioridad y cercanía al plazo — a menor plazo y mayor prioridad, más arriba aparece.</dd>
+              <dt>Semáforo de avance</dt><dd>El color (rojo, amarillo, verde) de cualquier porcentaje se calcula con una transición suave, no con saltos bruscos entre colores.</dd>
+            </dl>
+          </div>
+          <div class="glosario-grupo">
+            <h4>Seguridad y contenido</h4>
+            <dl class="glosario-lista">
+              <dt>Disciplina de contenido</dt><dd>Reglas sobre qué nunca puede aparecer en el sitio público: contratos de proveedores, hallazgos de auditoría/SUGEF/CONASSIF, credenciales, IPs internas, o datos sensibles de personas.</dd>
+              <dt>Vista local vs. vista pública</dt><dd>En tu computadora ves el detalle completo (incluida esta sección). En el sitio publicado, Jefatura/PMO/Gerencia ven una versión resumida, sin lo que solo te sirve a vos.</dd>
+              <dt>Página "protegida" (<code>personalizado</code>)</dt><dd>Una página hecha a mano que el sistema nunca sobrescribe al actualizar el sitio.</dd>
+            </dl>
+          </div>
+        </div>
+      </details>
+
     </div>
   </section>
 </main>
@@ -172,7 +340,6 @@
   const buscador = document.getElementById('buscador');
   const orden = document.getElementById('orden');
   const filtros = document.getElementById('filtros');
-  const sinResultados = document.getElementById('sin-resultados');
   const contador = document.getElementById('contador-visibles');
 
   let filtroActivo = 'todos';
@@ -187,25 +354,157 @@
   const PRIORIDAD_PESO = { alta: 0, media: 1, baja: 2, '': 3 };
   const ESTADO_PESO = { rojo: 0, amarillo: 1, neutral: 2, verde: 3 };
 
+  // ---------------------------------------------------------------------
+  // B\u00fasqueda flexible/aproximada (2026-09-23, a pedido de Marco: "la
+  // b\u00fasqueda debe ser flexible... todo lo relacionado o aproximado a la
+  // b\u00fasqueda", con resultado pr\u00e1ctico que muestre la tarea de referencia
+  // y el redireccionamiento a ella).
+  //
+  // Reemplaza el `includes()` de una sola frase exacta por:
+  //   1. Tokens: la b\u00fasqueda se parte en palabras: cada palabra se busca
+  //      por separado (AND entre ellas) \u2014 no importa el orden ni que sea
+  //      la frase completa ("core financiero" y "financiero core"
+  //      encuentran lo mismo).
+  //   2. Tolerancia a errores: si una palabra de 4+ letras no aparece
+  //      como substring exacto, se acepta si hay una palabra parecida
+  //      (distancia de edici\u00f3n <=1, o <=2 en palabras largas) \u2014 cubre
+  //      typos y variantes ("salesforc" ~ "salesforce").
+  //   3. Tres capas de datos por card: lo visible (t\u00edtulo/resumen/
+  //      categor\u00eda/estado/prioridad), lo "extra" (nombres de fase, texto
+  //      real pero no impreso en la card) y las referencias Jira (ticket +
+  //      resumen de cada subtarea). Si el match solo aparece en la
+  //      tercera capa, se informa cu\u00e1l fue la referencia y se linkea
+  //      directo a Jira \u2014 la card no se limita a "aparecer en la lista"
+  //      sin explicar por qu\u00e9.
+  // ---------------------------------------------------------------------
+
+  function distanciaEdicion(a, b, limite) {
+    if (Math.abs(a.length - b.length) > limite) return limite + 1;
+    const fila = new Array(b.length + 1);
+    for (let j = 0; j <= b.length; j++) fila[j] = j;
+    for (let i = 1; i <= a.length; i++) {
+      let anterior = fila[0];
+      fila[0] = i;
+      for (let j = 1; j <= b.length; j++) {
+        const temp = fila[j];
+        fila[j] = a[i - 1] === b[j - 1]
+          ? anterior
+          : 1 + Math.min(anterior, fila[j], fila[j - 1]);
+        anterior = temp;
+      }
+    }
+    return fila[b.length];
+  }
+
+  function coincideAproximado(palabraTexto, token) {
+    if (palabraTexto.length < 3 || token.length < 3) return false;
+    const limite = token.length >= 7 ? 2 : 1;
+    return distanciaEdicion(palabraTexto, token, limite) <= limite;
+  }
+
+  // token encontrado en `texto` (substring exacto, o aproximado contra
+  // cada palabra del texto si el token tiene 4+ letras).
+  function tokenEnTexto(texto, token) {
+    if (!texto) return false;
+    if (texto.includes(token)) return true;
+    if (token.length < 4) return false;
+    return texto.split(/[^a-z0-9]+/).some(palabra => coincideAproximado(palabra, token));
+  }
+
+  const referenciasCache = new WeakMap();
+  function referenciasDe(card) {
+    if (referenciasCache.has(card)) return referenciasCache.get(card);
+    let refs = [];
+    try {
+      refs = JSON.parse(card.dataset.referencias || '[]').map(r => ({
+        ...r,
+        _busq: normalizar(`${r.key || ''} ${r.resumen || ''}`),
+      }));
+    } catch (e) { /* referencias mal formadas: se ignoran, no rompe la b\u00fasqueda */ }
+    referenciasCache.set(card, refs);
+    return refs;
+  }
+
+  function evaluarCard(card, tokens) {
+    if (tokens.length === 0) return { visible: true, score: 0, coincidenciaExtra: null };
+    const visibleTxt = card.dataset.busqueda || '';
+    const extraTxt = card.dataset.extra || '';
+    const refs = referenciasDe(card);
+    let score = 0;
+    let coincidenciaExtra = null;
+
+    for (const token of tokens) {
+      if (visibleTxt.includes(token)) { score += 3; continue; }
+      if (tokenEnTexto(visibleTxt, token)) { score += 2; continue; }
+      if (tokenEnTexto(extraTxt, token)) { score += 1; continue; }
+      const ref = refs.find(r => tokenEnTexto(r._busq, token));
+      if (ref) {
+        score += 1;
+        if (!coincidenciaExtra) coincidenciaExtra = ref;
+        continue;
+      }
+      return { visible: false, score: 0, coincidenciaExtra: null }; // token sin match -> descarta (AND)
+    }
+    return { visible: true, score, coincidenciaExtra };
+  }
+
   function aplicarFiltros() {
     const termino = normalizar(buscador.value.trim());
+    const tokens = termino ? termino.split(/\s+/).filter(Boolean) : [];
     let visibles = 0;
 
     cards.forEach(card => {
       const coincideCategoria = filtroActivo === 'todos' || card.dataset.categoria === filtroActivo;
-      const coincideBusqueda = !termino || card.dataset.busqueda.includes(termino);
+      const { visible: coincideBusqueda, score, coincidenciaExtra } = evaluarCard(card, tokens);
       const visible = coincideCategoria && coincideBusqueda;
       card.style.display = visible ? '' : 'none';
+      card.dataset.score = score;
+
+      const pista = card.querySelector('.coincidencia-busqueda');
+      if (pista) {
+        if (visible && coincidenciaExtra) {
+          const key = coincidenciaExtra.key ? `${coincidenciaExtra.key} \u2014 ` : '';
+          const texto = `Coincide con: ${key}${coincidenciaExtra.resumen || ''}`;
+          if (coincidenciaExtra.url) {
+            pista.innerHTML = `${texto.replace(/</g, '&lt;')} <a href="${coincidenciaExtra.url}" target="_blank" rel="noopener">Ver en Jira &rarr;</a>`;
+          } else {
+            pista.textContent = texto;
+          }
+          pista.hidden = false;
+        } else {
+          pista.hidden = true;
+          pista.textContent = '';
+        }
+      }
+
       if (visible) visibles++;
     });
 
-    sinResultados.hidden = visibles !== 0;
+    // Con b\u00fasqueda activa, lo m\u00e1s relevante primero (m\u00e1s tokens
+    // encontrados y en el lugar m\u00e1s visible de la card); sin b\u00fasqueda,
+    // manda el criterio del selector "Ordenar por".
+    if (tokens.length > 0) {
+      const ordenadas = [...cards].sort((a, b) => (Number(b.dataset.score) || 0) - (Number(a.dataset.score) || 0));
+      ordenadas.forEach(card => grid.appendChild(card));
+    } else {
+      aplicarOrden();
+    }
+
     contador.textContent = visibles;
   }
 
   function aplicarOrden() {
     const criterio = orden.value;
     const ordenadas = [...cards].sort((a, b) => {
+      if (criterio === 'atencion') {
+        // Prioridad de atención (2026-09-23): ranking explícito 1..N
+        // declarado a mano por Marco en data/informes.json
+        // (orden_atencion), NO calculado — distinto del Radar de
+        // urgencia del sidebar (ese sí es automático, por fecha de
+        // vencimiento en Jira, y no se toca acá). Informes sin este
+        // campo declarado se mandan al final (999).
+        return (Number(a.dataset.ordenAtencion) || 999) - (Number(b.dataset.ordenAtencion) || 999);
+      }
       if (criterio === 'prioridad') {
         return PRIORIDAD_PESO[a.dataset.prioridad] - PRIORIDAD_PESO[b.dataset.prioridad];
       }
@@ -215,7 +514,7 @@
       if (criterio === 'titulo') {
         return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent, 'es');
       }
-      // 'recientes' (default): por fecha descendente
+      // 'recientes': por fecha descendente
       return b.dataset.fecha.localeCompare(a.dataset.fecha);
     });
     ordenadas.forEach(card => grid.appendChild(card));
@@ -242,6 +541,32 @@
   window.addEventListener('scroll', () => {
     header.classList.toggle('con-sombra', window.scrollY > 4);
   }, { passive: true });
+
+  // Sidebar "Mi seguimiento (Jira)" — mostrar/ocultar (2026-09-18).
+  // El estado inicial (colapsado o no) ya se aplicó en el <script> propio
+  // que genera render_panel_consolidado(), justo después del <aside>, para
+  // evitar el parpadeo de "se ve abierto y luego se cierra". Este bloque
+  // solo conecta el click. Si no hay snapshot de Jira todavía, ni el
+  // <aside> ni el botón existen y este bloque no encuentra nada que
+  // conectar (comprobación de null de rigor, sin romper el resto del script).
+  const sidebarJira = document.getElementById('sidebar-jira');
+  const btnToggleSidebar = document.getElementById('btn-toggle-sidebar-jira');
+  if (sidebarJira && btnToggleSidebar) {
+    const CLAVE_LOCALSTORAGE = 'sidebarJiraColapsado';
+    const aplicarEstadoSidebar = (colapsado) => {
+      sidebarJira.classList.toggle('colapsado', colapsado);
+      btnToggleSidebar.classList.toggle('colapsado', colapsado);
+      btnToggleSidebar.setAttribute('aria-expanded', String(!colapsado));
+      btnToggleSidebar.setAttribute('aria-label', colapsado
+        ? 'Mostrar panel Mi seguimiento (Jira)'
+        : 'Ocultar panel Mi seguimiento (Jira)');
+    };
+    btnToggleSidebar.addEventListener('click', () => {
+      const colapsado = !sidebarJira.classList.contains('colapsado');
+      aplicarEstadoSidebar(colapsado);
+      localStorage.setItem(CLAVE_LOCALSTORAGE, colapsado ? '1' : '0');
+    });
+  }
 
   aplicarFiltros();
 })();

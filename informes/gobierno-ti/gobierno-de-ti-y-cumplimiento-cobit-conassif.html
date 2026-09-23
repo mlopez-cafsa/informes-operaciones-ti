@@ -27,46 +27,44 @@
 
 <main>
   <div class="card-top">
-    <span class="estado-badge estado-rojo">Atrasado</span>
+    <span class="estado-badge estado-amarillo">En riesgo</span>
     <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
   </div>
   <h2 class="page-title">Gobierno de TI y Cumplimiento (COBIT / CONASSIF)</h2>
-  <p class="page-meta">gobierno-ti · 2026-08-27 · Cumplimiento: Vencido</p>
+  <p class="page-meta">gobierno-ti · 2026-09-18 · Cumplimiento: A tiempo</p>
 
   <div class="resumen-ejecutivo">
-    <strong>Resumen ejecutivo:</strong> Cluster de gobierno de TI (COBIT 2019 / CONASSIF 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. GDT-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'En curso' en Jira -- es el mas urgente. GDT-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. Se suman GDT-106 (mismo eje, plazo 31/12/2026), el expediente abierto de Softland (GDT-320) y el seguimiento de GBM de Costa Rica (GDT-107).
+    <strong>Resumen ejecutivo:</strong> Gobierno de TI (COBIT 2019 / CONASSIF 5-24): 4 de 5 frentes completados (GDT-100, GDT-106, GDT-320, GDT-107). Pendiente: GDT-120 (respaldos de informacion con proveedores), sin arrancar, sin descripcion ni subtareas en Jira. Vence 31/12/2026.
   </div>
 
   <div class="chart-container">
-    <h2>Avance por fase</h2>
+    <div class="titulo-seccion">
+      <svg class="icono-seccion" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>
+      </svg>
+      <h2 style="margin:0">Avance por fase</h2>
+    </div>
     <div class="chart-box" style="height:290px; max-width:640px;">
       <canvas id="grafico-avance"></canvas>
     </div>
     <ul class="fases-lista">
-      <li><span class="fase-nombre">Expedientes de proveedores - renegociacion (GDT-100)</span><span class="fase-pct pct-semaforo" data-pct="50">50%</span></li>
-      <li><span class="fase-nombre">Gobierno y cumplimiento tecnologico (GDT-106)</span><span class="fase-pct pct-semaforo" data-pct="50">50%</span></li>
-      <li><span class="fase-nombre">Respaldos de informacion con proveedores (GDT-120)</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
-      <li><span class="fase-nombre">Expediente Softland (GDT-320)</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
-      <li><span class="fase-nombre">GBM de Costa Rica (GDT-107)</span><span class="fase-pct pct-semaforo" data-pct="50">50%</span></li>
+      <li><span class="fase-nombre"><a href="https://cafsagroup.atlassian.net/browse/GDT-100" target="_blank" rel="noopener">Expedientes de proveedores - renegociacion (GDT-100)</a></span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
+      <li><span class="fase-nombre"><a href="https://cafsagroup.atlassian.net/browse/GDT-106" target="_blank" rel="noopener">Gobierno y cumplimiento tecnologico (GDT-106)</a></span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
+      <li><span class="fase-nombre"><a href="https://cafsagroup.atlassian.net/browse/GDT-120" target="_blank" rel="noopener">Respaldos de informacion con proveedores (GDT-120) - sin descripcion ni subtareas en Jira</a></span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
+      <li><span class="fase-nombre"><a href="https://cafsagroup.atlassian.net/browse/GDT-320" target="_blank" rel="noopener">Expediente Softland (GDT-320)</a></span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
+      <li><span class="fase-nombre"><a href="https://cafsagroup.atlassian.net/browse/GDT-107" target="_blank" rel="noopener">GBM de Costa Rica (GDT-107)</a></span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
     </ul>
     <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%.</p>
   </div>
 
-  <div class="detalle-links">
-    <h2>Más detalle</h2>
-    <ul>
-      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-100" target="_blank" rel="noopener">Ver GDT-100 en Jira</a></li>
-      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-106" target="_blank" rel="noopener">Ver GDT-106 en Jira</a></li>
-      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-120" target="_blank" rel="noopener">Ver GDT-120 en Jira</a></li>
-      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-320" target="_blank" rel="noopener">Ver GDT-320 en Jira</a></li>
-      <li><a href="https://cafsagroup.atlassian.net/browse/GDT-107" target="_blank" rel="noopener">Ver GDT-107 en Jira</a></li>
-    </ul>
-  </div>
 
   <button class="btn-consulta"
           data-titulo="Gobierno de TI y Cumplimiento (COBIT / CONASSIF)"
-          data-resumen="Cluster de gobierno de TI (COBIT 2019 / CONASSIF 5-24) que no tenia ninguna tarjeta en este indice hasta hoy. GDT-100 (actualizacion y gestion de expedientes de proveedores, renegociacion de contratos) esta vencido desde el 22/01/2026 y sigue 'En curso' en Jira -- es el mas urgente. GDT-120 (aseguramiento de respaldos de informacion con proveedores) es alta prioridad, vence 31/12/2026 y todavia no arranca. Se suman GDT-106 (mismo eje, plazo 31/12/2026), el expediente abierto de Softland (GDT-320) y el seguimiento de GBM de Costa Rica (GDT-107)."
+          data-resumen="Gobierno de TI (COBIT 2019 / CONASSIF 5-24): 4 de 5 frentes completados (GDT-100, GDT-106, GDT-320, GDT-107). Pendiente: GDT-120 (respaldos de informacion con proveedores), sin arrancar, sin descripcion ni subtareas en Jira. Vence 31/12/2026."
           onclick="enviarConsulta(this)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/>
+    </svg>
     Enviar consulta sobre este informe
   </button>
 </main>
@@ -85,11 +83,11 @@
   new Chart(document.getElementById('grafico-avance'), {
     type: 'bar',
     data: {
-      labels: ["Expedientes de proveedores - renegociacion (GDT-100)", "Gobierno y cumplimiento tecnologico (GDT-106)", "Respaldos de informacion con proveedores (GDT-120)", "Expediente Softland (GDT-320)", "GBM de Costa Rica (GDT-107)"],
+      labels: ["Expedientes de proveedores - renegociacion (GDT-100)", "Gobierno y cumplimiento tecnologico (GDT-106)", "Respaldos de informacion con proveedores (GDT-120) - sin descripcion ni subtareas en Jira", "Expediente Softland (GDT-320)", "GBM de Costa Rica (GDT-107)"],
       datasets: [{
         label: '% avance',
-        data: [50, 50, 0, 0, 50],
-        backgroundColor: ["#b8860b", "#b8860b", "#9a9a9a", "#9a9a9a", "#b8860b"]
+        data: [100, 100, 0, 100, 100],
+        backgroundColor: ["#2e7d32", "#2e7d32", "#9a9a9a", "#2e7d32", "#2e7d32"]
       }]
     },
     options: {

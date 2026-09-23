@@ -55,35 +55,61 @@ página del informe).
 con enlaces reales al issue de Jira correspondiente (requiere login CAFSA,
 así que es seguro enlazarlo aunque el repo sea público).
 
+### Nombre de fase como hipervínculo (2026-09-18)
+
+Si el `nombre` de una fase incluye la clave de Jira entre paréntesis (la
+convención que ya se usa en todo el sistema: `"... (BMO-118)"`,
+`"... (GDT-120) - sin descripción..."`), el nombre completo de la fase se
+convierte automáticamente en un link directo a ese issue
+(`jira_key_de_fase()` / `fase_nombre_html()` en `manage_informes.py`, vía
+una expresión regular sobre el paréntesis — no hace falta declarar nada
+aparte). **Si TODAS las fases de un informe resuelven así su propio
+enlace, la sección "Más detalle" se omite por completo** — sería un
+duplicado exacto de los enlaces que ya están arriba. Cuando alguna fase no
+trae clave en el nombre (por ejemplo "Modernización de infraestructura
+/gx", donde las fases son etapas de trabajo genéricas y no tickets
+individuales), "Más detalle" se sigue mostrando como respaldo con lo que
+haya en `jira_urls`.
+
 Si editás `fases` o `jira_urls` a mano en `data/informes.json`, corré
 `python3 scripts/manage_informes.py regenerar-paginas` para que las
 páginas individuales reflejen el cambio (a diferencia de `build`, que solo
 regenera `index.html`).
 
-## Agrupación por programa, no por issue individual
+### Desglose de subtareas por fase (2026-09-18)
 
-Cada card representa un **programa o iniciativa** (a veces varios issues
-de Jira relacionados), no cada issue suelto — así se evita un índice con
-decenas de cards diminutas. Ejemplo: "Gestión de riesgo tecnológico y
-obsolescencia crítica" agrupa PP-232, PP-233 y PP-229 en una sola card con
-tres fases.
+Cuando una fase necesita seguimiento más fino que un solo %, se le puede
+agregar `"subtareas": [{"jira_key": "ABC-1", "resumen": "...", "estado":
+"Finalizada"}, ...]` directamente en `data/informes.json` (no hay flag de
+CLI para esto todavía — se edita el JSON a mano y se corre
+`regenerar-paginas`). En cuanto una fase tiene `subtareas`, su `avance` dejá
+de ser la estimación manual y pasa a calcularse solo: % de subtareas con
+`estado` exactamente `"Finalizada"` sobre el total — un hecho verificable
+recalculado en cada build, no una estimación editorial (ver
+`avance_efectivo_fase()` en `manage_informes.py` y `avance_de_subtareas()`/
+`render_desglose_subtareas()` en `reportes_lib.py`). El HTML resultante
+muestra cada subtarea con link directo a Jira y un badge de estado, debajo
+del nombre de su fase. Es público (no oculto en modo local): es el mismo
+tipo de dato que ya se ve a nivel de fase, solo que más detallado.
 
-La card **"Backlog y mejoras continuas"** agrupa 4 iniciativas de menor
-tamaño individual que igual requieren seguimiento activo: BMO-118
-(Implementación, Análisis y Estabilización del Framework ETL |
-DataWareHouse — la de mayor peso real, headline del resumen), BMO-13
-(Facturas y Transferencias), PP-264 (análisis crediticio) y ST-2773
-(Acuerdo de Comité). Se corrigió en agosto/2026 porque el resumen anterior
-no reflejaba que BMO-118 es la que de verdad necesita continuidad —
-regla de fondo: **el resumen de una card agrupada siempre debe encabezar
-con el issue de mayor peso real**, no con una descripción genérica del
-grupo.
+## Agrupación por programa, o card propio por ticket (2026-09-18)
 
-La card **"Gobierno de TI y Cumplimiento (COBIT / CONASSIF)"** agrupa el
-clúster GDT-100/106/120/320/107 (gestión de expedientes de proveedores,
-cumplimiento COBIT 2019 / CONASSIF 5-24) — separada de "Backlog" porque
-tiene entidad propia y GDT-100 está vencido, lo que en la matriz de
-semáforo la marca en rojo (ver criterio de semáforo abajo).
+Un card puede representar un **programa** (varios issues de Jira
+relacionados bajo un mismo objetivo — ej. "Gobierno de TI y Cumplimiento"
+agrupa el clúster GDT-100/106/120/320/107) o un **ticket individual** que
+necesita seguimiento especializado (ej. "Integración GAUDI en CAFSA en
+Línea — FASE 1 (PP-233)", con su propio desglose de subtareas). La regla
+para decidir cuál usar: si Marco necesita ver el % y las subtareas de un
+ticket específico sin que quede diluido entre otros, ese ticket sale a su
+propio card, aunque comparta epopeya/eje con otro (ver el caso PP-232 vs.
+PP-233 más abajo — ambos son XL-TEC-01, pero viven en cards separados
+desde el 18/09/2026 porque cada uno se sigue por su propio ritmo).
+
+Cuando un card sí agrupa varios issues menores sin necesidad de
+seguimiento fino por separado (ej. issues de backlog de bajo impacto
+individual), la regla de fondo se mantiene: **el resumen de una card
+agrupada siempre debe encabezar con el issue de mayor peso real**, no con
+una descripción genérica del grupo.
 
 ## Buscador y orden (index)
 
@@ -115,6 +141,9 @@ informes-operaciones-ti/
 │   ├── index.html              # Generado — directorio de personas
 │   ├── <persona-slug>/index.html   # Generado — página evergreen de esa persona
 │   └── DD-MM-YYYY/             # Bandeja de memos fuente (.docx) — NUNCA se publica
+├── briefs/                     # Briefs diarios en HTML (Marco los deja caer acá) — excluido de git (.gitignore)
+│   ├── manifest.json           # Generado por manage_briefs.py build — NUNCA se comitea
+│   └── DD-##-MM-YYYY-brief.html
 ├── data/
 │   ├── informes.json           # Fuente de verdad de informes/
 │   ├── pendientes.json         # Fuente de verdad de reportes/
@@ -132,10 +161,11 @@ informes-operaciones-ti/
 │   ├── reportes_index_template.html   # Plantilla del directorio de personas
 │   └── pendiente_persona_template.html # Plantilla de la página de una persona
 └── scripts/
-    ├── common.py            # slugify / parse_jira_url — compartido
+    ├── common.py            # slugify / parse_jira_url / esc() / guardar_json_atomico() — compartido (ver "Estándares internos" abajo)
     ├── reportes_lib.py      # Datos + tarjeta de persona — compartido
-    ├── manage_informes.py   # Crea informes y regenera index.html
-    └── manage_pendientes.py # Registra pendientes y regenera reportes/ + index.html
+    ├── manage_informes.py   # Crea informes, regenera index.html, detecta páginas huérfanas
+    ├── manage_pendientes.py # Registra/edita/elimina pendientes y regenera reportes/ + index.html
+    └── manage_briefs.py     # Regenera briefs/manifest.json a partir de los .html en briefs/
 ```
 
 `index.html` ya no depende solo de `informes.json`: la sección "Reportes y
@@ -199,6 +229,12 @@ de un informe existente), regenera el índice con:
 python3 scripts/manage_informes.py build
 ```
 
+### Subcomandos de `manage_informes.py`
+
+- `nuevo`: crea un informe, lo registra en `data/informes.json` y regenera `index.html` (ver arriba).
+- `build`: regenera solo `index.html` a partir de `data/informes.json` (no toca las páginas individuales).
+- `regenerar-paginas`: re-renderiza **todas** las páginas individuales desde `data/informes.json` (útil tras editar `fases`/`jira_urls`/`subtareas` a mano en el JSON) y luego el índice. Salta los informes con `"personalizado": true` (ver sección dedicada más abajo). Al terminar, compara las rutas registradas en `data/informes.json` contra los `.html` que realmente existen bajo `informes/` y **avisa** (no borra) si encuentra alguno sin registro — `[AVISO] N página(s) .html en informes/ sin registro en data/informes.json`. Esto detectó y permitió limpiar 4 páginas huérfanas durante la auditoría del 2026-09-23 (ver `contexto-proyecto/CONTEXTO.md` sección 19); ahora corre en cada `regenerar-paginas` para que ese tipo de residuo no vuelva a acumularse en silencio.
+
 ## Criterio de semáforo (definido)
 
 El color ya no se elige a mano: se calcula a partir de dos datos que se
@@ -231,6 +267,31 @@ Si en el futuro Gerencia pide ajustar algún cruce de la matriz, se cambia
 ahí (una sola fuente de verdad) y se corre `build` para que todos los
 informes existentes se actualicen.
 
+## Rediseño visual del sitio (2026-09-18)
+
+A pedido de Marco ("estilizarlo con las mejores prácticas actuales a
+sistemas web", alcance: todo el sitio, profundidad: más visual/moderno),
+`assets/css/style.css` incorporó:
+
+- **Color de acento** (`--accent`, azul) para links, foco, hover de "ver
+  más" y la barra de avance — reservado a interacción genérica, nunca se
+  mezcla con el semáforo de estado (verde/amarillo/rojo sigue siendo el
+  único código de color con significado de riesgo).
+- **Radio de borde** 6px → 10px y **sombras en capas** (dos sombras
+  superpuestas, tinte neutro en vez de negro puro) en todas las cards —
+  ambos cambios se propagan solo con actualizar las variables en `:root`.
+- **Iconografía SVG inline** (sin CDN ni fuentes de íconos externas):
+  set compartido en `scripts/common.py` (`icono()`, `icono_seccion()`,
+  `icono_flecha()`, constantes `ICONO_*`), usado en encabezados de
+  sección y en los botones principales (correo, confirmar, Jira, ver
+  más). Aplica a las 4 plantillas generadas y se replicó a mano en las 2
+  páginas `personalizado: true` (ver `contexto-proyecto/CONTEXTO.md`
+  sección 13 para el detalle completo y qué hacer si se agrega un
+  encabezado nuevo a esas 2 páginas).
+- Más espacio entre secciones (`separador-seccion` 32px → 44px) y
+  microinteracciones sutiles (flecha que se desliza al hover, botones
+  con leve elevación al pasar el mouse).
+
 ## Botón "Enviar consulta sobre este informe"
 
 Abre un borrador de correo (`mailto:`) dirigido siempre a
@@ -238,19 +299,27 @@ Abre un borrador de correo (`mailto:`) dirigido siempre a
 No envía nada automáticamente: primero pide confirmación en el navegador, y
 luego el usuario revisa y envía desde su propio cliente de correo.
 
-## Utilidades únicas del sistema (2026-09-07)
+## Utilidades únicas del sistema (2026-09-07, rediseñado 2026-09-18)
 
-Sección nueva al final del `index.html`, con tarjetas descargables
-(`<a ... download>`, sin JS) hacia `utilidades/`: una plantilla por cada
-operación de mantenimiento del sistema (registrar informe, registrar
-pendiente, actualizar persona, registrar brief) más un
-`glosario-palabras-clave.md` con todos los términos acuñados en el
-proyecto. Cada plantilla resume, en una sola página, qué campos tener a
-mano, la ruta exacta donde vive el dato, el comando a correr y un
-checklist de verificación — pensado para no tener que abrir este README
-completo para una tarea de rutina. El glosario es un documento vivo: se
-agrega un término cada vez que el proyecto crea uno nuevo (ver SOP-13 en
-`SOP.md`). Contenido no sensible — vive en el repo público, igual que
+Sección al final del `index.html`: una guía por cada operación de
+mantenimiento del sistema (registrar informe, registrar pendiente,
+actualizar persona, registrar brief) más un glosario con todos los
+términos acuñados en el proyecto.
+
+**Cambio 2026-09-18:** antes cada tarjeta era un enlace de descarga
+(`<a ... download>`) hacia un `.md` crudo en `utilidades/` — poco
+práctico de leer (sintaxis Markdown sin renderizar, había que abrirlo
+aparte). Ahora cada una es un acordeón nativo (`<details class="utilidad-card">`,
+sin JS) que se lee **directo en la página**: primero, en lenguaje simple,
+qué es y cuándo usarlo y los pasos a seguir; el comando técnico exacto
+queda al final, para quien lo necesite copiar. Los archivos `.md`
+originales en `utilidades/` se mantienen como referencia/histórico, pero
+ya no son la vía principal — el contenido vive ahora directamente en
+`templates/index_template.html` (sección `.seccion-utilidades`). El
+glosario sigue siendo un documento vivo: se agrega un término cada vez
+que el proyecto crea uno nuevo (ver SOP-13 en `SOP.md`), ahora agrupado
+por categoría (`<dl class="glosario-lista">`) en vez de una lista plana.
+Contenido no sensible — vive en el repo público, igual que
 `README.md`/`SOP.md`.
 
 ## Vista local vs. vista pública (2026-09-07)
@@ -353,6 +422,52 @@ es un documento de trabajo personal, más lento de mantener al día. Jira es
 la fuente vigente y se prioriza sobre el Excel cuando hay diferencia entre
 ambos — el Excel sirve como referencia complementaria (contexto histórico,
 notas por issue), no como fuente de verdad para el panel.
+
+### Sidebar "Mi seguimiento (Jira)": panel fijo tipo "drawer" (2026-09-18, rediseñado el mismo día)
+
+Para aprovechar mejor el ancho de pantalla, el panel "Mi seguimiento
+(Jira)" es una **barra lateral izquierda** (`<aside class="sidebar-jira">`)
+colapsable, mientras que "Tu seguimiento de personas, Marco" y "Tus
+informes" quedan juntos en `<div class="contenido-central">`.
+
+**Nota de diseño:** la primera versión usaba `position: sticky` +
+flexbox, y Marco reportó dos problemas: el contenido central cambiaba de
+ancho al mostrar/ocultar el panel, y el panel "bajaba un poco" al
+empezar a hacer scroll. Se rediseñó siguiendo el patrón estándar de
+paneles colapsables (Notion/VS Code/Linear):
+
+- El `<aside>` es `position: fixed` (no `sticky`) — su posición es
+  siempre relativa al viewport, nunca se mueve ni se "asienta" al
+  scrollear.
+- Vive dentro de un **carril reservado de ancho constante**
+  (variable `--sidebar-w: 340px` en `:root`, aplicada como
+  `padding-left` de `.main-index`) que **no cambia nunca**, esté el
+  panel abierto o cerrado. Al cerrarlo, el panel solo se desliza fuera
+  de vista dentro de su propio carril (`transform: translateX(-100%)`)
+  — `.contenido-central` no tiene ninguna regla que dependa del estado
+  del sidebar, así que su ancho es siempre el mismo.
+- El botón de mostrar/ocultar (`#btn-toggle-sidebar-jira`,
+  `.btn-toggle-sidebar-flotante`) vive **fuera** del `<aside>` a
+  propósito, para no deslizarse junto con el panel y quedar
+  inalcanzable una vez colapsado.
+- El estado (mostrado/oculto) se guarda en `localStorage`
+  (`sidebarJiraColapsado`) y se aplica con un `<script>` inline que
+  corre apenas se genera el `<aside>` (antes de que cargue el resto de
+  la página), para evitar el parpadeo de "se ve abierto y se cierra".
+  Sin JS, el panel simplemente queda visible siempre (degradación
+  segura).
+- Si `data/jira_snapshot.json` todavía no existe,
+  `render_panel_consolidado()` sigue devolviendo `""` — ni el `<aside>`
+  ni el botón se generan, y el carril reservado queda en blanco.
+- En pantallas angostas (`max-width: 900px`), `.main-index` deja de
+  reservar el carril y el panel pasa a modo overlay puro (se superpone
+  al contenido, como un drawer de navegación móvil).
+- Esto aplica solo al `index.html` principal (clase `.main-index`); las
+  páginas de informe individual y de reportes por persona no cambiaron.
+  El layout general ahora usa hasta 1520px para `.contenido-central`
+  (descontado el carril del sidebar) en vez del `max-width` fijo de
+  1080px de antes — en un monitor de 1920px, el contenido usa ~78% del
+  ancho horizontal total.
 
 ## Buscador de la bitácora (Operaciones Diarias)
 
@@ -488,6 +603,45 @@ confirmando que la persona está atendiendo ese punto — mismo mecanismo de
 confirmación previa que el botón de consulta de `informes/` (nunca se
 envía nada sin que la persona lo revise y lo mande ella misma).
 
+### Subcomandos de `manage_pendientes.py`
+
+- `nuevo`: registra un pendiente nuevo (ver arriba).
+- `editar --id <id>`: modifica un pendiente existente — `--estado-item`, `--criticidad`, `--solicitud`, `--recomendacion`, `--plazo`, y `--agregar-jira-url` (repetible, solo agrega enlaces nuevos sin duplicar los existentes). Regenera las mismas páginas que `nuevo`. El `id` exacto se busca en `data/pendientes.json`.
+- `eliminar --id <id>`: elimina un pendiente por su `id`. Si era el último pendiente de esa persona, avisa que la página `reportes/<persona-slug>/index.html` queda sin enlazar desde ningún índice, pero **no la borra** — queda en disco hasta que se decida a mano si aplica eliminarla.
+- `actualizar-persona --persona-slug <slug>`: corrige `persona_nombre`/`persona_cargo` en **todos** los pendientes de esa persona a la vez (evita que el dato quede desalineado entre ítems si tiene más de uno).
+- `build`: regenera todas las páginas de `reportes/` + `index.html` principal desde `data/pendientes.json` (útil tras editar el JSON a mano, o para reflejar un cambio hecho directo en `data/pendientes.json`).
+
+## Módulo "Briefs diarios"
+
+`briefs/` es la bandeja de briefs diarios en HTML que Marco genera fuera de
+este sistema (correo/Teams/Jira) y deja caer ahí para poder verlos desde un
+botón en el `index.html` principal (`assets/js/brief-viewer.js`, un
+`<dialog>` con el brief embebido en `<iframe>`). **La carpeta está excluida
+de git a propósito** (ver `.gitignore`, nota del 2026-09-07 en
+`contexto-proyecto/CONTEXTO.md`): los briefs traen correos reales de
+colegas y proveedores, detalle de negociación de contratos, montos/facturas
+y casos de clientes — contenido que la disciplina de este repo público
+excluye (ver arriba). El script y el manifiesto que genera viven
+físicamente en el repo, pero nunca se comitean.
+
+Convención de nombre de archivo: `DD-##-MM-YYYY-brief.html` (día,
+secuencia del brief dentro de ese día — permite más de uno, p. ej. mañana y
+tarde —, mes, año). Ejemplo: `23-01-09-2026-brief.html` = 23 de septiembre
+de 2026, brief #1.
+
+```bash
+python3 scripts/manage_briefs.py build
+```
+
+Escanea `briefs/*.html`, valida cada nombre contra el patrón (los que no
+matchean se ignoran con un aviso, no rompen el build), y escribe
+`briefs/manifest.json` con la lista completa y cuál es "el más reciente"
+(por fecha desc, luego secuencia desc) — el `index.html` público lee este
+manifiesto por `fetch()`; si la carpeta no existe (p. ej. en el sitio
+publicado en GitHub Pages, donde `briefs/` nunca llega porque está en
+`.gitignore`), el `fetch` falla en silencio y el botón del brief
+simplemente no aparece.
+
 ## Matemáticas usadas en el sistema
 
 A pedido explícito del usuario, el sistema usa un par de fórmulas conocidas
@@ -546,6 +700,46 @@ No se forzó una fórmula para cada tema que se mencionó (relatividad,
 Maxwell, Schrödinger) — no tenían una relación honesta con lo que hace
 este sistema, y forzarlas habría sido decoración vacía en vez de algo
 realmente curioso.
+
+## Estándares internos de desarrollo (auditoría 2026-09-23)
+
+`scripts/common.py` centraliza dos garantías que antes no existían, y que
+cualquier script/función nueva de este proyecto debe seguir usando (no
+reinventar `open(..., "w")` ni interpolación cruda de texto en HTML):
+
+- **`guardar_json_atomico(ruta, datos)`**: toda escritura de un archivo de
+  datos (`data/informes.json`, `data/pendientes.json`,
+  `briefs/manifest.json`) pasa por acá. Escribe primero a un archivo
+  temporal en el mismo directorio y solo al final hace `os.replace()`
+  (atómico en el mismo filesystem) sobre el destino. Si el proceso se
+  interrumpe a mitad de camino (Ctrl+C, corte de luz, error de disco), el
+  archivo original queda intacto en vez de truncado/inválido. Usada por
+  `guardar_informes()` (`manage_informes.py`), `guardar_pendientes()`
+  (`reportes_lib.py`) y `build()` (`manage_briefs.py`).
+- **`esc(texto)`**: envoltorio de `html.escape(str(texto), quote=True)`
+  (tolera `None`/no-strings). Se usa en **todo** campo de texto plano que
+  se interpola en un `render_*()` — título, resumen, categoría, nombre,
+  cargo, tema, keys/labels/resúmenes de Jira, nombres de fase — para que
+  un `&`/`<`/`>` suelto (copiado de Jira, de un correo, etc.) no genere
+  HTML mal formado. **Excepción deliberada:** `solicitud` y
+  `recomendacion` de `data/pendientes.json` llevan HTML enriquecido a
+  propósito (`<strong>`, `<ol>`, `<li>` — ver `render_pendiente_item()` en
+  `reportes_lib.py`) y **nunca** deben pasar por `esc()`, porque
+  destruiría ese formato convirtiendo las etiquetas en texto literal. Si
+  se agrega un campo de texto plano nuevo a cualquier `render_*()`, debe
+  envolverse en `esc()` salvo que, como esos dos, sea explícitamente un
+  campo de HTML enriquecido documentado como tal.
+- **Detección de huérfanos**: `manage_informes.py regenerar-paginas`
+  compara automáticamente las rutas de `data/informes.json` contra los
+  `.html` reales bajo `informes/` y avisa (sin borrar) si encuentra
+  alguno sin registro — ver detalle en la sección de `manage_informes.py`
+  más arriba.
+
+Detalle completo de por qué se hizo cada cambio, qué se encontró durante
+la auditoría (incluyendo un error propio corregido de inmediato) y qué
+queda fuera de alcance como recomendación a futuro (tests automatizados,
+estructura de paquete, CI/lint, JSON Schema) en
+`contexto-proyecto/CONTEXTO.md`, sección 19.
 
 ## Publicar con GitHub Pages (paso manual, una sola vez)
 

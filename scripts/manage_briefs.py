@@ -38,13 +38,12 @@ Uso:
   python3 scripts/manage_briefs.py build
 """
 
-import json
 import re
 import sys
 from datetime import date
 from pathlib import Path
 
-from common import ROOT
+from common import ROOT, guardar_json_atomico
 
 BRIEFS_DIR = ROOT / "briefs"
 MANIFEST_FILE = BRIEFS_DIR / "manifest.json"
@@ -121,9 +120,7 @@ def build() -> None:
         "mas_reciente": mas_reciente,
     }
 
-    MANIFEST_FILE.write_text(
-        json.dumps(manifiesto, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    guardar_json_atomico(MANIFEST_FILE, manifiesto)
 
     print(f"[OK] briefs/manifest.json regenerado con {len(encontrados)} brief(s).")
     if mas_reciente:

@@ -37,7 +37,16 @@ import re
 import unicodedata
 from datetime import date
 
-from common import ROOT, slugify  # noqa: F401  (slugify re-exportado por conveniencia)
+from common import (  # noqa: F401  (slugify re-exportado por conveniencia)
+    ROOT,
+    esc,
+    guardar_json_atomico,
+    slugify,
+    icono,
+    icono_flecha,
+    ICONO_CORREO,
+    ICONO_CHECK,
+)
 
 PENDIENTES_FILE = ROOT / "data" / "pendientes.json"
 
@@ -149,11 +158,8 @@ def cargar_pendientes() -> list:
 
 
 def guardar_pendientes(pendientes: list) -> None:
-    PENDIENTES_FILE.parent.mkdir(parents=True, exist_ok=True)
     ordenados = sorted(pendientes, key=lambda x: x["fecha"], reverse=True)
-    with open(PENDIENTES_FILE, "w", encoding="utf-8") as f:
-        json.dump(ordenados, f, ensure_ascii=False, indent=2)
-        f.write("\n")
+    guardar_json_atomico(PENDIENTES_FILE, ordenados)
 
 
 def agrupar_por_persona(pendientes: list) -> dict:
@@ -250,6 +256,66 @@ def entropia_sistema(pendientes: list):
     return round(100 * abiertos / len(pendientes), 1)
 
 
+# ---------- Desglose de subtareas de Jira (fase -> subtareas) ----------
+# Objetivo (petición explícita, 2026-09-18): cuando una fase de un informe
+# SÍ tiene desglose real de subtareas de Jira, su avance deja de ser una
+# estimación editorial (Done=100/En curso=50/Por hacer=0, convención
+# documentada en manage_informes.py) y se vuelve un HECHO VERIFICABLE: %
+# de subtareas en estado "Finalizada" sobre el total, recalculado en cada
+# build directamente desde data/informes.json. Distinguir "esto es un
+# hecho verificable" de "esto es una estimación" es un principio explícito
+# de este proyecto (ver CONTEXTO.md) — este es el primer lugar del sistema
+# donde una fase puede tener las dos cosas a la vez y hay que dejar claro
+# cuál aplica.
+ESTADO_SUBTAREA_CLASE = {
+    "Finalizada": "estado-verde",
+    "Abierta": "estado-amarillo",
+    "Tareas por hacer": "estado-amarillo",
+    "En curso": "estado-amarillo",
+    "Evaluación de Viabilidad": "estado-amarillo",
+    "Bloqueada": "estado-rojo",
+}
+
+
+def clase_estado_subtarea(estado: str) -> str:
+    return ESTADO_SUBTAREA_CLASE.get(estado, "estado-neutral")
+
+
+def avance_de_subtareas(subtareas: list) -> int:
+    """% de subtareas con estado 'Finalizada' sobre el total. Hecho
+    verificable (se recalcula siempre desde el detalle real de Jira
+    guardado en el JSON), no una estimación a mano — ver nota arriba."""
+    if not subtareas:
+        return 0
+    finalizadas = sum(1 for s in subtareas if s.get("estado") == "Finalizada")
+    return round(100 * finalizadas / len(subtareas))
+
+
+def render_desglose_subtareas(subtareas: list) -> str:
+    """Lista de subtareas de Jira bajo una fase, con enlace directo a cada
+    una y badge de estado — reusa las mismas clases estado-verde/amarillo/
+    rojo del resto del sitio en vez de inventar una paleta nueva solo para
+    este nivel de detalle. Misma filosofía que render_persona_card()/
+    render_pendiente_item(): una sola función de renderizado, para que
+    cualquier vista futura que necesite el mismo desglose (hoy solo el
+    informe individual) lo pinte siempre igual."""
+    if not subtareas:
+        return ""
+    filas = "\n".join(
+        f'        <li class="subtarea-item">'
+        f'<a href="https://cafsagroup.atlassian.net/browse/{esc(s["jira_key"])}" target="_blank" rel="noopener">{esc(s["jira_key"])}</a>'
+        f' — {esc(s["resumen"])} '
+        f'<span class="estado-badge estado-badge-mini {clase_estado_subtarea(s.get("estado", ""))}">{esc(s.get("estado", ""))}</span>'
+        f'</li>'
+        for s in subtareas
+    )
+    finalizadas = sum(1 for s in subtareas if s.get("estado") == "Finalizada")
+    return f"""      <ul class="subtareas-lista">
+{filas}
+      </ul>
+      <p class="subtareas-nota">{finalizadas}/{len(subtareas)} subtarea(s) finalizada(s) en Jira — dato verificable, recalculado en cada build.</p>"""
+
+
 def _con_saltos(texto: str) -> str:
     """Convierte '\\n' literales del texto (JSON no guarda saltos de línea
     reales de forma legible) en <br> — permite escribir solicitudes/
@@ -288,7 +354,7 @@ def render_pendiente_item(item: dict) -> str:
         )
 
     jira_botones = "\n".join(
-        f'        <a class="btn-secundario" href="{j["url"]}" target="_blank" rel="noopener">{j["label"]} &rarr;</a>'
+        f'        <a class="btn-secundario" href="{esc(j["url"])}" target="_blank" rel="noopener">{esc(j["label"])} {icono_flecha()}</a>'
         for j in item.get("jira_urls", [])
     )
 
@@ -306,7 +372,7 @@ def render_pendiente_item(item: dict) -> str:
         <span class="estado-badge {estado_clase}">{estado_label}</span>
         <span class="prioridad-badge prioridad-{criticidad}">{criticidad_label}</span>
       </div>
-      <h3>{item['tema']}</h3>
+      <h3>{esc(item['tema'])}</h3>
       <p class="page-meta" style="margin-bottom:4px">{item['fecha']}</p>
       <p class="solicitud">{_con_saltos(item['solicitud'])}</p>
 {plazo_html}
@@ -314,11 +380,11 @@ def render_pendiente_item(item: dict) -> str:
 {recomendacion_html}
       <div class="acciones">
 {jira_botones}
-        <button class="btn-consulta" data-modo-local="boton" data-tema="{item['tema']}" onclick="confirmarSeguimiento(this)">
-          Confirmar seguimiento
+        <button class="btn-consulta" data-modo-local="boton" data-tema="{esc(item['tema'])}" onclick="confirmarSeguimiento(this)">
+          {icono(ICONO_CHECK)} Confirmar seguimiento
         </button>
-        <button class="btn-secundario btn-redactar" data-modo-local="boton" data-persona="{item['persona_nombre']}" data-tema="{item['tema']}" data-cuerpo="{cuerpo_correo}" onclick="redactarCorreo(this)">
-          Redactar correo a {item['persona_nombre'].split()[0]}
+        <button class="btn-secundario btn-redactar" data-modo-local="boton" data-persona="{esc(item['persona_nombre'])}" data-tema="{esc(item['tema'])}" data-cuerpo="{cuerpo_correo}" onclick="redactarCorreo(this)">
+          {icono(ICONO_CORREO)} Redactar correo a {esc(item['persona_nombre'].split()[0])}
         </button>
       </div>
     </article>"""
@@ -363,9 +429,9 @@ def render_persona_card(persona_slug: str, items: list, base_path: str = "") -> 
         <span class="jerarquia-badge jerarquia-{nivel_orden}" title="Jerarquía organizacional: se infiere del cargo declarado (Gerencia &gt; Jefatura &gt; PMO/Coordinación &gt; Contacto operativo). Define el orden de las tarjetas, no la criticidad de cada pendiente.">{nivel_etiqueta}</span>
         <span class="estado-badge {clase_badge}">{label_badge}</span>
       </div>
-      <h3><a href="{href}">{nombre}</a></h3>
-      <p class="cargo" title="{cargo}">{cargo}</p>
-      <p class="conteo">{conteo}</p>
+      <h3><a href="{href}">{esc(nombre)}</a></h3>
+      <p class="cargo" title="{esc(cargo)}">{esc(cargo)}</p>
+      <p class="conteo">{esc(conteo)}</p>
       <p class="formula-nota" title="Teorema de Pitágoras: magnitud = √(a²+b²) — a = pendientes abiertos, b = de esos, cuántos son de criticidad alta. Así lo de criticidad alta 'pesa' más que lineal en el total.">Magnitud de atención (√(a²+b²)): {magnitud}</p>
-      <a href="{href}">Ver pendientes y solicitudes &rarr;</a>
+      <a href="{href}">Ver pendientes y solicitudes {icono_flecha()}</a>
     </div>"""
