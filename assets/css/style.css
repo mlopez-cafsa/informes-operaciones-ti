@@ -820,6 +820,35 @@ main {
   box-shadow: var(--shadow);
 }
 
+.resumen-ejecutivo .resumen-titulo {
+  margin: 0 0 8px;
+}
+
+.resumen-ejecutivo p {
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.resumen-ejecutivo p:last-child,
+.resumen-ejecutivo ul:last-child {
+  margin-bottom: 0;
+}
+
+.resumen-ejecutivo ul,
+.resumen-ejecutivo ol {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.resumen-ejecutivo li {
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.resumen-ejecutivo li strong {
+  color: var(--cafsa-black);
+}
+
 .chart-container {
   background: var(--cafsa-white);
   border: 1px solid var(--cafsa-border);
