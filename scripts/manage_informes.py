@@ -106,6 +106,7 @@ from reportes_lib import (
     render_persona_card,
     texto_plazo,
 )
+from modelos import validar_informe
 
 DATA_FILE = ROOT / "data" / "informes.json"
 JIRA_SNAPSHOT_FILE = ROOT / "data" / "jira_snapshot.json"
@@ -198,10 +199,21 @@ def cargar_informes() -> list:
     if not DATA_FILE.exists():
         return []
     with open(DATA_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        informes = json.load(f)
+    for informe in informes:
+        try:
+            validar_informe(informe)
+        except ValueError as e:
+            sys.exit(f"[ERROR] data/informes.json tiene un registro inválido: {e}")
+    return informes
 
 
 def guardar_informes(informes: list) -> None:
+    for informe in informes:
+        try:
+            validar_informe(informe)
+        except ValueError as e:
+            sys.exit(f"[ERROR] No se guardó data/informes.json — registro inválido: {e}")
     informes_ordenados = sorted(
         informes, key=lambda x: (x.get("destacado", False), x["fecha"]), reverse=True
     )

@@ -34,6 +34,7 @@ alimentan ningún cálculo, son un saludo para quien lea el código fuente.
 import json
 import math
 import re
+import sys
 import unicodedata
 from datetime import date
 
@@ -47,6 +48,7 @@ from common import (  # noqa: F401  (slugify re-exportado por conveniencia)
     ICONO_CORREO,
     ICONO_CHECK,
 )
+from modelos import validar_pendiente
 
 PENDIENTES_FILE = ROOT / "data" / "pendientes.json"
 
@@ -154,10 +156,21 @@ def cargar_pendientes() -> list:
     if not PENDIENTES_FILE.exists():
         return []
     with open(PENDIENTES_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        pendientes = json.load(f)
+    for pendiente in pendientes:
+        try:
+            validar_pendiente(pendiente)
+        except ValueError as e:
+            sys.exit(f"[ERROR] data/pendientes.json tiene un registro inválido: {e}")
+    return pendientes
 
 
 def guardar_pendientes(pendientes: list) -> None:
+    for pendiente in pendientes:
+        try:
+            validar_pendiente(pendiente)
+        except ValueError as e:
+            sys.exit(f"[ERROR] No se guardó data/pendientes.json — registro inválido: {e}")
     ordenados = sorted(pendientes, key=lambda x: x["fecha"], reverse=True)
     guardar_json_atomico(PENDIENTES_FILE, ordenados)
 
