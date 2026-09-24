@@ -1,5 +1,94 @@
 [
   {
+    "id": "luis-aguilar-morales-2026-09-23-bestresource-factura-de-agosto-y-caida-de-la-base-",
+    "persona_slug": "luis-aguilar-morales",
+    "persona_nombre": "Luis Aguilar Morales",
+    "persona_cargo": "Gerente de TI",
+    "fecha": "2026-09-23",
+    "tema": "BestResource — factura de agosto y caída de la base de desarrollo",
+    "solicitud": "El 22/09 Luis pidio ayuda con el hilo de la factura de agosto de BestResource (el proveedor consulta si ya puede facturar) y reenvio el aviso de la caida de la base de desarrollo de CAFSA en Linea, preguntando por que no se apoyo a Angel -- Kevin la resolvio esa misma manana. Manana 24/09 a las 11 AM hay seguimiento de casos BestResource (organiza Kevin) donde ambos estan convocados.",
+    "plazo": "2026-09-24",
+    "criticidad": "alta",
+    "recomendacion": "Responder a Luis antes del seguimiento de manana con el estado de validacion del informe de agosto (que falta para aprobar la factura) y el contexto del incidente de la base de desarrollo. Se sugiere registrar el incidente del servidor .133 con causa raiz, porque tambien afecto la prueba de integracion que tenia bloqueada Geovanny en el mismo servidor.",
+    "jira_urls": [],
+    "estado_item": "pendiente"
+  },
+  {
+    "id": "luis-aguilar-morales-2026-09-23-deloitte-sync-org-scanner-documento-pendiente-de-c",
+    "persona_slug": "luis-aguilar-morales",
+    "persona_nombre": "Luis Aguilar Morales",
+    "persona_cargo": "Gerente de TI",
+    "fecha": "2026-09-23",
+    "tema": "Deloitte — Sync Org Scanner: documento pendiente de completar",
+    "solicitud": "Luis coordina desde el 01/09 con Deloitte (Ana Maria Robayo) el 'Sync Org Scanner'. Al 23/09 el documento enviado sigue incompleto -- todos los campos deben quedar llenos hasta que el estado 'Validar' se ponga en verde -- y Deloitte propuso una llamada hoy (23/09) o el jueves 24/09.",
+    "plazo": "2026-09-24",
+    "criticidad": "media",
+    "recomendacion": "Confirmar con Luis si TI debe completar algun campo pendiente del documento antes de la llamada propuesta, para no llegar sin la informacion resuelta.",
+    "jira_urls": [],
+    "estado_item": "pendiente"
+  },
+  {
+    "id": "luis-aguilar-morales-2026-09-23-contratos-de-proveedores-sin-firmar-ciberisk-y-nda",
+    "persona_slug": "luis-aguilar-morales",
+    "persona_nombre": "Luis Aguilar Morales",
+    "persona_cargo": "Gerente de TI",
+    "fecha": "2026-09-23",
+    "tema": "Contratos de proveedores sin firmar: Ciberisk y NDA Horizon-CX",
+    "solicitud": "Dos expedientes de proveedor siguen sin cerrar: (1) el contrato de servicios de Ciberisk para el usuario de prueba de CAFSA, pendiente desde el 07/09 -- Luis insistio con Daniela de Ciberisk el 20/09 sin respuesta del proveedor; (2) el NDA de Horizon-CX sigue sin el documento firmado de parte de CAFSA -- al 22/09 ambos estan en copia de un reclamo del proveedor por la demora.",
+    "plazo": null,
+    "criticidad": "alta",
+    "recomendacion": "Dar seguimiento a Ciberisk antes de que el expediente incompleto se convierta en hallazgo de auditoria (riesgo contractual ya senalado). Para Horizon-CX, resolver con Luis si la firma del NDA la gestiona TI o Legal, y destrabar el reclamo del proveedor.",
+    "jira_urls": [],
+    "estado_item": "pendiente"
+  },
+  {
+    "id": "luis-aguilar-morales-2026-09-23-bd-consultores-actualizacion-gx-v8-cambios-regulat",
+    "persona_slug": "luis-aguilar-morales",
+    "persona_nombre": "Luis Aguilar Morales",
+    "persona_cargo": "Gerente de TI",
+    "fecha": "2026-09-23",
+    "tema": "BD Consultores — actualizacion /gx v8 (cambios regulatorios SINPE/BCCR)",
+    "solicitud": "El 22/09 Luis reenvio el aviso de BD Consultores sobre /gx v8 y asigno coordinar la actualizacion con Herman Camacho por los cambios regulatorios de SINPE/BCCR.",
+    "plazo": null,
+    "criticidad": "media",
+    "recomendacion": "Confirmar a Luis el estado de la coordinacion con Herman Camacho antes de que el deba responderle a BCCR.",
+    "jira_urls": [],
+    "estado_item": "pendiente"
+  },
+  {
+    "id": "luis-aguilar-morales-2026-09-23-gaudi-avance-de-requerimientos-para-reportar-al-bc",
+    "persona_slug": "luis-aguilar-morales",
+    "persona_nombre": "Luis Aguilar Morales",
+    "persona_cargo": "Gerente de TI",
+    "fecha": "2026-09-23",
+    "tema": "GAUDI — avance de requerimientos para reportar al BCCR",
+    "solicitud": "El 13/09 Luis pidio el avance de cada requerimiento de GAUDI para reportarlo al BCCR antes del 28/09. La Fase 1 del proyecto (PP-233) vence el 30/09.",
+    "plazo": "2026-09-28",
+    "criticidad": "alta",
+    "recomendacion": "Enviar el avance consolidado a Luis con margen antes del 28/09 -- es el unico pendiente de gerencia con fecha regulatoria proxima.",
+    "jira_urls": [
+      {
+        "label": "Ver PP-233 en Jira",
+        "url": "https://cafsagroup.atlassian.net/browse/PP-233"
+      }
+    ],
+    "estado_item": "pendiente"
+  },
+  {
+    "id": "luis-aguilar-morales-2026-09-23-sugef-cierre-de-expediente-7-for-251-y-hallazgo-r1",
+    "persona_slug": "luis-aguilar-morales",
+    "persona_nombre": "Luis Aguilar Morales",
+    "persona_cargo": "Gerente de TI",
+    "fecha": "2026-09-23",
+    "tema": "SUGEF — cierre de expediente (7-FOR-251) y hallazgo R16",
+    "solicitud": "Luis lidero desde el 08/09 la entrega de evidencias para el requerimiento de informacion de SUGEF (oficio SGF-1071-2026). Al 18/09 pidio confirmar si el Formulario 7-FOR-251 quedo corregido y firmado, y el 21/09 seguia coordinando el hallazgo R16 del mismo requerimiento.",
+    "plazo": null,
+    "criticidad": "media",
+    "recomendacion": "Confirmar con Andres Zamora si el 7-FOR-251 quedo corregido y firmado, y el estado del hallazgo R16, antes de darle a Luis el expediente SUGEF por cerrado.",
+    "jira_urls": [],
+    "estado_item": "pendiente"
+  },
+  {
     "id": "cristopher-perez-ugalde-2026-08-27-des-1741-migracion-core-financiero-abanks-forms-14",
     "persona_slug": "cristopher-perez-ugalde",
     "persona_nombre": "Cristopher Pérez Ugalde",
