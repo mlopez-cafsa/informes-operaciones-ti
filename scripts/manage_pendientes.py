@@ -52,18 +52,24 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from common import ROOT, esc, slugify, parse_jira_url
+from common import ROOT, esc, icono_seccion, slugify, parse_jira_url, ICONO_GRAFICO, ICONO_OBJETIVO
 from reportes_lib import (
     CRITICIDADES_VALIDAS,
     ESTADOS_ITEM_VALIDOS,
     ORDEN_ESTADO,
-    agrupar_por_persona,
+    cargar_iniciativas,
     cargar_pendientes,
     entropia_sistema,
+    guardar_iniciativas,
     guardar_pendientes,
+    informes_por_propietario,
+    iniciativas_por_persona,
     orden_persona,
+    personas_a_mostrar,
+    render_iniciativa_card,
     render_pendiente_item,
     render_persona_card,
+    render_proyecto_persona_card,
     urgencia_gravitacional,
 )
 
@@ -72,8 +78,62 @@ REPORTES_DIR = ROOT / "reportes"
 REPORTES_INDEX_OUTPUT = REPORTES_DIR / "index.html"
 
 
-def render_persona_page(items: list) -> str:
+def render_proyectos_seccion(persona_slug: str, informes: list) -> str:
+    """Sección 'Proyectos en seguimiento' de la página de una persona:
+    informes cuyo propietario_slug coincide con ella (ver
+    reportes_lib.informes_por_propietario/render_proyecto_persona_card).
+    Distinto de los pendientes: no es una solicitud puntual, es el estado
+    real y verificable de un proyecto completo del que es responsable, con
+    % de avance, para que lo revise directo sin ir hasta 'Tus informes'.
+    Devuelve "" (sección omitida del todo) si la persona no tiene ningún
+    informe marcado con su propietario_slug."""
+    propios = informes_por_propietario(informes, persona_slug)
+    if not propios:
+        return ""
+    tarjetas = "\n".join(render_proyecto_persona_card(i) for i in propios)
+    return f"""  <div class="titulo-seccion">
+    {icono_seccion(ICONO_GRAFICO, 20)}
+    <h2 class="page-title">Proyectos en seguimiento</h2>
+  </div>
+  <p class="page-meta">Estado real tomado de Jira · actualizado al {date.today().isoformat()} · {len(propios)} proyecto(s)</p>
+
+  <div class="informes-grid">
+{tarjetas}
+  </div>
+"""
+
+
+def render_iniciativas_seccion(persona_slug: str, iniciativas: list) -> str:
+    """Sección 'Iniciativas' de la página de una persona: documentos de
+    análisis/propuesta puntuales que se le han enviado para revisión (ver
+    reportes_lib.iniciativas_por_persona/render_iniciativa_card). Distinto
+    de un pendiente (solicitud con seguimiento/estado) y de un proyecto
+    (avance %) — acá cada card es simplemente un documento para que la
+    persona lo abra y lo revise. Devuelve "" (sección omitida del todo) si
+    la persona no tiene ninguna iniciativa registrada."""
+    propias = iniciativas_por_persona(iniciativas, persona_slug)
+    if not propias:
+        return ""
+    tarjetas = "\n".join(render_iniciativa_card(i, base_path="../../") for i in propias)
+    return f"""  <div class="titulo-seccion">
+    {icono_seccion(ICONO_OBJETIVO, 20)}
+    <h2 class="page-title">Iniciativas</h2>
+  </div>
+  <p class="page-meta">Documentos de análisis para tu revisión · actualizado al {date.today().isoformat()} · {len(propias)} iniciativa(s)</p>
+
+  <div class="informes-grid">
+{tarjetas}
+  </div>
+"""
+
+
+def render_persona_page(persona_slug: str, persona: dict, informes: list, iniciativas: list) -> str:
+    """persona: dict {'nombre','cargo','items'} armado por
+    reportes_lib.personas_a_mostrar() — 'items' puede ser [] cuando la
+    persona no tiene ningún pendiente puntual pero sí proyectos en
+    seguimiento (petición explícita, 2026-09-24)."""
     plantilla = (TEMPLATES_DIR / "pendiente_persona_template.html").read_text(encoding="utf-8")
+    items = persona["items"]
     # Orden: primero por estado de flujo (pendiente > en_atención > resuelto),
     # y dentro de cada estado, por urgencia gravitacional descendente
     # (F=G·m/r² — ver reportes_lib.urgencia_gravitacional). Los ítems sin
@@ -86,25 +146,33 @@ def render_persona_page(items: list) -> str:
             x["fecha"],
         ),
     )
-    items_html = "\n".join(render_pendiente_item(i) for i in items_ordenados)
+    items_html = (
+        "\n".join(render_pendiente_item(i) for i in items_ordenados)
+        if items_ordenados else
+        '    <p class="page-meta">Sin pendientes puntuales registrados actualmente.</p>'
+    )
+    proyectos_html = render_proyectos_seccion(persona_slug, informes)
+    iniciativas_html = render_iniciativas_seccion(persona_slug, iniciativas)
 
     salida = plantilla
-    salida = salida.replace("{{PERSONA_NOMBRE}}", esc(items[0]["persona_nombre"]))
-    salida = salida.replace("{{PERSONA_CARGO}}", esc(items[0]["persona_cargo"]))
+    salida = salida.replace("{{PERSONA_NOMBRE}}", esc(persona["nombre"]))
+    salida = salida.replace("{{PERSONA_CARGO}}", esc(persona["cargo"]))
     salida = salida.replace("{{FECHA_GENERACION}}", date.today().isoformat())
     salida = salida.replace("{{TOTAL_PENDIENTES}}", str(len(items)))
     salida = salida.replace("<!--__PENDIENTES_LISTA__-->", items_html)
+    salida = salida.replace("<!--__INICIATIVAS_SECCION__-->", iniciativas_html)
+    salida = salida.replace("<!--__PROYECTOS_SECCION__-->", proyectos_html)
     return salida
 
 
-def build_reportes_index(por_persona: dict, pendientes: list) -> None:
+def build_reportes_index(personas: dict, pendientes: list) -> None:
     plantilla_index = (TEMPLATES_DIR / "reportes_index_template.html").read_text(encoding="utf-8")
     # Orden por jerarquía organizacional (Gerencia > Jefatura > PMO/
     # Coordinación > Contacto operativo), no alfabético — ver orden_persona().
-    orden = sorted(por_persona.items(), key=lambda kv: orden_persona(kv[1]))
+    orden = sorted(personas.items(), key=lambda kv: orden_persona(kv[1]))
     tarjetas = "\n".join(
-        render_persona_card(slug, items) for slug, items in orden
-    ) if por_persona else '    <p class="page-meta">Todavía no hay pendientes registrados.</p>'
+        render_persona_card(slug, persona) for slug, persona in orden
+    ) if personas else '    <p class="page-meta">Todavía no hay pendientes registrados.</p>'
 
     entropia = entropia_sistema(pendientes)
     entropia_html = (
@@ -121,28 +189,37 @@ def build_reportes_index(por_persona: dict, pendientes: list) -> None:
     salida = plantilla_index
     salida = salida.replace("<!--__PERSONAS_GRID__-->", tarjetas)
     salida = salida.replace("{{FECHA_GENERACION}}", date.today().isoformat())
-    salida = salida.replace("{{TOTAL_PERSONAS}}", str(len(por_persona)))
+    salida = salida.replace("{{TOTAL_PERSONAS}}", str(len(personas)))
     salida = salida.replace("<!--__ENTROPIA__-->", entropia_html)
     REPORTES_INDEX_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     REPORTES_INDEX_OUTPUT.write_text(salida, encoding="utf-8")
-    print(f"[OK] reportes/index.html regenerado con {len(por_persona)} persona(s).")
+    print(f"[OK] reportes/index.html regenerado con {len(personas)} persona(s).")
 
 
 def build() -> None:
     pendientes = cargar_pendientes()
-    por_persona = agrupar_por_persona(pendientes)
+    iniciativas = cargar_iniciativas()
+    # Import diferido (no a nivel de módulo): evita un import circular, ya
+    # que manage_informes.py importa de reportes_lib.py.
+    import manage_informes
+    informes = manage_informes.cargar_informes()
+    # Unión de "tiene al menos un pendiente" con "es propietaria de al
+    # menos un proyecto" (informes.json/propietario_slug) — petición
+    # explícita 2026-09-24: una persona no debe perder su página de
+    # seguimiento solo porque ya no le queda ningún pendiente puntual, si
+    # todavía tiene proyectos reales que revisar. Ver personas_a_mostrar().
+    personas = personas_a_mostrar(pendientes, informes)
 
-    for persona_slug, items in por_persona.items():
+    for persona_slug, persona in personas.items():
         destino = REPORTES_DIR / persona_slug / "index.html"
         destino.parent.mkdir(parents=True, exist_ok=True)
-        destino.write_text(render_persona_page(items), encoding="utf-8")
+        destino.write_text(render_persona_page(persona_slug, persona, informes, iniciativas), encoding="utf-8")
         print(f"[OK] Regenerado: {destino.relative_to(ROOT)}")
 
-    build_reportes_index(por_persona, pendientes)
+    build_reportes_index(personas, pendientes)
 
     # Mantiene sincronizada la sección "Reportes y seguimientos" del index
     # principal, que vive en manage_informes.py (mismo directorio scripts/).
-    import manage_informes
     manage_informes.build_index()
 
 
@@ -164,10 +241,54 @@ def eliminar_pendiente(args) -> None:
     print("[OK] index.html principal y reportes/index.html actualizados.")
 
     if not restantes:
-        pagina_huerfana = REPORTES_DIR / persona_slug / "index.html"
-        print(f"[AVISO] '{eliminado['persona_nombre']}' ya no tiene pendientes registrados.")
-        print(f"        {pagina_huerfana.relative_to(ROOT)} ya no está enlazada desde ningún índice,")
-        print("        pero el archivo sigue existiendo en disco (no se borra solo). Bórralo a mano si ya no aplica.")
+        import manage_informes
+        tiene_proyectos = any(
+            i.get("propietario_slug") == persona_slug for i in manage_informes.cargar_informes()
+        )
+        pagina = REPORTES_DIR / persona_slug / "index.html"
+        if tiene_proyectos:
+            print(f"[OK] '{eliminado['persona_nombre']}' ya no tiene pendientes puntuales, pero su página")
+            print(f"     sigue enlazada por sus proyectos en seguimiento: {pagina.relative_to(ROOT)}")
+        else:
+            print(f"[AVISO] '{eliminado['persona_nombre']}' ya no tiene pendientes registrados.")
+            print(f"        {pagina.relative_to(ROOT)} ya no está enlazada desde ningún índice,")
+            print("        pero el archivo sigue existiendo en disco (no se borra solo). Bórralo a mano si ya no aplica.")
+
+
+def crear_iniciativa(args) -> None:
+    persona_slug = args.persona_slug
+    ruta_archivo = Path(args.archivo)
+    if not ruta_archivo.is_absolute():
+        ruta_archivo = ROOT / ruta_archivo
+    if not ruta_archivo.exists():
+        sys.exit(f"[ERROR] No existe el archivo '{ruta_archivo}'. Colócalo primero en "
+                  f"reportes/{persona_slug}/iniciativas/ y vuelve a correr este comando.")
+
+    fecha = args.fecha or date.today().isoformat()
+    tema_slug = slugify(args.titulo)[:50]
+    iniciativa_id = f"{persona_slug}-{fecha}-{tema_slug}"
+
+    iniciativas = cargar_iniciativas()
+    if any(i["id"] == iniciativa_id for i in iniciativas):
+        sys.exit(f"[ERROR] Ya existe una iniciativa con id '{iniciativa_id}'. Usa otro título o fecha.")
+
+    iniciativa = {
+        "id": iniciativa_id,
+        "persona_slug": persona_slug,
+        "titulo": args.titulo,
+        "fecha": fecha,
+        "categoria": args.categoria,
+        "resumen": args.resumen,
+        "ruta": str(ruta_archivo.relative_to(ROOT)).replace("\\", "/"),
+    }
+
+    iniciativas.append(iniciativa)
+    guardar_iniciativas(iniciativas)
+    build()
+
+    print(f"[OK] Iniciativa registrada con id '{iniciativa_id}'.")
+    print(f"[OK] Página actualizada: reportes/{persona_slug}/index.html")
+    print("[OK] index.html principal actualizado (sección Reportes y seguimientos).")
 
 
 def actualizar_persona(args) -> None:
@@ -340,6 +461,15 @@ def main():
     p_persona.add_argument("--persona-cargo", default=None, dest="persona_cargo")
     p_persona.add_argument("--persona-nombre", default=None, dest="persona_nombre")
     p_persona.set_defaults(func=actualizar_persona)
+
+    p_iniciativa = sub.add_parser("nueva-iniciativa", help="Registrar una iniciativa (documento HTML ya creado) y regenerar las páginas afectadas")
+    p_iniciativa.add_argument("--persona-slug", required=True, dest="persona_slug", help="Slug tal como aparece en reportes/<slug>/ (ver data/personas.json)")
+    p_iniciativa.add_argument("--titulo", required=True)
+    p_iniciativa.add_argument("--categoria", required=True, help="Etiqueta corta, ej. 'Análisis de proveedor'")
+    p_iniciativa.add_argument("--resumen", required=True, help="1-2 líneas para la card, no el documento completo")
+    p_iniciativa.add_argument("--archivo", required=True, help="Ruta al .html ya colocado en reportes/<slug>/iniciativas/")
+    p_iniciativa.add_argument("--fecha", default=None, help="YYYY-MM-DD (default: hoy)")
+    p_iniciativa.set_defaults(func=crear_iniciativa)
 
     p_build = sub.add_parser("build", help="Regenerar todas las páginas desde data/pendientes.json")
     p_build.set_defaults(func=lambda args: build())

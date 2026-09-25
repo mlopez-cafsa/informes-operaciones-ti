@@ -89,37 +89,6 @@
     "estado_item": "pendiente"
   },
   {
-    "id": "cristopher-perez-ugalde-2026-08-27-des-1741-migracion-core-financiero-abanks-forms-14",
-    "persona_slug": "cristopher-perez-ugalde",
-    "persona_nombre": "Cristopher Pérez Ugalde",
-    "persona_cargo": "Jefe de TI",
-    "fecha": "2026-08-27",
-    "tema": "DES-1741 — Migración Core Financiero ABANKS (Forms 14c)",
-    "solicitud": "Indicar con quien coordinar la instalacion de servidores/componentes de produccion (DES-1745, DES-1748) y del ambiente Virtualizador de Oracle (DES-1753), para asignar tiempos y responsables. Debe priorizarse por el plazo: es el tema mas urgente de este seguimiento.",
-    "plazo": "2026-09-30",
-    "criticidad": "alta",
-    "recomendacion": "Se sugiere involucrar al equipo de Infraestructura para coordinar la instalacion de servidores/componentes de produccion (DES-1745, DES-1748) y del ambiente Virtualizador de Oracle (DES-1753).",
-    "jira_urls": [
-      {
-        "label": "Ver DES-1741 en Jira",
-        "url": "https://cafsagroup.atlassian.net/browse/DES-1741"
-      },
-      {
-        "label": "Ver DES-1745 en Jira",
-        "url": "https://cafsagroup.atlassian.net/browse/DES-1745"
-      },
-      {
-        "label": "Ver DES-1748 en Jira",
-        "url": "https://cafsagroup.atlassian.net/browse/DES-1748"
-      },
-      {
-        "label": "Ver DES-1753 en Jira",
-        "url": "https://cafsagroup.atlassian.net/browse/DES-1753"
-      }
-    ],
-    "estado_item": "pendiente"
-  },
-  {
     "id": "maria-cristina-hernandez-2026-08-27-pp-216-xl-cor-01-consolidado",
     "persona_slug": "maria-cristina-hernandez",
     "persona_nombre": "María Cristina Hernández",

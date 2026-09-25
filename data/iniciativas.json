@@ -1,0 +1,11 @@
+[
+  {
+    "id": "cristopher-perez-ugalde-2026-09-24-analisis-df-doble-factor-de-autenticacion-bd-consu",
+    "persona_slug": "cristopher-perez-ugalde",
+    "titulo": "Análisis /df — Doble Factor de Autenticación (BD Consultores)",
+    "fecha": "2026-09-24",
+    "categoria": "Análisis de proveedor",
+    "resumen": "Evaluación preliminar del producto /df (2FA/OTP) de BD Consultores: qué se sabe, su relación (independiente) con la obligación regulatoria de GAUDI, qué información falta pedir al proveedor, y ruta propuesta de implementación.",
+    "ruta": "reportes/cristopher-perez-ugalde/iniciativas/24-09-2026-ANALISIS-df-doble-factor.html"
+  }
+]

@@ -212,15 +212,51 @@
         "nombre": "Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)",
         "avance": 0,
         "subtareas": [
-          {"jira_key": "PP-291", "resumen": "Preparacion y aprobacion de alcance", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-292", "resumen": "Setup y estructura del proyecto", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-293", "resumen": "Capa de Servicios SOAP", "estado": "Finalizada"},
-          {"jira_key": "PP-294", "resumen": "Core y Autenticacion", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-295", "resumen": "Migracion del Controlador Admin", "estado": "Finalizada"},
-          {"jira_key": "PP-296", "resumen": "Migracion de Modelos", "estado": "Finalizada"},
-          {"jira_key": "PP-297", "resumen": "Migracion de Vistas y JavaScript", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-298", "resumen": "Seguridad y Refactor", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-299", "resumen": "Pruebas finales y Pase a Produccion", "estado": "Tareas por hacer"}
+          {
+            "jira_key": "PP-291",
+            "resumen": "Preparacion y aprobacion de alcance",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-292",
+            "resumen": "Setup y estructura del proyecto",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-293",
+            "resumen": "Capa de Servicios SOAP",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "PP-294",
+            "resumen": "Core y Autenticacion",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-295",
+            "resumen": "Migracion del Controlador Admin",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "PP-296",
+            "resumen": "Migracion de Modelos",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "PP-297",
+            "resumen": "Migracion de Vistas y JavaScript",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-298",
+            "resumen": "Seguridad y Refactor",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-299",
+            "resumen": "Pruebas finales y Pase a Produccion",
+            "estado": "Tareas por hacer"
+          }
         ]
       }
     ],
@@ -252,16 +288,56 @@
         "nombre": "Integracion GAUDI en CAFSA en Linea - FASE 1 (PP-233)",
         "avance": 0,
         "subtareas": [
-          {"jira_key": "PP-280", "resumen": "Entrega de diseno de login ajustado a GAUDI", "estado": "Finalizada"},
-          {"jira_key": "PP-281", "resumen": "Analisis y diseno funcional", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-282", "resumen": "Frontend - boton/opcion de ingreso GAUDI", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-283", "resumen": "Frontend - Modal de identificacion y accesibilidad", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-284", "resumen": "Responsive Desktop/Movil", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-285", "resumen": "Simulador backend de respuestas GAUDI (pre-integracion)", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-286", "resumen": "Pruebas UI/UX y ajustes finales", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-287", "resumen": "Documentacion", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-288", "resumen": "Revision y firma de Acta de Aceptacion", "estado": "Tareas por hacer"},
-          {"jira_key": "PP-289", "resumen": "Pase a produccion", "estado": "Tareas por hacer"}
+          {
+            "jira_key": "PP-280",
+            "resumen": "Entrega de diseno de login ajustado a GAUDI",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "PP-281",
+            "resumen": "Analisis y diseno funcional",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-282",
+            "resumen": "Frontend - boton/opcion de ingreso GAUDI",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-283",
+            "resumen": "Frontend - Modal de identificacion y accesibilidad",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-284",
+            "resumen": "Responsive Desktop/Movil",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-285",
+            "resumen": "Simulador backend de respuestas GAUDI (pre-integracion)",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-286",
+            "resumen": "Pruebas UI/UX y ajustes finales",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-287",
+            "resumen": "Documentacion",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-288",
+            "resumen": "Revision y firma de Acta de Aceptacion",
+            "estado": "Tareas por hacer"
+          },
+          {
+            "jira_key": "PP-289",
+            "resumen": "Pase a produccion",
+            "estado": "Tareas por hacer"
+          }
         ]
       }
     ],
@@ -359,12 +435,36 @@
         "nombre": "Correccion de discrepancias en estimaciones contables (BMO-252)",
         "avance": 0,
         "subtareas": [
-          {"jira_key": "BMO-253", "resumen": "Montos Mitigadores Negativos", "estado": "Abierta"},
-          {"jira_key": "BMO-254", "resumen": "Segmentacion Empresarial", "estado": "Finalizada"},
-          {"jira_key": "BMO-255", "resumen": "Cuentas por Cobrar", "estado": "Finalizada"},
-          {"jira_key": "BMO-256", "resumen": "Optimizacion Rendimiento Consultas BD", "estado": "Finalizada"},
-          {"jira_key": "BMO-257", "resumen": "Coordinacion Tecnica y Configuracion", "estado": "Finalizada"},
-          {"jira_key": "BMO-258", "resumen": "Documentacion y Consolidacion", "estado": "Finalizada"}
+          {
+            "jira_key": "BMO-253",
+            "resumen": "Montos Mitigadores Negativos",
+            "estado": "Abierta"
+          },
+          {
+            "jira_key": "BMO-254",
+            "resumen": "Segmentacion Empresarial",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "BMO-255",
+            "resumen": "Cuentas por Cobrar",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "BMO-256",
+            "resumen": "Optimizacion Rendimiento Consultas BD",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "BMO-257",
+            "resumen": "Coordinacion Tecnica y Configuracion",
+            "estado": "Finalizada"
+          },
+          {
+            "jira_key": "BMO-258",
+            "resumen": "Documentacion y Consolidacion",
+            "estado": "Finalizada"
+          }
         ]
       }
     ],

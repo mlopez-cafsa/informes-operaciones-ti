@@ -48,9 +48,11 @@ from common import (  # noqa: F401  (slugify re-exportado por conveniencia)
     ICONO_CORREO,
     ICONO_CHECK,
 )
-from modelos import validar_pendiente
+from modelos import validar_pendiente, validar_iniciativa
 
 PENDIENTES_FILE = ROOT / "data" / "pendientes.json"
+PERSONAS_FILE = ROOT / "data" / "personas.json"
+INICIATIVAS_FILE = ROOT / "data" / "iniciativas.json"
 
 # ---------- Jerarquía organizacional (petición explícita, 2026-08-29) ----------
 # Se usa para ORDENAR y ETIQUETAR las tarjetas de persona (mayor jerarquía
@@ -91,13 +93,15 @@ def nivel_jerarquico(persona_cargo: str):
     return NIVEL_DEFECTO
 
 
-def orden_persona(items: list):
+def orden_persona(persona: dict):
     """Clave de orden para las tarjetas de persona: primero por jerarquía
     organizacional (menor número = más jerarquía), y dentro del mismo
     nivel, por magnitud de atención descendente (quien más necesita
-    atención primero dentro de su propio nivel)."""
-    orden, _ = nivel_jerarquico(items[0]["persona_cargo"])
-    return (orden, -magnitud_atencion(items), items[0]["persona_nombre"])
+    atención primero dentro de su propio nivel). 'persona' es el dict
+    {'nombre','cargo','items'} que arma personas_a_mostrar() — 'items'
+    puede ser [] (persona sin pendientes, solo con proyectos)."""
+    orden, _ = nivel_jerarquico(persona["cargo"])
+    return (orden, -magnitud_atencion(persona["items"]), persona["nombre"])
 
 
 def texto_plano(html: str) -> str:
@@ -180,6 +184,60 @@ def agrupar_por_persona(pendientes: list) -> dict:
     for item in pendientes:
         por_persona.setdefault(item["persona_slug"], []).append(item)
     return por_persona
+
+
+def cargar_personas() -> dict:
+    """Registro de personas (slug -> {'nombre','cargo'}) en
+    data/personas.json. Existe SOLO como respaldo de nombre/cargo para una
+    persona que puede tener página de seguimiento sin tener ningún
+    pendiente activo — por ejemplo, alguien que es propietario de
+    proyectos (informes.json/propietario_slug) pero ya no tiene ninguna
+    solicitud puntual registrada (petición explícita, 2026-09-24: no
+    perder de vista sus proyectos solo porque su último pendiente se
+    eliminó). Para cualquier persona que SÍ tiene al menos un pendiente,
+    su nombre/cargo se sigue tomando de ahí — ver personas_a_mostrar()."""
+    if not PERSONAS_FILE.exists():
+        return {}
+    with open(PERSONAS_FILE, "r", encoding="utf-8") as f:
+        registro = json.load(f)
+    return {p["slug"]: p for p in registro}
+
+
+def personas_a_mostrar(pendientes: list, informes: list) -> dict:
+    """Slug -> {'nombre', 'cargo', 'items'} para TODA persona que debe
+    tener tarjeta/página en el módulo Reportes y seguimientos: quien
+    tenga al menos un pendiente (activo o resuelto), UNIDO con quien sea
+    propietaria de al menos un proyecto (informes.json/propietario_slug),
+    UNIDO con cualquier persona registrada en data/personas.json (el
+    directorio de personas que Marco sigue puntualmente, aunque hoy no
+    tenga ningún pendiente ni proyecto — corregido 2026-09-25: antes una
+    persona sin nada activo desaparecía del todo y su página quedaba
+    huérfana en disco con contenido desactualizado; ahora su página se
+    regenera igual, mostrando 'Sin pendientes puntuales registrados
+    actualmente', para que nunca muestre información vieja). 'items' es
+    su lista de pendientes (puede ser []). Una persona sin ningún
+    pendiente/proyecto y SIN registro en personas.json se omite del
+    todo — no hay de dónde sacar su nombre/cargo, y no vale la pena
+    inventarlos."""
+    resultado: dict = {}
+    for slug, items in agrupar_por_persona(pendientes).items():
+        resultado[slug] = {
+            "nombre": items[0]["persona_nombre"],
+            "cargo": items[0]["persona_cargo"],
+            "items": items,
+        }
+
+    registro = cargar_personas()
+    propietarios = {i["propietario_slug"] for i in informes if i.get("propietario_slug")}
+    for slug in propietarios | set(registro):
+        if slug in resultado:
+            continue
+        persona = registro.get(slug)
+        if not persona:
+            continue
+        resultado[slug] = {"nombre": persona["nombre"], "cargo": persona["cargo"], "items": []}
+
+    return resultado
 
 
 def dias_restantes(plazo: str):
@@ -304,6 +362,49 @@ def avance_de_subtareas(subtareas: list) -> int:
     return round(100 * finalizadas / len(subtareas))
 
 
+def avance_efectivo_fase(fase: dict) -> int:
+    """Avance real de una fase de informe. Si la fase declara "subtareas"
+    (desglose real de Jira), el avance ES el % de subtareas 'Finalizada'
+    — un hecho verificable que se recalcula siempre desde ese detalle, y
+    por lo tanto IGNORA cualquier número que haya quedado guardado en
+    "avance" para esa fase (para no arriesgar que ambos se
+    desincronicen). Si la fase no tiene desglose, se usa el número
+    declarado a mano (estimación editorial, ver convención
+    Done=100/En curso=50/Por hacer=0 documentada en manage_informes.py).
+
+    Vive acá (no en manage_informes.py) para que manage_pendientes.py
+    también pueda calcular el % real de un informe (sección 'Proyectos en
+    seguimiento' de la página de persona) sin crear un import circular
+    entre los dos scripts — manage_informes.py importa esta misma función
+    en vez de duplicarla."""
+    subtareas = fase.get("subtareas")
+    if subtareas:
+        return avance_de_subtareas(subtareas)
+    return fase["avance"]
+
+
+def avance_de(informe: dict):
+    """Devuelve (pct, detalle) o (None, None) si un informe no tiene dato
+    de avance. Prioridad: fases > subtareas_completadas/total > avance
+    explícito. Ver nota de avance_efectivo_fase() sobre por qué vive acá."""
+    fases = informe.get("fases") or []
+    if fases:
+        pct = round(sum(avance_efectivo_fase(f) for f in fases) / len(fases))
+        return pct, f"{len(fases)} fase(s) · promedio"
+
+    completadas = informe.get("subtareas_completadas")
+    total = informe.get("subtareas_total")
+    if completadas is not None and total:
+        pct = round(100 * completadas / total)
+        return pct, f"{completadas}/{total} etapas"
+
+    avance = informe.get("avance")
+    if avance is not None:
+        return avance, f"{avance}% de avance"
+
+    return None, None
+
+
 def render_desglose_subtareas(subtareas: list) -> str:
     """Lista de subtareas de Jira bajo una fase, con enlace directo a cada
     una y badge de estado — reusa las mismas clases estado-verde/amarillo/
@@ -416,25 +517,31 @@ def resumen_persona(items: list):
     return "estado-amarillo", "En seguimiento"
 
 
-def render_persona_card(persona_slug: str, items: list, base_path: str = "") -> str:
+def render_persona_card(persona_slug: str, persona: dict, base_path: str = "") -> str:
     """base_path: prefijo relativo hasta la carpeta reportes/. Vacío cuando
     se renderiza dentro de reportes/index.html (los links son 'slug/...'),
     'reportes/' cuando se renderiza en el index.html principal (los links
-    deben ser 'reportes/slug/...').
+    deben ser 'reportes/slug/...'). 'persona' es el dict
+    {'nombre','cargo','items'} que arma personas_a_mostrar() — 'items'
+    puede ser [] (persona sin ningún pendiente, solo con proyectos en
+    seguimiento).
 
     Estructura fija de 'carriles' (jerarquía / estado / título / cargo /
     conteo / magnitud / link) para que todas las cards midan igual sin
     importar el largo del nombre o el cargo — ver .persona-card en
     style.css. Orden de las cards en el grid: ver orden_persona()."""
+    items = persona["items"]
     abiertos = [i for i in items if i["estado_item"] != "resuelto"]
-    nombre = items[0]["persona_nombre"]
-    cargo = items[0]["persona_cargo"]
+    nombre = persona["nombre"]
+    cargo = persona["cargo"]
     clase_badge, label_badge = resumen_persona(items)
     nivel_orden, nivel_etiqueta = nivel_jerarquico(cargo)
-    conteo = (
-        f"{len(abiertos)} pendiente(s) abierto(s) de {len(items)} total"
-        if abiertos else f"Sin pendientes abiertos ({len(items)} en historial)"
-    )
+    if not items:
+        conteo = "Sin pendientes puntuales registrados actualmente"
+    elif abiertos:
+        conteo = f"{len(abiertos)} pendiente(s) abierto(s) de {len(items)} total"
+    else:
+        conteo = f"Sin pendientes abiertos ({len(items)} en historial)"
     magnitud = magnitud_atencion(items)
     href = f"{base_path}{persona_slug}/index.html"
     return f"""    <div class="persona-card">
@@ -447,4 +554,142 @@ def render_persona_card(persona_slug: str, items: list, base_path: str = "") -> 
       <p class="conteo">{esc(conteo)}</p>
       <p class="formula-nota" title="Teorema de Pitágoras: magnitud = √(a²+b²) — a = pendientes abiertos, b = de esos, cuántos son de criticidad alta. Así lo de criticidad alta 'pesa' más que lineal en el total.">Magnitud de atención (√(a²+b²)): {magnitud}</p>
       <a href="{href}">Ver pendientes y solicitudes {icono_flecha()}</a>
+    </div>"""
+
+
+ESTADOS_INFORME_LABEL = {
+    "verde": "A tiempo",
+    "amarillo": "En riesgo",
+    "rojo": "Atrasado",
+    "neutral": "Sin definir",
+}
+
+PRIORIDADES_INFORME_LABEL = {
+    "alta": "Prioridad alta",
+    "media": "Prioridad media",
+    "baja": "Prioridad baja",
+}
+
+
+def cargar_iniciativas() -> list:
+    """Registro de iniciativas (data/iniciativas.json): documentos de
+    análisis/propuesta puntuales, escritos a mano como HTML autocontenido
+    (no generados por plantilla), que se registran acá SOLO para que
+    aparezcan listados y enlazados desde la página de la persona
+    correspondiente — el contenido del documento en sí vive en su propio
+    archivo bajo reportes/<persona-slug>/iniciativas/."""
+    if not INICIATIVAS_FILE.exists():
+        return []
+    with open(INICIATIVAS_FILE, "r", encoding="utf-8") as f:
+        iniciativas = json.load(f)
+    for iniciativa in iniciativas:
+        try:
+            validar_iniciativa(iniciativa)
+        except ValueError as e:
+            sys.exit(f"[ERROR] data/iniciativas.json tiene un registro inválido: {e}")
+    return iniciativas
+
+
+def guardar_iniciativas(iniciativas: list) -> None:
+    for iniciativa in iniciativas:
+        try:
+            validar_iniciativa(iniciativa)
+        except ValueError as e:
+            sys.exit(f"[ERROR] No se guardó data/iniciativas.json — registro inválido: {e}")
+    ordenadas = sorted(iniciativas, key=lambda x: x["fecha"], reverse=True)
+    guardar_json_atomico(INICIATIVAS_FILE, ordenadas)
+
+
+def iniciativas_por_persona(iniciativas: list, persona_slug: str) -> list:
+    """Iniciativas de una persona, más recientes primero (mismo orden que
+    guardar_iniciativas())."""
+    propias = [i for i in iniciativas if i["persona_slug"] == persona_slug]
+    return sorted(propias, key=lambda i: i["fecha"], reverse=True)
+
+
+def render_iniciativa_card(iniciativa: dict, base_path: str = "") -> str:
+    """Card de una iniciativa dentro de la página de una persona — reusa
+    las mismas clases .informe-card/.categoria/.card-footer que ya pinta
+    el resto del sitio (mismo lenguaje visual, sin inventar una card
+    nueva). A diferencia de un pendiente (solicitud con seguimiento/
+    estado) o un proyecto (avance %), una iniciativa es un documento de
+    análisis puntual — la card solo necesita título, categoría, resumen y
+    el link al documento completo.
+
+    base_path: prefijo relativo hasta la raíz del sitio (por defecto
+    '../../', la profundidad real de reportes/<slug>/index.html) — la
+    'ruta' del registro ya incluye 'reportes/<slug>/iniciativas/...'."""
+    href = f"{base_path}{iniciativa['ruta']}"
+    return f"""    <div class="informe-card">
+      <div class="card-top">
+        <span class="categoria">{esc(iniciativa['categoria'])}</span>
+      </div>
+      <h3><a href="{href}">{esc(iniciativa['titulo'])}</a></h3>
+      <p class="resumen">{esc(iniciativa['resumen'])}</p>
+      <div class="card-footer">
+        <span>{iniciativa['fecha']}</span>
+        <a href="{href}">Ver análisis completo {icono_flecha()}</a>
+      </div>
+    </div>"""
+
+
+def informes_por_propietario(informes: list, persona_slug: str) -> list:
+    """Informes cuyo campo 'propietario_slug' coincide con la persona —
+    ver render_proyecto_persona_card(). Orden: mismo criterio ejecutivo
+    que el index principal (orden_atencion, menor primero, sin declarar
+    va al final)."""
+    propios = [i for i in informes if i.get("propietario_slug") == persona_slug]
+    return sorted(propios, key=lambda i: i.get("orden_atencion", 999))
+
+
+def render_proyecto_persona_card(informe: dict, base_path: str = "../../") -> str:
+    """Card compacta de proyecto dentro de la página de una persona —
+    'Proyectos en seguimiento' (petición explícita, 2026-09-24): a
+    diferencia de un pendiente (una solicitud puntual dirigida a esa
+    persona), esto es el estado real y verificable de un proyecto del que
+    esa persona es responsable, para que lo pueda revisar directo sin
+    tener que ir hasta 'Tus informes'. Reutiliza las mismas clases
+    .informe-card/.progreso/.pct-semaforo que ya pinta el index principal
+    — mismo diseño, sin inventar una card nueva — y enlaza al informe
+    completo para el detalle fase por fase.
+
+    base_path: prefijo relativo hasta la raíz del sitio (por defecto
+    '../../', que es la profundidad real de reportes/<slug>/index.html)."""
+    estado = informe.get("estado", "neutral")
+    estado_label = ESTADOS_INFORME_LABEL.get(estado, "Sin definir")
+    prioridad = informe.get("prioridad")
+    prioridad_label = PRIORIDADES_INFORME_LABEL.get(prioridad, "")
+    prioridad_html = (
+        f'<span class="prioridad-badge prioridad-{prioridad}">{prioridad_label}</span>'
+        if prioridad else ""
+    )
+
+    pct, detalle = avance_de(informe)
+    progreso_html = ""
+    if pct is not None:
+        pct = max(0, min(100, pct))
+        progreso_html = f"""      <div class="progreso" role="progressbar" aria-valuenow="{pct}" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: {detalle}">
+        <div class="progreso-barra"><div class="progreso-relleno" data-pct="{pct}" style="width:{pct}%"></div></div>
+        <span class="progreso-label">{detalle} (<span class="pct-semaforo" data-pct="{pct}">{pct}%</span>)</span>
+      </div>"""
+
+    vencimiento = informe.get("vencimiento")
+    vencimiento_html = f" &middot; {texto_plazo(vencimiento)}" if vencimiento else ""
+
+    href = f"{base_path}{informe['ruta']}"
+    return f"""    <div class="informe-card">
+      <div class="card-top">
+        <span class="categoria">{esc(informe['categoria'])}</span>
+        <div class="badges-wrap">
+          {prioridad_html}
+          <span class="estado-badge estado-{estado}">{estado_label}</span>
+        </div>
+      </div>
+      <h3><a href="{href}">{esc(informe['titulo'])}</a></h3>
+      <p class="resumen">{esc(informe['resumen'])}</p>
+{progreso_html}
+      <div class="card-footer">
+        <span>{informe['fecha']}{vencimiento_html}</span>
+        <a href="{href}">Ver informe completo {icono_flecha()}</a>
+      </div>
     </div>"""

@@ -92,6 +92,7 @@ class Informe:
     destacado: bool = False
     personalizado: bool = False
     orden_atencion: int = 999
+    propietario_slug: str = None
 
     def __post_init__(self):
         for campo in ("id", "titulo", "categoria", "resumen", "ruta"):
@@ -138,6 +139,31 @@ class Pendiente:
         _lista_de_dicts("jira_urls", self.jira_urls, claves_requeridas=("label", "url"))
 
 
+@dataclass
+class Iniciativa:
+    """Espejo de la forma de un registro en `data/iniciativas.json`. Cada
+    iniciativa es un análisis/documento puntual (HTML autocontenido,
+    escrito a mano, no generado por plantilla) que se le envía a UNA
+    persona para su revisión — distinto de un pendiente (una solicitud
+    con seguimiento/estado) y distinto de un informe (estado de un
+    proyecto). Ver `render_iniciativa_card()`/`iniciativas_por_persona()`
+    en reportes_lib.py y el subcomando `nueva-iniciativa` de
+    manage_pendientes.py."""
+
+    id: str
+    persona_slug: str
+    titulo: str
+    fecha: str
+    categoria: str
+    resumen: str
+    ruta: str
+
+    def __post_init__(self):
+        for campo in ("id", "persona_slug", "titulo", "categoria", "resumen", "ruta"):
+            _requerido(campo, getattr(self, campo))
+        _fecha_iso("fecha", self.fecha)
+
+
 def _construir(cls, dato: dict, etiqueta: str):
     if not isinstance(dato, dict):
         raise ValueError(f"cada {etiqueta} debe ser un objeto JSON (recibido: {type(dato).__name__})")
@@ -160,3 +186,8 @@ def validar_informe(dato: dict) -> None:
 def validar_pendiente(dato: dict) -> None:
     """Igual que `validar_informe()`, para un registro de pendiente."""
     _construir(Pendiente, dato, "pendiente")
+
+
+def validar_iniciativa(dato: dict) -> None:
+    """Igual que `validar_informe()`, para un registro de iniciativa."""
+    _construir(Iniciativa, dato, "iniciativa")

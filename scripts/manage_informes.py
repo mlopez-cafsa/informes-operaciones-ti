@@ -98,10 +98,12 @@ from common import (
     ICONO_BUZON_VACIO,
 )
 from reportes_lib import (
-    agrupar_por_persona,
+    avance_de,
     avance_de_subtareas,
+    avance_efectivo_fase,
     cargar_pendientes,
     orden_persona,
+    personas_a_mostrar,
     render_desglose_subtareas,
     render_persona_card,
     texto_plazo,
@@ -218,42 +220,6 @@ def guardar_informes(informes: list) -> None:
         informes, key=lambda x: (x.get("destacado", False), x["fecha"]), reverse=True
     )
     guardar_json_atomico(DATA_FILE, informes_ordenados)
-
-
-def avance_efectivo_fase(fase: dict) -> int:
-    """Avance real de una fase. Si la fase declara "subtareas" (desglose
-    real de Jira), el avance ES el % de subtareas 'Finalizada' — un hecho
-    verificable que se recalcula siempre desde ese detalle, y por lo tanto
-    IGNORA cualquier número que haya quedado guardado en "avance" para esa
-    fase (para no arriesgar que ambos se desincronicen). Si la fase no
-    tiene desglose, se usa el número declarado a mano (estimación
-    editorial, ver convención Done=100/En curso=50/Por hacer=0 en el
-    docstring del módulo)."""
-    subtareas = fase.get("subtareas")
-    if subtareas:
-        return avance_de_subtareas(subtareas)
-    return fase["avance"]
-
-
-def avance_de(informe: dict):
-    """Devuelve (pct, detalle) o (None, None) si no hay dato de avance.
-    Prioridad: fases > subtareas_completadas/total > avance explícito."""
-    fases = informe.get("fases") or []
-    if fases:
-        pct = round(sum(avance_efectivo_fase(f) for f in fases) / len(fases))
-        return pct, f"{len(fases)} fase(s) · promedio"
-
-    completadas = informe.get("subtareas_completadas")
-    total = informe.get("subtareas_total")
-    if completadas is not None and total:
-        pct = round(100 * completadas / total)
-        return pct, f"{completadas}/{total} etapas"
-
-    avance = informe.get("avance")
-    if avance is not None:
-        return avance, f"{avance}% de avance"
-
-    return None, None
 
 
 def render_progreso(informe: dict) -> str:
@@ -390,22 +356,27 @@ def render_filtro(categoria: str) -> str:
     return f'      <button type="button" data-filtro="{esc(categoria)}" role="tab" aria-selected="false">{esc(categoria)}</button>'
 
 
-def render_seccion_reportes() -> str:
+def render_seccion_reportes(informes: list) -> tuple:
     """Sección 'Reportes y seguimientos' embebida en el index principal —
     misma tarjeta de persona que reportes/index.html (ver reportes_lib.py),
-    con base_path='reportes/' porque los links parten desde la raíz."""
+    con base_path='reportes/' porque los links parten desde la raíz.
+    Incluye tanto a quien tiene pendientes puntuales como a quien es
+    propietaria de proyectos sin tener ninguno (ver
+    reportes_lib.personas_a_mostrar — petición explícita, 2026-09-24).
+    Devuelve (html, total_personas)."""
     pendientes = cargar_pendientes()
-    por_persona = agrupar_por_persona(pendientes)
-    if not por_persona:
-        return '    <p class="page-meta">Todavía no hay reportes/pendientes registrados.</p>'
+    personas = personas_a_mostrar(pendientes, informes)
+    if not personas:
+        return '    <p class="page-meta">Todavía no hay reportes/pendientes registrados.</p>', 0
     # Orden por jerarquía organizacional (Gerencia > Jefatura > PMO/
     # Coordinación > Contacto operativo), no alfabético — ver orden_persona()
     # en reportes_lib.py. Mismo criterio que reportes/index.html.
-    orden = sorted(por_persona.items(), key=lambda kv: orden_persona(kv[1]))
-    return "\n".join(
-        render_persona_card(slug, items, base_path="reportes/")
-        for slug, items in orden
+    orden = sorted(personas.items(), key=lambda kv: orden_persona(kv[1]))
+    html = "\n".join(
+        render_persona_card(slug, persona, base_path="reportes/")
+        for slug, persona in orden
     )
+    return html, len(personas)
 
 
 def cargar_jira_snapshot():
@@ -569,9 +540,7 @@ def build_index() -> None:
     grid_html = "\n".join(render_card(i) for i in informes_por_atencion) if informes else \
         '    <p class="page-meta">Todavía no hay informes publicados.</p>'
 
-    pendientes = cargar_pendientes()
-    total_personas = len(agrupar_por_persona(pendientes))
-    reportes_html = render_seccion_reportes()
+    reportes_html, total_personas = render_seccion_reportes(informes)
     panel_consolidado_html = render_panel_consolidado()
 
     salida = template

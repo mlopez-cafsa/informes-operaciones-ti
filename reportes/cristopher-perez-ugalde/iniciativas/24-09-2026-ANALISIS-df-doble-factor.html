@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análisis de Iniciativa — Solución de Doble Factor /df (BD Consultores)</title>
+<style>
+  :root{
+    --azul-cafsa:#0b3d63;
+    --azul-claro:#e8f1f8;
+    --gris-texto:#2b2b2b;
+    --gris-claro:#f4f5f7;
+    --borde:#d8dee5;
+    --verde-hecho:#1a7f4e;
+    --naranja-recom:#b56a00;
+    --rojo-pendiente:#a4282c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    color:var(--gris-texto);
+    background:#ffffff;
+    margin:0;
+    line-height:1.55;
+    font-size:15px;
+  }
+  .wrapper{max-width:960px;margin:0 auto;padding:32px 28px 80px;}
+  header.doc-header{
+    border-bottom:4px solid var(--azul-cafsa);
+    padding-bottom:18px;
+    margin-bottom:28px;
+  }
+  header.doc-header h1{
+    color:var(--azul-cafsa);
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  header.doc-header p.subtitle{
+    margin:0;
+    color:#555;
+    font-size:14px;
+  }
+  .meta-box{
+    background:var(--gris-claro);
+    border:1px solid var(--borde);
+    border-radius:6px;
+    padding:12px 16px;
+    margin-top:14px;
+    font-size:13px;
+    color:#444;
+  }
+  .meta-box table{border-collapse:collapse;width:100%;}
+  .meta-box td{padding:3px 8px 3px 0;vertical-align:top;}
+  .meta-box td.label{font-weight:600;color:var(--azul-cafsa);white-space:nowrap;}
+
+  nav.toc{
+    background:var(--azul-claro);
+    border:1px solid var(--borde);
+    border-radius:6px;
+    padding:16px 20px;
+    margin-bottom:32px;
+  }
+  nav.toc h2{font-size:15px;margin:0 0 10px;color:var(--azul-cafsa);}
+  nav.toc ol{margin:0;padding-left:20px;}
+  nav.toc li{margin-bottom:4px;font-size:14px;}
+  nav.toc a{color:var(--azul-cafsa);text-decoration:none;}
+  nav.toc a:hover{text-decoration:underline;}
+
+  section{margin-bottom:36px;}
+  h2.section-title{
+    color:var(--azul-cafsa);
+    font-size:19px;
+    border-bottom:2px solid var(--azul-claro);
+    padding-bottom:6px;
+    margin-bottom:16px;
+  }
+  h3{font-size:15.5px;color:#17364f;margin:18px 0 8px;}
+
+  .tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    padding:2px 8px;
+    border-radius:3px;
+    margin-bottom:8px;
+  }
+  .tag.hecho{background:#e4f4ea;color:var(--verde-hecho);border:1px solid #b8e0c8;}
+  .tag.recom{background:#fdf1e0;color:var(--naranja-recom);border:1px solid #f0d5a6;}
+  .tag.pendiente{background:#fbe9ea;color:var(--rojo-pendiente);border:1px solid #eec2c4;}
+
+  blockquote.fuente{
+    background:var(--gris-claro);
+    border-left:4px solid var(--azul-cafsa);
+    margin:10px 0;
+    padding:10px 16px;
+    font-style:italic;
+    color:#3a3a3a;
+    font-size:14px;
+  }
+
+  table.tabla-considera{
+    width:100%;
+    border-collapse:collapse;
+    margin:10px 0 6px;
+    font-size:13.5px;
+  }
+  table.tabla-considera th{
+    background:var(--azul-cafsa);
+    color:#fff;
+    text-align:left;
+    padding:8px 10px;
+  }
+  table.tabla-considera td{
+    border:1px solid var(--borde);
+    padding:8px 10px;
+    vertical-align:top;
+  }
+  table.tabla-considera tr:nth-child(even) td{background:#fafbfc;}
+
+  ul.lista-check li{margin-bottom:6px;}
+  ul.lista-check{padding-left:22px;}
+
+  .pasos{counter-reset:paso;list-style:none;padding:0;margin:0;}
+  .pasos li{
+    counter-increment:paso;
+    position:relative;
+    padding:10px 14px 10px 46px;
+    margin-bottom:10px;
+    background:var(--gris-claro);
+    border:1px solid var(--borde);
+    border-radius:6px;
+  }
+  .pasos li::before{
+    content:counter(paso);
+    position:absolute;
+    left:10px;
+    top:8px;
+    width:24px;
+    height:24px;
+    background:var(--azul-cafsa);
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:700;
+  }
+  .pasos li strong{color:var(--azul-cafsa);}
+
+  .nota-critica{
+    background:#fbe9ea;
+    border:1px solid #eec2c4;
+    border-radius:6px;
+    padding:12px 16px;
+    margin:14px 0;
+    font-size:13.5px;
+  }
+  .nota-critica strong{color:var(--rojo-pendiente);}
+
+  .resumen-ejecutivo{
+    background:var(--azul-claro);
+    border:1px solid #c7dced;
+    border-left:4px solid var(--azul-cafsa);
+    border-radius:6px;
+    padding:16px 20px;
+    margin-bottom:24px;
+  }
+  .resumen-ejecutivo h2{
+    font-size:16px;
+    color:var(--azul-cafsa);
+    margin:0 0 10px;
+  }
+  .resumen-ejecutivo ul{margin:0;padding-left:20px;}
+  .resumen-ejecutivo li{margin-bottom:6px;font-size:14px;}
+  .resumen-ejecutivo li strong{color:var(--azul-cafsa);}
+
+  footer{
+    margin-top:50px;
+    padding-top:14px;
+    border-top:1px solid var(--borde);
+    font-size:12px;
+    color:#888;
+  }
+
+  a.btn-volver{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:18px;
+    padding:8px 16px;
+    background:var(--azul-cafsa);
+    color:#ffffff;
+    border-radius:6px;
+    font-size:13.5px;
+    font-weight:600;
+    text-decoration:none;
+  }
+  a.btn-volver:hover{background:#0a3252;}
+
+  @media print{
+    nav.toc{display:none;}
+    a.btn-volver{display:none;}
+    body{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <a class="btn-volver" href="../index.html">&larr; Volver al seguimiento de Cristopher Pérez Ugalde</a>
+
+  <header class="doc-header">
+    <h1>Iniciativa - Solución de Doble Factor de Autenticación /df</h1>
+    <p class="subtitle">Análisis preliminar de alcance, requisitos y consideraciones de implementación — proveedor BD Finance S.A. (BD Consultores)</p>
+    <div class="meta-box">
+      <table>
+        <tr><td class="label">Proyecto:</td><td>SaaS BD Finance SA - Iniciativa doble factor de autenticación</td></tr>
+        <tr><td class="label">Preparado para:</td><td>Marco Vinicio López Zamora — Ingeniero de Operaciones de TI, CAFSA</td></tr>
+        <tr><td class="label">Fecha de análisis:</td><td>24 de septiembre, 2026</td></tr>
+        <tr><td class="label">Estado del servicio:</td><td><strong>No contratado.</strong> /df es un producto independiente de BD Consultores.</td></tr>
+        <tr><td class="label">Fuente primaria disponible:</td><td>Página pública de BD Consultores — "Soluciones de Omnicanalidad" (<a href="https://www.bdconsultores.com/soluciones-de-omnicanalidad/#PELdfSection" target="_blank">bdconsultores.com/soluciones-de-omnicanalidad</a>)</td></tr>
+      </table>
+    </div>
+  </header>
+
+  <div class="resumen-ejecutivo">
+    <h2>Resumen ejecutivo — para revisión rápida</h2>
+    <ul>
+      <li><strong>Qué es:</strong> /df es un producto comercial de BD Consultores (2FA/OTP vía servicios REST) — hoy <strong>no contratado</strong> por CAFSA, distinto y no sustituible de GAUDI (que es un mecanismo regulatorio del BCCR).</li>
+      <li><strong>Por qué importa ahora:</strong> coincide en el tiempo con la obligación regulatoria de GAUDI, por lo que conviene documentar ante gerencia que son dos iniciativas independientes (Sección 2), para no reportar avance regulatorio donde no lo hay.</li>
+      <li><strong>Qué falta:</strong> toda la información base del proveedor — ficha técnica, modelo de despliegue/cobro, especificación REST, requisitos de red (Sección 3). Hoy la única fuente es una página de mercadeo.</li>
+      <li><strong>Siguiente paso concreto:</strong> solicitar a BD Consultores (Herman Camacho / Rebeca Benavides) la ficha técnica y propuesta formal, y definir internamente el caso de uso a proteger antes de cualquier conversación técnica (Sección 7, paso 1-2).</li>
+    </ul>
+  </div>
+
+  <nav class="toc">
+    <h2>Contenido del análisis</h2>
+    <ol>
+      <li><a href="#seccion1">Qué es /df — información confirmada</a></li>
+      <li><a href="#seccion2">Por qué es relevante para CAFSA ahora</a></li>
+      <li><a href="#seccion3">Qué se necesita para implementarlo</a></li>
+      <li><a href="#seccion4">Consideraciones técnicas de integración</a></li>
+      <li><a href="#seccion5">Consideraciones de seguridad y regulatorias</a></li>
+      <li><a href="#seccion6">Consideraciones contractuales y comerciales</a></li>
+      <li><a href="#seccion7">Propuesta de ruta de implementación</a></li>
+      <li><a href="#seccion8">Preguntas puntuales a plantear a BD Finance</a></li>
+    </ol>
+  </nav>
+
+  <!-- SECCION 1 -->
+  <section id="seccion1">
+    <h2 class="section-title">1. Qué es /df — información confirmada</h2>
+    <span class="tag hecho">Hecho verificable</span>
+    <blockquote class="fuente">
+      "La solución para ofrecer doble factor de manera robusta y dinámica es /df, con capacidad para ofrecer seguridad adicional a los canales electrónicos. La seguridad es base con /df, ofreciendo una capacidad de generar OTP. Esta solución está lista para integrar con cualquier tipo de aplicativo que así lo requiera mediante servicios REST."
+      <br><em>— BD Consultores, página "Soluciones de Omnicanalidad"</em>
+    </blockquote>
+    <p>Esto es, textualmente, todo lo que el proveedor publica sobre /df. De ahí se pueden extraer tres datos objetivos:</p>
+    <ul class="lista-check">
+      <li><strong>Función principal:</strong> generación de contraseñas de un solo uso (OTP — One Time Password) como segundo factor de autenticación.</li>
+      <li><strong>Propósito declarado:</strong> "seguridad adicional a los canales electrónicos" — sugiere que está pensado para proteger canales de cara al cliente (banca en línea, app móvil), no necesariamente procesos internos de backoffice.</li>
+      <li><strong>Mecanismo de integración:</strong> servicios REST, agnóstico del aplicativo que lo consuma ("cualquier tipo de aplicativo que así lo requiera").</li>
+    </ul>
+    <p>No se publica información sobre: canal de entrega del OTP (SMS, correo, app autenticadora, push), vigencia/expiración del código, algoritmo utilizado (TOTP/HOTP u otro propietario), modelo de despliegue (SaaS como /gx, on-premise, o híbrido), ni si requiere licenciamiento por canal, por transacción o por usuario.</p>
+  </section>
+
+  <!-- SECCION 2 -->
+  <section id="seccion2">
+    <h2 class="section-title">2. Por qué es relevante para CAFSA ahora</h2>
+    <span class="tag recom">Consideración / recomendación técnica</span>
+    <p>Esta iniciativa no surge en el vacío: coincide en el tiempo con el comunicado del BCCR sobre obligaciones de autenticación de clientes vía GAUDI (Reglamento de Sistema de Pagos, artículos 13 y 14, y la Norma Técnica de Experiencia de Usuario en GAUDI), que este mismo proyecto ha venido analizando por separado. Vale la pena tener presente esta relación al evaluar /df, sin mezclarla como si fuera un mismo requerimiento:</p>
+    <table class="tabla-considera">
+      <tr><th>Mecanismo</th><th>Naturaleza</th><th>Relación con /df</th></tr>
+      <tr>
+        <td>GAUDI (Firmador/Validador/Autenticador — BCCR)</td>
+        <td>Plataforma <strong>regulatoria y centralizada del BCCR</strong>. Es un requisito normativo para autenticación con certificado digital SINPE.</td>
+        <td>Es un mecanismo distinto y no sustituible por /df. Ya está en uso institucional dentro de /gx.</td>
+      </tr>
+      <tr>
+        <td>/df (BD Consultores)</td>
+        <td>Producto <strong>comercial de un proveedor privado</strong>, de propósito general (2FA/OTP), no exigido por ningún reglamento por nombre.</td>
+        <td>Podría usarse como <strong>capa complementaria</strong> de seguridad (ej. segundo factor en banca en línea/app), pero no reemplaza ni cumple por sí sola una obligación específica de autenticación vía GAUDI.</td>
+      </tr>
+    </table>
+    <p><strong>Recomendación:</strong> antes de avanzar con /df, dejar explícito ante gerencia y ante quien dé seguimiento al tema regulatorio (BCCR/GAUDI) que se trata de dos iniciativas independientes, con drivers distintos (una es negocio/seguridad propia; la otra es cumplimiento normativo). Confundirlas podría llevar a reportar un avance regulatorio que en realidad no se está dando.</p>
+  </section>
+
+  <!-- SECCION 3 -->
+  <section id="seccion3">
+    <h2 class="section-title">3. Qué se necesita para implementarlo</h2>
+    <span class="tag pendiente">Pendiente de información del proveedor</span>
+    <p>Dado que /df no está contratado y la única fuente es una página de mercadeo, lo primero que se necesita no es técnico sino de <strong>información base</strong>. Sin esto, cualquier plan de implementación sería una suposición:</p>
+    <ul class="lista-check">
+      <li>Ficha técnica o propuesta formal de /df por parte de BD Consultores (equivalente a los Anexos 1-5 que existen para /gx).</li>
+      <li>Modelo de despliegue: ¿SaaS (como /gx) o requiere componentes on-premise?</li>
+      <li>Modelo comercial: licenciamiento por usuario, por transacción, por canal, o suscripción mensual fija (como la de /gx, 36 meses).</li>
+      <li>Canales de entrega de OTP soportados de forma nativa (SMS, correo electrónico, push a app propia, TOTP en app autenticadora tipo Google Authenticator) y si el envío de SMS/correo corre por cuenta de CAFSA o del proveedor.</li>
+      <li>Especificación de los servicios REST expuestos (endpoints, autenticación de la API, formatos de solicitud/respuesta, límites de tasa).</li>
+      <li>Requisitos de infraestructura y red (segmentos, VPN, certificados) — en /gx este punto generó varios puntos abiertos de firewall/IP; es razonable anticipar algo similar con /df.</li>
+      <li>Confirmación de si /df puede operar de forma independiente del contrato de /gx, o si BD Consultores lo condiciona a tener /gx activo (dado que ambos son productos del mismo proveedor y comparten cliente).</li>
+    </ul>
+  </section>
+
+  <!-- SECCION 4 -->
+  <section id="seccion4">
+    <h2 class="section-title">4. Consideraciones técnicas de integración</h2>
+    <span class="tag recom">Consideración / recomendación técnica</span>
+    <p>Basado en el patrón de integración ya observado con /gx (que también expone/consume servicios vía web services, y donde CAFSA mantiene un servicio propio expuesto — <code>IEntidadNBS</code> — para que el proveedor lo invoque), es razonable anticipar una arquitectura similar para /df:</p>
+    <table class="tabla-considera">
+      <tr><th>Punto técnico</th><th>Consideración</th></tr>
+      <tr><td>Punto de integración</td><td>Definir si /df se integra directamente con el/los canal(es) de cliente (CAFSA en Línea, CAFSA App) o si pasa primero por el Core Bancario, como ocurre con /gx vía <code>IEntidadNBS</code>.</td></tr>
+      <tr><td>Autenticación de la API REST</td><td>Confirmar el esquema (API Key, OAuth2, mTLS) antes de comprometer un canal de producción — es un componente de seguridad, no un servicio informativo.</td></tr>
+      <tr><td>Ambientes</td><td>Solicitar, igual que con /gx, ambientes separados de Desarrollo/QA/Producción con URLs propias, para no probar generación de OTP directamente en producción.</td></tr>
+      <tr><td>Red y firewall</td><td>Anticipar la necesidad de autorizar segmentos/IPs específicos, igual que ocurrió con /gx (ver puntos abiertos de conectividad ya documentados). Solicitar desde el inicio la lista completa de endpoints/segmentos, para evitar el patrón de descubrir IPs no autorizadas después de ir a producción.</td></tr>
+      <tr><td>Disponibilidad / continuidad</td><td>Si /df protege el login o una transacción crítica del cliente, su caída bloquea la operación del canal. Se debe exigir un SLA de disponibilidad y un plan de contingencia (fallback), similar al Plan de Continuidad ya exigido para /gx.</td></tr>
+      <tr><td>Volumetría</td><td>Estimar cuántos OTP se generarían por día/mes (según canales y transacciones que se quieran proteger) antes de negociar, ya que suele ser la base del modelo de cobro.</td></tr>
+    </table>
+  </section>
+
+  <!-- SECCION 5 -->
+  <section id="seccion5">
+    <h2 class="section-title">5. Consideraciones de seguridad y regulatorias</h2>
+    <span class="tag recom">Consideración / recomendación técnica</span>
+    <ul class="lista-check">
+      <li><strong>Vigencia y reintentos del OTP:</strong> confirmar tiempo de expiración y número máximo de reintentos/reenvíos permitidos — parámetros críticos que /df debería permitir configurar, no imponer de forma fija.</li>
+      <li><strong>Canal de entrega como superficie de riesgo:</strong> si el OTP se entrega por SMS, considerar el riesgo conocido de SIM-swapping; si es por correo, el riesgo de cuentas de correo comprometidas. Preguntar a BD Consultores qué canales soporta y si soporta TOTP en app autenticadora (más robusto que SMS/correo).</li>
+      <li><strong>Almacenamiento de secretos:</strong> si la solución usa TOTP, hay que definir dónde y cómo se resguarda la semilla (seed) de cada usuario — si es responsabilidad de /df (SaaS del proveedor) o si CAFSA debe custodiar algo internamente.</li>
+      <li><strong>Cumplimiento SUGEF/CONASSIF:</strong> un mecanismo de autenticación reforzada normalmente entra dentro del alcance de la normativa de gestión de riesgo tecnológico y ciberseguridad de SUGEF. Antes de implementar, validar si aplica algún requisito normativo específico sobre autenticación multifactor para canales electrónicos (más allá de la obligación de GAUDI, que es un tema aparte, ver Sección 2). Esto es una recomendación de verificación, no una confirmación de que exista tal requisito puntual.</li>
+      <li><strong>Trazabilidad/auditoría:</strong> exigir que cada evento de generación, envío y validación de OTP quede registrado en bitácora (propia de /df o exportable hacia los sistemas de monitoreo de CAFSA), por las mismas razones de trazabilidad que ya se exigen en /gx (Sección 13 del Manual de usuario — Bitácora, Bitácora de Servicios Externos/Internos).</li>
+    </ul>
+  </section>
+
+  <!-- SECCION 6 -->
+  <section id="seccion6">
+    <h2 class="section-title">6. Consideraciones contractuales y comerciales</h2>
+    <span class="tag recom">Consideración / recomendación técnica</span>
+    <ul class="lista-check">
+      <li>/df requeriría un <strong>contrato o anexo independiente</strong> del contrato vigente de /gx (BDDL-0924) — no está cubierto por ese contrato ni por sus Anexos 1-5, que son específicos de la suite /gx.</li>
+      <li>Dado que ambos productos son de BD Consultores, hay oportunidad de negociar condiciones (soporte, SLA, precio) de forma conjunta o al menos consistente con lo ya pactado para /gx — vale la pena evaluarlo con Rebeca Benavides (Gerencia Comercial de Industria, contacto ya establecido).</li>
+      <li>Debe pasar por el mismo proceso de revisión de proveedor/contrato ya aplicado a BD Finance (checklist de documentación de proveedores críticos, personería jurídica, estados financieros, etc.), documentado en <code>docs-verificacion-proveedor-cod-5.txt</code> — aunque sea el mismo proveedor, un nuevo servicio implica nueva revisión de alcance contractual y, según la política de CAFSA, posible actualización del expediente.</li>
+      <li><strong>Cláusulas de riesgo a revisar con prioridad</strong> una vez exista una propuesta de contrato (siguiendo el criterio ya establecido para revisión de contratos de proveedores): SLA de disponibilidad del servicio de generación de OTP, penalidades por indisponibilidad, propiedad y confidencialidad de los datos de autenticación de los clientes de CAFSA, continuidad del servicio (BCP/DRP) y condiciones de salida/reversibilidad si CAFSA decide migrar a otro proveedor de 2FA en el futuro.</li>
+    </ul>
+  </section>
+
+  <!-- SECCION 7 -->
+  <section id="seccion7">
+    <h2 class="section-title">7. Propuesta de ruta de implementación</h2>
+    <span class="tag recom">Consideración / recomendación técnica</span>
+    <ol class="pasos">
+      <li><strong>Solicitar a BD Consultores</strong> (contacto sugerido: Herman Camacho o Rebeca Benavides) ficha técnica, propuesta comercial y alcance funcional formal de /df — el insumo que hoy no existe en el expediente.</li>
+      <li><strong>Definir internamente el caso de uso</strong>: ¿qué se quiere proteger con /df? (login a CAFSA en Línea/App, confirmación de transferencias, cambios de datos sensibles, etc.). Sin esto, cualquier conversación técnica con el proveedor será genérica.</li>
+      <li><strong>Contrastar contra el driver regulatorio</strong> (Sección 2): documentar formalmente que /df es una iniciativa de seguridad propia y no el mecanismo de cumplimiento de la obligación GAUDI, salvo que un análisis legal/regulatorio indique lo contrario.</li>
+      <li><strong>Evaluación técnica preliminar</strong> con la ficha técnica en mano: esquema de integración REST, ambientes, requisitos de red — siguiendo el mismo criterio aplicado a /gx (Sección 4 de este documento).</li>
+      <li><strong>Revisión de riesgos de seguridad y cumplimiento</strong> (Sección 5) antes de firmar cualquier compromiso comercial.</li>
+      <li><strong>Revisión contractual formal</strong> priorizando cláusulas de riesgo (Sección 6) antes de la firma.</li>
+      <li><strong>Piloto en ambiente de pruebas</strong> con un solo canal/caso de uso antes de escalar a producción, replicando la metodología que ya se usó para validar "AceptarTransaccion" en QA con /gx.</li>
+    </ol>
+  </section>
+
+  <!-- SECCION 8 -->
+  <section id="seccion8">
+    <h2 class="section-title">8. Preguntas puntuales a plantear a BD Finance</h2>
+    <span class="tag pendiente">Insumo para correo/reunión con el proveedor</span>
+    <ul class="lista-check">
+      <li>¿Qué canales de entrega de OTP soporta (SMS, correo, push, TOTP en app autenticadora)? ¿El envío de SMS/correo lo gestiona BD o debe integrarse con un proveedor de mensajería de CAFSA?</li>
+      <li>¿Cuál es el modelo de despliegue (SaaS, on-premise, híbrido) y el modelo de cobro (por usuario, por OTP generado, suscripción fija)?</li>
+      <li>¿Hay documentación técnica (manual, especificación REST/API) que nos puedan compartir para la evaluación?</li>
+      <li>¿Cuál sería el tiempo estimado de implementación de punta a punta?</li>
+    </ul>
+  </section>
+
+  <footer>
+    Documento generado como insumo de análisis interno para CAFSA — proyecto "CONTRATOS - SERVICIOS CAFSA". No constituye una propuesta técnica ni comercial cerrada; su contenido debe validarse y complementarse con la información formal que BD Finance/BD Consultores aporte sobre /df antes de tomar decisiones de contratación o implementación.
+  </footer>
+
+</div>
+</body>
+</html>
