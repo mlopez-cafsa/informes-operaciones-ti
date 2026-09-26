@@ -106,6 +106,7 @@ from reportes_lib import (
     personas_a_mostrar,
     render_desglose_subtareas,
     render_persona_card,
+    render_persona_card_publica,
     texto_plazo,
 )
 from modelos import validar_informe
@@ -363,11 +364,19 @@ def render_seccion_reportes(informes: list) -> tuple:
     Incluye tanto a quien tiene pendientes puntuales como a quien es
     propietaria de proyectos sin tener ninguno (ver
     reportes_lib.personas_a_mostrar — petición explícita, 2026-09-24).
-    Devuelve (html, total_personas)."""
+
+    Devuelve (html, html_publico, total_personas): 'html' es la card REAL
+    (nombre/cargo/link, base_path='reportes/'), visible solo en vista local
+    ([data-modo-local="bloque"] en index_template.html); 'html_publico' es
+    la card genérica/anónima (render_persona_card_publica — petición
+    explícita, 2026-09-25), visible solo en vista pública
+    ([data-modo-publico]). Se generan ambas siempre; el CSS decide cuál se
+    ve según el hostname (ver modo-vista.js)."""
     pendientes = cargar_pendientes()
     personas = personas_a_mostrar(pendientes, informes)
     if not personas:
-        return '    <p class="page-meta">Todavía no hay reportes/pendientes registrados.</p>', 0
+        vacio = '    <p class="page-meta">Todavía no hay reportes/pendientes registrados.</p>'
+        return vacio, vacio, 0
     # Orden por jerarquía organizacional (Gerencia > Jefatura > PMO/
     # Coordinación > Contacto operativo), no alfabético — ver orden_persona()
     # en reportes_lib.py. Mismo criterio que reportes/index.html.
@@ -376,7 +385,11 @@ def render_seccion_reportes(informes: list) -> tuple:
         render_persona_card(slug, persona, base_path="reportes/")
         for slug, persona in orden
     )
-    return html, len(personas)
+    html_publico = "\n".join(
+        render_persona_card_publica(persona)
+        for _, persona in orden
+    )
+    return html, html_publico, len(personas)
 
 
 def cargar_jira_snapshot():
@@ -561,13 +574,14 @@ def build_index() -> None:
     grid_html = "\n".join(render_card(i) for i in informes_por_atencion) if informes else \
         '    <p class="page-meta">Todavía no hay informes publicados.</p>'
 
-    reportes_html, total_personas = render_seccion_reportes(informes)
+    reportes_html, reportes_html_publico, total_personas = render_seccion_reportes(informes)
     panel_consolidado_html = render_panel_consolidado()
 
     salida = template
     salida = salida.replace("<!--__FILTROS_CATEGORIA__-->", filtros_html)
     salida = salida.replace("<!--__INFORMES_GRID__-->", grid_html)
     salida = salida.replace("<!--__REPORTES_PERSONAS_GRID__-->", reportes_html)
+    salida = salida.replace("<!--__REPORTES_PERSONAS_GRID_PUBLICA__-->", reportes_html_publico)
     salida = salida.replace("<!--__PANEL_CONSOLIDADO__-->", panel_consolidado_html)
     salida = salida.replace("{{TOTAL_PERSONAS_REPORTES}}", str(total_personas))
     salida = salida.replace("{{FECHA_GENERACION}}", date.today().isoformat())

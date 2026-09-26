@@ -69,6 +69,7 @@ from reportes_lib import (
     render_iniciativa_card,
     render_pendiente_item,
     render_persona_card,
+    render_persona_card_publica,
     render_proyecto_persona_card,
     urgencia_gravitacional,
 )
@@ -173,6 +174,17 @@ def build_reportes_index(personas: dict, pendientes: list) -> None:
     tarjetas = "\n".join(
         render_persona_card(slug, persona) for slug, persona in orden
     ) if personas else '    <p class="page-meta">Todavía no hay pendientes registrados.</p>'
+    # Vista pública (petición explícita, 2026-09-25): misma lógica que
+    # render_seccion_reportes() en manage_informes.py — se genera SIEMPRE
+    # también el grid genérico/anónimo (sin nombre/cargo/link), que
+    # reemplaza al real solo quando el hostname no es local (ver
+    # modo-vista.js + [data-modo-publico] en style.css). Este directorio
+    # (reportes/index.html) es justamente el punto de entrada que Marco
+    # pidió dejar de exponer — las páginas individuales ya compartidas
+    # (reportes/<slug>/index.html) siguen funcionando igual por link directo.
+    tarjetas_publicas = "\n".join(
+        render_persona_card_publica(persona) for _, persona in orden
+    ) if personas else '    <p class="page-meta">Todavía no hay pendientes registrados.</p>'
 
     entropia = entropia_sistema(pendientes)
     entropia_html = (
@@ -188,6 +200,7 @@ def build_reportes_index(personas: dict, pendientes: list) -> None:
 
     salida = plantilla_index
     salida = salida.replace("<!--__PERSONAS_GRID__-->", tarjetas)
+    salida = salida.replace("<!--__PERSONAS_GRID_PUBLICA__-->", tarjetas_publicas)
     salida = salida.replace("{{FECHA_GENERACION}}", date.today().isoformat())
     salida = salida.replace("{{TOTAL_PERSONAS}}", str(len(personas)))
     salida = salida.replace("<!--__ENTROPIA__-->", entropia_html)

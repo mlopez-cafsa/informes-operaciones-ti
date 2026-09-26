@@ -47,8 +47,20 @@
     · <!--__ENTROPIA__-->
   </p>
 
-  <div class="personas-grid" id="grid-personas">
+  <!--
+    Vista pública (petición explícita, 2026-09-25): este directorio no debe
+    exponer nombre/cargo/link de ninguna persona puntual a un visitante
+    público — se generan SIEMPRE dos grids (real y genérica/anónima sin
+    link) y el CSS decide cuál mostrar según el hostname (ver
+    modo-vista.js + [data-modo-publico] en style.css). Un enlace ya
+    compartido directamente (reportes/<slug>/index.html) sigue funcionando
+    igual: esto solo afecta esta página de listado.
+  -->
+  <div class="personas-grid" id="grid-personas" data-modo-local="bloque">
 <!--__PERSONAS_GRID__-->
+  </div>
+  <div class="personas-grid personas-grid-publica" data-modo-publico>
+<!--__PERSONAS_GRID_PUBLICA__-->
   </div>
 </main>
 

@@ -27,7 +27,7 @@
     </div>
   </div>
   <nav class="header-nav">
-    <a href="reportes/index.html">Reportes y seguimientos</a>
+    <a href="reportes/index.html" data-modo-local="boton">Reportes y seguimientos</a>
     <button type="button" id="btn-abrir-brief" class="btn-brief-dia" hidden>Brief del día</button>
   </nav>
 </header>
@@ -149,7 +149,7 @@
             </svg>
             <h2 id="titulo-reportes" class="page-title" style="margin-bottom:2px" data-texto-local="Tu seguimiento de personas, Marco">Reportes y seguimientos</h2>
           </div>
-          <a href="reportes/index.html" class="ver-todos">Ver todos los pendientes por persona
+          <a href="reportes/index.html" class="ver-todos" data-modo-local="boton">Ver todos los pendientes por persona
             <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
             </svg>
@@ -159,7 +159,20 @@
           Solicitudes puntuales dirigidas a una persona específica, con enlace a
           Jira y seguimiento · 3 persona(s) con pendientes registrados
         </p>
-        <div class="personas-grid" id="grid-personas-reportes">
+        <!--
+          Vista pública (petición explícita, 2026-09-25): el índice principal
+          NO debe ofrecer redirecciones hacia el detalle de una persona
+          puntual (ni el link "Ver todos" de arriba, ya oculto vía
+          data-modo-local="boton", ni las cards de abajo). Se generan SIEMPRE
+          dos grids — la real (con nombre/cargo/link, solo visible para
+          Marco) y la genérica/anónima sin link (solo visible para
+          cualquier otro visitante) — y el CSS decide cuál mostrar según el
+          hostname (ver modo-vista.js + [data-modo-publico] en style.css).
+          Un enlace ya compartido directamente (ej. reportes/<slug>/) sigue
+          funcionando igual: esto solo afecta el punto de entrada desde el
+          índice general.
+        -->
+        <div class="personas-grid" id="grid-personas-reportes" data-modo-local="bloque">
     <div class="persona-card">
       <div class="card-top">
         <span class="jerarquia-badge jerarquia-1" title="Jerarquía organizacional: se infiere del cargo declarado (Gerencia &gt; Jefatura &gt; PMO/Coordinación &gt; Contacto operativo). Define el orden de las tarjetas, no la criticidad de cada pendiente.">Gerencia</span>
@@ -192,6 +205,32 @@
       <p class="conteo">1 pendiente(s) abierto(s) de 1 total</p>
       <p class="formula-nota" title="Teorema de Pitágoras: magnitud = √(a²+b²) — a = pendientes abiertos, b = de esos, cuántos son de criticidad alta. Así lo de criticidad alta 'pesa' más que lineal en el total.">Magnitud de atención (√(a²+b²)): 1.41</p>
       <a href="reportes/maria-cristina-hernandez/index.html">Ver pendientes y solicitudes <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+        </div>
+        <div class="personas-grid personas-grid-publica" data-modo-publico>
+    <div class="persona-card persona-card-publica">
+      <div class="card-top">
+        <span class="jerarquia-badge jerarquia-1" title="Jerarquía organizacional: se infiere del cargo declarado.">Gerencia</span>
+        <span class="estado-badge estado-rojo">Atención requerida</span>
+      </div>
+      <h3>Seguimiento interno</h3>
+      <p class="conteo">Detalle disponible solo para la persona destinataria, por enlace directo.</p>
+    </div>
+    <div class="persona-card persona-card-publica">
+      <div class="card-top">
+        <span class="jerarquia-badge jerarquia-2" title="Jerarquía organizacional: se infiere del cargo declarado.">Jefatura</span>
+        <span class="estado-badge estado-verde">Al día</span>
+      </div>
+      <h3>Seguimiento interno</h3>
+      <p class="conteo">Detalle disponible solo para la persona destinataria, por enlace directo.</p>
+    </div>
+    <div class="persona-card persona-card-publica">
+      <div class="card-top">
+        <span class="jerarquia-badge jerarquia-3" title="Jerarquía organizacional: se infiere del cargo declarado.">PMO</span>
+        <span class="estado-badge estado-rojo">Atención requerida</span>
+      </div>
+      <h3>Seguimiento interno</h3>
+      <p class="conteo">Detalle disponible solo para la persona destinataria, por enlace directo.</p>
     </div>
         </div>
       </section>

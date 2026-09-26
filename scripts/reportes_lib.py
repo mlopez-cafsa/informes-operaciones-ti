@@ -557,6 +557,52 @@ def render_persona_card(persona_slug: str, persona: dict, base_path: str = "") -
     </div>"""
 
 
+# ---------- Vista pública (petición explícita, 2026-09-25) ----------
+# El módulo "Reportes y seguimientos" contiene nombres, cargos y detalle de
+# pendientes de personas puntuales — contenido que Marco decidió que NO debe
+# quedar expuesto en la versión pública del sitio (GitHub Pages), aunque los
+# enlaces directos ya compartidos con cada persona (Luis, Cristopher,
+# Cristina) deben seguir funcionando igual. La solución: en vista pública
+# (ver assets/js/modo-vista.js + [data-modo-publico] en style.css), el index
+# principal y reportes/index.html muestran una card GENÉRICA por persona
+# (sin nombre/cargo/conteo/link — solo jerarquía + estado + una etiqueta de
+# categoría), y la vista local (Marco) sigue viendo render_persona_card()
+# tal cual. Ambas cards se generan siempre; el CSS decide cuál se ve según
+# el hostname.
+def tipo_seguimiento_publico(persona_cargo: str) -> str:
+    """Etiqueta genérica de categoría para la card pública — no identifica a
+    la persona, solo distingue si el seguimiento es con alguien interno de
+    CAFSA o con un proveedor/contacto externo. Todo el personal registrado
+    hoy es interno; el caso 'proveedor' queda listo para cuando se registre
+    el primer contacto externo, sin tener que tocar este código otra vez."""
+    cargo_normalizado = _sin_tildes(persona_cargo)
+    if any(clave in cargo_normalizado for clave in ("proveedor", "externo", "contacto comercial")):
+        return "Coordinación con proveedor"
+    return "Seguimiento interno"
+
+
+def render_persona_card_publica(persona: dict) -> str:
+    """Versión pública/anónima de render_persona_card(): mismo badge de
+    jerarquía y el mismo badge de estado (no identifican a nadie por sí
+    solos), pero SIN nombre, cargo, conteo, magnitud ni link — la card no es
+    clickeable (ver .persona-card-publica en style.css, sin <a> ni cursor de
+    puntero). 'persona' es el dict {'nombre','cargo','items'} que arma
+    personas_a_mostrar()."""
+    items = persona["items"]
+    cargo = persona["cargo"]
+    clase_badge, label_badge = resumen_persona(items)
+    nivel_orden, nivel_etiqueta = nivel_jerarquico(cargo)
+    titulo = tipo_seguimiento_publico(cargo)
+    return f"""    <div class="persona-card persona-card-publica">
+      <div class="card-top">
+        <span class="jerarquia-badge jerarquia-{nivel_orden}" title="Jerarquía organizacional: se infiere del cargo declarado.">{nivel_etiqueta}</span>
+        <span class="estado-badge {clase_badge}">{label_badge}</span>
+      </div>
+      <h3>{esc(titulo)}</h3>
+      <p class="conteo">Detalle disponible solo para la persona destinataria, por enlace directo.</p>
+    </div>"""
+
+
 ESTADOS_INFORME_LABEL = {
     "verde": "A tiempo",
     "amarillo": "En riesgo",

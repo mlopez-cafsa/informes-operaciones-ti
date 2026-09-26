@@ -74,6 +74,16 @@
 html.modo-local [data-modo-local="bloque"] { display: block !important; }
 html.modo-local [data-modo-local="boton"] { display: inline-flex !important; }
 
+/* Inversa (petición explícita, 2026-09-25): contenido que se muestra en
+   vista PÚBLICA por defecto y se oculta solo en vista local (Marco). Caso
+   de uso: la card genérica/anónima de "Reportes y seguimientos" — visible
+   para cualquier visitante público, oculta para Marco, que ve en su lugar
+   la card real (arriba, vía [data-modo-local="bloque"]). No necesita una
+   variante "boton": basta con display:none en modo local, el navegador ya
+   restaura el display natural del elemento (block/inline) al no aplicar
+   la regla. */
+html.modo-local [data-modo-publico] { display: none !important; }
+
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -1726,6 +1736,25 @@ main {
 
 .persona-card > a:last-child:hover .icono-flecha {
   transform: translateX(3px);
+}
+
+/* Card pública/anónima (petición explícita, 2026-09-25): misma estructura
+   de carriles que .persona-card, pero sin título-link ni "Ver pendientes"
+   — no es clickeable, así que se anula el hover-lift y el cursor pointer
+   heredados para no sugerir que hay algo en qué hacer clic. Ver
+   reportes_lib.render_persona_card_publica(). */
+.persona-card-publica {
+  cursor: default;
+}
+
+.persona-card-publica:hover {
+  box-shadow: var(--shadow);
+  transform: none;
+}
+
+.persona-card-publica h3 {
+  color: var(--cafsa-black);
+  -webkit-line-clamp: 2;
 }
 
 .pendientes-lista {
