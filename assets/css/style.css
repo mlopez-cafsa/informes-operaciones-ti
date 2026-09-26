@@ -77,6 +77,12 @@ html.modo-local [data-modo-local="boton"] { display: inline-flex !important; }
    depende de flexbox (ej. .toolbar, .filters de la sección Informes) —
    "bloque" los apilaría en columna y rompería el layout horizontal. */
 html.modo-local [data-modo-local="flex"] { display: flex !important; }
+/* "grid" (fix 2026-09-25): mismo problema que "flex" pero para
+   contenedores CSS Grid (.personas-grid en el index principal y en
+   reportes/index.html) — con "bloque" perdían columnas/gap y las cards
+   de "Tu seguimiento de personas, Marco" se apilaban una por fila
+   (se veían "horribles", a palabras de Marco). */
+html.modo-local [data-modo-local="grid"] { display: grid !important; }
 
 /* Inversa (petición explícita, 2026-09-25): contenido que se muestra en
    vista PÚBLICA por defecto y se oculta solo en vista local (Marco). Caso
