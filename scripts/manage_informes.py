@@ -342,13 +342,16 @@ def render_card(informe: dict) -> str:
           <span class="estado-badge estado-{estado}">{estado_label}</span>
         </div>
       </div>
-      <h3><a href="{informe['ruta']}">{esc(informe['titulo'])}</a></h3>
+      <h3>
+        <a href="{informe['ruta']}" data-modo-local="boton">{esc(informe['titulo'])}</a>
+        <span data-modo-publico>{esc(informe['titulo'])}</span>
+      </h3>
       <p class="resumen" data-modo-local="bloque">{esc(informe['resumen'])}</p>
       <p class="coincidencia-busqueda" hidden></p>
 {progreso_html}
       <div class="card-footer">
         <span>{informe['fecha']}{vencimiento_html}</span>
-        <a href="{informe['ruta']}">Ver informe {icono_flecha()}</a>
+        <a href="{informe['ruta']}" data-modo-local="boton">Ver informe {icono_flecha()}</a>
       </div>
     </div>"""
 
