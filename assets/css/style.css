@@ -142,6 +142,20 @@ img { max-width: 100%; }
 
 .titulo-seccion .page-title { margin: 0; color: var(--cafsa-black); }
 
+/* Espacio título → contenido cuando la sección ya NO tiene subtítulo
+   descriptivo debajo (petición explícita, 2026-09-25: se quitaron los
+   textos de "Reportes y seguimientos", "Informes" y el directorio de
+   reportes/index.html por irrelevantes — pero sin ellos el título quedaba
+   pegado al toolbar/grid de abajo). 24px reutiliza el mismo valor que ya
+   usa .resumen-ejecutivo en este sistema, en vez de inventar un número
+   nuevo. Clase modificadora explícita (no se toca .titulo-seccion en
+   general) para no afectar las secciones que sí conservan su .page-meta
+   (informe, utilidades, página de persona) ni el layout en fila de
+   .seccion-reportes-header (título + link "Ver todos"). */
+.titulo-seccion--sin-subtitulo {
+  margin-bottom: 24px;
+}
+
 /* Todo ícono de flecha (.icono-flecha) es neutro SIEMPRE, sin importar
    el color del link que lo contiene (ver-todos, "Ver informe", "Ver
    pendientes...") — un color de ícono propio y consistente en todo el

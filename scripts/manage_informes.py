@@ -586,9 +586,6 @@ def build_index() -> None:
     salida = salida.replace("<!--__REPORTES_PERSONAS_GRID__-->", reportes_html)
     salida = salida.replace("<!--__REPORTES_PERSONAS_GRID_PUBLICA__-->", reportes_html_publico)
     salida = salida.replace("<!--__PANEL_CONSOLIDADO__-->", panel_consolidado_html)
-    salida = salida.replace("{{TOTAL_PERSONAS_REPORTES}}", str(total_personas))
-    salida = salida.replace("{{FECHA_GENERACION}}", date.today().isoformat())
-    salida = salida.replace("{{TOTAL_INFORMES}}", str(len(informes)))
 
     INDEX_OUTPUT.write_text(salida, encoding="utf-8")
     print(f"[OK] index.html regenerado con {len(informes)} informe(s) y {total_personas} persona(s) en seguimiento.")

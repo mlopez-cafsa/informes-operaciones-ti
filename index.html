@@ -142,7 +142,7 @@
     <div class="contenido-central">
 
       <section class="seccion-reportes" aria-labelledby="titulo-reportes">
-        <div class="seccion-reportes-header">
+        <div class="seccion-reportes-header titulo-seccion--sin-subtitulo">
           <div class="titulo-seccion">
             <svg class="icono-seccion" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="3"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
@@ -155,10 +155,6 @@
             </svg>
           </a>
         </div>
-        <p class="page-meta">
-          Solicitudes puntuales dirigidas a una persona específica, con enlace a
-          Jira y seguimiento · 3 persona(s) con pendientes registrados
-        </p>
         <!--
           Vista pública (petición explícita, 2026-09-25): el índice principal
           NO debe ofrecer redirecciones hacia el detalle de una persona
@@ -238,16 +234,12 @@
       <hr class="separador-seccion">
 
       <section class="seccion-informes" aria-labelledby="titulo-informes">
-        <div class="titulo-seccion">
+        <div class="titulo-seccion titulo-seccion--sin-subtitulo">
           <svg class="icono-seccion" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/>
           </svg>
           <h2 id="titulo-informes" class="page-title" data-texto-local="Tus informes">Informes</h2>
         </div>
-        <p class="page-meta">
-          Actualizado a partir del seguimiento interno de Operaciones de TI del 2026-09-25
-          · <span id="contador-visibles">8</span> de 8 informe(s)
-        </p>
 
         <div class="toolbar" data-modo-local="flex">
           <div class="buscador-wrap">
@@ -690,7 +682,6 @@
   const buscador = document.getElementById('buscador');
   const orden = document.getElementById('orden');
   const filtros = document.getElementById('filtros');
-  const contador = document.getElementById('contador-visibles');
 
   let filtroActivo = 'todos';
 
@@ -801,7 +792,6 @@
   function aplicarFiltros() {
     const termino = normalizar(buscador.value.trim());
     const tokens = termino ? termino.split(/\s+/).filter(Boolean) : [];
-    let visibles = 0;
 
     cards.forEach(card => {
       const coincideCategoria = filtroActivo === 'todos' || card.dataset.categoria === filtroActivo;
@@ -826,8 +816,6 @@
           pista.textContent = '';
         }
       }
-
-      if (visible) visibles++;
     });
 
     // Con b\u00fasqueda activa, lo m\u00e1s relevante primero (m\u00e1s tokens
@@ -839,8 +827,6 @@
     } else {
       aplicarOrden();
     }
-
-    contador.textContent = visibles;
   }
 
   function aplicarOrden() {

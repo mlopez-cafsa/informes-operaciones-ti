@@ -59,7 +59,6 @@ from reportes_lib import (
     ORDEN_ESTADO,
     cargar_iniciativas,
     cargar_pendientes,
-    entropia_sistema,
     guardar_iniciativas,
     guardar_pendientes,
     informes_por_propietario,
@@ -186,24 +185,9 @@ def build_reportes_index(personas: dict, pendientes: list) -> None:
         render_persona_card_publica(persona) for _, persona in orden
     ) if personas else '    <p class="page-meta">Todavía no hay pendientes registrados.</p>'
 
-    entropia = entropia_sistema(pendientes)
-    entropia_html = (
-        f'<span class="formula-nota" title="Metáfora de la 2ª ley de la termodinámica: '
-        f'porcentaje de pendientes que siguen abiertos sobre el total histórico. '
-        f'No es una entropía física real — es una lectura libre de la idea, para tener '
-        f'una sola cifra de salud general del sistema. Color invertido: más alto es peor '
-        f'(más pendientes sin cerrar), así que se acerca al rojo en vez de al verde.'
-        f'">Entropía del sistema: '
-        f'<span class="pct-semaforo" data-pct="{entropia}" data-invertido="true">{entropia}%</span></span>'
-        if entropia is not None else ""
-    )
-
     salida = plantilla_index
     salida = salida.replace("<!--__PERSONAS_GRID__-->", tarjetas)
     salida = salida.replace("<!--__PERSONAS_GRID_PUBLICA__-->", tarjetas_publicas)
-    salida = salida.replace("{{FECHA_GENERACION}}", date.today().isoformat())
-    salida = salida.replace("{{TOTAL_PERSONAS}}", str(len(personas)))
-    salida = salida.replace("<!--__ENTROPIA__-->", entropia_html)
     REPORTES_INDEX_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     REPORTES_INDEX_OUTPUT.write_text(salida, encoding="utf-8")
     print(f"[OK] reportes/index.html regenerado con {len(personas)} persona(s).")
