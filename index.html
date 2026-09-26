@@ -249,7 +249,7 @@
           · <span id="contador-visibles">8</span> de 8 informe(s)
         </p>
 
-        <div class="toolbar">
+        <div class="toolbar" data-modo-local="flex">
           <div class="buscador-wrap">
             <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
               <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
@@ -275,7 +275,15 @@
           </label>
         </div>
 
-        <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría">
+        <!--
+          Vista pública (petición explícita, 2026-09-25): el toolbar
+          (buscador + orden) y el filtro por categoría son herramientas de
+          consulta pensadas para uso interno/de mantenimiento — en público
+          se muestra la lista completa de informes, sin controles
+          interactivos, en el orden de atención por defecto (ver
+          modo-vista.js + [data-modo-local="flex"] en style.css).
+        -->
+        <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría" data-modo-local="flex">
           <button type="button" class="active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
       <button type="button" data-filtro="core-financiero" role="tab" aria-selected="false">core-financiero</button>
       <button type="button" data-filtro="datos-etl" role="tab" aria-selected="false">datos-etl</button>
@@ -296,7 +304,7 @@
         </div>
       </div>
       <h3><a href="informes/core-financiero/migracion-de-core-financiero-forms-14c.html">Migración de Core Financiero - Forms 14c</a></h3>
-      <p class="resumen">Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 23/09/2026: BestResource migro el 95% del catalogo (504 objetos); CAFSA aprobo el 67.3% (339 de 504), un salto de +15.9 puntos en solo 5 dias, el ritmo mas rapido del proyecto. GENERALES se destrabo (de 3.7% a 53.2%) pero ahora concentra 22 de los 41 rechazos totales. BRANCH es el nuevo riesgo: 38.7%, sin ningun cambio desde el corte anterior. Quedan 7 dias para el 30/09/2026. Infraestructura de produccion y pruebas por roles aun no arrancan. Detalle completo por modulo en el informe.</p>
+      <p class="resumen" data-modo-local="bloque">Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 23/09/2026: BestResource migro el 95% del catalogo (504 objetos); CAFSA aprobo el 67.3% (339 de 504), un salto de +15.9 puntos en solo 5 dias, el ritmo mas rapido del proyecto. GENERALES se destrabo (de 3.7% a 53.2%) pero ahora concentra 22 de los 41 rechazos totales. BRANCH es el nuevo riesgo: 38.7%, sin ningun cambio desde el corte anterior. Quedan 7 dias para el 30/09/2026. Infraestructura de produccion y pruebas por roles aun no arrancan. Detalle completo por modulo en el informe.</p>
       <p class="coincidencia-busqueda" hidden></p>
       <div class="progreso" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 fase(s) · promedio">
         <div class="progreso-barra"><div class="progreso-relleno" data-pct="43" style="width:43%"></div></div>
@@ -316,7 +324,7 @@
         </div>
       </div>
       <h3><a href="informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html">Quanto - Contabilidad | Correccion Discrepancias Estimaciones Historico (BMO-252)</a></h3>
-      <p class="resumen">Correccion de discrepancias en estimaciones contables del sistema Quanto (BMO-252). 83% de avance real (5 de 6 frentes finalizados, actualizado 23/09/2026): segmentacion empresarial, cuentas por cobrar, optimizacion de rendimiento, coordinacion con Quanto y documentacion tecnica ya cerrados. Unico pendiente: montos mitigadores negativos (BMO-253), corregido y confirmado por Quanto pero bloqueado por 2 subtareas abiertas. Sin fecha limite en Jira.</p>
+      <p class="resumen" data-modo-local="bloque">Correccion de discrepancias en estimaciones contables del sistema Quanto (BMO-252). 83% de avance real (5 de 6 frentes finalizados, actualizado 23/09/2026): segmentacion empresarial, cuentas por cobrar, optimizacion de rendimiento, coordinacion con Quanto y documentacion tecnica ya cerrados. Unico pendiente: montos mitigadores negativos (BMO-253), corregido y confirmado por Quanto pero bloqueado por 2 subtareas abiertas. Sin fecha limite en Jira.</p>
       <p class="coincidencia-busqueda" hidden></p>
       <div class="progreso" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 1 fase(s) · promedio">
         <div class="progreso-barra"><div class="progreso-relleno" data-pct="83" style="width:83%"></div></div>
@@ -336,7 +344,7 @@
         </div>
       </div>
       <h3><a href="informes/riesgo-tecnologico/integracion-gaudi-cafsa-en-linea.html">Integracion GAUDI en CAFSA en Linea - FASE 1 (PP-233)</a></h3>
-      <p class="resumen">Integracion GAUDI en CAFSA en Linea, Fase 1, epica XL-TEC-01 (independiente de PP-232). 10% de avance real: 1 de 10 criterios finalizado (diseno de login). Vence 30/09/2026, la fecha mas proxima del eje XL-TEC-01. Nota: en Teams (16-17/09) se reporto 80-85% de avance, aun no reflejado en Jira.</p>
+      <p class="resumen" data-modo-local="bloque">Integracion GAUDI en CAFSA en Linea, Fase 1, epica XL-TEC-01 (independiente de PP-232). 10% de avance real: 1 de 10 criterios finalizado (diseno de login). Vence 30/09/2026, la fecha mas proxima del eje XL-TEC-01. Nota: en Teams (16-17/09) se reporto 80-85% de avance, aun no reflejado en Jira.</p>
       <p class="coincidencia-busqueda" hidden></p>
       <div class="progreso" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 1 fase(s) · promedio">
         <div class="progreso-barra"><div class="progreso-relleno" data-pct="10" style="width:10%"></div></div>
@@ -356,7 +364,7 @@
         </div>
       </div>
       <h3><a href="informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html">Gobierno de TI y Cumplimiento (COBIT / CONASSIF)</a></h3>
-      <p class="resumen">Gobierno de TI (COBIT 2019 / CONASSIF 5-24): 4 de 5 frentes completados (GDT-100, GDT-106, GDT-320, GDT-107). Pendiente: GDT-120 (respaldos de informacion con proveedores), sin arrancar, sin descripcion ni subtareas en Jira. Vence 31/12/2026.</p>
+      <p class="resumen" data-modo-local="bloque">Gobierno de TI (COBIT 2019 / CONASSIF 5-24): 4 de 5 frentes completados (GDT-100, GDT-106, GDT-320, GDT-107). Pendiente: GDT-120 (respaldos de informacion con proveedores), sin arrancar, sin descripcion ni subtareas en Jira. Vence 31/12/2026.</p>
       <p class="coincidencia-busqueda" hidden></p>
       <div class="progreso" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 5 fase(s) · promedio">
         <div class="progreso-barra"><div class="progreso-relleno" data-pct="80" style="width:80%"></div></div>
@@ -376,7 +384,7 @@
         </div>
       </div>
       <h3><a href="informes/infraestructura/modernizacion-de-infraestructura-gx.html">Modernizacion de infraestructura /gx</a></h3>
-      <p class="resumen">Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas. En curso: diseno de arquitectura, certificados y validaciones antes del pase a produccion.</p>
+      <p class="resumen" data-modo-local="bloque">Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas. En curso: diseno de arquitectura, certificados y validaciones antes del pase a produccion.</p>
       <p class="coincidencia-busqueda" hidden></p>
       <div class="progreso" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 10 fase(s) · promedio">
         <div class="progreso-barra"><div class="progreso-relleno" data-pct="20" style="width:20%"></div></div>
@@ -396,7 +404,7 @@
         </div>
       </div>
       <h3><a href="informes/riesgo-tecnologico/migracion-pel-admin-a-php.html">Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)</a></h3>
-      <p class="resumen">Migracion del sitio Admin de PEL(/gx) a PHP, epica XL-TEC-01 (independiente de PP-233). 33% de avance real: 3 de 9 criterios de aceptacion finalizados (Capa de Servicios SOAP, Controlador Admin, Modelos). Vence 31/10/2026.</p>
+      <p class="resumen" data-modo-local="bloque">Migracion del sitio Admin de PEL(/gx) a PHP, epica XL-TEC-01 (independiente de PP-233). 33% de avance real: 3 de 9 criterios de aceptacion finalizados (Capa de Servicios SOAP, Controlador Admin, Modelos). Vence 31/10/2026.</p>
       <p class="coincidencia-busqueda" hidden></p>
       <div class="progreso" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 1 fase(s) · promedio">
         <div class="progreso-barra"><div class="progreso-relleno" data-pct="33" style="width:33%"></div></div>
@@ -416,7 +424,7 @@
         </div>
       </div>
       <h3><a href="informes/datos-etl/framework-etl-datawarehouse.html">Implementacion, Analisis y Estabilizacion Framework ETL | DataWareHouse</a></h3>
-      <p class="resumen">Framework ETL / DataWareHouse (BMO-118): 17% de avance real (1 de 6 subtareas finalizada). Pendientes: analisis del framework, correccion de errores SSIS, validacion de jobs, pruebas unitarias/integrales e integracion con Salesforce (BMO-155). Riesgo de dependencia para otras integraciones de datos; sin fecha limite en Jira.</p>
+      <p class="resumen" data-modo-local="bloque">Framework ETL / DataWareHouse (BMO-118): 17% de avance real (1 de 6 subtareas finalizada). Pendientes: analisis del framework, correccion de errores SSIS, validacion de jobs, pruebas unitarias/integrales e integracion con Salesforce (BMO-155). Riesgo de dependencia para otras integraciones de datos; sin fecha limite en Jira.</p>
       <p class="coincidencia-busqueda" hidden></p>
       <div class="progreso" role="progressbar" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100" aria-label="Avance: 1 fase(s) · promedio">
         <div class="progreso-barra"><div class="progreso-relleno" data-pct="17" style="width:17%"></div></div>
@@ -436,7 +444,7 @@
         </div>
       </div>
       <h3><a href="informes/operaciones/operaciones-diarias.html">Operaciones Diarias</a></h3>
-      <p class="resumen">Bitacora de labores diarias de TI: 530.5 horas en 58 dias habiles (05/06/2026 - 20/08/2026). Distribucion: 70% operaciones internas, 30% gestion con proveedores externos.</p>
+      <p class="resumen" data-modo-local="bloque">Bitacora de labores diarias de TI: 530.5 horas en 58 dias habiles (05/06/2026 - 20/08/2026). Distribucion: 70% operaciones internas, 30% gestion con proveedores externos.</p>
       <p class="coincidencia-busqueda" hidden></p>
 
       <div class="card-footer">

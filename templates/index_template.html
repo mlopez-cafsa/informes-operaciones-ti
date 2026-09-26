@@ -109,7 +109,7 @@
           · <span id="contador-visibles">{{TOTAL_INFORMES}}</span> de {{TOTAL_INFORMES}} informe(s)
         </p>
 
-        <div class="toolbar">
+        <div class="toolbar" data-modo-local="flex">
           <div class="buscador-wrap">
             <svg class="icono-buscar" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
               <circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
@@ -135,7 +135,15 @@
           </label>
         </div>
 
-        <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría">
+        <!--
+          Vista pública (petición explícita, 2026-09-25): el toolbar
+          (buscador + orden) y el filtro por categoría son herramientas de
+          consulta pensadas para uso interno/de mantenimiento — en público
+          se muestra la lista completa de informes, sin controles
+          interactivos, en el orden de atención por defecto (ver
+          modo-vista.js + [data-modo-local="flex"] en style.css).
+        -->
+        <nav class="filters" id="filtros" role="tablist" aria-label="Filtrar por categoría" data-modo-local="flex">
           <button type="button" class="active" data-filtro="todos" role="tab" aria-selected="true">Todos</button>
 <!--__FILTROS_CATEGORIA__-->
         </nav>

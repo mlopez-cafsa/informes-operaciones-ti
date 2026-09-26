@@ -343,7 +343,7 @@ def render_card(informe: dict) -> str:
         </div>
       </div>
       <h3><a href="{informe['ruta']}">{esc(informe['titulo'])}</a></h3>
-      <p class="resumen">{esc(informe['resumen'])}</p>
+      <p class="resumen" data-modo-local="bloque">{esc(informe['resumen'])}</p>
       <p class="coincidencia-busqueda" hidden></p>
 {progreso_html}
       <div class="card-footer">

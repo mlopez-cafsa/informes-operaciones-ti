@@ -73,6 +73,10 @@
 [data-modo-local] { display: none !important; }
 html.modo-local [data-modo-local="bloque"] { display: block !important; }
 html.modo-local [data-modo-local="boton"] { display: inline-flex !important; }
+/* "flex" (petición explícita, 2026-09-25): para contenedores cuyo layout
+   depende de flexbox (ej. .toolbar, .filters de la sección Informes) —
+   "bloque" los apilaría en columna y rompería el layout horizontal. */
+html.modo-local [data-modo-local="flex"] { display: flex !important; }
 
 /* Inversa (petición explícita, 2026-09-25): contenido que se muestra en
    vista PÚBLICA por defecto y se oculta solo en vista local (Marco). Caso
