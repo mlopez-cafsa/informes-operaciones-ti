@@ -551,6 +551,7 @@
   // conectar (comprobación de null de rigor, sin romper el resto del script).
   const sidebarJira = document.getElementById('sidebar-jira');
   const btnToggleSidebar = document.getElementById('btn-toggle-sidebar-jira');
+  const backdropSidebar = document.getElementById('sidebar-jira-backdrop');
   if (sidebarJira && btnToggleSidebar) {
     const CLAVE_LOCALSTORAGE = 'sidebarJiraColapsado';
     const aplicarEstadoSidebar = (colapsado) => {
@@ -560,12 +561,23 @@
       btnToggleSidebar.setAttribute('aria-label', colapsado
         ? 'Mostrar panel Mi seguimiento (Jira)'
         : 'Ocultar panel Mi seguimiento (Jira)');
+      // Fondo semitransparente detrás del panel, solo visible en pantallas
+      // angostas (ver @media max-width:900px en style.css) — deja claro
+      // que el panel es un overlay temporal y permite cerrarlo tocando
+      // fuera de él, sin tener que ubicar el botón flotante.
+      if (backdropSidebar) backdropSidebar.classList.toggle('visible', !colapsado);
     };
     btnToggleSidebar.addEventListener('click', () => {
       const colapsado = !sidebarJira.classList.contains('colapsado');
       aplicarEstadoSidebar(colapsado);
       localStorage.setItem(CLAVE_LOCALSTORAGE, colapsado ? '1' : '0');
     });
+    if (backdropSidebar) {
+      backdropSidebar.addEventListener('click', () => {
+        aplicarEstadoSidebar(true);
+        localStorage.setItem(CLAVE_LOCALSTORAGE, '1');
+      });
+    }
   }
 
   aplicarFiltros();

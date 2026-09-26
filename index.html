@@ -53,6 +53,7 @@
 
 <main id="contenido" class="main-index">
 
+    <div class="sidebar-jira-backdrop" id="sidebar-jira-backdrop"></div>
     <aside class="sidebar-jira" id="sidebar-jira" aria-label="Mi seguimiento (Jira)">
       <div class="sidebar-jira-header">
         <div class="titulo-seccion">
@@ -122,12 +123,18 @@
     (function () {
       var el = document.getElementById('sidebar-jira');
       var btn = document.getElementById('btn-toggle-sidebar-jira');
+      var backdrop = document.getElementById('sidebar-jira-backdrop');
       if (!el || !btn) return;
-      if (localStorage.getItem('sidebarJiraColapsado') === '1') {
+      var guardado = localStorage.getItem('sidebarJiraColapsado');
+      var esPantallaAngosta = window.matchMedia('(max-width: 900px)').matches;
+      var colapsar = guardado === '1' || (guardado === null && esPantallaAngosta);
+      if (colapsar) {
         el.classList.add('colapsado');
         btn.classList.add('colapsado');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Mostrar panel Mi seguimiento (Jira)');
+      } else if (backdrop) {
+        backdrop.classList.add('visible');
       }
     })();
     </script>
@@ -823,6 +830,7 @@
   // conectar (comprobación de null de rigor, sin romper el resto del script).
   const sidebarJira = document.getElementById('sidebar-jira');
   const btnToggleSidebar = document.getElementById('btn-toggle-sidebar-jira');
+  const backdropSidebar = document.getElementById('sidebar-jira-backdrop');
   if (sidebarJira && btnToggleSidebar) {
     const CLAVE_LOCALSTORAGE = 'sidebarJiraColapsado';
     const aplicarEstadoSidebar = (colapsado) => {
@@ -832,12 +840,23 @@
       btnToggleSidebar.setAttribute('aria-label', colapsado
         ? 'Mostrar panel Mi seguimiento (Jira)'
         : 'Ocultar panel Mi seguimiento (Jira)');
+      // Fondo semitransparente detrás del panel, solo visible en pantallas
+      // angostas (ver @media max-width:900px en style.css) — deja claro
+      // que el panel es un overlay temporal y permite cerrarlo tocando
+      // fuera de él, sin tener que ubicar el botón flotante.
+      if (backdropSidebar) backdropSidebar.classList.toggle('visible', !colapsado);
     };
     btnToggleSidebar.addEventListener('click', () => {
       const colapsado = !sidebarJira.classList.contains('colapsado');
       aplicarEstadoSidebar(colapsado);
       localStorage.setItem(CLAVE_LOCALSTORAGE, colapsado ? '1' : '0');
     });
+    if (backdropSidebar) {
+      backdropSidebar.addEventListener('click', () => {
+        aplicarEstadoSidebar(true);
+        localStorage.setItem(CLAVE_LOCALSTORAGE, '1');
+      });
+    }
   }
 
   aplicarFiltros();

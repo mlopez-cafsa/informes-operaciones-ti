@@ -1471,16 +1471,51 @@ main {
   margin-top: 14px;
 }
 
+/* Fondo semitransparente detrás del panel — solo tiene efecto visual en
+   pantallas angostas (ver media query de abajo); en escritorio queda
+   `display:none` siempre, sin importar la clase `.visible` (el panel ahí
+   convive en su propio carril, nunca tapa el contenido). z-index entre el
+   contenido (automático) y el panel (15)/botón (16), para oscurecer todo
+   menos el panel y el botón flotante. Clic encima = cerrar el panel (ver
+   index_template.html). */
+.sidebar-jira-backdrop {
+  display: none;
+}
+
 @media (max-width: 900px) {
   /* Pantallas angostas: no hay espacio para reservar un carril fijo sin
      dejar el contenido central demasiado angosto. El panel pasa a modo
      "overlay" puro (se superpone al contenido en vez de convivir en su
-     propio carril) — mismo patrón que un drawer de navegación móvil. */
+     propio carril) — mismo patrón que un drawer de navegación móvil.
+
+     2026-09-25 (reporte de Marco: en celular el panel se ve abierto
+     tapando el contenido): el estado inicial abierto/cerrado ya se
+     resuelve en JS (ver script inline en manage_informes.py,
+     render_panel_consolidado) — sin preferencia guardada, arranca
+     cerrado acá abajo de los 900px. Este bloque solo cubre la parte
+     visual del modo overlay. */
   .main-index {
     padding-left: 24px;
   }
   .sidebar-jira {
     box-shadow: var(--shadow-lift);
+  }
+  .sidebar-jira-backdrop {
+    display: block;
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(17, 17, 17, 0.4);
+    z-index: 14;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .sidebar-jira-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 
@@ -1799,8 +1834,28 @@ main {
 }
 
 @media (max-width: 640px) {
-  .site-header { padding: 12px 16px; }
+  .site-header {
+    padding: 12px 16px;
+    /* El header no envolvía (`justify-content:space-between` sin
+       `flex-wrap`): en un celular, logo+título a la izquierda y el pill
+       "Reportes y seguimientos" a la derecha no caben en una sola fila y
+       se apretaban/desbordaban. Envolver es seguro en desktop también
+       (ahí sí sobra espacio de sobra, nunca llega a envolver). */
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+  .site-header .header-nav {
+    flex-wrap: wrap;
+  }
   main { padding: 18px 16px 40px; }
+  /* `.main-index` es más específico que `main` de arriba y no heredaba
+     este ajuste — sin esto, quedaba con el padding de escritorio (40px a
+     la derecha) en un viewport de ~375px. Misma especificidad que la
+     regla de la media query de 900px de arriba; gana esta por venir
+     después en el archivo. */
+  .main-index {
+    padding: 18px 16px 40px;
+  }
   .toolbar { flex-direction: column; align-items: stretch; }
   .buscador-wrap { max-width: none; }
   .orden-wrap { justify-content: space-between; }

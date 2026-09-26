@@ -472,7 +472,8 @@ def render_panel_consolidado() -> str:
     filtro_url = snapshot.get("filtro_jira_url", "#")
     generado = snapshot.get("generado", "")
 
-    aside_html = f"""    <aside class="sidebar-jira" id="sidebar-jira" aria-label="Mi seguimiento (Jira)">
+    aside_html = f"""    <div class="sidebar-jira-backdrop" id="sidebar-jira-backdrop"></div>
+    <aside class="sidebar-jira" id="sidebar-jira" aria-label="Mi seguimiento (Jira)">
       <div class="sidebar-jira-header">
         <div class="titulo-seccion">
           {icono_seccion(ICONO_TICKET, 18)}
@@ -506,16 +507,36 @@ def render_panel_consolidado() -> str:
     # cerrarse" que tendría si esto se hiciera solo en el <script> grande
     # al final de index_template.html (mismo principio que
     # assets/js/modo-vista.js con la vista local/pública).
+    #
+    # 2026-09-25 (reporte de Marco: en celular, al abrir el sitio publicado
+    # en GitHub Pages, el panel aparece abierto tapando el contenido): en
+    # pantallas angostas el panel deja de convivir en su propio carril y
+    # pasa a modo "overlay" (ver @media max-width:900px en style.css),
+    # así que si arranca abierto por defecto cubre casi toda la pantalla
+    # (--sidebar-w-real: min(340px, 86vw)). Antes solo se revisaba
+    # localStorage, y en una visita nueva (sin preferencia guardada
+    # todavía) el panel siempre arrancaba abierto, sin importar el ancho
+    # de pantalla. Ahora: si YA existe una preferencia guardada (el usuario
+    # lo abrió/cerró antes, en cualquier dispositivo), esa preferencia
+    # manda siempre. Si NO existe ninguna preferencia todavía, arranca
+    # cerrado en pantallas angostas (mismo punto de quiebre que el CSS,
+    # 900px) y abierto en pantallas anchas — igual que se veía antes ahí.
     script_html = """    <script>
     (function () {
       var el = document.getElementById('sidebar-jira');
       var btn = document.getElementById('btn-toggle-sidebar-jira');
+      var backdrop = document.getElementById('sidebar-jira-backdrop');
       if (!el || !btn) return;
-      if (localStorage.getItem('sidebarJiraColapsado') === '1') {
+      var guardado = localStorage.getItem('sidebarJiraColapsado');
+      var esPantallaAngosta = window.matchMedia('(max-width: 900px)').matches;
+      var colapsar = guardado === '1' || (guardado === null && esPantallaAngosta);
+      if (colapsar) {
         el.classList.add('colapsado');
         btn.classList.add('colapsado');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Mostrar panel Mi seguimiento (Jira)');
+      } else if (backdrop) {
+        backdrop.classList.add('visible');
       }
     })();
     </script>
