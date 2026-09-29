@@ -198,29 +198,29 @@
   {
     "id": "2026-09-18-migracion-pel-admin-a-php",
     "titulo": "Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)",
-    "fecha": "2026-09-18",
+    "fecha": "2026-09-29",
     "categoria": "riesgo-tecnologico",
     "orden_atencion": 6,
     "prioridad": "media",
-    "cumplimiento": "en_riesgo",
-    "estado": "amarillo",
+    "cumplimiento": "a_tiempo",
+    "estado": "verde",
     "avance": null,
     "subtareas_completadas": null,
     "subtareas_total": null,
     "fases": [
       {
         "nombre": "Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)",
-        "avance": 0,
+        "avance": 89,
         "subtareas": [
           {
             "jira_key": "PP-291",
             "resumen": "Preparacion y aprobacion de alcance",
-            "estado": "Tareas por hacer"
+            "estado": "Finalizada"
           },
           {
             "jira_key": "PP-292",
             "resumen": "Setup y estructura del proyecto",
-            "estado": "Tareas por hacer"
+            "estado": "Finalizada"
           },
           {
             "jira_key": "PP-293",
@@ -230,7 +230,7 @@
           {
             "jira_key": "PP-294",
             "resumen": "Core y Autenticacion",
-            "estado": "Tareas por hacer"
+            "estado": "Finalizada"
           },
           {
             "jira_key": "PP-295",
@@ -245,12 +245,12 @@
           {
             "jira_key": "PP-297",
             "resumen": "Migracion de Vistas y JavaScript",
-            "estado": "Tareas por hacer"
+            "estado": "Finalizada"
           },
           {
             "jira_key": "PP-298",
             "resumen": "Seguridad y Refactor",
-            "estado": "Tareas por hacer"
+            "estado": "Finalizada"
           },
           {
             "jira_key": "PP-299",
@@ -266,7 +266,7 @@
         "url": "https://cafsagroup.atlassian.net/browse/PP-232"
       }
     ],
-    "resumen": "Migracion del sitio Admin de PEL(/gx) a PHP, epica XL-TEC-01 (independiente de PP-233). 33% de avance real: 3 de 9 criterios de aceptacion finalizados (Capa de Servicios SOAP, Controlador Admin, Modelos). Vence 31/10/2026.",
+    "resumen": "Migracion del sitio Admin de PEL(/gx) a PHP (CodeIgniter 4), epica XL-TEC-01 (independiente de PP-233). 89% de avance real: 8 de 9 criterios de aceptacion finalizados -- setup del proyecto, capa de servicios SOAP, autenticacion/CSRF, controlador admin, modelos, migracion de las 11 vistas (incluye actualizacion de librerias de frontend) y refactor de seguridad (CSRF global, saneamiento de URLs, checklist de seguridad de CAFSA). Unico pendiente: Pruebas finales y Pase a Produccion (PP-232-08, ~27h) -- pruebas funcionales por modulo, integracion SOAP, prueba de independencia operativa ante caida del sistema principal, deployment en staging, UAT por las areas administrativas usuarias y despliegue a produccion; sin iniciar. Vence 31/10/2026. Desarrollo a cargo de BestResource bajo el contrato marco BESTR-2025062601 (sin penalidades monetarias por atraso; los atrasos imputables al proveedor se acreditan a CAFSA como horas gratuitas el mes siguiente, segun Anexo SLA). Nota abierta: la discrepancia de horas estimadas senalada en el analisis original (120h segun tabla de fases vs. 182h segun la introduccion) quedo marcada como resuelta en la subtarea de aprobacion de alcance, pero el ticket no registra explicitamente cual cifra quedo como linea base -- pendiente de confirmar con BestResource antes del cierre del proyecto.",
     "ruta": "informes/riesgo-tecnologico/migracion-pel-admin-a-php.html",
     "destacado": true,
     "vencimiento": "2026-10-31"
