@@ -142,6 +142,22 @@ PRIORIDAD_JIRA_ESTILO = {
 }
 ORDEN_PRIORIDAD_JIRA = ["Highest", "High", "Medium", "Low", "Lowest"]
 
+# Nombre real de cada proyecto de Jira (petición explícita, 2026-09-29: la
+# versión pública del radar de urgencia no debe exponer la clave del ticket
+# ni su resumen puntual — se reemplazan por el nombre del proyecto al que
+# pertenece, un dato mucho más general). Nombres tomados directamente de
+# Jira (getVisibleJiraProjects), no inventados — si aparece un proyecto
+# nuevo que todavía no está en este mapa, se usa un rótulo neutro en vez de
+# fallar el build.
+NOMBRE_PROYECTO_JIRA = {
+    "PP": "Proyectos Estratégicos y Regulatorios",
+    "DES": "Desarrollo",
+    "GDT": "Gobierno de TI",
+    "BMO": "Mejoras Operativas y Soporte",
+    "ST": "Seguimiento TI",
+}
+NOMBRE_PROYECTO_JIRA_DEFECTO = "Otro proyecto interno"
+
 ESTADOS_VALIDOS = {
     "verde": "A tiempo",
     "amarillo": "En riesgo",
@@ -428,14 +444,41 @@ def texto_plazo_jira(dias: int) -> str:
 
 
 def render_radar_item(F: float, dias: int, issue: dict) -> str:
+    """Devuelve SIEMPRE dos versiones del mismo item del radar — la real,
+    como link directo al issue en Jira con su clave y resumen puntual
+    (visible solo en vista local, ver [data-modo-local="flex"] en
+    style.css), y una versión resumida para vista pública (petición
+    explícita, 2026-09-29): sin link (ya se había quitado la
+    redirección — ver nota anterior del 2026-09-29) y, ahora además, sin
+    la clave del ticket ni su resumen puntual — se reemplazan por el
+    nombre del proyecto (dato general, no identifica el asunto concreto).
+    Se conservan badge de prioridad y plazo/fórmula, que no son
+    información sensible por sí solos. <div> no clickeable (visible solo
+    en vista pública, [data-modo-publico])."""
     clase = PRIORIDAD_JIRA_ESTILO.get(issue.get("prioridad"), "neutral")
-    return f"""      <a class="radar-item" href="{esc(issue['url'])}" target="_blank" rel="noopener">
-        <span class="estado-badge estado-{clase}">{esc(issue['prioridad'])}</span>
+    plazo_formula = (
+        f'<span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / '
+        f'días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes '
+        f'y seguimientos.">{texto_plazo_jira(dias)} · F={F}</span>'
+    )
+    contenido_real = f"""<span class="estado-badge estado-{clase}">{esc(issue['prioridad'])}</span>
         <span class="radar-texto">
           <strong>{esc(issue['key'])}</strong> — {esc(issue['resumen'])}
-          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">{texto_plazo_jira(dias)} · F={F}</span>
-        </span>
+          {plazo_formula}
+        </span>"""
+    nombre_proyecto = NOMBRE_PROYECTO_JIRA.get(issue.get("proyecto"), NOMBRE_PROYECTO_JIRA_DEFECTO)
+    contenido_publico = f"""<span class="estado-badge estado-{clase}">{esc(issue['prioridad'])}</span>
+        <span class="radar-texto">
+          <strong>{esc(nombre_proyecto)}</strong>
+          {plazo_formula}
+        </span>"""
+    real = f"""      <a class="radar-item" href="{esc(issue['url'])}" target="_blank" rel="noopener" data-modo-local="flex">
+        {contenido_real}
       </a>"""
+    publico = f"""      <div class="radar-item radar-item-publica" data-modo-publico>
+        {contenido_publico}
+      </div>"""
+    return real + "\n" + publico
 
 
 def render_panel_consolidado() -> str:
@@ -497,7 +540,7 @@ def render_panel_consolidado() -> str:
         </div>
       </div>
       <div id="sidebar-jira-cuerpo" class="sidebar-jira-cuerpo">
-        <a href="{esc(filtro_url)}" class="ver-todos" target="_blank" rel="noopener">Ver los {total} pendientes en Jira {icono_flecha()}</a>
+        <a href="{esc(filtro_url)}" class="ver-todos" target="_blank" rel="noopener" data-modo-local="boton">Ver los {total} pendientes en Jira {icono_flecha()}</a>
         <p class="page-meta" style="margin:8px 0 16px">
           Consolidado de mis tareas abiertas asignadas en Jira, actualizado al {generado}
           · {total} pendiente(s) abierto(s)

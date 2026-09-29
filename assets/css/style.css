@@ -1613,6 +1613,19 @@ main {
   margin-top: 1px;
 }
 
+/* Réplica pública del radar (petición explícita, 2026-09-29): mismo
+   contenido que .radar-item, pero como <div> sin link — sin hover-lift
+   ni cursor de puntero, para no sugerir que hay algo en qué hacer clic
+   (ver render_radar_item() en manage_informes.py). */
+.radar-item-publica {
+  cursor: default;
+}
+
+.radar-item-publica:hover {
+  box-shadow: var(--shadow);
+  transform: none;
+}
+
 .radar-texto {
   display: flex;
   flex-direction: column;

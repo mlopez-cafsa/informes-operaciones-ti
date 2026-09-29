@@ -62,7 +62,7 @@
         </div>
       </div>
       <div id="sidebar-jira-cuerpo" class="sidebar-jira-cuerpo">
-        <a href="https://cafsagroup.atlassian.net/issues?jql=assignee%3DcurrentUser()%20AND%20statusCategory%20!%3D%20Done%20ORDER%20BY%20priority%20DESC%2C%20duedate%20ASC" class="ver-todos" target="_blank" rel="noopener">Ver los 33 pendientes en Jira <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="https://cafsagroup.atlassian.net/issues?jql=assignee%3DcurrentUser()%20AND%20statusCategory%20!%3D%20Done%20ORDER%20BY%20priority%20DESC%2C%20duedate%20ASC" class="ver-todos" target="_blank" rel="noopener" data-modo-local="boton">Ver los 33 pendientes en Jira <svg class="icono-flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <p class="page-meta" style="margin:8px 0 16px">
           Consolidado de mis tareas abiertas asignadas en Jira, actualizado al 2026-09-23
           · 33 pendiente(s) abierto(s)
@@ -76,41 +76,76 @@
         </div>
         <h3 class="radar-titulo">Radar de urgencia <span class="formula-nota" title="Los 5 pendientes con mayor F = (50 × peso de prioridad) / días_restantes², solo entre los que tienen fecha de vencimiento en Jira.">top 5</span></h3>
         <div class="radar-urgencia">
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-216" target="_blank" rel="noopener">
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-216" target="_blank" rel="noopener" data-modo-local="flex">
         <span class="estado-badge estado-rojo">Highest</span>
         <span class="radar-texto">
           <strong>PP-216</strong> — XL-COR-01  Implementación del nuevo Cotizador
           <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 166 día(s) · F=250.0</span>
         </span>
       </a>
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1741" target="_blank" rel="noopener">
+      <div class="radar-item radar-item-publica" data-modo-publico>
+        <span class="estado-badge estado-rojo">Highest</span>
+        <span class="radar-texto">
+          <strong>Proyectos Estratégicos y Regulatorios</strong>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vencido hace 166 día(s) · F=250.0</span>
+        </span>
+      </div>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1741" target="_blank" rel="noopener" data-modo-local="flex">
         <span class="estado-badge estado-rojo">Highest</span>
         <span class="radar-texto">
           <strong>DES-1741</strong> — Migración Core Financiero ABANKS - Forms 14c
           <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 1 día(s) · F=250.0</span>
         </span>
       </a>
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-233" target="_blank" rel="noopener">
+      <div class="radar-item radar-item-publica" data-modo-publico>
+        <span class="estado-badge estado-rojo">Highest</span>
+        <span class="radar-texto">
+          <strong>Desarrollo</strong>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 1 día(s) · F=250.0</span>
+        </span>
+      </div>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-233" target="_blank" rel="noopener" data-modo-local="flex">
         <span class="estado-badge estado-amarillo">Medium</span>
         <span class="radar-texto">
           <strong>PP-233</strong> — XL-TEC-01 Gestión de Riesgo Tecnológico y Obsolescencia Crítica - Integración GAUDI en CAFSA en Línea - FASE 1
           <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 1 día(s) · F=150.0</span>
         </span>
       </a>
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-229" target="_blank" rel="noopener">
+      <div class="radar-item radar-item-publica" data-modo-publico>
+        <span class="estado-badge estado-amarillo">Medium</span>
+        <span class="radar-texto">
+          <strong>Proyectos Estratégicos y Regulatorios</strong>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 1 día(s) · F=150.0</span>
+        </span>
+      </div>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/PP-229" target="_blank" rel="noopener" data-modo-local="flex">
         <span class="estado-badge estado-amarillo">Medium</span>
         <span class="radar-texto">
           <strong>PP-229</strong> — XL-TEC-01 Gestión de Riesgo Tecnológico y Obsolescencia Crítica - Plan de mitigación de Riesgo de afectación de Bases de datos, ABANKS y WebLogic (Obsolescencia tecnológica)
           <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 1 día(s) · F=150.0</span>
         </span>
       </a>
-      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1743" target="_blank" rel="noopener">
+      <div class="radar-item radar-item-publica" data-modo-publico>
+        <span class="estado-badge estado-amarillo">Medium</span>
+        <span class="radar-texto">
+          <strong>Proyectos Estratégicos y Regulatorios</strong>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 1 día(s) · F=150.0</span>
+        </span>
+      </div>
+      <a class="radar-item" href="https://cafsagroup.atlassian.net/browse/DES-1743" target="_blank" rel="noopener" data-modo-local="flex">
         <span class="estado-badge estado-amarillo">Medium</span>
         <span class="radar-texto">
           <strong>DES-1743</strong> — Migración Módulos, Objetos &amp; Pantallas Abanks
           <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 1 día(s) · F=150.0</span>
         </span>
       </a>
+      <div class="radar-item radar-item-publica" data-modo-publico>
+        <span class="estado-badge estado-amarillo">Medium</span>
+        <span class="radar-texto">
+          <strong>Desarrollo</strong>
+          <span class="formula-nota" title="Urgencia gravitacional: F = (50 × peso de prioridad) / días_restantes². A mayor prioridad y menor plazo, mayor F. Mismo criterio que en Reportes y seguimientos.">Vence en 1 día(s) · F=150.0</span>
+        </span>
+      </div>
         </div>
       </div>
     </aside>
