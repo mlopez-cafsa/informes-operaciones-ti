@@ -1,125 +1,1877 @@
 {
-  "generado": "2026-08-27",
+  "generado": "2026-09-30",
   "fuente": "Bitácora interna de labores diarias — solo campos estructurados (fecha, issue de Jira, proveedor, horas). No incluye la descripción de la tarea: ese texto libre trae nombres de personas y detalle de proveedores/incidentes que no aplica publicar aquí (ver README, disciplina de contenido).",
-  "rango": ["2026-08-03", "2026-08-25"],
-  "total_horas": 169.5,
+  "rango": [
+    "2026-08-03",
+    "2026-09-28"
+  ],
+  "total_horas": 346.5,
   "registros": [
-    {"fecha": "2026-08-03", "jira_key": "BMO-319", "proveedor": "Quanto", "horas": 1.0},
-    {"fecha": "2026-08-03", "jira_key": "BMO-319", "proveedor": "CAFSA", "horas": 3.0},
-    {"fecha": "2026-08-03", "jira_key": "BMO-319", "proveedor": "CAFSA", "horas": 4.5},
-    {"fecha": "2026-08-04", "jira_key": "BMO-320", "proveedor": "Quanto", "horas": 1.0},
-    {"fecha": "2026-08-04", "jira_key": "BMO-320", "proveedor": "BD Finance (PELgx)", "horas": 1.0},
-    {"fecha": "2026-08-04", "jira_key": "BMO-320", "proveedor": "CAFSA", "horas": 1.5},
-    {"fecha": "2026-08-04", "jira_key": "BMO-320", "proveedor": "BestResource (BestR)", "horas": 3.0},
-    {"fecha": "2026-08-04", "jira_key": "BMO-320", "proveedor": "CAFSA", "horas": 1.5},
-    {"fecha": "2026-08-04", "jira_key": "BMO-320", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-05", "jira_key": "BMO-321", "proveedor": "BestResource (BestR)", "horas": 1.0},
-    {"fecha": "2026-08-05", "jira_key": "BMO-321", "proveedor": "Quanto", "horas": 3.0},
-    {"fecha": "2026-08-05", "jira_key": "BMO-321", "proveedor": "CAFSA", "horas": 4.5},
-    {"fecha": "2026-08-06", "jira_key": "BMO-322", "proveedor": "BestResource (BestR)", "horas": 3.0},
-    {"fecha": "2026-08-06", "jira_key": "BMO-322", "proveedor": "CAFSA", "horas": 5.5},
-    {"fecha": "2026-08-07", "jira_key": "BMO-323", "proveedor": "BD Finance (PELgx)", "horas": 1.0},
-    {"fecha": "2026-08-07", "jira_key": "BMO-323", "proveedor": "CAFSA", "horas": 3.0},
-    {"fecha": "2026-08-07", "jira_key": "BMO-323", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-07", "jira_key": "BMO-323", "proveedor": "CAFSA", "horas": 1.0},
-    {"fecha": "2026-08-07", "jira_key": "BMO-323", "proveedor": "BestResource (BestR)", "horas": 3.0},
-    {"fecha": "2026-08-07", "jira_key": "BMO-323", "proveedor": "CAFSA", "horas": 2.0},
-    {"fecha": "2026-08-10", "jira_key": "BMO-325", "proveedor": "BestResource (BestR)", "horas": 1.0},
-    {"fecha": "2026-08-10", "jira_key": "BMO-325", "proveedor": "CAFSA", "horas": 3.0},
-    {"fecha": "2026-08-10", "jira_key": "BMO-325", "proveedor": "CAFSA", "horas": 1.5},
-    {"fecha": "2026-08-10", "jira_key": "BMO-325", "proveedor": "CAFSA", "horas": 1.0},
-    {"fecha": "2026-08-10", "jira_key": "BMO-325", "proveedor": "CAFSA", "horas": 1.0},
-    {"fecha": "2026-08-10", "jira_key": "BMO-325", "proveedor": "CAFSA", "horas": 4.0},
-    {"fecha": "2026-08-10", "jira_key": "BMO-325", "proveedor": "CAFSA", "horas": 4.0},
-    {"fecha": "2026-08-11", "jira_key": "BMO-326", "proveedor": "Quanto", "horas": 4.0},
-    {"fecha": "2026-08-11", "jira_key": "BMO-326", "proveedor": "CAFSA", "horas": 3.0},
-    {"fecha": "2026-08-11", "jira_key": "BMO-326", "proveedor": "Quanto", "horas": 1.0},
-    {"fecha": "2026-08-11", "jira_key": "BMO-326", "proveedor": "Quanto", "horas": 4.0},
-    {"fecha": "2026-08-11", "jira_key": "BMO-326", "proveedor": "Quanto", "horas": 3.0},
-    {"fecha": "2026-08-11", "jira_key": "BMO-326", "proveedor": "Quanto", "horas": 1.0},
-    {"fecha": "2026-08-11", "jira_key": "BMO-326", "proveedor": "Quanto", "horas": 4.0},
-    {"fecha": "2026-08-12", "jira_key": "BMO-327", "proveedor": "CAFSA", "horas": 3.0},
-    {"fecha": "2026-08-12", "jira_key": "BMO-327", "proveedor": "CAFSA", "horas": 1.5},
-    {"fecha": "2026-08-12", "jira_key": "BMO-327", "proveedor": "CAFSA", "horas": 1.5},
-    {"fecha": "2026-08-12", "jira_key": "BMO-327", "proveedor": "CAFSA", "horas": 2.5},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "CAFSA", "horas": 4.0},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "BestResource (BestR)", "horas": 0.5},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "Ladonware", "horas": 1.5},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "Quanto", "horas": 0.3},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "GBM", "horas": 0.5},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "BestResource (BestR)", "horas": 0.3},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "BestResource (BestR)", "horas": 0.2},
-    {"fecha": "2026-08-13", "jira_key": "BMO-328", "proveedor": "CAFSA", "horas": 0.6},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "BD Finance (PELgx)", "horas": 2.0},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "DWH (consultor externo)", "horas": 0.3},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "CAFSA", "horas": 1.0},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "Ladonware", "horas": 0.5},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "BestResource (BestR)", "horas": 0.3},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "CAFSA", "horas": 0.2},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "CAFSA", "horas": 2.0},
-    {"fecha": "2026-08-14", "jira_key": "BMO-333", "proveedor": "CAFSA", "horas": 0.4},
-    {"fecha": "2026-08-17", "jira_key": "BMO-334", "proveedor": "Ladonware", "horas": 1.5},
-    {"fecha": "2026-08-17", "jira_key": "BMO-334", "proveedor": "DWH (consultor externo)", "horas": 1.0},
-    {"fecha": "2026-08-17", "jira_key": "BMO-334", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-17", "jira_key": "BMO-334", "proveedor": "GBM", "horas": 1.0},
-    {"fecha": "2026-08-17", "jira_key": "BMO-334", "proveedor": "Softland", "horas": 0.3},
-    {"fecha": "2026-08-17", "jira_key": "BMO-334", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-17", "jira_key": "BMO-334", "proveedor": "BestResource (BestR)", "horas": 0.3},
-    {"fecha": "2026-08-17", "jira_key": "BMO-334", "proveedor": "CAFSA", "horas": 3.4},
-    {"fecha": "2026-08-18", "jira_key": "BMO-335", "proveedor": "CAFSA", "horas": 11.0},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "BestResource (BestR)", "horas": 1.5},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "BestResource (BestR)", "horas": 1.0},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "CAFSA", "horas": 1.0},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "GBM", "horas": 0.5},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "Quanto", "horas": 0.5},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "BestResource (BestR)", "horas": 0.5},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "Softland", "horas": 0.3},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-19", "jira_key": "BMO-336", "proveedor": "CAFSA", "horas": 2.9},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "BestResource (BestR)", "horas": 0.5},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "Quanto", "horas": 0.3},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "BD Consultores / BD Digital Serv", "horas": 1.5},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "GBM", "horas": 0.3},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "CAFSA", "horas": 0.7},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "CAFSA", "horas": 0.8},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "CAFSA", "horas": 0.8},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-20", "jira_key": "BMO-337", "proveedor": "CAFSA", "horas": 2.7},
-    {"fecha": "2026-08-21", "jira_key": "BMO-338", "proveedor": "CAFSA", "horas": 1.5},
-    {"fecha": "2026-08-21", "jira_key": "BMO-338", "proveedor": "BD Consultores / BD Digital Serv", "horas": 0.5},
-    {"fecha": "2026-08-21", "jira_key": "BMO-338", "proveedor": "BestResource (BestR)", "horas": 3.3},
-    {"fecha": "2026-08-21", "jira_key": "BMO-338", "proveedor": "Quanto", "horas": 0.5},
-    {"fecha": "2026-08-21", "jira_key": "BMO-338", "proveedor": "CAFSA", "horas": 2.7},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "Sentinel", "horas": 1.0},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "CAFSA", "horas": 1.2},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "CAFSA", "horas": 1.3},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "GBM", "horas": 0.3},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "Quanto", "horas": 0.3},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "Softland", "horas": 0.2},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "CAFSA", "horas": 0.2},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "BestResource", "horas": 0.5},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "CAFSA", "horas": 0.4},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "CAFSA", "horas": 2.0},
-    {"fecha": "2026-08-24", "jira_key": "BMO-340", "proveedor": "CAFSA", "horas": 2.3},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "BD Consultores / BD Digital Serv", "horas": 1.5},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "Softland", "horas": 0.3},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "GBM", "horas": 0.8},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "BestResource (BestR)", "horas": 1.0},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "CAFSA", "horas": 0.8},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "CAFSA", "horas": 0.5},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "CAFSA", "horas": 0.4},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "Quanto", "horas": 0.3},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "CAFSA", "horas": 0.3},
-    {"fecha": "2026-08-25", "jira_key": "BMO-341", "proveedor": "CAFSA", "horas": 2.6}
+    {
+      "fecha": "2026-08-03",
+      "jira_key": "BMO-319",
+      "proveedor": "Quanto",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-03",
+      "jira_key": "BMO-319",
+      "proveedor": "CAFSA",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-03",
+      "jira_key": "BMO-319",
+      "proveedor": "CAFSA",
+      "horas": 4.5
+    },
+    {
+      "fecha": "2026-08-04",
+      "jira_key": "BMO-320",
+      "proveedor": "Quanto",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-04",
+      "jira_key": "BMO-320",
+      "proveedor": "BD Finance (PELgx)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-04",
+      "jira_key": "BMO-320",
+      "proveedor": "CAFSA",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-04",
+      "jira_key": "BMO-320",
+      "proveedor": "BestResource (BestR)",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-04",
+      "jira_key": "BMO-320",
+      "proveedor": "CAFSA",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-04",
+      "jira_key": "BMO-320",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-05",
+      "jira_key": "BMO-321",
+      "proveedor": "BestResource (BestR)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-05",
+      "jira_key": "BMO-321",
+      "proveedor": "Quanto",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-05",
+      "jira_key": "BMO-321",
+      "proveedor": "CAFSA",
+      "horas": 4.5
+    },
+    {
+      "fecha": "2026-08-06",
+      "jira_key": "BMO-322",
+      "proveedor": "BestResource (BestR)",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-06",
+      "jira_key": "BMO-322",
+      "proveedor": "CAFSA",
+      "horas": 5.5
+    },
+    {
+      "fecha": "2026-08-07",
+      "jira_key": "BMO-323",
+      "proveedor": "BD Finance (PELgx)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-07",
+      "jira_key": "BMO-323",
+      "proveedor": "CAFSA",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-07",
+      "jira_key": "BMO-323",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-07",
+      "jira_key": "BMO-323",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-07",
+      "jira_key": "BMO-323",
+      "proveedor": "BestResource (BestR)",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-07",
+      "jira_key": "BMO-323",
+      "proveedor": "CAFSA",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-08-10",
+      "jira_key": "BMO-325",
+      "proveedor": "BestResource (BestR)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-10",
+      "jira_key": "BMO-325",
+      "proveedor": "CAFSA",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-10",
+      "jira_key": "BMO-325",
+      "proveedor": "CAFSA",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-10",
+      "jira_key": "BMO-325",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-10",
+      "jira_key": "BMO-325",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-10",
+      "jira_key": "BMO-325",
+      "proveedor": "CAFSA",
+      "horas": 4.0
+    },
+    {
+      "fecha": "2026-08-10",
+      "jira_key": "BMO-325",
+      "proveedor": "CAFSA",
+      "horas": 4.0
+    },
+    {
+      "fecha": "2026-08-11",
+      "jira_key": "BMO-326",
+      "proveedor": "Quanto",
+      "horas": 4.0
+    },
+    {
+      "fecha": "2026-08-11",
+      "jira_key": "BMO-326",
+      "proveedor": "CAFSA",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-11",
+      "jira_key": "BMO-326",
+      "proveedor": "Quanto",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-11",
+      "jira_key": "BMO-326",
+      "proveedor": "Quanto",
+      "horas": 4.0
+    },
+    {
+      "fecha": "2026-08-11",
+      "jira_key": "BMO-326",
+      "proveedor": "Quanto",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-11",
+      "jira_key": "BMO-326",
+      "proveedor": "Quanto",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-11",
+      "jira_key": "BMO-326",
+      "proveedor": "Quanto",
+      "horas": 4.0
+    },
+    {
+      "fecha": "2026-08-12",
+      "jira_key": "BMO-327",
+      "proveedor": "CAFSA",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-08-12",
+      "jira_key": "BMO-327",
+      "proveedor": "CAFSA",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-12",
+      "jira_key": "BMO-327",
+      "proveedor": "CAFSA",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-12",
+      "jira_key": "BMO-327",
+      "proveedor": "CAFSA",
+      "horas": 2.5
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "CAFSA",
+      "horas": 4.0
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "Ladonware",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "Quanto",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "GBM",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-08-13",
+      "jira_key": "BMO-328",
+      "proveedor": "CAFSA",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "BD Finance (PELgx)",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "DWH (consultor externo)",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "Ladonware",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "CAFSA",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "CAFSA",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-08-14",
+      "jira_key": "BMO-333",
+      "proveedor": "CAFSA",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-08-17",
+      "jira_key": "BMO-334",
+      "proveedor": "Ladonware",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-17",
+      "jira_key": "BMO-334",
+      "proveedor": "DWH (consultor externo)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-17",
+      "jira_key": "BMO-334",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-17",
+      "jira_key": "BMO-334",
+      "proveedor": "GBM",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-17",
+      "jira_key": "BMO-334",
+      "proveedor": "Softland",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-17",
+      "jira_key": "BMO-334",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-17",
+      "jira_key": "BMO-334",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-17",
+      "jira_key": "BMO-334",
+      "proveedor": "CAFSA",
+      "horas": 3.4
+    },
+    {
+      "fecha": "2026-08-18",
+      "jira_key": "BMO-335",
+      "proveedor": "CAFSA",
+      "horas": 11.0
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "BestResource (BestR)",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "BestResource (BestR)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "GBM",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "Quanto",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "Softland",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-19",
+      "jira_key": "BMO-336",
+      "proveedor": "CAFSA",
+      "horas": 2.9
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "Quanto",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "BD Consultores / BD Digital Serv",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "GBM",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "CAFSA",
+      "horas": 0.7
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "CAFSA",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "CAFSA",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-20",
+      "jira_key": "BMO-337",
+      "proveedor": "CAFSA",
+      "horas": 2.7
+    },
+    {
+      "fecha": "2026-08-21",
+      "jira_key": "BMO-338",
+      "proveedor": "CAFSA",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-21",
+      "jira_key": "BMO-338",
+      "proveedor": "BD Consultores / BD Digital Serv",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-21",
+      "jira_key": "BMO-338",
+      "proveedor": "BestResource (BestR)",
+      "horas": 3.3
+    },
+    {
+      "fecha": "2026-08-21",
+      "jira_key": "BMO-338",
+      "proveedor": "Quanto",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-21",
+      "jira_key": "BMO-338",
+      "proveedor": "CAFSA",
+      "horas": 2.7
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "Sentinel",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "CAFSA",
+      "horas": 1.2
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "CAFSA",
+      "horas": 1.3
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "GBM",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "Quanto",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "Softland",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "CAFSA",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "BestResource",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "CAFSA",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "CAFSA",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-08-24",
+      "jira_key": "BMO-340",
+      "proveedor": "CAFSA",
+      "horas": 2.3
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "BD Consultores / BD Digital Serv",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "Softland",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "GBM",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "BestResource (BestR)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "CAFSA",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "CAFSA",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "Quanto",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-25",
+      "jira_key": "BMO-341",
+      "proveedor": "CAFSA",
+      "horas": 2.6
+    },
+    {
+      "fecha": "2026-08-26",
+      "jira_key": "BMO-342",
+      "proveedor": "CAFSA / Horizon-Profit (Salesforce FSC)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-26",
+      "jira_key": "BMO-342",
+      "proveedor": "Quanto",
+      "horas": 0.7
+    },
+    {
+      "fecha": "2026-08-26",
+      "jira_key": "BMO-342",
+      "proveedor": "Softland",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-26",
+      "jira_key": "BMO-342",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-26",
+      "jira_key": "BMO-342",
+      "proveedor": "CAFSA",
+      "horas": 6.0
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "BestResource (BestR)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "CAFSA",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "Sentinel (soysentinel.com)",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "CAFSA / Horizon-Profit (Salesforce FSC)",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-08-27",
+      "jira_key": "BMO-344",
+      "proveedor": "CAFSA",
+      "horas": 4.7
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "BD Consultores / BD Digital Serv",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "BestResource (BestR)",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "Quanto",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "Softland",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "CAFSA",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "CAFSA / Horizon-Profit (Salesforce FSC)",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "GBM",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-08-28",
+      "jira_key": "BMO-345",
+      "proveedor": "CAFSA",
+      "horas": 3.2
+    },
+    {
+      "fecha": "2026-08-31",
+      "jira_key": "BMO-367",
+      "proveedor": "CAFSA",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-01",
+      "jira_key": "BMO-346",
+      "proveedor": "CAFSA",
+      "horas": 8.0
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "CAFSA",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "Cotizador CAFSA (Apptividad)",
+      "horas": 0.7
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "Cotizador CAFSA (Apptividad)",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "Softland",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "CAFSA",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "Ladonware",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "GBM / BD Consultores",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "BestResource (BestR)",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-02",
+      "jira_key": "BMO-347",
+      "proveedor": "CAFSA",
+      "horas": 3.5
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "BestResource (BestR)",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "CAFSA",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "BD Consultores / BD Digital Serv",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "Quanto",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-03",
+      "jira_key": "BMO-348",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-04",
+      "jira_key": "BMO-349",
+      "proveedor": "Cotizador CAFSA (Apptividad)",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-04",
+      "jira_key": "BMO-349",
+      "proveedor": "CAFSA",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-04",
+      "jira_key": "BMO-349",
+      "proveedor": "CAFSA",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-04",
+      "jira_key": "BMO-349",
+      "proveedor": "Sentinel (soysentinel.com)",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-04",
+      "jira_key": "BMO-349",
+      "proveedor": "EnevaSys",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-04",
+      "jira_key": "BMO-349",
+      "proveedor": "BD Consultores / BD Digital Serv",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-04",
+      "jira_key": "BMO-349",
+      "proveedor": "CAFSA",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-04",
+      "jira_key": "BMO-349",
+      "proveedor": "CAFSA",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "SolDS",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "Cotizador CAFSA (Apptividad)",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "CAFSA",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "Horizon-CX",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "Ladonware",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "GBM / BD Consultores",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "CAFSA",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "EnevaSys",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-07",
+      "jira_key": "BMO-350",
+      "proveedor": "CAFSA",
+      "horas": 2.8
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "SolDS",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "Cotizador CAFSA (Apptividad)",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "BD Consultores / BDigitalServ",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "GBM / BD Consultores",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "BestResource",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "BestResource",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "CAFSA / Quanto Soluciones",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "BestResource",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-08",
+      "jira_key": "BMO-351",
+      "proveedor": "CAFSA",
+      "horas": 3.1
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "BestResource",
+      "horas": 1.3
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "BestResource",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "BestResource",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "BestResource",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "CAFSA / Coforge",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "BD Consultores / BDigitalServ",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "Quanto Soluciones",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "SolDS",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-09",
+      "jira_key": "BMO-352",
+      "proveedor": "CAFSA",
+      "horas": 2.7
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "BD Consultores / bdigitalserv",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "BestResource",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "BestResource",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "BestResource",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "BestResource",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "BestResource",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-10",
+      "jira_key": "BMO-353",
+      "proveedor": "Datavox",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "CAFSA",
+      "horas": 0.7
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "BestResource",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "BD Consultores / bdigitalserv",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "BestResource",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "BestResource",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "Coforge",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "Quanto Soluciones",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "CAFSA",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "Datavox",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-11",
+      "jira_key": "BMO-354",
+      "proveedor": "CAFSA",
+      "horas": 2.8
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "CAFSA / Coforge",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "BD Consultores / BDigitalServ / BestResource",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "BestResource",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "BestResource",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "CAFSA",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-14",
+      "jira_key": "BMO-355",
+      "proveedor": "CAFSA",
+      "horas": 1.3
+    },
+    {
+      "fecha": "2026-09-15",
+      "jira_key": "BMO-356",
+      "proveedor": "CAFSA",
+      "horas": 0.0
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "BD Consultores",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "GBM",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "Quanto Soluciones",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "BestResource",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "CAFSA",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-16",
+      "jira_key": "BMO-357",
+      "proveedor": "CAFSA",
+      "horas": 3.5
+    },
+    {
+      "fecha": "2026-09-17",
+      "jira_key": "BMO-358",
+      "proveedor": "BestResource",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-17",
+      "jira_key": "BMO-358",
+      "proveedor": "BestResource",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-17",
+      "jira_key": "BMO-358",
+      "proveedor": "BestResource",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-17",
+      "jira_key": "BMO-358",
+      "proveedor": "Quanto Soluciones",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-17",
+      "jira_key": "BMO-358",
+      "proveedor": "Apptividad",
+      "horas": 1.3
+    },
+    {
+      "fecha": "2026-09-17",
+      "jira_key": "BMO-358",
+      "proveedor": "CAFSA",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-17",
+      "jira_key": "BMO-358",
+      "proveedor": "Datavox",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-17",
+      "jira_key": "BMO-358",
+      "proveedor": "CAFSA",
+      "horas": 4.0
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "CAFSA",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "BD Consultores / bdigitalserv",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "BestResource",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "Quanto Soluciones",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-18",
+      "jira_key": "BMO-360",
+      "proveedor": "CAFSA",
+      "horas": 2.5
+    },
+    {
+      "fecha": "2026-09-21",
+      "jira_key": "BMO-359",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-21",
+      "jira_key": "BMO-359",
+      "proveedor": "CAFSA",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-09-21",
+      "jira_key": "BMO-359",
+      "proveedor": "CAFSA",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-09-21",
+      "jira_key": "BMO-359",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-21",
+      "jira_key": "BMO-359",
+      "proveedor": "BestResource",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-09-21",
+      "jira_key": "BMO-359",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-21",
+      "jira_key": "BMO-359",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-21",
+      "jira_key": "BMO-359",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "BestResource",
+      "horas": 1.4
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "BestResource",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "BestResource",
+      "horas": 2.5
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "BestResource",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "CAFSA",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "CAFSA",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-22",
+      "jira_key": "BMO-362",
+      "proveedor": "CAFSA",
+      "horas": 2.6
+    },
+    {
+      "fecha": "2026-09-23",
+      "jira_key": "BMO-363",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-23",
+      "jira_key": "BMO-363",
+      "proveedor": "BestResource",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-23",
+      "jira_key": "BMO-363",
+      "proveedor": "BestResource",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-09-23",
+      "jira_key": "BMO-363",
+      "proveedor": "BestResource",
+      "horas": 1.5
+    },
+    {
+      "fecha": "2026-09-23",
+      "jira_key": "BMO-363",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-23",
+      "jira_key": "BMO-363",
+      "proveedor": "Quanto Soluciones",
+      "horas": 3.0
+    },
+    {
+      "fecha": "2026-09-23",
+      "jira_key": "BMO-363",
+      "proveedor": "CAFSA",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "BestResource",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "BestResource / CAFSA",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "BestResource",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "BestResource",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "BestResource",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "Ladonware",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "CAFSA",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-24",
+      "jira_key": "BMO-364",
+      "proveedor": "CAFSA",
+      "horas": 4.8
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "Coforge",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "BestResource",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "BestResource / BCCR (GAUDI)",
+      "horas": 1.3
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "BestResource",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "BD Consultores",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "CAFSA / Quanto Soluciones",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "Ladonware",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "CAFSA / Grupo Purdy",
+      "horas": 0.8
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "CAFSA",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-25",
+      "jira_key": "BMO-365",
+      "proveedor": "CAFSA",
+      "horas": 2.0
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "CAFSA / Quanto Soluciones",
+      "horas": 1.2
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "BestResource (GAUDI)",
+      "horas": 2.2
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "BestResource (Admin)",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "CAFSA / BCCR (GAUDI)",
+      "horas": 0.5
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "BestResource",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "BD Consultores",
+      "horas": 0.6
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "Apptividad",
+      "horas": 0.4
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "BestResource",
+      "horas": 0.3
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "Deloitte",
+      "horas": 0.2
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "CAFSA",
+      "horas": 1.0
+    },
+    {
+      "fecha": "2026-09-28",
+      "jira_key": "BMO-366",
+      "proveedor": "CAFSA",
+      "horas": 0.7
+    }
   ]
 }

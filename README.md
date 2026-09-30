@@ -42,6 +42,40 @@ ruta). Lo que sí se publica es el estado ejecutivo del proyecto asociado
 (ej. "migración de infraestructura en curso"), sin el detalle contractual
 de fondo.
 
+## Estado actual del sistema (al 30/09/2026)
+
+Hecho verificable a partir de `data/*.json` al momento de escribir esto
+— cambia con cada `build`/`regenerar-paginas`, no es un número fijo:
+
+- **8 informes** publicados bajo `informes/`, en las categorías
+  `datos-etl`, `gobierno-ti`, `core-financiero`, `riesgo-tecnologico`
+  (×2 — PP-232 y PP-233, en cards separados), `infraestructura`,
+  `finanzas-internas` y `operaciones`. De esos, **3 tienen
+  `"personalizado": true`** (contenido hecho a mano, `regenerar-paginas`
+  los salta): Migración de Core Financiero (Forms 14C), Quanto/Contabilidad
+  (BMO-252) y Operaciones Diarias.
+- **Módulo "Reportes y seguimientos"**: 3 personas registradas en
+  `data/personas.json` (Luis Aguilar Morales — Gerente de TI, Cristopher
+  Pérez Ugalde — Jefe de TI, María Cristina Hernández — PMO), con **7
+  pendientes** abiertos/en seguimiento en `data/pendientes.json` y **1
+  iniciativa** de análisis extendido (`data/iniciativas.json` — doble
+  factor /df, de Cristopher).
+- **Panel "Mi seguimiento (Jira)"**: snapshot de 33 pendientes propios
+  abiertos en Jira, actualizado por última vez el 2026-09-23
+  (`data/jira_snapshot.json.generado`) — correr la skill `-actualiza-jira`
+  (o repetir la consulta JQL a mano) para refrescarlo.
+- **Bitácora de Operaciones Diarias**: 311 registros estructurados
+  (fecha/issue/proveedor/horas) en `data/bitacora_operaciones.json`,
+  rango 2026-08-03 a 2026-09-28, 346.5 horas totales — actualizada al
+  2026-09-30.
+- **Página "Configuración y utilidades del sistema"**
+  (`utilidades-sistema.html`, nueva desde 2026-09-30): reemplaza el
+  acordeón que antes vivía dentro del `index.html` principal — ver
+  sección dedicada más abajo.
+- Repositorio en la rama `main`, publicado vía GitHub Pages, **sin
+  dependencias externas de Python** — todo `scripts/*.py` corre con la
+  librería estándar (probado con Python 3.10).
+
 ## Fases y enlaces a Jira
 
 Un informe puede declarar `--fase "Nombre=NN"` (repetible) para mostrar un
@@ -130,9 +164,11 @@ backend).
 ```
 informes-operaciones-ti/
 ├── index.html                  # Generado por el script — NO editar a mano
+├── utilidades-sistema.html     # Configuración y utilidades del sistema — hecha a mano, NO se regenera sola
 ├── README.md                    # Referencia técnica (cómo usar cada script)
 ├── SOP.md                       # Procedimiento estándar paso a paso (cuándo/en qué orden)
 ├── robots.txt
+├── .gitignore
 ├── logos-cafsa/                 # Logos originales (fuente, sin optimizar)
 ├── assets/
 │   ├── css/style.css           # Paleta CAFSA + semáforo + sistema visual (acento, sombras, iconografía)
@@ -142,20 +178,24 @@ informes-operaciones-ti/
 │   ├── js/brief-viewer.js      # Botón + <dialog> del brief diario (solo aparece si briefs/manifest.json existe)
 │   └── img/logos/              # Logos optimizados para web + favicon
 ├── informes/
-│   └── <categoria>/<slug>.html # Un archivo HTML por informe
+│   └── <categoria>/<slug>.html # Un archivo HTML por informe (8 al día de hoy — ver "Estado actual del sistema")
 ├── reportes/
 │   ├── index.html              # Generado — directorio de personas
-│   ├── <persona-slug>/index.html   # Generado — página evergreen de esa persona
-│   └── DD-MM-YYYY/             # Bandeja de memos fuente (.docx) — NUNCA se publica
+│   ├── <persona-slug>/         # Generado — página evergreen de esa persona (incluye iniciativas/ si aplica)
+│   │   ├── index.html
+│   │   └── iniciativas/*.html  # Análisis extendido de una iniciativa puntual (ej. doble factor /df)
+│   └── DD-MM-YYYY/             # Bandeja de memos fuente (.docx) — NUNCA se publica (ver .gitignore)
 ├── briefs/                     # Briefs diarios en HTML — excluido de git (.gitignore)
 │   ├── manifest.json           # Generado por manage_briefs.py build — NUNCA se comitea
 │   └── DD-##-MM-YYYY-brief.html
 ├── data/
 │   ├── informes.json           # Fuente de verdad de informes/
 │   ├── pendientes.json         # Fuente de verdad de reportes/
+│   ├── iniciativas.json        # Iniciativas de análisis extendido por persona (reportes/<persona>/iniciativas/)
+│   ├── personas.json           # Registro slug → nombre/cargo (una sola fuente para ambos scripts)
 │   ├── jira_snapshot.json      # Foto de mis pendientes en Jira (panel "Mi seguimiento")
 │   └── bitacora_operaciones.json # Registros estructurados para el buscador de Operaciones Diarias
-├── utilidades/                 # Plantillas descargables + glosario (referencia; el contenido vivo vive en index_template.html)
+├── utilidades/                 # Plantillas descargables + glosario — formato de referencia/respaldo
 │   ├── plantilla-nuevo-informe.md
 │   ├── plantilla-nuevo-pendiente.md
 │   ├── plantilla-actualizar-persona.md
@@ -166,14 +206,21 @@ informes-operaciones-ti/
 │   ├── informe_template.html          # Plantilla de un informe nuevo
 │   ├── reportes_index_template.html   # Plantilla del directorio de personas
 │   └── pendiente_persona_template.html # Plantilla de la página de una persona
-└── scripts/
-    ├── common.py            # slugify / parse_jira_url / esc() / guardar_json_atomico() / iconografía — compartido
-    ├── modelos.py           # Dataclasses Informe/Pendiente — validan la forma de data/*.json al leer y guardar
-    ├── reportes_lib.py      # Datos + tarjeta de persona — compartido
-    ├── manage_informes.py   # Crea informes, regenera index.html, detecta páginas huérfanas
-    ├── manage_pendientes.py # Registra/edita/elimina pendientes y regenera reportes/ + index.html
-    └── manage_briefs.py     # Regenera briefs/manifest.json a partir de los .html en briefs/
+├── scripts/
+│   ├── common.py            # slugify / parse_jira_url / esc() / guardar_json_atomico() / iconografía — compartido
+│   ├── modelos.py           # Dataclasses Informe/Pendiente/Iniciativa — validan la forma de data/*.json
+│   ├── reportes_lib.py      # Datos + tarjeta de persona — compartido
+│   ├── manage_informes.py   # Crea informes, regenera index.html, detecta páginas huérfanas
+│   ├── manage_pendientes.py # Registra/edita/elimina pendientes y regenera reportes/ + index.html
+│   └── manage_briefs.py     # Regenera briefs/manifest.json a partir de los .html en briefs/
+└── contexto-proyecto/           # Memoria/contexto interno — excluido de git (.gitignore), NO viaja con el repo
+    ├── CONTEXTO.md              # Historial de decisiones, detalle sin curar — no tiene versión pública
+    ├── HOJA-RUTA.xlsx           # Hoja de ruta personal de seguimiento (referencia complementaria a Jira)
+    ├── ARQUITECTURA-MEMORIA-CASOS.md
+    └── *.xlsx / *.md            # Insumos puntuales (ej. plan de pruebas Forms 14C) — ver sección dedicada
 ```
+
+**`contexto-proyecto/` no está en git** (ver `.gitignore`): si clonás este repo en una computadora nueva, esta carpeta **no llega** — hay que copiarla manualmente desde donde se respalde, o recrearla. Ver "Implementar este sistema en otra computadora" más abajo.
 
 `index.html` no depende solo de `informes.json`: la sección "Reportes y
 seguimientos" que se ve arriba del catálogo de informes se arma con los
@@ -298,22 +345,35 @@ Abre un borrador de correo (`mailto:`) dirigido siempre a
 No envía nada automáticamente: primero pide confirmación en el navegador, y
 luego el usuario revisa y envía desde su propio cliente de correo.
 
-## Utilidades únicas del sistema
+## Configuración y utilidades del sistema
 
-Sección al final del `index.html` (solo visible en modo local — ver "Vista
-local vs. vista pública" abajo): un acordeón nativo
-(`<details class="utilidad-card">`, sin JS) por cada operación de
-mantenimiento del sistema (registrar informe, registrar pendiente,
-actualizar persona, registrar brief), con una explicación en lenguaje
-simple de qué es y cuándo usarlo, y el comando técnico exacto al final
-para quien lo necesite copiar. El contenido vive en
-`templates/index_template.html` (sección `.seccion-utilidades`); los
-archivos `.md` en `utilidades/` son la misma información en formato
-descargable, de referencia. El glosario (`<dl class="glosario-lista">`,
-agrupado por categoría) documenta todos los términos acuñados en el
-proyecto — se agrega un término cada vez que el proyecto crea uno nuevo
-(ver SOP-13 en `SOP.md`). Contenido no sensible — vive en el repo público,
-igual que `README.md`/`SOP.md`.
+Página propia — `utilidades-sistema.html`, en la raíz del repo, **hecha a
+mano** (no se regenera con `regenerar-paginas`) — enlazada desde el
+segmento "Configuración" al final del panel "Mi seguimiento (Jira)" (ver
+esa sección más abajo). Hasta el 2026-09-30 este contenido vivía como un
+acordeón chico dentro del `index.html` principal; se movió a una página
+dedicada para aprovechar el ancho completo en vez de tarjetas colapsadas.
+
+Layout de 2 columnas: un TOC fijo a la izquierda con anclas a cada tema, y
+el contenido siempre desplegado a la derecha (sin clics para expandir) —
+una sección por cada operación de mantenimiento del sistema (registrar
+informe, registrar pendiente, actualizar persona, registrar brief), con
+una explicación en lenguaje simple de qué es y cuándo usarlo, y el
+comando técnico exacto al final para quien lo necesite copiar. El
+glosario (`<dl class="glosario-lista">`, agrupado por categoría) documenta
+todos los términos acuñados en el proyecto — se agrega un término cada
+vez que el proyecto crea uno nuevo (ver SOP-13 en `SOP.md`).
+
+Toda la página está gateada `data-modo-local="bloque"` (solo visible en
+modo local — ver "Vista local vs. vista pública" abajo); en vista pública
+muestra un aviso breve en vez del contenido completo. Contenido no
+sensible en sí mismo — vive en el repo público, igual que
+`README.md`/`SOP.md` — pero es de uso exclusivo de Marco, sin interés
+para Jefatura/PMO/Gerencia.
+
+Los archivos `.md` en `utilidades/` son la misma información en formato
+descargable, de referencia/respaldo — el contenido vivo y completo está en
+`utilidades-sistema.html`.
 
 ## Vista local vs. vista pública
 
@@ -721,6 +781,120 @@ Recomendaciones identificadas pero no implementadas (a evaluar si el
 proyecto lo justifica): pruebas automatizadas, estructura de paquete
 Python (`src/` + `pyproject.toml`), y linting/type-checking en CI.
 
+## Implementar este sistema en otra computadora
+
+Guía paso a paso para seguir trabajando con este mismo sistema desde una
+computadora distinta a la actual (reemplazo de equipo, segunda estación de
+trabajo, etc.). Se divide en lo que **sí viaja con git** (el repo público)
+y lo que **no viaja** (contenido privado y permisos de cuenta).
+
+### 1. Requisitos previos
+
+- **Git** instalado.
+- **Python 3.10 o superior**. No hace falta `pip install` nada ni crear un
+  entorno virtual: los 6 scripts bajo `scripts/` solo usan librería
+  estándar (`json`, `os`, `re`, `sys`, `html`, `math`, `argparse`,
+  `dataclasses`, `datetime`, `pathlib`, `tempfile`, `unicodedata`).
+- Un navegador, para revisar el sitio localmente y en producción.
+- Cuenta de GitHub con acceso de escritura al repositorio
+  `mlopez-cafsa/informes-operaciones-ti`, si desde la computadora nueva se
+  va a comitear/publicar (no solo a consultar).
+- Si además vas a usar un asistente de Claude (Cowork/Claude Code) para
+  operar el sistema (crear informes, refrescar Jira, cerrar el día): las
+  skills de este proyecto disponibles en esa sesión —
+  `anthropic-skills:actualiza-jira`, `anthropic-skills:actualiza-plan-14c`,
+  `anthropic-skills:cierre-dia-mlopezz` — y los conectores descritos en el
+  paso 4.
+
+### 2. Clonar el repositorio
+
+```bash
+git clone https://github.com/mlopez-cafsa/informes-operaciones-ti.git
+cd informes-operaciones-ti
+```
+
+Esto trae **todo el contenido público** del sistema: `index.html`,
+`utilidades-sistema.html`, `informes/`, `reportes/` (solo lo publicado,
+nunca los `.docx` fuente), `data/*.json`, `scripts/`, `templates/`,
+`assets/`, `README.md`, `SOP.md`. Por diseño (ver `.gitignore`), **dos
+carpetas no viajan con git** y hay que decidir qué hacer con cada una:
+
+- **`contexto-proyecto/`** — memoria/contexto interno del proyecto
+  (decisiones, detalle sin curar) y la **hoja de ruta personal**,
+  `contexto-proyecto/HOJA-RUTA.xlsx`. No existe ningún mecanismo
+  automático para traerla: hay que **copiarla a mano** desde la
+  computadora anterior (USB, OneDrive personal, el medio que uses para
+  respaldos) a la misma ruta `contexto-proyecto/` en la computadora nueva.
+  Sin ella, el sistema funciona igual (nada de `informes/` ni `reportes/`
+  depende de esta carpeta en tiempo de build), pero se pierde el
+  historial de decisiones y la hoja de ruta deja de reflejar tu estado
+  real. **Antes de retomar el trabajo en la computadora nueva, completá
+  `contexto-proyecto/HOJA-RUTA.xlsx`** con lo que haya quedado pendiente
+  de actualizar — recordá que Jira es la fuente que se prioriza sobre
+  este Excel cuando hay diferencia entre ambos (ver "Panel consolidado
+  'Mi seguimiento'" más arriba), pero el Excel sigue siendo tu referencia
+  de contexto que Jira no guarda.
+- **`briefs/`** — briefs diarios en HTML con correos y datos reales de
+  proveedores/clientes. Tampoco viaja con git. Si querés seguir usando el
+  botón "Brief del día" en la computadora nueva, recreá la carpeta ahí y
+  corré `python3 scripts/manage_briefs.py build` para generar su
+  manifiesto la primera vez.
+
+### 3. Probar el sitio localmente
+
+```bash
+python3 -m http.server 8000
+```
+
+Abrí `http://localhost:8000/index.html`. Al estar en `localhost`, el
+sitio carga en **vista local** (ver "Vista local vs. vista pública" más
+arriba): se ven la sección "Configuración", los botones de acción y el
+panel "Mi seguimiento (Jira)".
+
+### 4. Otorgar permisos a Jira y Microsoft 365 (si vas a usar el asistente)
+
+Esto es lo que casi siempre falta al migrar de computadora, porque **no
+es un archivo que se copie**: son permisos de tu propia cuenta,
+autorizados por separado en cada sesión/dispositivo donde uses el
+asistente. Sin ellos, el sitio y los scripts siguen funcionando
+igual — lo que deja de funcionar es el *mantenimiento asistido* (refrescar
+Jira, cruzar el plan de pruebas, cerrar el día):
+
+- **Jira/Confluence (Atlassian)** — necesario para refrescar
+  `data/jira_snapshot.json` (skill `-actualiza-jira`), consultar el estado
+  de cualquier issue citado en `informes.json`/`pendientes.json`, y cruzar
+  la Epic DES-1741 con el plan de pruebas (skill `-actualiza-plan-14c`).
+  La primera vez que el asistente intente una consulta de Jira en la
+  computadora nueva, vas a tener que autorizar el conector de Atlassian
+  con tu cuenta de `cafsagroup.atlassian.net` (login CAFSA) — acceso de
+  lectura como mínimo, y de escritura si además vas a crear/editar issues
+  desde ahí.
+- **Microsoft 365 (correo, calendario, Teams, SharePoint)** — necesario
+  para leer el plan de pruebas Excel en SharePoint, buscar contexto en
+  correo/Teams antes de redactar un informe o pendiente, y (si usás
+  `-cierre`) armar el cierre de día desde tu calendario y correo reales.
+  Hay que autorizar el conector de Microsoft 365 con tu cuenta corporativa
+  (`@cafsa.fi.cr`) — permisos típicos: lectura de correo, calendario,
+  Teams (chats/canales) y archivos de SharePoint/OneDrive.
+- **Read AI** (opcional — solo si usás `-cierre` con resúmenes de
+  reuniones grabadas) — conector aparte, autorizalo únicamente si vas a
+  seguir usando esa integración desde la computadora nueva.
+
+Ninguno de estos permisos se guarda en este repositorio ni en ningún
+archivo del proyecto: viven asociados a tu cuenta en la plataforma de
+Claude y se piden la primera vez que una skill o una consulta los
+necesita. Si al correr `-actualiza-jira`, `-actualiza-plan-14c` o
+`-cierre` el asistente reporta que no tiene acceso a Jira o a M365, es
+este paso el que falta completar.
+
+### 5. Publicar y flujo de trabajo posterior
+
+Con el sitio probado localmente y, si aplica, los permisos del paso 4
+otorgados, seguí las dos secciones de abajo: "Publicar con GitHub Pages"
+(paso único, solo si este repo en particular todavía no está publicado —
+si ya lo está, no hay que repetirlo) y "Flujo de trabajo en Visual Studio
+Code" (para cada cambio posterior: editar, `git add`/`commit`/`push`).
+
 ## Publicar con GitHub Pages (paso manual, una sola vez)
 
 1. En GitHub, entra al repo → **Settings** → **Pages**.
@@ -745,3 +919,103 @@ Python (`src/` + `pyproject.toml`), y linting/type-checking en CI.
 > ejecutando una operación al mismo tiempo). Cierra cualquier operación de
 > git en curso y, si el error persiste sin que haya ningún proceso de git
 > activo, borra manualmente el archivo `.git/index.lock`.
+
+## Prompt para retomar el sistema con una IA nueva (otra computadora/cuenta)
+
+Escenario: descargaste/clonaste este repositorio en una computadora nueva
+(ver "Implementar este sistema en otra computadora" arriba) y le vas a dar
+la ruta a un asistente de IA con acceso a archivos y terminal (Claude,
+Cowork, Claude Code, u otro con capacidades equivalentes) para que
+**retome el desarrollo y mantenimiento del sistema** — no para que lo
+analice desde cero como si fuera código ajeno.
+
+Copiá y pegá el siguiente prompt tal cual, reemplazando únicamente la
+ruta entre `< >`:
+
+```
+Vas a administrar y dar seguimiento a un sistema ya existente, no a
+analizarlo como código nuevo ni a proponer una reestructuración. El
+sistema completo está en esta ruta: <RUTA_COMPLETA_AL_REPO>.
+
+Antes de hacer o proponer cualquier cosa, en este orden:
+
+1. Leé completo README.md en la raíz del repo — es la referencia técnica
+   de cada script, cada convención y el estado actual del sistema.
+2. Leé completo SOP.md — es el procedimiento paso a paso (cuándo y en qué
+   orden correr cada operación, con su verificación y su rollback).
+3. Si existe la carpeta contexto-proyecto/ (no siempre está — no viaja
+   con git, ver README), leé contexto-proyecto/CONTEXTO.md completo: es
+   el historial real de decisiones, nombres, hallazgos y contexto sin
+   curar de este proyecto. Si no existe, decímelo y seguí sin ella — no
+   es un bloqueante, pero no inventes ese contexto si falta.
+4. Revisá el estado real del repo antes de asumir nada: `git status`,
+   `git log -10 --oneline`, y el contenido actual de cada archivo bajo
+   data/*.json (informes.json, pendientes.json, iniciativas.json,
+   personas.json, jira_snapshot.json, bitacora_operaciones.json).
+
+Mientras trabajás en este sistema, respetá estrictamente lo ya
+documentado en README.md/SOP.md — en particular:
+
+- Nunca edites a mano index.html, reportes/index.html, ni ninguna página
+  bajo reportes/<persona>/ — son generados por los scripts. Los cambios
+  van en data/*.json, en templates/*.html o en los propios scripts, y
+  después corrés el subcomando de regeneración correspondiente.
+- Las páginas marcadas "personalizado": true en data/informes.json (hoy:
+  Migración Core Financiero Forms 14C, Quanto/Contabilidad BMO-252,
+  Operaciones Diarias) se editan directamente a mano — regenerar-paginas
+  las salta a propósito, no se tocan con el generador genérico.
+- Toda escritura de un data/*.json pasa por guardar_json_atomico()
+  (scripts/common.py) y todo campo de texto plano interpolado en HTML
+  pasa por esc() — no reinventar ninguna de las dos cosas.
+- Este repositorio es público (GitHub Pages) — nunca subas detalle de
+  contratos con proveedores, hallazgos de auditoría/SUGEF/CONASSIF,
+  credenciales, IPs internas, ni datos personales sensibles. Ver
+  "Repositorio público — disciplina de contenido" en README.md antes de
+  publicar cualquier contenido nuevo.
+- Respetá la separación vista local (Marco) vs. vista pública
+  (Jefatura/PMO/Gerencia) documentada en README.md — cualquier contenido
+  nuevo de uso interno se marca data-modo-local, no se asume visible para
+  todos por default.
+- Nunca ejecutes git add/commit/push sin que yo lo pida explícitamente en
+  ese momento, aunque el cambio parezca trivial.
+- Si te falta información para hacer algo con precisión (un dato, una
+  decisión de alcance, un valor de un campo), preguntame de forma puntual
+  antes de asumirlo — no lo completes con un supuesto razonable y lo
+  aclarés después.
+- Distinguí siempre, en lo que me digas, qué es un hecho verificable en
+  el sistema/Jira/los datos, y qué es una recomendación u opinión técnica
+  tuya.
+
+Mi perfil: soy Ingeniero de Operaciones de TI en CAFSA, con formación en
+ingeniería de software; en proceso de formación activa en temas legales y
+regulatorios (contratos con proveedores, SUGEF, CONASSIF). Comunicación
+directa y sin rodeos, formal pero sencilla, priorizando siempre precisión
+sobre velocidad. No me expliques conceptos básicos de programación,
+arquitectura o seguridad — sí dame contexto normativo cuando aplique, sin
+sobreexplicar lo evidente. Al revisar cualquier contrato con proveedores,
+identificá primero cláusulas de riesgo (SLA, penalidades, propiedad de
+datos, continuidad del servicio, salida/reversibilidad) antes de comentar
+aspectos menores.
+
+Cuando termines de leer lo anterior, decime en pocas líneas en qué estado
+encontraste el sistema (última fecha de actualización de cada data/*.json,
+qué hay en git status, si contexto-proyecto/ está presente o no) y
+preguntame qué querés hacer a continuación — no empieces ningún cambio
+todavía.
+```
+
+Notas sobre este prompt:
+
+- Es **agnóstico de a qué operación vas a pedirle después** (crear un
+  informe, refrescar Jira, revisar un contrato, lo que sea) — su único
+  objetivo es que la IA llegue al primer pedido real ya con el contexto
+  completo del sistema, en vez de improvisando sobre supuestos.
+- Si vas a usar Claude en Cowork/Claude Code y ya tenés las skills de
+  este proyecto instaladas ahí (`anthropic-skills:actualiza-jira`,
+  `anthropic-skills:actualiza-plan-14c`, `anthropic-skills:cierre-dia-mlopezz`),
+  no hace falta mencionarlas en este prompt — se activan solas por
+  nombre/frase disparadora cuando las invocás directamente.
+- Los permisos de Jira/Microsoft 365 (ver "Implementar este sistema en
+  otra computadora" arriba) son independientes de este prompt: ni este
+  texto ni ningún archivo del repo los otorga — se autorizan aparte,
+  la primera vez que una consulta a esas herramientas los necesite.

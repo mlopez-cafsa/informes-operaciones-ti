@@ -500,7 +500,7 @@
   {
     "id": "2026-08-21-operaciones-diarias",
     "titulo": "Operaciones Diarias",
-    "fecha": "2026-08-21",
+    "fecha": "2026-09-30",
     "categoria": "operaciones",
     "orden_atencion": 8,
     "prioridad": "media",
@@ -511,7 +511,7 @@
     "subtareas_total": null,
     "fases": [],
     "jira_urls": [],
-    "resumen": "Bitacora de labores diarias de TI: 530.5 horas en 58 dias habiles (05/06/2026 - 20/08/2026). Distribucion: 70% operaciones internas, 30% gestion con proveedores externos.",
+    "resumen": "Bitacora de labores diarias de TI: 735.0 horas en 85 dias habiles (05/06/2026 - 28/09/2026). Distribucion: 66% operaciones internas, 34% gestion con proveedores externos.",
     "ruta": "informes/operaciones/operaciones-diarias.html",
     "destacado": false,
     "personalizado": true,

@@ -552,6 +552,10 @@ def render_panel_consolidado() -> str:
         <div class="radar-urgencia">
 {radar_html}
         </div>
+        <div class="sidebar-config-segmento" data-modo-local="bloque">
+          <h3 class="radar-titulo">Configuración</h3>
+          <a href="utilidades-sistema.html" class="ver-todos">Utilidades del sistema {icono_flecha()}</a>
+        </div>
       </div>
     </aside>
     <button type="button" id="btn-toggle-sidebar-jira" class="btn-toggle-sidebar-flotante" aria-expanded="true" aria-controls="sidebar-jira-cuerpo" aria-label="Ocultar panel Mi seguimiento (Jira)">
@@ -585,6 +589,7 @@ def render_panel_consolidado() -> str:
       var el = document.getElementById('sidebar-jira');
       var btn = document.getElementById('btn-toggle-sidebar-jira');
       var backdrop = document.getElementById('sidebar-jira-backdrop');
+      var contenido = document.getElementById('contenido');
       if (!el || !btn) return;
       var guardado = localStorage.getItem('sidebarJiraColapsado');
       var esPantallaAngosta = window.matchMedia('(max-width: 900px)').matches;
@@ -594,6 +599,10 @@ def render_panel_consolidado() -> str:
         btn.classList.add('colapsado');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Mostrar panel Mi seguimiento (Jira)');
+        // Contenido central recentrado desde el primer pintado si el panel
+        // arranca colapsado (petición explícita, 2026-09-30) — ver
+        // .main-index.sidebar-colapsado en style.css.
+        if (contenido) contenido.classList.add('sidebar-colapsado');
       } else if (backdrop) {
         backdrop.classList.add('visible');
       }

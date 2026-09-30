@@ -495,89 +495,87 @@ main {
   border-color: var(--accent-soft);
 }
 
-/* ---------- Utilidades únicas del sistema — acordeón legible (2026-09-18) ----------
-   Antes: cada tarjeta descargaba un .md crudo (poco práctico de leer).
-   Ahora: <details>/<summary> nativos, sin JS, con el contenido completo
-   visible dentro de la misma página — lenguaje simple primero, el
-   comando técnico exacto queda al final de cada acordeón para quien lo
-   necesite copiar. */
-.utilidades-grid {
+/* ---------- Configuración y utilidades del sistema — página completa
+   (2026-09-30) ----------
+   Antes: acordeón <details>/<summary> dentro de una sección chica del
+   index principal (cada tarjeta escondía su contenido hasta hacer clic).
+   Ahora: página propia (utilidades-sistema.html), enlazada desde el
+   segmento "Configuración" del panel "Mi seguimiento (Jira)", con layout
+   de 2 columnas — TOC fijo a la izquierda, contenido siempre desplegado
+   a la derecha, sin necesidad de expandir nada — para aprovechar el
+   ancho completo de una página dedicada en vez de tarjetas chicas. */
+.utilidades-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 14px;
-  margin-top: 6px;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
   align-items: start;
+  margin-top: 6px;
 }
 
-.utilidad-card {
+.utilidades-toc {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 0;
+}
+
+.utilidades-toc a {
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--cafsa-dark);
+  font-weight: 500;
+}
+
+.utilidades-toc a:hover {
+  background: var(--cafsa-white);
+  text-decoration: none;
+}
+
+.utilidades-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.utilidad-seccion {
   background: var(--cafsa-white);
   border: 1px solid var(--cafsa-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  color: var(--cafsa-dark);
-  transition: box-shadow 0.15s ease;
+  padding: 22px 24px;
+  scroll-margin-top: 20px;
 }
 
-.utilidad-card[open],
-.utilidad-card:hover {
-  box-shadow: var(--shadow-lift);
+.utilidad-seccion.utilidad-glosario {
+  border-color: var(--cafsa-dark);
 }
 
-.utilidad-card > summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 16px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.utilidad-card > summary::-webkit-details-marker,
-.utilidad-card > summary::marker {
-  display: none;
-  content: "";
-}
-
-.utilidad-card summary .utilidad-encabezado {
+.utilidad-seccion-header {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--cafsa-border);
 }
 
-.utilidad-card h3 {
-  font-size: 0.95rem;
+.utilidad-seccion-header h2 {
+  font-size: 1.05rem;
   margin: 0;
   color: var(--cafsa-black);
 }
 
-.utilidad-card summary p {
-  font-size: 0.82rem;
+.utilidad-seccion-header p {
+  font-size: 0.85rem;
   color: var(--cafsa-gray);
   margin: 0;
 }
 
-.utilidad-toggle {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--status-yellow);
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.utilidad-toggle .txt-abierto { display: none; }
-.utilidad-card[open] .utilidad-toggle .txt-cerrado { display: none; }
-.utilidad-card[open] .utilidad-toggle .txt-abierto { display: inline; }
-
-.utilidad-card.utilidad-glosario {
-  border-color: var(--cafsa-dark);
-}
-
 .utilidad-cuerpo {
-  padding: 0 16px 16px;
-  border-top: 1px solid var(--cafsa-border);
-  padding-top: 14px;
   font-size: 0.85rem;
   line-height: 1.5;
 }
@@ -1064,71 +1062,7 @@ main {
   font-style: italic;
 }
 
-/* ---------- Buscador embebido en una página de informe (ej. Operaciones Diarias) ---------- */
-.bitacora-controles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-}
-
-.buscador-bitacora {
-  flex: 1 1 280px;
-  max-width: 420px;
-  margin-bottom: 0;
-}
-
-/* El buscador de la bitácora reutiliza .buscador-wrap/.icono-buscar del
-   toolbar principal, pero necesita su propio selector de input porque
-   #buscador (índice principal) es un id, no una clase — sin esto el
-   input quedaba sin padding/borde y el ícono de lupa se montaba encima
-   del texto. */
-.buscador-bitacora input[type="search"] {
-  width: 100%;
-  padding: 10px 14px 10px 36px;
-  border: 1px solid var(--cafsa-border);
-  border-radius: 999px;
-  background: var(--cafsa-white);
-  font-size: 0.88rem;
-  font-family: inherit;
-  color: var(--cafsa-dark);
-}
-
-.buscador-bitacora input[type="search"]::placeholder { color: var(--cafsa-gray-light); }
-
-.fecha-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: var(--cafsa-gray);
-  white-space: nowrap;
-}
-
-.fecha-wrap input[type="date"] {
-  border: 1px solid var(--cafsa-border);
-  background: var(--cafsa-white);
-  color: var(--cafsa-dark);
-  padding: 7px 10px;
-  border-radius: var(--radius);
-  font-size: 0.82rem;
-  font-family: inherit;
-}
-
-.btn-limpiar-bitacora {
-  border: 1px solid var(--cafsa-border);
-  background: var(--cafsa-white);
-  color: var(--cafsa-gray);
-  padding: 7px 14px;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-family: inherit;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.btn-limpiar-bitacora:hover { background: var(--cafsa-gray-bg); }
-
+/* ---------- Detalle de bitácora embebido en una página de informe (ej. Operaciones Diarias) ---------- */
 .lista-bitacora {
   display: flex;
   flex-direction: column;
@@ -1182,28 +1116,6 @@ main {
 .bitacora-proveedor-n {
   color: var(--cafsa-gray-light);
   font-weight: 600;
-}
-
-/* Cruce sutil hacia el informe correspondiente (ver operaciones-diarias.html,
-   PROVEEDOR_INFORME) — un enlace discreto dentro de la misma "píldora" de
-   proveedor, no una tarjeta aparte, para no competir visualmente con la
-   lista de proveedores del día. */
-.bitacora-cruce {
-  display: inline-block;
-  margin-left: 6px;
-  padding-left: 6px;
-  border-left: 1px solid var(--cafsa-border);
-  color: var(--cafsa-black);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.bitacora-cruce:hover { text-decoration: underline; }
-
-@media (max-width: 640px) {
-  .bitacora-controles { flex-direction: column; align-items: stretch; }
-  .buscador-bitacora { max-width: none; }
-  .fecha-wrap { justify-content: space-between; }
 }
 
 /* ---------- Tabla de datos genérica (ej. plan de pruebas por módulo) ---------- */
@@ -1473,19 +1385,36 @@ main {
    ni se "asienta": su posición es siempre relativa al viewport, no al
    documento, así que no hay salto alguno al scrollear) y vive dentro de
    un carril reservado de ancho CONSTANTE (`--sidebar-w`) en el padding
-   izquierdo de `.main-index`. Ese carril NO cambia de tamaño nunca,
-   esté el panel abierto o cerrado — al cerrarlo, el panel solo se
-   desliza fuera de vista dentro de su propio carril (`translateX`), sin
-   tocar el ancho ni la posición de `.contenido-central`. El botón de
+   izquierdo de `.main-index`. El panel en sí se desliza fuera de vista
+   dentro de ese carril (`translateX`), sin afectar el ancho de
+   `.contenido-central` (`max-width` + `margin:auto` propios) — eso evita
+   el salto de ancho del layout anterior (v1, flexbox). El botón de
    mostrar/ocultar vive fuera del panel (no se desliza con él) para
-   poder reabrirlo siempre desde el mismo lugar. Variables
-   `--sidebar-w`/`--header-h` declaradas en `:root`, arriba. */
+   poder reabrirlo siempre desde el mismo lugar.
+
+   `.sidebar-colapsado` en `.main-index` (petición explícita, 2026-09-30):
+   cuando el panel está oculto, el carril reservado en el padding
+   izquierdo se libera (baja a los mismos 40px del lado derecho) para que
+   `.contenido-central` quede centrado en todo el ancho disponible, en
+   vez de seguir corrido hacia la derecha por un carril vacío. Esta clase
+   la alterna el JS de `index.html` (misma función que ya controla
+   `.colapsado` en el panel y el botón), y solo aplica en escritorio — en
+   el breakpoint de 900px el panel ya es un overlay, no un carril, así
+   que ahí no hay nada que centrar. Variables `--sidebar-w`/`--header-h`
+   declaradas en `:root`, arriba. */
 .main-index {
   max-width: none;
   width: 100%;
   margin: 0;
   padding: 24px 40px 60px calc(var(--sidebar-w) + 40px);
   box-sizing: border-box;
+  transition: padding-left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 901px) {
+  .main-index.sidebar-colapsado {
+    padding-left: 40px;
+  }
 }
 
 .contenido-central {
@@ -1637,6 +1566,16 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+/* Segmento "Configuración" al final del panel (2026-09-30): mismo patrón
+   visual que "Radar de urgencia" arriba (.radar-titulo + .ver-todos),
+   separado con un borde superior porque no comparte grid/lista con lo
+   anterior — es un único link de salida, no una colección. */
+.sidebar-config-segmento {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--cafsa-border);
 }
 
 .radar-item {
@@ -1978,4 +1917,21 @@ main {
   .toolbar { flex-direction: column; align-items: stretch; }
   .buscador-wrap { max-width: none; }
   .orden-wrap { justify-content: space-between; }
+
+  /* Página utilidades-sistema.html: en celular no hay espacio para 2
+     columnas — el TOC pasa a una fila de chips scrolleable horizontal,
+     arriba del contenido, en vez de ir fijo a la izquierda. */
+  .utilidades-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .utilidades-toc {
+    position: static;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 6px;
+    padding-bottom: 6px;
+  }
+  .utilidades-toc a { white-space: nowrap; }
 }
