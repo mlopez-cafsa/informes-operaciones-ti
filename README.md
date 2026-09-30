@@ -952,6 +952,78 @@ Antes de hacer o proponer cualquier cosa, en este orden:
    `git log -10 --oneline`, y el contenido actual de cada archivo bajo
    data/*.json (informes.json, pendientes.json, iniciativas.json,
    personas.json, jira_snapshot.json, bitacora_operaciones.json).
+5. Pedime acceso a Jira y a mi correo/Teams (M365) para poner al día mi
+   seguimiento real, en vez de asumir que data/jira_snapshot.json y
+   data/pendientes.json siguen vigentes tal cual quedaron en la
+   computadora anterior:
+   - **Jira**: con mi cuenta de cafsagroup.atlassian.net, consultá
+     `assignee = currentUser() AND statusCategory != Done` y comparalo
+     contra data/jira_snapshot.json actual — decime qué issues cerraron,
+     cuáles son nuevos, y cuáles cambiaron de prioridad/vencimiento.
+     Refrescar el snapshot completo con este resultado es mecánico
+     (mismo criterio que la skill -actualiza-jira, si la tenés
+     disponible) — podés aplicarlo directo. También revisá el estado
+     actual de cada issue ya citado en informes.json/pendientes.json
+     (aunque no sea mío), para detectar si algún dato publicado quedó
+     desactualizado.
+   - **Correo y Teams**: buscá conversaciones recientes que mencionen
+     compromisos, solicitudes pendientes o seguimientos con alguna de las
+     personas ya registradas en data/personas.json, o con una persona
+     nueva que no esté ahí todavía. Esto es solo para **detectar
+     candidatos** a pendiente nuevo o actualización de uno existente —
+     no registres nada en data/pendientes.json a partir de un correo sin
+     que yo lo confirme antes: mostrame la lista de candidatos (de quién,
+     qué, con qué urgencia, de dónde lo sacaste) y esperá mi confirmación
+     punto por punto antes de escribir cualquier cambio.
+6. No asumas que soy la misma persona para la que se construyó
+   originalmente este sistema (Ingeniero de Operaciones de TI, CAFSA) —
+   puede que sea otra persona retomándolo, con otro puesto, otro
+   organigrama y otro criterio de prioridad. Esto no son detalles de
+   configuración técnica: son datos de la persona, y asumirlos mal
+   contamina data/personas.json, data/pendientes.json y cualquier botón
+   de correo del sitio.
+   - Si ya tenés contexto guardado sobre quién soy (puesto, área, a quién
+     reporto, cómo prefiero trabajar), no lo apliques directo: mostrámelo
+     de vuelta primero como una consulta — "Tengo este contexto
+     sobre vos: [resumen]. ¿Configuro el sistema con esta información?"
+     — y esperá mi confirmación antes de usarlo para nada.
+   - Si no tenés ese contexto, no lo inventes ni heredes el del perfil
+     original por default. Hacéme, con una recomendación concreta en
+     cada una, las preguntas puntuales que falten para completar la
+     parametrización — como mínimo:
+     a. ¿Quién sos (nombre, cargo, área) y cuál es tu correo real de
+        contacto? Hoy assets/js/mailto-consulta.js y
+        assets/js/brief-viewer.js asumen mlopezz@cafsa.fi.cr en todos
+        los botones de correo del sitio. Recomendación: no lo dejes así
+        si no sos vos — hay que reemplazarlo antes de publicar nada
+        nuevo.
+     b. ¿A qué jefatura/gerencia reportás vos, y quiénes son las
+        personas reales a las que LES DAS seguimiento en "Reportes y
+        seguimientos"? Hoy data/personas.json tiene 3 personas
+        específicas del perfil original (Luis Aguilar Morales,
+        Cristopher Pérez Ugalde, María Cristina Hernández).
+        Recomendación: si no son las tuyas, no reutilices esos
+        registros ni sus pendientes — reconstruí
+        personas.json/pendientes.json desde cero con tu propio
+        organigrama real antes de dar el sistema por "al día".
+     c. ¿Con qué criterio priorizás vos los informes/cards? La matriz de
+        semáforo (prioridad × cumplimiento, documentada en README.md) es
+        genérica. Recomendación: mantenela tal cual salvo que me digas
+        explícitamente un criterio de prioridad distinto.
+     d. ¿Seguís usando la misma cuenta de Jira/M365 de CAFSA
+        (cafsagroup.atlassian.net, @cafsa.fi.cr) ya referenciada en el
+        sistema, o es otra cuenta/organización? Recomendación: si es
+        otra organización, buena parte del sitio (dominio de Jira,
+        disciplina regulatoria SUGEF/CONASSIF, textos publicados) fue
+        escrita a la medida de CAFSA y necesita revisión, no asumas que
+        aplica igual.
+   - Una vez que sepas quién soy (confirmado por mí, o extraído de
+     contexto que ya tenías y yo validé), ajustá tu estilo de
+     comunicación a como yo prefiera trabajar con vos — no asumas que
+     querés la misma comunicación directa/formal del perfil original si
+     no te lo confirmé.
+   - No toques data/personas.json, data/pendientes.json, ni ningún botón
+     de mailto del sitio hasta tener esto resuelto.
 
 Mientras trabajás en este sistema, respetá estrictamente lo ya
 documentado en README.md/SOP.md — en particular:
@@ -986,22 +1058,15 @@ documentado en README.md/SOP.md — en particular:
   el sistema/Jira/los datos, y qué es una recomendación u opinión técnica
   tuya.
 
-Mi perfil: soy Ingeniero de Operaciones de TI en CAFSA, con formación en
-ingeniería de software; en proceso de formación activa en temas legales y
-regulatorios (contratos con proveedores, SUGEF, CONASSIF). Comunicación
-directa y sin rodeos, formal pero sencilla, priorizando siempre precisión
-sobre velocidad. No me expliques conceptos básicos de programación,
-arquitectura o seguridad — sí dame contexto normativo cuando aplique, sin
-sobreexplicar lo evidente. Al revisar cualquier contrato con proveedores,
-identificá primero cláusulas de riesgo (SLA, penalidades, propiedad de
-datos, continuidad del servicio, salida/reversibilidad) antes de comentar
-aspectos menores.
-
-Cuando termines de leer lo anterior, decime en pocas líneas en qué estado
+Cuando termines los 6 pasos, decime en pocas líneas en qué estado
 encontraste el sistema (última fecha de actualización de cada data/*.json,
-qué hay en git status, si contexto-proyecto/ está presente o no) y
-preguntame qué querés hacer a continuación — no empieces ningún cambio
-todavía.
+qué hay en git status, si contexto-proyecto/ está presente o no, qué
+cambió en Jira desde el último snapshot, y qué candidatos a pendiente
+nuevo encontraste en correo/Teams, si alguno), mostrame el resultado del
+paso 6 (el contexto que ya tenías de mí para confirmar, o las preguntas
+que necesitás que responda), y preguntame qué querés hacer a
+continuación — no apliques ningún cambio todavía, salvo el refresco
+mecánico del snapshot de Jira descrito en el paso 5.
 ```
 
 Notas sobre este prompt:
