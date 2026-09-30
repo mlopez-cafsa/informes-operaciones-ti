@@ -883,6 +883,42 @@ main {
   color: var(--cafsa-black);
 }
 
+/* Resumen ejecutivo en formato "ficha": 1 frase de contexto + bullets
+   cortos de datos clave (Estado/Avance/Próximo paso/Vence), en vez de un
+   párrafo corrido — petición explícita, 2026-09-29: un ejecutivo debe
+   poder escanear el estado de un proyecto en segundos, no leer 10+
+   líneas seguidas. Ver render_resumen_bullets() en manage_informes.py. */
+.resumen-ejecutivo .resumen-contexto {
+  margin: 0 0 12px;
+  line-height: 1.5;
+  color: var(--cafsa-gray);
+}
+
+.resumen-ejecutivo .resumen-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resumen-ejecutivo .resumen-bullets li {
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--cafsa-border);
+}
+
+.resumen-ejecutivo .resumen-bullets li:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.resumen-ejecutivo .resumen-bullets .estado-badge-mini,
+.resumen-ejecutivo .resumen-bullets .pct-semaforo {
+  margin-left: 2px;
+}
+
 .chart-container {
   background: var(--cafsa-white);
   border: 1px solid var(--cafsa-border);
@@ -987,16 +1023,33 @@ main {
 
 .subtarea-item {
   display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.78rem;
+  color: var(--cafsa-gray);
+}
+
+.subtarea-linea {
+  display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;
-  font-size: 0.78rem;
-  color: var(--cafsa-gray);
 }
 
 .subtarea-item a {
   font-weight: 600;
   color: var(--cafsa-dark);
+}
+
+/* Línea de contexto opcional por subtarea (petición explícita,
+   2026-09-29) — ver docstring de render_desglose_subtareas() en
+   reportes_lib.py. Sangrada para leerse claramente como detalle de la
+   línea de arriba, no como un ítem nuevo de la lista. */
+.subtarea-detalle {
+  margin: 0 0 0 2px;
+  font-size: 0.74rem;
+  color: var(--cafsa-gray-light);
+  line-height: 1.4;
 }
 
 .estado-badge-mini {

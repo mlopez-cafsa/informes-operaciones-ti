@@ -412,15 +412,26 @@ def render_desglose_subtareas(subtareas: list) -> str:
     este nivel de detalle. Misma filosofía que render_persona_card()/
     render_pendiente_item(): una sola función de renderizado, para que
     cualquier vista futura que necesite el mismo desglose (hoy solo el
-    informe individual) lo pinte siempre igual."""
+    informe individual) lo pinte siempre igual.
+
+    'detalle' (opcional, petición explícita, 2026-09-29): una línea corta
+    de contexto por subtarea — qué se hizo/incluye, en lenguaje ejecutivo,
+    NO la tabla completa de tareas internas de Jira (esa sigue viviendo
+    solo en Jira, un clic de distancia vía el link). Es opcional a
+    propósito: solo se declara donde aporta (ej. subtareas ya finalizadas
+    de un informe puntual) — los informes que no la usan se ven exactamente
+    igual que antes."""
     if not subtareas:
         return ""
     filas = "\n".join(
         f'        <li class="subtarea-item">'
+        f'<span class="subtarea-linea">'
         f'<a href="https://cafsagroup.atlassian.net/browse/{esc(s["jira_key"])}" target="_blank" rel="noopener">{esc(s["jira_key"])}</a>'
         f' — {esc(s["resumen"])} '
         f'<span class="estado-badge estado-badge-mini {clase_estado_subtarea(s.get("estado", ""))}">{esc(s.get("estado", ""))}</span>'
-        f'</li>'
+        f'</span>'
+        + (f'\n          <p class="subtarea-detalle">{esc(s["detalle"])}</p>' if s.get("detalle") else "")
+        + '</li>'
         for s in subtareas
     )
     finalizadas = sum(1 for s in subtareas if s.get("estado") == "Finalizada")

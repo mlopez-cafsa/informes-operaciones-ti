@@ -34,7 +34,13 @@
   <p class="page-meta">riesgo-tecnologico · 2026-09-29 · Cumplimiento: A tiempo</p>
 
   <div class="resumen-ejecutivo">
-    <strong>Resumen ejecutivo:</strong> Migracion del sitio Admin de PEL(/gx) a PHP (CodeIgniter 4), epica XL-TEC-01 (independiente de PP-233). 89% de avance real: 8 de 9 criterios de aceptacion finalizados -- setup del proyecto, capa de servicios SOAP, autenticacion/CSRF, controlador admin, modelos, migracion de las 11 vistas (incluye actualizacion de librerias de frontend) y refactor de seguridad (CSRF global, saneamiento de URLs, checklist de seguridad de CAFSA). Unico pendiente: Pruebas finales y Pase a Produccion (PP-232-08, ~27h) -- pruebas funcionales por modulo, integracion SOAP, prueba de independencia operativa ante caida del sistema principal, deployment en staging, UAT por las areas administrativas usuarias y despliegue a produccion; sin iniciar. Vence 31/10/2026. Desarrollo a cargo de BestResource bajo el contrato marco BESTR-2025062601 (sin penalidades monetarias por atraso; los atrasos imputables al proveedor se acreditan a CAFSA como horas gratuitas el mes siguiente, segun Anexo SLA). Nota abierta: la discrepancia de horas estimadas senalada en el analisis original (120h segun tabla de fases vs. 182h segun la introduccion) quedo marcada como resuelta en la subtarea de aprobacion de alcance, pero el ticket no registra explicitamente cual cifra quedo como linea base -- pendiente de confirmar con BestResource antes del cierre del proyecto.
+    <p class="resumen-contexto">Migracion del sitio Admin de PEL(/gx) a PHP (CodeIgniter 4), epica XL-TEC-01 (independiente de PP-233).</p>
+    <ul class="resumen-bullets">
+      <li><strong>Estado:</strong> <span class="estado-badge estado-badge-mini estado-verde">A tiempo</span></li>
+      <li><strong>Avance:</strong> <span class="pct-semaforo" data-pct="89">89%</span> — 8 de 9 criterios de aceptacion finalizados (backend, frontend y seguridad completos)</li>
+      <li><strong>Próximo paso:</strong> Pruebas finales y Pase a Produccion (PP-299), sin iniciar</li>
+      <li><strong>Vence:</strong> 31/10/2026 (faltan 32 días)</li>
+    </ul>
   </div>
 
   <div class="chart-container">
@@ -50,15 +56,23 @@
     <ul class="fases-lista">
       <li><span class="fase-nombre"><a href="https://cafsagroup.atlassian.net/browse/PP-232" target="_blank" rel="noopener">Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)</a></span><span class="fase-pct pct-semaforo" data-pct="89">89%</span></li>
       <ul class="subtareas-lista">
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-291" target="_blank" rel="noopener">PP-291</a> — Preparacion y aprobacion de alcance <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></li>
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-292" target="_blank" rel="noopener">PP-292</a> — Setup y estructura del proyecto <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></li>
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-293" target="_blank" rel="noopener">PP-293</a> — Capa de Servicios SOAP <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></li>
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-294" target="_blank" rel="noopener">PP-294</a> — Core y Autenticacion <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></li>
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-295" target="_blank" rel="noopener">PP-295</a> — Migracion del Controlador Admin <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></li>
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-296" target="_blank" rel="noopener">PP-296</a> — Migracion de Modelos <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></li>
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-297" target="_blank" rel="noopener">PP-297</a> — Migracion de Vistas y JavaScript <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></li>
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-298" target="_blank" rel="noopener">PP-298</a> — Seguridad y Refactor <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></li>
-        <li class="subtarea-item"><a href="https://cafsagroup.atlassian.net/browse/PP-299" target="_blank" rel="noopener">PP-299</a> — Pruebas finales y Pase a Produccion <span class="estado-badge estado-badge-mini estado-amarillo">Tareas por hacer</span></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-291" target="_blank" rel="noopener">PP-291</a> — Preparacion y aprobacion de alcance <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></span>
+          <p class="subtarea-detalle">Alcance funcional aprobado, discrepancia de horas con BestResource escalada para aclarar, y ambiente de trabajo (servidor, virtual host, accesos SOAP) definido.</p></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-292" target="_blank" rel="noopener">PP-292</a> — Setup y estructura del proyecto <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></span>
+          <p class="subtarea-detalle">Instalacion y configuracion base de CodeIgniter 4: entorno, virtual host, estructura de directorios y templates.</p></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-293" target="_blank" rel="noopener">PP-293</a> — Capa de Servicios SOAP <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></span>
+          <p class="subtarea-detalle">Clase SoapService creada, con wrapper para los 15 eventos SOAP identificados y manejo centralizado de sesion/errores; probada contra el servicio real.</p></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-294" target="_blank" rel="noopener">PP-294</a> — Core y Autenticacion <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></span>
+          <p class="subtarea-detalle">Login/logout con CSRF nativo y cookies seguras, mas saneamiento de URLs y validacion de entrada (mitigacion de inyeccion SQL).</p></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-295" target="_blank" rel="noopener">PP-295</a> — Migracion del Controlador Admin <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></span>
+          <p class="subtarea-detalle">AdminController reescrito (25 metodos) con rutas nombradas y respuestas JSON estandarizadas.</p></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-296" target="_blank" rel="noopener">PP-296</a> — Migracion de Modelos <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></span>
+          <p class="subtarea-detalle">Admin_model (15 metodos que invocan SOAP) y funciones auxiliares de clientes/productos migrados.</p></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-297" target="_blank" rel="noopener">PP-297</a> — Migracion de Vistas y JavaScript <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></span>
+          <p class="subtarea-detalle">11 vistas migradas (login, usuarios, productos, tasas, pagos automaticos, reportes) y librerias de frontend actualizadas (Bootstrap 3 a 5).</p></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-298" target="_blank" rel="noopener">PP-298</a> — Seguridad y Refactor <span class="estado-badge estado-badge-mini estado-verde">Finalizada</span></span>
+          <p class="subtarea-detalle">CSRF global, saneamiento de URLs adicional y rate limiting, con checklist final de seguridad de CAFSA aprobado.</p></li>
+        <li class="subtarea-item"><span class="subtarea-linea"><a href="https://cafsagroup.atlassian.net/browse/PP-299" target="_blank" rel="noopener">PP-299</a> — Pruebas finales y Pase a Produccion <span class="estado-badge estado-badge-mini estado-amarillo">Tareas por hacer</span></span></li>
       </ul>
       <p class="subtareas-nota">8/9 subtarea(s) finalizada(s) en Jira — dato verificable, recalculado en cada build.</p>
     </ul>
@@ -68,7 +82,7 @@
 
   <button class="btn-consulta"
           data-titulo="Migracion de sitio Admin de PEL(/gx) a nueva version de PHP (PP-232)"
-          data-resumen="Migracion del sitio Admin de PEL(/gx) a PHP (CodeIgniter 4), epica XL-TEC-01 (independiente de PP-233). 89% de avance real: 8 de 9 criterios de aceptacion finalizados -- setup del proyecto, capa de servicios SOAP, autenticacion/CSRF, controlador admin, modelos, migracion de las 11 vistas (incluye actualizacion de librerias de frontend) y refactor de seguridad (CSRF global, saneamiento de URLs, checklist de seguridad de CAFSA). Unico pendiente: Pruebas finales y Pase a Produccion (PP-232-08, ~27h) -- pruebas funcionales por modulo, integracion SOAP, prueba de independencia operativa ante caida del sistema principal, deployment en staging, UAT por las areas administrativas usuarias y despliegue a produccion; sin iniciar. Vence 31/10/2026. Desarrollo a cargo de BestResource bajo el contrato marco BESTR-2025062601 (sin penalidades monetarias por atraso; los atrasos imputables al proveedor se acreditan a CAFSA como horas gratuitas el mes siguiente, segun Anexo SLA). Nota abierta: la discrepancia de horas estimadas senalada en el analisis original (120h segun tabla de fases vs. 182h segun la introduccion) quedo marcada como resuelta en la subtarea de aprobacion de alcance, pero el ticket no registra explicitamente cual cifra quedo como linea base -- pendiente de confirmar con BestResource antes del cierre del proyecto."
+          data-resumen="Migracion del sitio Admin de PEL(/gx) a PHP (CodeIgniter 4), epica XL-TEC-01 (independiente de PP-233)."
           onclick="enviarConsulta(this)">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
       <rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/>

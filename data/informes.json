@@ -55,7 +55,9 @@
         "url": "https://cafsagroup.atlassian.net/browse/BMO-118"
       }
     ],
-    "resumen": "Framework ETL / DataWareHouse (BMO-118): 17% de avance real (1 de 6 subtareas finalizada). Pendientes: analisis del framework, correccion de errores SSIS, validacion de jobs, pruebas unitarias/integrales e integracion con Salesforce (BMO-155). Riesgo de dependencia para otras integraciones de datos; sin fecha limite en Jira.",
+    "resumen": "Framework ETL / DataWareHouse (BMO-118): estabilizacion del proceso de integracion de datos, con riesgo de dependencia para otras integraciones (incluye Salesforce).",
+    "avance_detalle": "1 de 6 subtareas finalizadas en Jira",
+    "proximo_paso": "Analisis del framework y correccion de errores SSIS (BMO-148/BMO-151)",
     "ruta": "informes/datos-etl/framework-etl-datawarehouse.html",
     "destacado": true,
     "vencimiento": null
@@ -116,7 +118,9 @@
         "url": "https://cafsagroup.atlassian.net/browse/GDT-107"
       }
     ],
-    "resumen": "Gobierno de TI (COBIT 2019 / CONASSIF 5-24): 4 de 5 frentes completados (GDT-100, GDT-106, GDT-320, GDT-107). Pendiente: GDT-120 (respaldos de informacion con proveedores), sin arrancar, sin descripcion ni subtareas en Jira. Vence 31/12/2026.",
+    "resumen": "Gobierno de TI (COBIT 2019 / CONASSIF 5-24): cumplimiento normativo de expedientes de proveedores y frentes de gobierno tecnologico.",
+    "avance_detalle": "4 de 5 frentes completados (GDT-100, GDT-106, GDT-320, GDT-107)",
+    "proximo_paso": "GDT-120 (respaldos de informacion con proveedores) - sin arrancar, sin descripcion ni subtareas en Jira",
     "ruta": "informes/gobierno-ti/gobierno-de-ti-y-cumplimiento-cobit-conassif.html",
     "destacado": true,
     "vencimiento": "2026-12-31"
@@ -189,7 +193,7 @@
         "url": "https://cafsagroup.atlassian.net/browse/DES-2707"
       }
     ],
-    "resumen": "Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 23/09/2026: BestResource migro el 95% del catalogo (504 objetos); CAFSA aprobo el 67.3% (339 de 504), un salto de +15.9 puntos en solo 5 dias, el ritmo mas rapido del proyecto. GENERALES se destrabo (de 3.7% a 53.2%) pero ahora concentra 22 de los 41 rechazos totales. BRANCH es el nuevo riesgo: 38.7%, sin ningun cambio desde el corte anterior. Quedan 7 dias para el 30/09/2026. Infraestructura de produccion y pruebas por roles aun no arrancan. Detalle completo por modulo en el informe.",
+    "resumen": "Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 23/09/2026: 67.3% aprobado por CAFSA (339 de 504 objetos); BRANCH es el principal riesgo. Quedan 7 dias para el 30/09/2026. Detalle completo por modulo en el informe.",
     "ruta": "informes/core-financiero/migracion-de-core-financiero-forms-14c.html",
     "destacado": true,
     "personalizado": true,
@@ -215,42 +219,50 @@
           {
             "jira_key": "PP-291",
             "resumen": "Preparacion y aprobacion de alcance",
-            "estado": "Finalizada"
+            "estado": "Finalizada",
+            "detalle": "Alcance funcional aprobado, discrepancia de horas con BestResource escalada para aclarar, y ambiente de trabajo (servidor, virtual host, accesos SOAP) definido."
           },
           {
             "jira_key": "PP-292",
             "resumen": "Setup y estructura del proyecto",
-            "estado": "Finalizada"
+            "estado": "Finalizada",
+            "detalle": "Instalacion y configuracion base de CodeIgniter 4: entorno, virtual host, estructura de directorios y templates."
           },
           {
             "jira_key": "PP-293",
             "resumen": "Capa de Servicios SOAP",
-            "estado": "Finalizada"
+            "estado": "Finalizada",
+            "detalle": "Clase SoapService creada, con wrapper para los 15 eventos SOAP identificados y manejo centralizado de sesion/errores; probada contra el servicio real."
           },
           {
             "jira_key": "PP-294",
             "resumen": "Core y Autenticacion",
-            "estado": "Finalizada"
+            "estado": "Finalizada",
+            "detalle": "Login/logout con CSRF nativo y cookies seguras, mas saneamiento de URLs y validacion de entrada (mitigacion de inyeccion SQL)."
           },
           {
             "jira_key": "PP-295",
             "resumen": "Migracion del Controlador Admin",
-            "estado": "Finalizada"
+            "estado": "Finalizada",
+            "detalle": "AdminController reescrito (25 metodos) con rutas nombradas y respuestas JSON estandarizadas."
           },
           {
             "jira_key": "PP-296",
             "resumen": "Migracion de Modelos",
-            "estado": "Finalizada"
+            "estado": "Finalizada",
+            "detalle": "Admin_model (15 metodos que invocan SOAP) y funciones auxiliares de clientes/productos migrados."
           },
           {
             "jira_key": "PP-297",
             "resumen": "Migracion de Vistas y JavaScript",
-            "estado": "Finalizada"
+            "estado": "Finalizada",
+            "detalle": "11 vistas migradas (login, usuarios, productos, tasas, pagos automaticos, reportes) y librerias de frontend actualizadas (Bootstrap 3 a 5)."
           },
           {
             "jira_key": "PP-298",
             "resumen": "Seguridad y Refactor",
-            "estado": "Finalizada"
+            "estado": "Finalizada",
+            "detalle": "CSRF global, saneamiento de URLs adicional y rate limiting, con checklist final de seguridad de CAFSA aprobado."
           },
           {
             "jira_key": "PP-299",
@@ -266,7 +278,9 @@
         "url": "https://cafsagroup.atlassian.net/browse/PP-232"
       }
     ],
-    "resumen": "Migracion del sitio Admin de PEL(/gx) a PHP (CodeIgniter 4), epica XL-TEC-01 (independiente de PP-233). 89% de avance real: 8 de 9 criterios de aceptacion finalizados -- setup del proyecto, capa de servicios SOAP, autenticacion/CSRF, controlador admin, modelos, migracion de las 11 vistas (incluye actualizacion de librerias de frontend) y refactor de seguridad (CSRF global, saneamiento de URLs, checklist de seguridad de CAFSA). Unico pendiente: Pruebas finales y Pase a Produccion (PP-232-08, ~27h) -- pruebas funcionales por modulo, integracion SOAP, prueba de independencia operativa ante caida del sistema principal, deployment en staging, UAT por las areas administrativas usuarias y despliegue a produccion; sin iniciar. Vence 31/10/2026. Desarrollo a cargo de BestResource bajo el contrato marco BESTR-2025062601 (sin penalidades monetarias por atraso; los atrasos imputables al proveedor se acreditan a CAFSA como horas gratuitas el mes siguiente, segun Anexo SLA). Nota abierta: la discrepancia de horas estimadas senalada en el analisis original (120h segun tabla de fases vs. 182h segun la introduccion) quedo marcada como resuelta en la subtarea de aprobacion de alcance, pero el ticket no registra explicitamente cual cifra quedo como linea base -- pendiente de confirmar con BestResource antes del cierre del proyecto.",
+    "resumen": "Migracion del sitio Admin de PEL(/gx) a PHP (CodeIgniter 4), epica XL-TEC-01 (independiente de PP-233).",
+    "avance_detalle": "8 de 9 criterios de aceptacion finalizados (backend, frontend y seguridad completos)",
+    "proximo_paso": "Pruebas finales y Pase a Produccion (PP-299), sin iniciar",
     "ruta": "informes/riesgo-tecnologico/migracion-pel-admin-a-php.html",
     "destacado": true,
     "vencimiento": "2026-10-31"
@@ -347,7 +361,9 @@
         "url": "https://cafsagroup.atlassian.net/browse/PP-233"
       }
     ],
-    "resumen": "Integracion GAUDI en CAFSA en Linea, Fase 1, epica XL-TEC-01 (independiente de PP-232). 10% de avance real: 1 de 10 criterios finalizado (diseno de login). Vence 30/09/2026, la fecha mas proxima del eje XL-TEC-01. Nota: en Teams (16-17/09) se reporto 80-85% de avance, aun no reflejado en Jira.",
+    "resumen": "Integracion GAUDI en CAFSA en Linea, Fase 1, epica XL-TEC-01 (independiente de PP-232). Vence 30/09/2026, la fecha mas proxima del eje XL-TEC-01.",
+    "avance_detalle": "1 de 10 criterios finalizado (diseno de login) - nota: en Teams (16-17/09) se reporto 80-85% de avance, aun no reflejado en Jira",
+    "proximo_paso": "Analisis y diseno funcional (PP-281); backend y frontend de la integracion siguen pendientes",
     "ruta": "informes/riesgo-tecnologico/integracion-gaudi-cafsa-en-linea.html",
     "destacado": true,
     "vencimiento": "2026-09-30"
@@ -412,7 +428,9 @@
         "url": "https://cafsagroup.atlassian.net/browse/BMO-166"
       }
     ],
-    "resumen": "Actualizacion tecnologica y de seguridad de la plataforma /gx. Preparacion tecnica y conectividad completadas. En curso: diseno de arquitectura, certificados y validaciones antes del pase a produccion.",
+    "resumen": "Actualizacion tecnologica y de seguridad de la plataforma /gx (BMO-166).",
+    "avance_detalle": "preparacion tecnica y conectividad ya completadas",
+    "proximo_paso": "Diseno de arquitectura objetivo, certificados y validaciones antes del pase a produccion",
     "ruta": "informes/infraestructura/modernizacion-de-infraestructura-gx.html",
     "destacado": false,
     "vencimiento": null
@@ -474,7 +492,7 @@
         "url": "https://cafsagroup.atlassian.net/browse/BMO-252"
       }
     ],
-    "resumen": "Correccion de discrepancias en estimaciones contables del sistema Quanto (BMO-252). 83% de avance real (5 de 6 frentes finalizados, actualizado 23/09/2026): segmentacion empresarial, cuentas por cobrar, optimizacion de rendimiento, coordinacion con Quanto y documentacion tecnica ya cerrados. Unico pendiente: montos mitigadores negativos (BMO-253), corregido y confirmado por Quanto pero bloqueado por 2 subtareas abiertas. Sin fecha limite en Jira.",
+    "resumen": "Correccion de discrepancias en estimaciones contables del sistema Quanto (BMO-252). 5 de 6 frentes cerrados; unico pendiente: montos mitigadores negativos (BMO-253), ya corregido y confirmado por Quanto, bloqueado por 2 subtareas abiertas.",
     "ruta": "informes/finanzas-internas/correccion-de-discrepancias-en-estimaciones-contables.html",
     "destacado": false,
     "vencimiento": null

@@ -93,6 +93,8 @@ class Informe:
     personalizado: bool = False
     orden_atencion: int = 999
     propietario_slug: str = None
+    proximo_paso: str = None
+    avance_detalle: str = None
 
     def __post_init__(self):
         for campo in ("id", "titulo", "categoria", "resumen", "ruta"):

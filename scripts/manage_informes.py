@@ -665,6 +665,48 @@ def color_de_fase(pct: int) -> str:
     return "#9a9a9a"
 
 
+def render_resumen_bullets(informe: dict) -> str:
+    """Bullets tipo ficha para el resumen ejecutivo: Estado, Avance,
+    Próximo paso (si el informe lo declara) y Vence — pensado para que se
+    lea en segundos, no como párrafo corrido (petición explícita de
+    Marco, 2026-09-29: un ejecutivo no debería tener que leer más de 10
+    líneas seguidas para entender el estado de un proyecto).
+
+    Estado/Avance/Vence se derivan de datos que YA se calculan en otras
+    partes de esta función (avance_de(), texto_plazo()) — no se redactan
+    a mano acá, para que el bullet nunca quede desincronizado del resto
+    de la página (mismo criterio que avance_efectivo_fase(), ver su
+    docstring en reportes_lib.py). 'Próximo paso' es el único campo de
+    texto libre, y es opcional porque no todos los informes tienen uno
+    claro todavía (ej. un informe recién creado, o uno tipo bitácora)."""
+    items = [
+        f'      <li><strong>Estado:</strong> '
+        f'<span class="estado-badge estado-badge-mini estado-{informe["estado"]}">{ESTADOS_VALIDOS[informe["estado"]]}</span></li>'
+    ]
+
+    pct, _ = avance_de(informe)
+    if pct is not None:
+        detalle = informe.get("avance_detalle")
+        sufijo = f" — {esc(detalle)}" if detalle else ""
+        items.append(
+            f'      <li><strong>Avance:</strong> '
+            f'<span class="pct-semaforo" data-pct="{pct}">{pct}%</span>{sufijo}</li>'
+        )
+
+    proximo_paso = informe.get("proximo_paso")
+    if proximo_paso:
+        items.append(f'      <li><strong>Próximo paso:</strong> {esc(proximo_paso)}</li>')
+
+    vencimiento = informe.get("vencimiento")
+    if vencimiento:
+        etiqueta, _, resto = texto_plazo(vencimiento).partition(": ")
+        items.append(f'      <li><strong>{esc(etiqueta)}:</strong> {esc(resto)}</li>')
+    else:
+        items.append('      <li><strong>Vence:</strong> Sin fecha límite definida en Jira.</li>')
+
+    return '    <ul class="resumen-bullets">\n' + "\n".join(items) + "\n    </ul>"
+
+
 def render_informe_html(informe: dict) -> str:
     """Renderiza (o re-renderiza) el HTML individual de un informe a partir
     de sus datos en informes.json — usado tanto por crear_informe() como por
@@ -736,6 +778,7 @@ def render_informe_html(informe: dict) -> str:
     contenido = contenido.replace("{{FECHA}}", informe["fecha"])
     contenido = contenido.replace("{{CATEGORIA}}", esc(informe["categoria"]))
     contenido = contenido.replace("{{RESUMEN}}", esc(informe["resumen"]))
+    contenido = contenido.replace("{{RESUMEN_BULLETS_HTML}}", render_resumen_bullets(informe))
     contenido = contenido.replace("{{ESTADO_CLASE}}", f"estado-{informe['estado']}")
     contenido = contenido.replace("{{ESTADO_LABEL}}", ESTADOS_VALIDOS[informe["estado"]])
     contenido = contenido.replace("{{PRIORIDAD_LABEL}}", PRIORIDADES_VALIDAS[informe["prioridad"]])
