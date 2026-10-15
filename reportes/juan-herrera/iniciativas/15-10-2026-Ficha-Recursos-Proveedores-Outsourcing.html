@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de Proveedores de Outsourcing — Factor K, Pandatech, Novacomp</title>
+<style>
+  :root{
+    --azul-cafsa:#0b3d63;
+    --azul-claro:#e8f1f8;
+    --gris-texto:#2b2b2b;
+    --gris-claro:#f4f5f7;
+    --borde:#d8dee5;
+    --naranja-recom:#b56a00;
+    --rojo-pendiente:#a4282c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    color:var(--gris-texto);
+    background:#ffffff;
+    margin:0;
+    line-height:1.6;
+    font-size:16.5px;
+  }
+  .wrapper{max-width:1000px;margin:0 auto;padding:32px 28px 80px;}
+
+  header.doc-header{
+    border-bottom:4px solid var(--azul-cafsa);
+    padding-bottom:18px;
+    margin-bottom:28px;
+  }
+  header.doc-header h1{
+    color:var(--azul-cafsa);
+    font-size:26px;
+    margin:0 0 6px;
+  }
+
+  /* ---- Cada proveedor es una tarjeta propia, claramente delimitada:
+     encabezado de color + cuerpo, en vez de solo un separador entre
+     secciones — así se distingue de un vistazo dónde empieza y termina
+     el contenido de cada uno. ---- */
+  .proveedor-card{
+    background:#ffffff;
+    border:1px solid var(--borde);
+    border-radius:10px;
+    margin-bottom:32px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(11,61,99,.05), 0 4px 12px rgba(11,61,99,.07);
+    scroll-margin-top:16px;
+  }
+  .proveedor-card:last-of-type{margin-bottom:0;}
+  .proveedor-header{
+    background:var(--azul-cafsa);
+    color:#fff;
+    padding:16px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px 16px;
+  }
+  .proveedor-header h2{
+    color:#fff;
+    font-size:19px;
+    margin:0;
+    display:flex;
+    align-items:center;
+  }
+  .proveedor-numero{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;
+    height:26px;
+    background:rgba(255,255,255,.22);
+    border-radius:50%;
+    font-size:13px;
+    font-weight:700;
+    margin-right:10px;
+    flex-shrink:0;
+  }
+  .proveedor-body{padding:20px 22px 24px;}
+  h3{font-size:14.5px;color:#17364f;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.02em;}
+  h3:first-child{margin-top:0;}
+
+  .chips{display:flex;gap:7px;flex-wrap:wrap;}
+  .chip{
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.35);
+    font-size:12.5px;
+    font-weight:600;
+    padding:4px 11px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+
+  table.tabla-clausulas{
+    width:100%;
+    border-collapse:collapse;
+    margin:8px 0 4px;
+    font-size:15px;
+  }
+  table.tabla-clausulas th{
+    background:var(--azul-cafsa);
+    color:#fff;
+    text-align:left;
+    padding:8px 10px;
+  }
+  table.tabla-clausulas td{
+    border:1px solid var(--borde);
+    padding:8px 10px;
+    vertical-align:top;
+  }
+  table.tabla-clausulas td:first-child{
+    font-weight:700;
+    color:var(--azul-cafsa);
+    width:26%;
+  }
+  table.tabla-clausulas tr:nth-child(even) td{background:#fafbfc;}
+  table.tabla-clausulas tr.fila-riesgo td:first-child{border-left:4px solid var(--naranja-recom);}
+  table.tabla-clausulas tr.fila-alerta td:first-child{border-left:4px solid var(--rojo-pendiente);}
+
+  table.tabla-considera{
+    width:100%;
+    border-collapse:collapse;
+    margin:10px 0 4px;
+    font-size:15px;
+  }
+  table.tabla-considera th{
+    background:var(--azul-cafsa);
+    color:#fff;
+    text-align:left;
+    padding:8px 10px;
+  }
+  table.tabla-considera td{
+    border:1px solid var(--borde);
+    padding:7px 10px;
+    vertical-align:top;
+  }
+  table.tabla-considera tr:nth-child(even) td{background:#fafbfc;}
+
+  .tabla-nota{
+    font-size:13px;
+    color:#777;
+    margin:-2px 0 0;
+  }
+
+  .contact-box{
+    background:var(--gris-claro);
+    border:1px solid var(--borde);
+    border-radius:6px;
+    padding:10px 14px;
+    font-size:14.5px;
+    margin-bottom:6px;
+  }
+  .contact-box p{margin:0 0 4px;}
+  .contact-box p:last-child{margin-bottom:0;}
+
+  .nota-info{
+    background:var(--azul-claro);
+    border:1px solid #c7dced;
+    border-left:4px solid var(--azul-cafsa);
+    border-radius:6px;
+    padding:10px 14px;
+    margin:12px 0 0;
+    font-size:15px;
+  }
+
+  .cita-box{
+    background:var(--gris-claro);
+    border:1px solid var(--borde);
+    border-left:4px solid #8a94a0;
+    border-radius:6px;
+    padding:10px 14px;
+    margin:8px 0 0;
+  }
+  .cita-box p{margin:0 0 8px;font-size:14px;font-style:italic;color:#444;}
+  .cita-box p:last-child{margin-bottom:0;}
+  .cita-box p strong{font-style:normal;color:var(--azul-cafsa);}
+
+  /* ---- Mockup visual de borrador de adenda (texto legal sin modificar) ---- */
+  .doc-mock{
+    background:#fffdf6;
+    border:2px solid var(--naranja-recom);
+    box-shadow:0 2px 10px rgba(181,106,0,.16);
+    border-radius:6px;
+    padding:0 0 16px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:14.5px;
+    margin-top:8px;
+    overflow:hidden;
+  }
+  .doc-mock .banner{
+    background:var(--naranja-recom);
+    color:#fff;
+    font-family:"Segoe UI",Arial,sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.03em;
+    padding:8px 20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .doc-mock .why{
+    margin:0;
+    background:#fdf1e0;
+    padding:10px 20px;
+    font-family:"Segoe UI",Arial,sans-serif;
+    font-size:13px;
+    color:#6b4e00;
+    border-bottom:1px solid #f0d5a6;
+  }
+  .doc-mock .why > strong{color:#4a3700;display:block;margin-bottom:4px;}
+  .doc-mock .why ul{margin:0;padding-left:16px;}
+  .doc-mock .why li{margin-bottom:2px;}
+  .doc-mock .inner{padding:14px 20px 0;}
+  .doc-mock .tag-draft{
+    display:inline-block;
+    background:var(--rojo-pendiente);
+    color:#fff;
+    font-family:"Segoe UI",Arial,sans-serif;
+    font-size:11px;
+    padding:2px 8px;
+    border-radius:3px;
+    margin-bottom:10px;
+    letter-spacing:.03em;
+  }
+  .doc-mock h4{margin:0 0 8px;font-size:14.5px;letter-spacing:.02em;color:var(--gris-texto);}
+  .doc-mock p{margin:0 0 10px;}
+  .doc-mock .clause-name{font-weight:700;}
+  .doc-mock .sig{
+    margin-top:14px;
+    font-family:"Segoe UI",Arial,sans-serif;
+    font-size:12.5px;
+    color:#777;
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .doc-mock .sig div{border-top:1px solid #999;padding-top:4px;width:45%;text-align:center;}
+  .doc-mock .confirm{
+    margin:14px 20px 0;
+    background:#fdf1e0;
+    border:1px dashed var(--naranja-recom);
+    border-radius:4px;
+    padding:9px 12px;
+    font-family:"Segoe UI",Arial,sans-serif;
+    font-size:13px;
+    color:#6b4e00;
+  }
+
+  footer{
+    margin-top:50px;
+    padding-top:14px;
+    border-top:1px solid var(--borde);
+    font-size:13px;
+    color:#888;
+  }
+
+  a.btn-volver{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:18px;
+    padding:8px 16px;
+    background:var(--azul-cafsa);
+    color:#ffffff;
+    border-radius:6px;
+    font-size:14.5px;
+    font-weight:600;
+    text-decoration:none;
+  }
+  a.btn-volver:hover{background:#0a3252;}
+
+  @media(max-width:700px){
+    .doc-mock .sig{flex-direction:column;}
+    .doc-mock .sig div{width:100%;}
+  }
+
+  @media print{
+    nav.toc{display:none;}
+    a.btn-volver{display:none;}
+    body{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <a class="btn-volver" href="../index.html">&larr; Volver al seguimiento de Juan Herrera</a>
+
+  <header class="doc-header">
+    <h1>Ficha de Proveedores de Outsourcing/Outtasking</h1>
+  </header>
+
+  <!-- FACTOR K -->
+  <section class="proveedor-card" id="factor-k">
+    <div class="proveedor-header">
+      <h2><span class="proveedor-numero">1</span>Factor K Software Company S.R.L.</h2>
+      <div class="chips">
+        <span class="chip">Inicio 11/10/2024</span>
+        <span class="chip">24 meses + renovación 12 meses</span>
+        <span class="chip">No renovar: aviso 90 días</span>
+      </div>
+    </div>
+    <div class="proveedor-body">
+
+    <h3>Cláusulas y consideraciones clave</h3>
+    <table class="tabla-clausulas">
+      <tr><th>Tema</th><th>Detalle</th></tr>
+      <tr><td>Terminación por incumplimiento</td><td>30 días naturales para subsanar tras notificación escrita. Aplica al Contrato Marco completo — Factor K no define términos de terminación a nivel de Orden de Trabajo individual.</td></tr>
+      <tr><td>Salida del contrato completo</td><td>90 días naturales de preaviso (por conveniencia).</td></tr>
+      <tr><td>Efecto económico de salida</td><td>CAFSA paga en 30 días lo pendiente + trabajo en curso a la fecha de corte.</td></tr>
+    </table>
+    <div class="nota-info"><strong>Seguimiento agendado:</strong> sesión con Factor K (Jimmy Quesada Bolaños) programada para el <strong>viernes a las 2:00 p.m.</strong>, con el fin de revisar y obtener las Órdenes de Trabajo vigentes de las personas asignadas.</div>
+
+    <h3>Contactos del contrato</h3>
+    <div class="contact-box">
+      <p><strong>Factor K:</strong> Jimmy Quesada Bolaños — jimmy.quesada@factork-software.com</p>
+      <p><strong>CAFSA (autorización):</strong> Luis Aguilar Morales — laguilar@cafsa.fi.cr</p>
+    </div>
+
+    <h3>Ejemplo de adenda — cláusula de uso de IA</h3>
+    <div class="doc-mock">
+      <div class="banner">⚠ VALIDAR CLÁUSULAS DE ADENDA</div>
+      <div class="why"><strong>Por qué se agrega:</strong>
+        <ul>
+          <li>El contrato no regula el uso de IA por parte del proveedor; se cierra ese vacío antes de que se use una herramienta no autorizada con información de CAFSA.</li>
+          <li><strong>Cláusulas pendientes:</strong> incorporar las cláusulas estándar de Legal que faltan (marcas, naturaleza mercantil, SUGEF, continuidad, seguridad de la información, personal, autonomía técnica) y generar Órdenes de Servicio con la misma estructura usada en Pandatech/Novacomp.</li>
+        </ul>
+      </div>
+      <div class="inner">
+        <span class="tag-draft">BORRADOR</span>
+        <h4>ADENDA N.° 1 AL CONTRATO MARCO DE SERVICIOS (PRV-FTK-1)</h4>
+        <p>Entre Financiera CAFSA S.A. ("El Cliente") y Factor K Software Company S.R.L. ("Factor K"), suscrito el 11 de octubre de 2024. Ambas partes acuerdan incorporar la siguiente cláusula al Contrato. Las demás disposiciones permanecen vigentes sin modificación.</p>
+        <p class="clause-name">CATORCEAVA: USO DE INTELIGENCIA ARTIFICIAL.</p>
+        <p>Factor K se obliga a no utilizar herramientas o sistemas de Inteligencia Artificial que no hayan sido previamente autorizados por escrito por El Cliente, para el desarrollo, soporte o cualquier actividad relacionada con los Servicios. Queda prohibido ingresar Información Confidencial de El Cliente en herramientas de IA no autorizadas. El incumplimiento se considerará una violación a la cláusula de Confidencialidad del presente Contrato. El Cliente podrá solicitar en cualquier momento la declaración de las herramientas de IA utilizadas por el personal de Factor K.</p>
+        <div class="sig"><div>Jimmy Quesada Bolaños — Factor K</div><div>Luis Ángel González Magán — El Cliente</div></div>
+      </div>
+      <div class="confirm">✔ Responsable del recurso: confirmar si esta redacción cubre el caso de uso real antes de remitirla a Legal.</div>
+    </div>
+    </div>
+  </section>
+
+  <!-- PANDATECH -->
+  <section class="proveedor-card" id="pandatech">
+    <div class="proveedor-header">
+      <h2><span class="proveedor-numero">2</span>Pandatech S.A.</h2>
+      <div class="chips">
+        <span class="chip">01/12/2024 – 31/12/2025*</span>
+        <span class="chip">Renovación automática 12 meses</span>
+        <span class="chip">No renovar: aviso 30 días</span>
+      </div>
+    </div>
+    <div class="proveedor-body">
+
+    <h3>Cláusulas y consideraciones clave</h3>
+    <table class="tabla-clausulas">
+      <tr><th>Tema</th><th>Detalle</th></tr>
+      <tr class="fila-riesgo"><td>*Inconsistencia en el contrato</td><td>La Cláusula Sétima dice "doce (13) meses" — confirmar plazo real con el proveedor.</td></tr>
+      <tr><td>SLA del recurso</td><td>Disponibilidad mensual mínima 95%; jornada 160 h/mes; aviso de ausencia programada con 2 días hábiles de anticipación.</td></tr>
+      <tr><td>Incidencias</td><td>Deben reportarse a CAFSA en menos de 1 hora; solicitudes operativas, respuesta en ≤4 horas hábiles.</td></tr>
+      <tr><td>Sustitución (por causa de Pandatech)</td><td>Ausencia &gt;3 días hábiles, renuncia, incapacidad &gt;5 días o bajo desempeño grave documentado → reemplazo temporal en 2–5 días hábiles, definitivo en 5–10 días hábiles, sin costo. Evaluación del reemplazo: 30 días.</td></tr>
+      <tr><td>Condiciones para prescindir del servicio</td><td>Igual en las 5 Órdenes vigentes (ejemplo: O.S. Efraín Araya / Geovanny Gómez): notificación escrita de la incidencia → PANDATECH implementa medidas correctivas → si el patrón de incumplimiento persiste, CAFSA puede solicitar sustitución inmediata o dar por finalizada anticipadamente la Orden de Servicio.</td></tr>
+    </table>
+
+    <h3>Contactos del contrato</h3>
+    <div class="contact-box">
+      <p><strong>Pandatech (comercial):</strong> Pablo Rodríguez Brenes — pablo.rodriguez@pandatechla.com</p>
+      <p><strong>Pandatech (jefatura técnica):</strong> Cristian Gómez Morales</p>
+      <p><strong>CAFSA (gestor servicio):</strong> Juan Herrera Mena — jherrera@cafsa.fi.cr</p>
+      <p><strong>CAFSA (autorización SLA):</strong> Luis Aguilar Morales — laguilar@cafsa.fi.cr</p>
+    </div>
+
+    <h3>Recursos actualmente contratados</h3>
+    <table class="tabla-considera">
+      <tr><th>Persona</th><th>Rol</th><th>Vigencia</th></tr>
+      <tr><td>Geovanny Gómez Leiva</td><td>Full Stack Java/React</td><td>02/02/26 – 31/12/26</td></tr>
+      <tr><td>Efraín Araya Fuentes</td><td>Full Stack Java/React</td><td>02/02/26 – 31/12/26</td></tr>
+      <tr><td>Pamela Muñoz Jiménez</td><td>Full Stack Java/React</td><td>10/11/25 – 10/11/26</td></tr>
+      <tr><td>Matthew Russell Obregón</td><td>Analista QA</td><td>31/12/25 – 31/12/26</td></tr>
+      <tr><td>Rolando Quirós Artavia</td><td>Full Stack (híbrido)</td><td>19/12/25 – 31/12/26</td></tr>
+    </table>
+    <p class="tabla-nota">Jefatura inmediata de los 5: Cristian Gómez (Pandatech)</p>
+
+    <h3>Ejemplo de adenda — incluye cláusula de IA + ajustes recomendados</h3>
+    <div class="doc-mock">
+      <div class="banner">⚠ VALIDAR CLÁUSULAS DE ADENDA</div>
+      <div class="why"><strong>Por qué se agregan:</strong>
+        <ul>
+          <li><strong>IA:</strong> vacío no regulado en el contrato.</li>
+          <li><strong>Plazo:</strong> corrige el error de redacción de la Cláusula Sétima ("doce (13) meses").</li>
+        </ul>
+      </div>
+      <div class="inner">
+        <span class="tag-draft">BORRADOR</span>
+        <h4>ADENDA N.° 1 AL CONTRATO MARCO DE PRESTACIÓN DE SERVICIOS — CÓDIGO 001</h4>
+        <p>Entre Financiera CAFSA S.A. ("CAFSA") y Pandatech S.A. ("PANDATECH"). De conformidad con la Cláusula Décima Tercera (Mecanismo de Control de Cambios), ambas partes acuerdan incorporar y corregir las siguientes cláusulas del Contrato. Las demás disposiciones permanecen vigentes sin modificación.</p>
+        <p class="clause-name">CLÁUSULA TRIGÉSIMA SÉPTIMA: USO DE INTELIGENCIA ARTIFICIAL.</p>
+        <p>PANDATECH se obliga a no utilizar herramientas o sistemas de Inteligencia Artificial que no hayan sido previamente autorizados por escrito por CAFSA, para la prestación de LOS SERVICIOS. Queda prohibido ingresar información confidencial de CAFSA en herramientas de IA no autorizadas. El incumplimiento se considerará una violación a la Cláusula Décima Sétima (Confidencialidad). CAFSA podrá solicitar en cualquier momento la declaración de las herramientas de IA utilizadas por el personal asignado por PANDATECH.</p>
+        <p class="clause-name">CLÁUSULA TRIGÉSIMA OCTAVA: CORRECCIÓN DE LA CLÁUSULA SÉTIMA (PLAZO).</p>
+        <p>Las partes dejan constancia de que la vigencia inicial del Contrato fue de doce (12) meses, contados a partir del 01 de diciembre de 2024 y hasta el 31 de diciembre de 2025, corrigiéndose en consecuencia cualquier referencia a "doce (13) meses" contenida en la Cláusula Sétima original. Las renovaciones automáticas de 12 meses continúan rigiendo sin variación.</p>
+        <div class="sig"><div>Roy Zúñiga Rodríguez — Pandatech</div><div>Carlos Enrique Castro Riba — CAFSA</div></div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- NOVACOMP -->
+  <section class="proveedor-card" id="novacomp">
+    <div class="proveedor-header">
+      <h2><span class="proveedor-numero">3</span>Servicios Computacionales Novacomp S.A.</h2>
+      <div class="chips">
+        <span class="chip">25/02/2026 – 25/02/2027</span>
+        <span class="chip">Renovación automática</span>
+        <span class="chip">No renovar: aviso 30 días</span>
+        <span class="chip">OS mínima: 3 meses</span>
+      </div>
+    </div>
+    <div class="proveedor-body">
+
+    <h3>Cláusulas y consideraciones clave</h3>
+    <table class="tabla-clausulas">
+      <tr><th>Tema</th><th>Detalle</th></tr>
+      <tr><td>SLA del recurso</td><td>Disponibilidad ≥95%; jornada 160 h/mes; aviso de ausencia programada con 2 días hábiles.</td></tr>
+      <tr><td>Sustitución por ausencia no programada</td><td>&gt;3 días hábiles: propuesta de reemplazo en máximo 8 días hábiles.</td></tr>
+      <tr><td>Sustitución por bajo desempeño</td><td>Solo puede solicitarse sin costo <u>dentro de las primeras 4 semanas</u> de la Orden de Servicio.</td></tr>
+      <tr class="fila-alerta"><td>Contradicción interna del contrato</td><td>Una cláusula dice que CAFSA puede terminar con 30 días de preaviso sin pagar el resto; otras dos (Octava y Décima Tercera) dicen que, fuera de las primeras 4 semanas, CAFSA debe seguir pagando hasta el fin del plazo de la Orden aunque prescinda del consultor. Aclarar con el proveedor antes de notificar cualquier baja.</td></tr>
+    </table>
+
+    <h3>Qué dice cada cláusula (texto original)</h3>
+    <div class="cita-box">
+      <p><strong>Reglas sobre Terminación del Acuerdo:</strong> "El Cliente podrá dar por terminada total o parcialmente cualquier orden de servicio, mediante notificación escrita con al menos treinta (30) días naturales de preaviso, sin obligación de pagar el período restante no ejecutado, debiendo únicamente cancelar los servicios efectivamente prestados..."</p>
+      <p><strong>Cláusula Octava (Sustitución de Recursos):</strong> "...Bajo ninguna otra circunstancia El Cliente podrá devolver a un consultor antes de la fecha de vencimiento acordada... En caso de presentarse alguna devolución por decisión de El Cliente, este asumirá el monto de facturación por el tiempo pendiente."</p>
+      <p><strong>Cláusula Décima Tercera (Valor y Forma de Pago):</strong> "...en caso de que El Cliente desee devolver al consultor antes del plazo estipulado..., deberá seguir cubriendo los pagos mensuales hasta completar el plazo comprometido."</p>
+    </div>
+    <div class="nota-info"><strong>Validado en la Orden de Servicio:</strong> sí existe un criterio de baja por rendimiento — la O.S. tiene su propia sección "Incumplimiento Reiterado" que permite "Terminación anticipada de la Orden de Servicio". Pero, igual que el contrato marco, no dice qué pasa con el pago pendiente; y como el marco tiene cláusula de Prelación Contractual (prevalece sobre la Orden en caso de conflicto), sin la adenda seguiría ganando la Cláusula Octava/Décima Tercera (pago completo).</div>
+
+    <h3>Contactos del contrato</h3>
+    <div class="contact-box">
+      <p><strong>Novacomp (rep. legal):</strong> Harold Humberto Leiva Martínez — hleiva@crnova.com</p>
+      <p><strong>Novacomp (Delivery Manager):</strong> Francisco Canales Umaña</p>
+      <p><strong>Novacomp (Business Dev.):</strong> David Quirós Tencio</p>
+      <p><strong>CAFSA (autorización SLA):</strong> Luis Aguilar Morales — laguilar@cafsa.fi.cr</p>
+    </div>
+
+    <h3>Recursos actualmente contratados</h3>
+    <table class="tabla-considera">
+      <tr><th>Persona</th><th>Rol</th><th>Vigencia</th></tr>
+      <tr><td>Oscar Edwin Sánchez Hernández</td><td>Fullstack Java + React</td><td>26/02/26 – 31/12/26</td></tr>
+    </table>
+
+    <h3>Ejemplo de adenda — incluye cláusula de IA + ajustes recomendados</h3>
+    <div class="doc-mock">
+      <div class="banner">⚠ VALIDAR CLÁUSULAS DE ADENDA</div>
+      <div class="why"><strong>Por qué se agregan:</strong>
+        <ul>
+          <li><strong>IA:</strong> vacío no regulado en el contrato.</li>
+          <li><strong>Aclaración:</strong> resuelve la contradicción interna sobre si se paga o no el saldo pendiente al dar de baja un recurso.</li>
+          <li><strong>Baja sin penalidad:</strong> formaliza una vía basada en desempeño documentado, en lugar de depender de cuál cláusula se interprete como aplicable.</li>
+        </ul>
+      </div>
+      <div class="inner">
+        <span class="tag-draft">BORRADOR</span>
+        <h4>ADENDA N.° 1 AL CONTRATO GENÉRICO DE SUMINISTRO NOVACOMP-20262801</h4>
+        <p>Entre Arrendadora CAFSA S.A. y/o Financiera CAFSA S.A. ("El Cliente") y Servicios Computacionales Novacomp S.A. ("El Proveedor"). De conformidad con la Cláusula Décima Segunda (Mecanismo de Control de Cambios), ambas partes acuerdan incorporar y aclarar las siguientes cláusulas del Contrato. Las demás disposiciones permanecen vigentes sin modificación.</p>
+        <p class="clause-name">TRIGÉSIMA SEXTA: USO DE INTELIGENCIA ARTIFICIAL.</p>
+        <p>El Proveedor se obliga a no utilizar herramientas o sistemas de Inteligencia Artificial que no hayan sido previamente autorizados por escrito por El Cliente, para la ejecución de los servicios. Queda prohibido ingresar información confidencial de El Cliente en herramientas de IA no autorizadas. El incumplimiento se considerará una violación a la Cláusula Vigésima Primera (Confidencialidad) y a la Trigésima Primera (Metas de Confidencialidad). El Cliente podrá solicitar en cualquier momento la declaración de las herramientas de IA utilizadas por el personal asignado.</p>
+        <p class="clause-name">TRIGÉSIMA SÉPTIMA: ACLARACIÓN DE LAS REGLAS DE TERMINACIÓN.</p>
+        <p>Las partes aclaran que, ante cualquier contradicción entre las "Reglas sobre Terminación del Acuerdo" y lo dispuesto en las Cláusulas Octava y Décima Tercera, prevalecerá lo establecido en la presente Adenda y en la Cláusula Trigésima Octava siguiente, dejando sin efecto cualquier interpretación contraria.</p>
+        <p class="clause-name">TRIGÉSIMA OCTAVA: BAJA DE RECURSO SIN PENALIDAD POR DESEMPEÑO DOCUMENTADO.</p>
+        <p>El Cliente podrá dar por terminada una Orden de Servicio respecto de un consultor específico, sin obligación de pagar el saldo restante del plazo pactado, siempre que: (i) haya notificado por escrito al Proveedor la incidencia o bajo desempeño con al menos [10] días hábiles de anticipación; (ii) haya otorgado al Proveedor un plazo razonable de subsanación sin que se observe mejora; y (iii) exista evidencia documental de lo anterior (correos, tickets, evaluaciones de desempeño). Fuera de este supuesto, continúa rigiendo la obligación de pago establecida en la Cláusula Octava.</p>
+        <div class="sig"><div>Harold Humberto Leiva Martínez — Novacomp</div><div>Carlos Enrique Castro Riba — El Cliente</div></div>
+      </div>
+      <div class="confirm">✔ Responsable del recurso: confirme si el plazo de subsanación sugerido ([10] días hábiles) es razonable para este tipo de incidencias antes de remitir a Legal.</div>
+    </div>
+    </div>
+  </section>
+
+  <footer>
+    Ficha elaborada a partir de los contratos marco y órdenes de servicio vigentes en PR-OUTSOURCINGS (corte: 15 de octubre de 2026). Los ejemplos de adenda son borradores para discusión interna; no constituyen asesoría legal ni texto firmado.
+  </footer>
+
+</div>
+</body>
+</html>

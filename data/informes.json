@@ -128,11 +128,11 @@
   {
     "id": "2026-08-21-migracion-de-core-financiero-forms-14c",
     "titulo": "Migración de Core Financiero - Forms 14c",
-    "fecha": "2026-09-23",
+    "fecha": "2026-10-12",
     "categoria": "core-financiero",
     "orden_atencion": 1,
     "prioridad": "alta",
-    "cumplimiento": "en_riesgo",
+    "cumplimiento": "vencido",
     "estado": "rojo",
     "avance": null,
     "subtareas_completadas": null,
@@ -144,7 +144,7 @@
       },
       {
         "nombre": "Migracion y pruebas de modulos/objetos Abanks",
-        "avance": 67
+        "avance": 76
       },
       {
         "nombre": "Pruebas por roles de usuario",
@@ -193,7 +193,7 @@
         "url": "https://cafsagroup.atlassian.net/browse/DES-2707"
       }
     ],
-    "resumen": "Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 23/09/2026: 67.3% aprobado por CAFSA (339 de 504 objetos); BRANCH es el principal riesgo. Quedan 7 dias para el 30/09/2026. Detalle completo por modulo en el informe.",
+    "resumen": "Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 12/10/2026: 75.5% aprobado por CAFSA (389 de 515 objetos). El plazo del 30/09/2026 ya vencio hace 12 dias sin cierre. Los rechazos bajaron de 41 a 2 (GENERALES y MAYOR resolvieron los suyos); aparecio una categoria nueva de 9 objetos (RECOMPILADOS) sin modulo confirmado. Detalle completo por modulo en el informe.",
     "ruta": "informes/core-financiero/migracion-de-core-financiero-forms-14c.html",
     "destacado": true,
     "personalizado": true,

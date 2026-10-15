@@ -1,5 +1,14 @@
 [
   {
+    "id": "juan-herrera-2026-10-15-ficha-de-proveedores-de-outsourcing-factor-k-panda",
+    "persona_slug": "juan-herrera",
+    "titulo": "Ficha de Proveedores de Outsourcing — Factor K, Pandatech, Novacomp",
+    "fecha": "2026-10-15",
+    "categoria": "Gestión de contratos / proveedores",
+    "resumen": "Cláusulas de riesgo, contactos y recursos activos de los 3 contratos de outsourcing, con borradores de adenda de uso de IA pendientes de validar.",
+    "ruta": "reportes/juan-herrera/iniciativas/15-10-2026-Ficha-Recursos-Proveedores-Outsourcing.html"
+  },
+  {
     "id": "cristopher-perez-ugalde-2026-09-24-analisis-df-doble-factor-de-autenticacion-bd-consu",
     "persona_slug": "cristopher-perez-ugalde",
     "titulo": "Análisis /df — Doble Factor de Autenticación (BD Consultores)",
