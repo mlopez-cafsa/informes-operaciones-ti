@@ -1154,6 +1154,19 @@ main {
   border-bottom: none;
 }
 
+/* Avance de % Aprobado frente al corte anterior (plan de pruebas por módulo):
+   la fila con avance se resalta en verde y la celda "Avance" muestra los
+   puntos porcentuales ganados. Convención fija: se aplica en cada corte. */
+.tabla-datos tbody tr.fila-avance,
+.tabla-datos tbody tr.fila-avance:hover { background: var(--status-green-bg); }
+.tabla-datos tr.fila-avance td:first-child {
+  font-weight: 700;
+  box-shadow: inset 4px 0 0 var(--status-green);
+}
+.delta-avance { color: var(--status-green); font-weight: 700; }
+.delta-avance small { font-weight: 500; color: var(--cafsa-gray); }
+.delta-sin-cambio { color: var(--status-neutral); }
+
 /* ---------- Recomendaciones por segmento (bloques con borde de color) ---------- */
 .segmentos-recomendaciones {
   display: flex;
