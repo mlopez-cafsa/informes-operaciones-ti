@@ -70,14 +70,45 @@
 
   .sub{color:var(--gris-medio);margin:0 0 10px;font-size:15px;}
   .meta{font-size:14.5px;color:var(--gris-medio);}
+  /* ---- Guía de etiquetas: una tarjeta por etiqueta, con su color y su significado ---- */
   .legend{
-    font-size:14.5px;
     background:var(--gris-claro);
     border:1px solid var(--borde);
-    border-radius:6px;
-    padding:10px 14px;
+    border-radius:10px;
+    padding:14px 16px 16px;
     margin:0 0 6px;
   }
+  .legend-titulo{
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--gris-medio);
+    margin:0 0 10px;
+  }
+  .legend-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:10px;
+  }
+  .legend-item{
+    background:#ffffff;
+    border:1px solid var(--borde);
+    border-top:4px solid var(--borde);
+    border-radius:8px;
+    padding:10px 12px 12px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+  }
+  .legend-item .tag{margin-right:0;font-size:13px;white-space:normal;}
+  .legend-item p{margin:0;font-size:14.5px;line-height:1.45;color:var(--gris-texto);}
+  .legend-item.hecho{border-top-color:var(--verde-hecho);}
+  .legend-item.inf{border-top-color:var(--naranja-recom);}
+  .legend-item.nc{border-top-color:var(--rojo-pendiente);}
+  .legend-item.recom{border-top-color:var(--azul-cafsa);}
+  .legend-item.consultar{border-top-color:var(--morado-consulta);}
 
   table{
     width:100%;
@@ -174,6 +205,7 @@
     body{font-size:12px;}
     .wrapper{padding:0;}
     table{break-inside:avoid;}
+    .legend-item{break-inside:avoid;}
   }
 </style>
 </head>
@@ -189,13 +221,16 @@
 
 
 
-<p class="legend">
-<span class="tag hecho">Hecho verificable</span> comprobado en el código o dato entregado por CAFSA ·
-<span class="tag inf">Inferido</span> deducido, no probado ·
-<span class="tag nc">No confirmado</span> falta evidencia ·
-<span class="tag recom">Recomendación</span> opinión técnica ·
-<span class="tag consultar">Consultar a Cristopher (o Yerrica)</span> cuando no está claro cómo proceder
-</p>
+<div class="legend">
+  <p class="legend-titulo">Guía de etiquetas</p>
+  <div class="legend-grid">
+    <div class="legend-item hecho"><span class="tag hecho">Hecho verificable</span><p>Comprobado en el código o dato entregado por CAFSA.</p></div>
+    <div class="legend-item inf"><span class="tag inf">Inferido</span><p>Deducido, no probado.</p></div>
+    <div class="legend-item nc"><span class="tag nc">No confirmado</span><p>Falta evidencia.</p></div>
+    <div class="legend-item recom"><span class="tag recom">Recomendación</span><p>Opinión técnica.</p></div>
+    <div class="legend-item consultar"><span class="tag consultar">Consultar a Cristopher (o Yerrica)</span><p>Cuando no está claro cómo proceder.</p></div>
+  </div>
+</div>
 
 <h2 class="section-title">1. Objetivo y ambientes</h2>
 <p><strong>Objetivo:</strong> instalar el Admin migrado como producción en el servidor <code>192.168.1.132</code>, hacer que la URL de producción resuelva ahí, y después apagar el <code>192.168.1.115</code>. El <code>192.168.1.150</code> se mantiene como desarrollo.</p>
