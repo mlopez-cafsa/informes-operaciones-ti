@@ -18,5 +18,10 @@
     "slug": "juan-herrera",
     "nombre": "Juan Herrera Mena",
     "cargo": "Analista de Sistemas y Coordinación"
+  },
+  {
+    "slug": "geovanny-leon",
+    "nombre": "Geovanny Leon",
+    "cargo": "Encargado de Infraestructura Linux"
   }
 ]

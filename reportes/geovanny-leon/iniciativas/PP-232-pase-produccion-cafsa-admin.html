@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PP-232 — Pase a producción (Infraestructura)</title>
+<style>
+  :root{
+    --azul-cafsa:#0b3d63;
+    --azul-claro:#e8f1f8;
+    --gris-texto:#2b2b2b;
+    --gris-claro:#f4f5f7;
+    --gris-medio:#5b6577;
+    --borde:#d8dee5;
+    --verde-hecho:#1a7f4e;
+    --verde-bg:#e4f4ea;
+    --naranja-recom:#b56a00;
+    --naranja-bg:#fdf1e0;
+    --rojo-pendiente:#a4282c;
+    --rojo-bg:#fbe9ea;
+    --morado-consulta:#5b3f8c;
+    --morado-bg:#efe9f7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    color:var(--gris-texto);
+    background:#ffffff;
+    margin:0;
+    line-height:1.6;
+    font-size:16.5px;
+  }
+  .wrapper{max-width:1040px;margin:0 auto;padding:32px 28px 80px;}
+
+  a.btn-volver{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:18px;
+    padding:8px 16px;
+    background:var(--azul-cafsa);
+    color:#ffffff;
+    border-radius:6px;
+    font-size:14.5px;
+    font-weight:600;
+    text-decoration:none;
+  }
+  a.btn-volver:hover{background:#0a3252;}
+
+  header.doc-header{
+    border-bottom:4px solid var(--azul-cafsa);
+    padding-bottom:18px;
+    margin-bottom:22px;
+  }
+  header.doc-header h1{
+    color:var(--azul-cafsa);
+    font-size:26px;
+    margin:0 0 6px;
+  }
+
+  h2.section-title{
+    font-size:20px;
+    color:var(--azul-cafsa);
+    margin:38px 0 14px;
+    padding-bottom:6px;
+    border-bottom:2px solid var(--azul-cafsa);
+  }
+  h3{font-size:16px;color:#17364f;margin:24px 0 8px;}
+  h3:first-child{margin-top:0;}
+
+  .sub{color:var(--gris-medio);margin:0 0 10px;font-size:15px;}
+  .meta{font-size:14.5px;color:var(--gris-medio);}
+  .legend{
+    font-size:14.5px;
+    background:var(--gris-claro);
+    border:1px solid var(--borde);
+    border-radius:6px;
+    padding:10px 14px;
+    margin:0 0 6px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:#ffffff;
+    border:1px solid var(--borde);
+    font-size:15px;
+    margin:8px 0 6px;
+  }
+  th,td{
+    text-align:left;
+    vertical-align:top;
+    padding:8px 10px;
+    border-bottom:1px solid var(--borde);
+  }
+  th{
+    background:var(--azul-cafsa);
+    color:#ffffff;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+  }
+  tbody tr:nth-child(even) td{background:#fafbfc;}
+  td.n{white-space:nowrap;font-weight:700;width:52px;color:var(--azul-cafsa);}
+  .amb th:nth-child(1){width:24%;}
+  .amb th:nth-child(2){width:160px;}
+  .amb th:nth-child(3){width:30%;}
+  .amb td:nth-child(2){white-space:nowrap;}
+  .amb td:nth-child(2) code{white-space:nowrap;word-break:normal;}
+  .t3 th:nth-child(2){width:31%;}
+  .t3 th:nth-child(3){width:31%;}
+  .t3 th:nth-child(4){width:30%;}
+
+  code{
+    background:var(--gris-claro);
+    border:1px solid var(--borde);
+    border-radius:4px;
+    padding:1px 5px;
+    font-size:14px;
+    word-break:break-word;
+  }
+  pre{
+    background:#10151f;
+    color:#e8ecf3;
+    padding:14px 16px;
+    border-radius:8px;
+    overflow:auto;
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  .tag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    border-radius:10px;
+    padding:1px 9px;
+    margin-right:4px;
+    white-space:nowrap;
+    border:1px solid transparent;
+  }
+  .tag.hecho{background:var(--verde-bg);color:var(--verde-hecho);border-color:#b8e0c8;}
+  .tag.inf{background:var(--naranja-bg);color:var(--naranja-recom);border-color:#f0d5a6;}
+  .tag.nc{background:var(--rojo-bg);color:var(--rojo-pendiente);border-color:#eec2c4;}
+  .tag.recom{background:var(--azul-claro);color:var(--azul-cafsa);border-color:#c7dced;}
+  .tag.consultar{background:var(--morado-bg);color:var(--morado-consulta);border-color:#d6c9ea;}
+
+  .p{
+    display:inline-block;
+    color:#ffffff;
+    font-weight:700;
+    border-radius:6px;
+    padding:2px 11px;
+    font-size:14px;
+    margin-right:6px;
+  }
+  .pA{background:var(--rojo-pendiente);}
+  .pB{background:var(--naranja-recom);}
+  .pC{background:var(--azul-cafsa);}
+
+  .who{font-size:13.5px;color:var(--gris-medio);display:block;margin-top:4px;}
+  ul{margin:6px 0 6px 20px;padding:0;}
+  li{margin:4px 0;}
+
+  @media (max-width:640px){
+    table,thead,tbody,tr,th,td{display:block;}
+    thead{display:none;}
+    td{border-bottom:none;}
+    tr{border-bottom:1px solid var(--borde);padding:6px 0;}
+    td.n{width:auto;}
+  }
+  @media print{
+    a.btn-volver{display:none;}
+    body{font-size:12px;}
+    .wrapper{padding:0;}
+    table{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<a class="btn-volver" href="../index.html">&larr; Volver al seguimiento de Geovanny Leon</a>
+
+<header class="doc-header">
+  <h1>Pase a producción — Admin CAFSA migrado</h1>
+</header>
+
+
+
+
+<p class="legend">
+<span class="tag hecho">Hecho verificable</span> comprobado en el código o dato entregado por CAFSA ·
+<span class="tag inf">Inferido</span> deducido, no probado ·
+<span class="tag nc">No confirmado</span> falta evidencia ·
+<span class="tag recom">Recomendación</span> opinión técnica ·
+<span class="tag consultar">Consultar a Cristopher (o Yerrica)</span> cuando no está claro cómo proceder
+</p>
+
+<h2 class="section-title">1. Objetivo y ambientes</h2>
+<p><strong>Objetivo:</strong> instalar el Admin migrado como producción en el servidor <code>192.168.1.132</code>, hacer que la URL de producción resuelva ahí, y después apagar el <code>192.168.1.115</code>. El <code>192.168.1.150</code> se mantiene como desarrollo.</p>
+<table class="amb">
+<thead><tr><th>Ambiente</th><th>Servidor</th><th>URL</th><th>Después del pase</th></tr></thead>
+<tbody>
+<tr><td><strong>Producción actual</strong></td><td><code>192.168.1.115</code></td><td><code>https://ibanking-admin.cafsa.fi.cr/admin</code></td><td>Se apaga, al final y una vez estabilizado el pase.</td></tr>
+<tr><td><strong>Desarrollo (sistema actual)</strong></td><td><code>192.168.1.115</code></td><td><code>https://capacitacion.cafsa.fi.cr/</code></td><td>Se apaga junto con el <code>.115</code> (ver C3).</td></tr>
+<tr><td><strong>Producción nueva</strong> (destino)</td><td><code>192.168.1.132</code></td><td>Por definir (A1). Hoy <code>https://ibanking.cafsa.fi.cr</code> ya resuelve a este servidor.</td><td>Aquí se instala el sistema migrado.</td></tr>
+<tr><td><strong>Sistema migrado</strong> (origen del código)</td><td><code>192.168.1.150</code></td><td><code>https://migraadmin.cafsa.fi.cr/login</code></td><td>Pasa a ser desarrollo. No se apaga.</td></tr>
+</tbody>
+</table>
+
+<h2 class="section-title">2. Plan en 7 pasos</h2>
+<table>
+<thead><tr><th>#</th><th>Paso</th><th>Detalle</th><th>Quién</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td>Conseguir lo que hoy solo está en el <code>.115</code></td><td>Certificado HTTPS de <code>ibanking-admin</code> (con su llave), URL del Web Service que usa el sistema actual, y copia de su configuración. Hacerlo antes de apagar nada (A3, A4).</td><td>Infraestructura</td></tr>
+<tr><td class="n">2</td><td>Preparar el <code>.132</code></td><td>Verificar PHP ≥ 8.2 y extensiones, servidor web y SELinux (sección 3). Abrir la regla de red hacia el Web Service (B2).</td><td>Infraestructura</td></tr>
+<tr><td class="n">3</td><td>Instalar el sistema</td><td>Copiar el proyecto (viene en la carpeta que se entrega) a una carpeta propia, crear el <code>.env</code> de producción y dar permisos a <code>writable/</code> (sección 3).</td><td>Infraestructura</td></tr>
+<tr><td class="n">4</td><td>Crear el VirtualHost</td><td>Nombre <code>ibanking-admin.cafsa.fi.cr</code>, con certificado y redirección <code>/admin</code> → <code>/login</code> (sección 3). Todavía no recibe usuarios, porque el DNS sigue apuntando al <code>.115</code>.</td><td>Infraestructura</td></tr>
+<tr><td class="n">5</td><td>Probar sin afectar a nadie</td><td>En una estación de CAFSA, apuntar <code>ibanking-admin.cafsa.fi.cr</code> a <code>192.168.1.132</code> en el archivo <code>hosts</code> y probar login, consultas y <code>/admin</code> (B4).</td><td>CAFSA + Infraestructura</td></tr>
+<tr><td class="n">6</td><td>Cambiar el DNS</td><td>Repuntar <code>ibanking-admin.cafsa.fi.cr</code> al <code>192.168.1.132</code> y correr las pruebas de humo (C1). <strong>Retorno si falla:</strong> devolver el registro DNS al <code>.115</code>, que sigue encendido.</td><td>Infraestructura + CAFSA</td></tr>
+<tr><td class="n">7</td><td>Apagar el <code>.115</code></td><td>Solo después de estabilizar, con fecha acordada (C3).</td><td>CAFSA + Infraestructura</td></tr>
+</tbody>
+</table>
+
+<h2 class="section-title">3. Cómo debe quedar configurado en el <code>.132</code></h2>
+
+<h3>Requisitos del servidor</h3>
+<ul>
+<li><span class="tag hecho">Hecho</span> PHP ≥ 8.2 (el proveedor validó 8.4.3) con php-fpm. Extensiones que exige <code>composer.lock</code>: ctype, dom, fileinfo, filter, gd, iconv, intl, libxml, mbstring, simplexml, xml, xmlreader, xmlwriter, zip, zlib; más <code>soap</code> y OpenSSL, que usa la aplicación. Se verifica con <code>composer check-platform-reqs</code>.</li>
+<li>Servidor web con reescritura de URL (Apache con <code>mod_rewrite</code>, según la guía del proveedor). <span class="tag nc">No confirmado</span> qué servidor web usa el <code>.132</code>.</li>
+<li>SELinux, si está activo (según la guía): <code>semanage fcontext -a -t httpd_sys_rw_content_t "&lt;ruta&gt;/writable(/.*)?"</code>, <code>restorecon -Rv &lt;ruta&gt;/writable</code> y <code>setsebool -P httpd_can_network_connect 1</code>.</li>
+<li>Permisos de escritura solo en <code>writable/</code>, para el usuario con que corre PHP-FPM.</li>
+</ul>
+
+<h3>Archivo <code>.env</code> de producción (en la raíz del proyecto, junto a <code>app/</code>)</h3>
+<pre>CI_ENVIRONMENT = production
+app.baseURL = 'https://ibanking-admin.cafsa.fi.cr/'
+encryption.key = hex2bin:&lt;generada con: php spark key:generate&gt;
+encryption.driver = OpenSSL
+WS_URL_WSDL = &lt;WSDL de producción confirmado en A3&gt;</pre>
+<ul>
+<li><span class="tag hecho">Hecho</span> Las 5 variables son obligatorias y deben escribirse a mano: <code>encryption.driver</code> y <code>WS_URL_WSDL</code> no están en la plantilla <code>env</code> ni en el ejemplo de la guía del proveedor.</li>
+<li><span class="tag hecho">Hecho</span> <code>app.baseURL</code> va con barra final y debe ser la URL que usarán los usuarios (si A1 define otra, cambiarla aquí).</li>
+<li><span class="tag hecho">Hecho</span> La clave <code>encryption.key</code> solo cifra la contraseña guardada en la sesión del usuario: sirve cualquier clave nueva, no hay que igualarla con otro ambiente.</li>
+<li>Los tiempos de espera del Web Service (30 s y 40 s) ya vienen por defecto en el código; no hace falta declararlos.</li>
+</ul>
+
+<h3>VirtualHost de ejemplo (Apache)</h3>
+<pre>&lt;VirtualHost *:443&gt;
+    ServerName ibanking-admin.cafsa.fi.cr
+    DocumentRoot /websites/ibanking-admin.cafsa.fi.cr/public
+
+    SSLEngine on
+    SSLCertificateFile    &lt;ruta al certificado&gt;
+    SSLCertificateKeyFile &lt;ruta a la llave&gt;
+
+    &lt;Directory /websites/ibanking-admin.cafsa.fi.cr/public&gt;
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    # La URL actual termina en /admin y el sistema nuevo no tiene esa ruta
+    RewriteEngine On
+    RewriteRule ^/admin/?$ /login [R=302,L]
+
+    # Integración con PHP-FPM: copiar el mecanismo de los VirtualHost existentes del servidor
+&lt;/VirtualHost&gt;</pre>
+<p class="meta">Es una referencia, no una configuración final. <span class="tag recom">Recomendación</span> tomar como modelo un VirtualHost que ya funcione en el <code>.132</code> y ajustar la ruta, el certificado y el handler de PHP. La ruta <code>/websites/&lt;sitio&gt;</code> sigue la convención de las notas del proyecto (<span class="tag inf">Inferido</span> que aplica al <code>.132</code>). Si el servidor no es Apache o no está claro cómo integrar PHP-FPM: <span class="tag consultar">Consultar a Cristopher (o Yerrica)</span></p>
+
+<h2 class="section-title">4. Validaciones y consultas, por prioridad y en secuencia</h2>
+<p class="sub">Los puntos A bloquean el agendamiento; los B, la ejecución; los C son de la ventana en adelante.</p>
+
+<h3><span class="p pA">A</span> Antes de agendar la ventana</h3>
+<table class="t3">
+<thead><tr><th>#</th><th>Qué validar o consultar</th><th>Por qué / cómo</th><th>Recomendación</th></tr></thead>
+<tbody>
+<tr><td class="n">A1</td>
+<td><strong>URL de producción del sistema nuevo.</strong> ¿<code>ibanking-admin.cafsa.fi.cr</code> pasará a resolver al <code>.132</code>?<span class="who"><span class="tag consultar">Consultar a Cristopher (o Yerrica)</span> para definir el host y quién cambia el DNS</span></td>
+<td><span class="tag hecho">Hecho</span> <code>ibanking-admin</code> resuelve al <code>.115</code> (se apaga) e <code>ibanking</code> ya resuelve al <code>.132</code>. El sistema debe vivir en la raíz de un host, no bajo una subruta. El código trae comentada la URL <code>https://ibanking.cafsa.fi.cr/</code> como «PRODU».</td>
+<td>Repuntar <code>ibanking-admin.cafsa.fi.cr</code> al <code>.132</code>: los usuarios conservan su URL. <span class="tag inf">Inferido</span> <code>ibanking</code> ya sirve otra aplicación en el <code>.132</code>; no usarlo para el Admin salvo que se confirme que está libre.</td></tr>
+
+<tr><td class="n">A2</td>
+<td><strong>Pila actual del <code>.132</code>:</strong> sistema operativo, servidor web, versiones de PHP y extensiones, SELinux, y qué aloja hoy.<span class="who">Responde: Infraestructura. Dudas: <span class="tag consultar">Consultar a Cristopher (o Yerrica)</span></span></td>
+<td><span class="tag nc">No confirmado</span> La guía del proveedor parte de Oracle Linux 9.5, Apache 2.4, PHP 8.4.3 y Composer 2.x. El sistema exige PHP ≥ 8.2.</td>
+<td>Entregar la salida de <code>cat /etc/os-release</code>, <code>httpd -v</code> (o <code>nginx -v</code>), <code>php -v</code>, <code>php -m</code>, <code>composer -V</code> y <code>getenforce</code>. Instalar el Admin en carpeta y VirtualHost propios, sin tocar lo existente. Si el PHP no cumple, añadir una versión adicional con un pool de php-fpm propio.</td></tr>
+
+<tr><td class="n">A3</td>
+<td><strong>Web Service de producción:</strong> qué WSDL usa hoy el sistema actual en el <code>.115</code>. Definir <code>WS_URL_WSDL</code>.<span class="who">Responde: Infraestructura / CAFSA. Si no se encuentra: <span class="tag consultar">Consultar a Cristopher (o Yerrica)</span></span></td>
+<td><span class="tag nc">No confirmado</span> La guía indica <code>http://192.168.1.15:8001/CAFSABANKING/BANKING?wsdl</code>, pero su ejemplo de <code>.env</code> no lo completa y la URL venía partida en el documento (la reconstruí).</td>
+<td>Leer el valor en la configuración del sistema actual <strong>antes de apagar el <code>.115</code></strong> y pedir a BestResource que lo confirme por escrito.</td></tr>
+
+<tr><td class="n">A4</td>
+<td><strong>Certificado HTTPS</strong> de <code>ibanking-admin.cafsa.fi.cr</code> en el <code>.132</code>.<span class="who"><span class="tag consultar">Consultar a Cristopher (o Yerrica)</span> sobre cómo se gestiona o se emite</span></td>
+<td><span class="tag hecho">Hecho</span> En producción la cookie de sesión lleva <code>Secure</code>: sin HTTPS no se puede iniciar sesión. <span class="tag inf">Inferido</span> el certificado actual está en el <code>.115</code>.</td>
+<td>Copiar el certificado y su llave desde el <code>.115</code> antes de apagarlo; si no es posible, pedir uno nuevo para ese nombre.</td></tr>
+
+<tr><td class="n">A5</td>
+<td><strong>Ruta <code>/admin</code>.</strong> Probar <code>https://migraadmin.cafsa.fi.cr/admin</code> con y sin sesión, y ubicar enlaces o marcadores que usen <code>/admin</code>.<span class="who">Prueba: CAFSA · Redirección: Infraestructura</span></td>
+<td><span class="tag hecho">Hecho</span> El sistema nuevo no tiene una ruta <code>/admin</code> sola (solo <code>/</code>, <code>/login</code>, <code>/logout</code> y <code>/admin/&lt;módulo&gt;</code> con sesión). <span class="tag inf">Inferido</span> daría 404.</td>
+<td>Redirección <code>/admin</code> → <code>/login</code> en el servidor web (ver sección 3), sin cambio de código. No instalar el sistema bajo <code>/admin</code>. Avisar a los usuarios.</td></tr>
+
+<tr><td class="n">A6</td>
+<td><strong>Que el código sea el tag <code>v1.0.1</code> (commit <code>e45896f</code>).</strong> Comandos: <code>git describe --tags</code>, <code>git rev-parse --short HEAD</code>, <code>git status</code> y <code>git ls-remote --tags origin v1.0.1</code>.<span class="who">Responde: CAFSA (mlopezz); respaldo: BestResource</span></td>
+<td><span class="tag nc">No confirmado</span> La carpeta del proyecto no trae <code>.git</code>. La guía clona de GitHub; CAFSA usa el GitLab interno (<code>192.168.1.93</code>).</td>
+<td>Verificarlo en el <code>.150</code> o en el GitLab interno y comparar con <code>diff -rq</code> contra la carpeta que se entrega. Si no coincide, BestResource debe aclararlo antes de agendar.</td></tr>
+
+<tr><td class="n">A7</td>
+<td><strong>Proxy, WAF o balanceador</strong> entre los usuarios y el <code>.132</code>.<span class="who"><span class="tag consultar">Consultar a Cristopher (o Yerrica)</span></span></td>
+<td><span class="tag hecho">Hecho</span> El límite de intentos (login 3/min) se cuenta por IP del cliente y <code>proxyIPs</code> está vacío en <code>Config/App.php</code>. Con un proxy delante, todos los usuarios compartirían el mismo contador.</td>
+<td>Si no hay nada entre los usuarios y el servidor, no hay que hacer nada. Si lo hay, BestResource debe entregar el ajuste en un tag nuevo; no editarlo a mano en el servidor.</td></tr>
+</tbody>
+</table>
+
+<h3><span class="p pB">B</span> Antes de ejecutar (con A cerrado)</h3>
+<table class="t3">
+<thead><tr><th>#</th><th>Qué validar o consultar</th><th>Por qué / cómo</th><th>Recomendación</th></tr></thead>
+<tbody>
+<tr><td class="n">B1</td>
+<td><strong>Código y dependencias en el <code>.132</code>.</strong><span class="who">Responde: Infraestructura</span></td>
+<td><span class="tag hecho">Hecho</span> <code>composer install</code> descarga 9 paquetes de internet. <span class="tag inf">Inferido</span> un servidor de producción normalmente no tiene salida.</td>
+<td>Usar el código y la carpeta <code>vendor/</code> que se entregan con el proyecto (sin <code>.env</code> ni contenido de <code>writable/</code>) y correr <code>composer check-platform-reqs</code> en el <code>.132</code>.</td></tr>
+
+<tr><td class="n">B2</td>
+<td><strong>Conectividad del <code>.132</code> al Web Service de producción</strong> (host y puerto de A3).<span class="who">Responde: Infraestructura. Reglas de firewall: <span class="tag consultar">Consultar a Cristopher (o Yerrica)</span></span></td>
+<td><span class="tag nc">No confirmado</span> que el <code>.132</code> alcance ese Web Service. <span class="tag inf">Inferido</span> el cliente SOAP usa las direcciones <code>soap:address</code> que declara el WSDL, no solo la del <code>.env</code>.</td>
+<td>Probar con <code>curl -sI "&lt;WSDL&gt;"</code> desde el <code>.132</code> y revisar los <code>soap:address</code>. Con SELinux activo: <code>httpd_can_network_connect=1</code>.</td></tr>
+
+<tr><td class="n">B3</td>
+<td><strong>Estaciones de los administradores alcanzan los 4 dominios CDN</strong> (jsdelivr, cdnjs, code.jquery.com, cdn.datatables.net).<span class="who">Responde: CAFSA</span></td>
+<td><span class="tag hecho">Hecho</span> Las pantallas cargan esas librerías desde el navegador del usuario.</td>
+<td>Si las pruebas funcionales se hicieron desde esas estaciones, darlo por cubierto; si no, abrir el login desde una de ellas.</td></tr>
+
+<tr><td class="n">B4</td>
+<td><strong>Prueba previa sin afectar usuarios:</strong> apuntar <code>ibanking-admin.cafsa.fi.cr</code> a <code>192.168.1.132</code> en el archivo <code>hosts</code> de una estación y probar login, consultas, <code>/admin</code> y certificado.<span class="who">Responde: CAFSA + Infraestructura</span></td>
+<td>El DNS sigue apuntando al <code>.115</code>, así que el resto de los usuarios no ve el cambio. Valida certificado, VirtualHost, <code>.env</code> y Web Service antes del cambio real.</td>
+<td>Hacerla siempre antes de agendar el cambio de DNS.</td></tr>
+
+<tr><td class="n">B5</td>
+<td><strong>Ventana y retorno:</strong> fecha, hora, responsables, tiempo máximo antes de revertir.<span class="who">Responde: CAFSA / Infraestructura</span></td>
+<td>El retorno es devolver el DNS al <code>.115</code>, por eso este debe seguir encendido y sin cambios durante la ventana. BestResource pidió que se le informe la ventana.</td>
+<td>Agendar fuera del horario operativo; bajar el TTL del registro DNS con anticipación; fijar el tiempo máximo (la guía usa ~2 h).</td></tr>
+</tbody>
+</table>
+
+<h3><span class="p pC">C</span> Durante la ventana y después</h3>
+<table class="t3">
+<thead><tr><th>#</th><th>Qué validar o decidir</th><th>Por qué / cómo</th><th>Recomendación</th></tr></thead>
+<tbody>
+<tr><td class="n">C1</td>
+<td><strong>Pruebas de humo posteriores al cambio de DNS.</strong><span class="who">Responde: CAFSA</span></td>
+<td>La guía propone pruebas que escriben datos reales y asume un bloqueo de cuentas. <span class="tag hecho">Hecho</span> la aplicación solo limita 3 intentos/min por IP; un bloqueo de cuenta sería del Web Service (<span class="tag nc">No confirmado</span>).</td>
+<td>Empezar solo con lectura: login, dashboard, usuarios, tokens, productos y pagos automáticos (consulta). Probar crear usuario, restablecer contraseña o activar/desactivar solo con casos acordados, y no probar bloqueos con cuentas reales.</td></tr>
+
+<tr><td class="n">C2</td>
+<td><strong>El <code>.150</code> como desarrollo:</strong> confirmar que su configuración no apunte al Web Service de producción.<span class="who">Responde: Infraestructura / CAFSA. Si no está claro: <span class="tag consultar">Consultar a Cristopher (o Yerrica)</span></span></td>
+<td><span class="tag nc">No confirmado</span> a qué Web Service apunta hoy el <code>.150</code>. Si apunta al de producción, el desarrollo operaría sobre datos reales.</td>
+<td>Revisar el <code>.env</code> del <code>.150</code>: debe usar el Web Service de desarrollo o pruebas. Su <code>app.baseURL</code> sigue siendo <code>https://migraadmin.cafsa.fi.cr/</code>.</td></tr>
+
+<tr><td class="n">C3</td>
+<td><strong>Apagado del <code>.115</code> y destino de <code>capacitacion</code>.</strong><span class="who">Decide: CAFSA. Procedimiento de baja: <span class="tag consultar">Consultar a Cristopher (o Yerrica)</span></span></td>
+<td>Al apagar el <code>.115</code> se pierde también <code>capacitacion.cafsa.fi.cr</code>, el desarrollo del sistema actual.</td>
+<td>Apagar solo después de estabilizar el pase, con fecha acordada. Antes, conservar copia del código, la configuración, el certificado y los logs, y decidir qué pasa con los registros DNS de <code>capacitacion</code>.</td></tr>
+
+<tr><td class="n">C4</td>
+<td><strong>Revisión de <code>writable/logs</code></strong> y rotación.<span class="who">Responde: Infraestructura</span></td>
+<td><span class="tag hecho">Hecho</span> El log queda en nivel 4 en producción y no tiene rotación incorporada.</td>
+<td>Revisarlo en las primeras horas y configurar <code>logrotate</code> con retención definida.</td></tr>
+</tbody>
+</table>
+
+</div>
+</body>
+</html>

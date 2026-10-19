@@ -1,5 +1,14 @@
 [
   {
+    "id": "geovanny-leon-2026-10-19-pp-232-pase-a-produccion-del-admin-cafsa-migrado",
+    "persona_slug": "geovanny-leon",
+    "titulo": "PP-232 — Pase a producción del Admin CAFSA migrado",
+    "fecha": "2026-10-19",
+    "categoria": "Pase a producción / Infraestructura",
+    "resumen": "Plan en 7 pasos para instalar el Admin migrado en el servidor .132, configuración requerida y validaciones por prioridad (A/B/C) antes, durante y después de la ventana.",
+    "ruta": "reportes/geovanny-leon/iniciativas/PP-232-pase-produccion-cafsa-admin.html"
+  },
+  {
     "id": "juan-herrera-2026-10-15-ficha-de-proveedores-de-outsourcing-factor-k-panda",
     "persona_slug": "juan-herrera",
     "titulo": "Ficha de Proveedores de Outsourcing — Factor K, Pandatech, Novacomp",
