@@ -1,5 +1,14 @@
 [
   {
+    "id": "alvaro-guevara-2026-10-27-mapa-de-contratos-y-ordenes-de-servicio-quanto-sol",
+    "persona_slug": "alvaro-guevara",
+    "titulo": "Mapa de Contratos y Órdenes de Servicio — Quanto Soluciones",
+    "fecha": "2026-10-27",
+    "categoria": "Gestión de contratos / proveedores",
+    "resumen": "Mapa de los 3 contratos con Quanto (2 SaaS QR y el Contrato Marco de consultoría en borrador), alerta de vigencia, comparativa y puntos clave para la decisión de Gerencia.",
+    "ruta": "reportes/alvaro-guevara/quanto/Mapa-Contratos-Quanto-Gerencia.html"
+  },
+  {
     "id": "geovanny-leon-2026-10-19-pp-232-pase-a-produccion-del-admin-cafsa-migrado",
     "persona_slug": "geovanny-leon",
     "titulo": "PP-232 — Pase a producción del Admin CAFSA migrado",

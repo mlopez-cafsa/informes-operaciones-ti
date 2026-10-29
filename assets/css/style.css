@@ -1662,8 +1662,16 @@ main {
    ordenarse por jerarquía organizacional, conviene que quepan varias de
    un vistazo sin scroll. */
 .persona-card {
-  background: var(--cafsa-white);
-  border: 1px solid var(--cafsa-border);
+  /* Fondo con tinte del acento (--accent-bg, verde musgo muy claro) en vez
+     de blanco puro: sobre el fondo gris de la página, cada card se
+     distingue de un vistazo sin recargar la interfaz. Se refuerza con
+     borde del mismo matiz y una barra de acento a la izquierda (señal
+     estructural que no depende solo del color). El texto sigue siendo
+     oscuro sobre un tono muy claro, así que el contraste se mantiene
+     por encima de WCAG AA; los colores de semáforo no se tocan. */
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-soft);
+  border-left: 4px solid var(--accent);
   border-radius: var(--radius);
   padding: 13px 14px;
   box-shadow: var(--shadow);
@@ -1678,6 +1686,7 @@ main {
 .persona-card:hover {
   box-shadow: var(--shadow-lift);
   transform: translateY(-2px);
+  border-color: var(--accent);
 }
 
 .persona-card .card-top {
@@ -1792,6 +1801,8 @@ main {
 .persona-card-publica:hover {
   box-shadow: var(--shadow);
   transform: none;
+  border-color: var(--accent-soft);
+  border-left-color: var(--accent);
 }
 
 .persona-card-publica h3 {

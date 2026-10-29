@@ -31,16 +31,16 @@
     <span class="prioridad-badge prioridad-alta">Prioridad alta</span>
   </div>
   <h2 class="page-title">Migración de Core Financiero - Forms 14c</h2>
-  <p class="page-meta">core-financiero · 2026-10-16 · Cumplimiento: Vencido</p>
+  <p class="page-meta">core-financiero · 2026-10-28 · Cumplimiento: Vencido</p>
 
   <div class="resumen-ejecutivo">
-    <p class="resumen-contexto">Proyecto más crítico de TI: migración del núcleo financiero a Oracle Forms 14C. Corte 16/10/2026 (4 días desde el corte anterior). El plazo del 30/09/2026 ya venció hace 16 días sin cierre del plan de pruebas.</p>
+    <p class="resumen-contexto">Proyecto más crítico de TI: migración del núcleo financiero a Oracle Forms 14C. Corte 28/10/2026 (12 días desde el corte anterior). El plazo del 30/09/2026 ya venció hace 28 días sin cierre del plan de pruebas.</p>
     <ul class="resumen-bullets">
       <li><strong>Estado:</strong> <span class="estado-badge estado-badge-mini estado-rojo">Vencido</span></li>
-      <li><strong>Avance:</strong> <span class="pct-semaforo" data-pct="76.3">76.3%</span> aprobado por CAFSA (393 de 515 objetos) — +0.8 puntos en 4 días (4 objetos más aprobados). BestResource se mantiene en 95% del catálogo migrado.</li>
-      <li><strong>Riesgo:</strong> el plazo formal (30/09/2026) sigue vencido. Los rechazos subieron de 2 a 5: aparecen 3 nuevos (COLOCACIÓN, BANCOS y BRANCH), dos de ellos en objetos de asientos contables. Persisten sin cerrar los rechazos de SOLICITUDES y GARANTÍAS (tercer corte consecutivo). RECOMPILADOS (9 objetos) sigue sin módulo confirmado.</li>
-      <li><strong>Próximo paso:</strong> corregir y re-probar los 5 rechazos (revisando si los dos de asientos contables comparten causa), confirmar el módulo real de los 9 objetos de RECOMPILADOS, y arrancar infraestructura de producción y pruebas por roles de usuario (ambas en 0%).</li>
-      <li><strong>Vence:</strong> 30/09/2026 (vencido hace 16 días).</li>
+      <li><strong>Avance:</strong> <span class="pct-semaforo" data-pct="78.8">78.8%</span> aprobado por CAFSA (406 de 515 objetos) — +2.5 puntos en 12 días (13 objetos más aprobados). BestResource se mantiene en 95% del catálogo migrado.</li>
+      <li><strong>Riesgo:</strong> el plazo formal (30/09/2026) sigue vencido. Los rechazos subieron de 5 a 16 (3.1% del catálogo): 11 nuevos en BANCOS, GARANTÍAS, SOLICITUDES y GENERALES, y ninguno de los 5 anteriores se corrigió. Los rechazos de SOLICITUDES y GARANTÍAS llevan 5 cortes consecutivos sin resolverse (desde el 18/09/2026). RECOMPILADOS (9 objetos) sigue sin módulo confirmado.</li>
+      <li><strong>Próximo paso:</strong> asignar responsable y fecha de corrección a los 16 rechazos (los 5 persistentes primero), validar con usuario funcional las aprobaciones con observaciones de duda en GARANTÍAS, confirmar el módulo real de los 9 objetos de RECOMPILADOS, y arrancar infraestructura de producción y pruebas por roles de usuario (ambas en 0%).</li>
+      <li><strong>Vence:</strong> 30/09/2026 (vencido hace 28 días).</li>
     </ul>
   </div>
 
@@ -54,16 +54,16 @@
       <span class="kpi-label">Migrado por el proveedor (BestResource)</span>
     </div>
     <div class="kpi-box">
-      <span class="kpi-valor">77.3%</span>
+      <span class="kpi-valor">81.9%</span>
       <span class="kpi-label">Evaluado por CAFSA (aprobado + rechazado)</span>
     </div>
     <div class="kpi-box">
-      <span class="kpi-valor pct-semaforo" data-pct="76.3">76.3%</span>
+      <span class="kpi-valor pct-semaforo" data-pct="78.8">78.8%</span>
       <span class="kpi-label">Aprobado por CAFSA — aceptación real</span>
     </div>
     <div class="kpi-box">
-      <span class="kpi-valor">5</span>
-      <span class="kpi-label">Objetos rechazados (1.0% del total)</span>
+      <span class="kpi-valor">16</span>
+      <span class="kpi-label">Objetos rechazados (3.1% del total)</span>
     </div>
   </div>
 
@@ -74,18 +74,18 @@
       </svg>
       <h2 style="margin:0">Avance por fase</h2>
     </div>
-    <p class="chart-subtitulo">Estructura real del proyecto en Jira (Epic DES-1741 y sus 7 tareas hijas, agrupadas en 5 fases) · corte 16/10/2026. Sin cambios de estructura ni de estado en Jira desde el corte anterior — las 7 tareas hijas y sus fechas límite (30/09/2026, ya vencidas) siguen igual.</p>
+    <p class="chart-subtitulo">Estructura real del proyecto en Jira (Epic DES-1741 y sus 7 tareas hijas, agrupadas en 5 fases) · corte 28/10/2026. Sin cambios de estructura ni de estado en Jira desde el corte anterior — las 7 tareas hijas y sus fechas límite (30/09/2026, ya vencidas) siguen igual.</p>
     <div class="chart-box" style="height:290px; max-width:640px;">
       <canvas id="grafico-avance"></canvas>
     </div>
     <ul class="fases-lista">
       <li><span class="fase-nombre">Seleccion de proveedor</span><span class="fase-pct pct-semaforo" data-pct="100">100%</span></li>
-      <li><span class="fase-nombre">Migracion y pruebas de modulos/objetos Abanks</span><span class="fase-pct pct-semaforo" data-pct="76">76%</span></li>
+      <li><span class="fase-nombre">Migracion y pruebas de modulos/objetos Abanks</span><span class="fase-pct pct-semaforo" data-pct="79">79%</span></li>
       <li><span class="fase-nombre">Pruebas por roles de usuario</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
       <li><span class="fase-nombre">Infraestructura de produccion</span><span class="fase-pct pct-semaforo" data-pct="0">0%</span></li>
       <li><span class="fase-nombre">Coordinacion y seguimiento tecnico con BestResource</span><span class="fase-pct pct-semaforo" data-pct="50">50%</span></li>
     </ul>
-    <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%. La fase "Migración y pruebas de módulos/objetos" es la excepción: su 76% es una medición real, tomada del plan de pruebas — objetos aprobados sobre el total del catálogo (515). Un objeto evaluado y rechazado no cuenta como avance: necesita corrección y re-prueba.</p>
+    <p class="fases-nota">El porcentaje de cada fase es una estimación declarada (no una medición exacta de esfuerzo), calculada así: completado = 100%, en curso = 50%, por hacer = 0%. La fase "Migración y pruebas de módulos/objetos" es la excepción: su 79% es una medición real, tomada del plan de pruebas — objetos aprobados sobre el total del catálogo (515). Un objeto evaluado y rechazado no cuenta como avance: necesita corrección y re-prueba.</p>
   </div>
 
   <div class="chart-container">
@@ -95,23 +95,23 @@
       </svg>
       <h2 style="margin:0">Plan de pruebas por módulo</h2>
     </div>
-    <p class="chart-subtitulo">515 objetos · fuente: plan de pruebas en SharePoint (actualización constante) · corte al 16/10/2026.</p>
+    <p class="chart-subtitulo">515 objetos · fuente: plan de pruebas en SharePoint (actualización constante) · corte al 28/10/2026.</p>
     <div style="overflow-x:auto; margin-top:14px;">
       <table class="tabla-datos">
         <thead>
-          <tr><th>Módulo</th><th>Total</th><th>Pendiente</th><th>En proceso</th><th>Aprobado</th><th>Rechazado</th><th>% Evaluado</th><th>% Aprobado</th><th>Avance vs. 12/10</th></tr>
+          <tr><th>Módulo</th><th>Total</th><th>Pendiente</th><th>En proceso</th><th>Aprobado</th><th>Rechazado</th><th>% Evaluado</th><th>% Aprobado</th><th>Avance vs. 16/10</th></tr>
         </thead>
         <tbody>
           <tr><td>RECOMPILADOS *</td><td>9</td><td>9</td><td>0</td><td>0</td><td>0</td><td>0.0%</td><td><span class="pct-semaforo" data-pct="0.0">0.0%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
-          <tr><td>SOLICITUDES</td><td>38</td><td>15</td><td>1</td><td>21</td><td>1</td><td>57.9%</td><td><span class="pct-semaforo" data-pct="55.3">55.3%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
-          <tr class="fila-avance"><td>BRANCH</td><td>63</td><td>23</td><td>2</td><td>37</td><td>1</td><td>60.3%</td><td><span class="pct-semaforo" data-pct="58.7">58.7%</span></td><td><span class="delta-avance">▲ +3.1 pts <small>(+2 obj.)</small></span></td></tr>
-          <tr><td>GARANTÍAS</td><td>49</td><td>13</td><td>1</td><td>34</td><td>1</td><td>71.4%</td><td><span class="pct-semaforo" data-pct="69.4">69.4%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
-          <tr><td>GENERALES</td><td>110</td><td>26</td><td>2</td><td>82</td><td>0</td><td>74.5%</td><td><span class="pct-semaforo" data-pct="74.5">74.5%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
-          <tr class="fila-avance"><td>BANCOS</td><td>40</td><td>6</td><td>0</td><td>33</td><td>1</td><td>85.0%</td><td><span class="pct-semaforo" data-pct="82.5">82.5%</span></td><td><span class="delta-avance">▲ +2.5 pts <small>(+1 obj.)</small></span></td></tr>
-          <tr class="fila-avance"><td>COLOCACIÓN</td><td>105</td><td>14</td><td>2</td><td>88</td><td>1</td><td>84.8%</td><td><span class="pct-semaforo" data-pct="83.8">83.8%</span></td><td><span class="delta-avance">▲ +0.9 pts <small>(+1 obj.)</small></span></td></tr>
+          <tr><td>BRANCH</td><td>63</td><td>23</td><td>2</td><td>37</td><td>1</td><td>60.3%</td><td><span class="pct-semaforo" data-pct="58.7">58.7%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
+          <tr class="fila-avance"><td>SOLICITUDES</td><td>38</td><td>5</td><td>2</td><td>26</td><td>5</td><td>81.6%</td><td><span class="pct-semaforo" data-pct="68.4">68.4%</span></td><td><span class="delta-avance">▲ +13.1 pts <small>(+5 obj.)</small></span></td></tr>
+          <tr><td>GENERALES</td><td>110</td><td>24</td><td>2</td><td>82</td><td>2</td><td>76.4%</td><td><span class="pct-semaforo" data-pct="74.5">74.5%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
+          <tr class="fila-avance"><td>GARANTÍAS</td><td>49</td><td>2</td><td>2</td><td>41</td><td>4</td><td>91.8%</td><td><span class="pct-semaforo" data-pct="83.7">83.7%</span></td><td><span class="delta-avance">▲ +14.3 pts <small>(+7 obj.)</small></span></td></tr>
+          <tr><td>COLOCACIÓN</td><td>105</td><td>14</td><td>2</td><td>88</td><td>1</td><td>84.8%</td><td><span class="pct-semaforo" data-pct="83.8">83.8%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
+          <tr class="fila-avance"><td>BANCOS</td><td>40</td><td>3</td><td>0</td><td>34</td><td>3</td><td>92.5%</td><td><span class="pct-semaforo" data-pct="85.0">85.0%</span></td><td><span class="delta-avance">▲ +2.5 pts <small>(+1 obj.)</small></span></td></tr>
           <tr><td>MAYOR</td><td>64</td><td>2</td><td>1</td><td>61</td><td>0</td><td>95.3%</td><td><span class="pct-semaforo" data-pct="95.3">95.3%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
           <tr><td>CAPTACIÓN</td><td>37</td><td>0</td><td>0</td><td>37</td><td>0</td><td>100.0%</td><td><span class="pct-semaforo" data-pct="100">100.0%</span></td><td><span class="delta-sin-cambio">—</span></td></tr>
-          <tr class="tabla-datos-total"><td>Total general</td><td>515</td><td>108</td><td>9</td><td>393</td><td>5</td><td>77.3%</td><td><span class="pct-semaforo" data-pct="76.3">76.3%</span></td><td><span class="delta-avance">▲ +0.8 pts <small>(+4 obj.)</small></span></td></tr>
+          <tr class="tabla-datos-total"><td>Total general</td><td>515</td><td>82</td><td>11</td><td>406</td><td>16</td><td>81.9%</td><td><span class="pct-semaforo" data-pct="78.8">78.8%</span></td><td><span class="delta-avance">▲ +2.5 pts <small>(+13 obj.)</small></span></td></tr>
         </tbody>
       </table>
     </div>
@@ -126,36 +126,36 @@
     </div>
     <div class="segmentos-recomendaciones">
       <article class="segmento-recomendacion segmento-rojo">
-        <h3>RECOMPILADOS — sin cambios, categoría sin módulo confirmado</h3>
-        <p>Los mismos 9 objetos nuevos del corte anterior, todos en "Pendiente" y sin ningún avance. El Excel los infiere como COLOCACIÓN por patrón de código, pero el propio proveedor marcó 2 de ellos (OBJ.BPRMENU, OBJ.BMG5030) como pendientes de "validar manualmente" a qué módulo pertenecen. Recomendación: confirmar el módulo real de los 9 objetos y asignar responsable antes de incorporarlos al ciclo normal de pruebas — mientras tanto siguen contando como pendientes puros.</p>
+        <h3>RECOMPILADOS — sin cambios en 12 días, categoría sin módulo confirmado</h3>
+        <p>Los mismos 9 objetos nuevos, todos en "Pendiente" y sin ningún avance desde su alta. El Excel los infiere como COLOCACIÓN por patrón de código, pero el propio proveedor marcó 2 de ellos (OBJ.BPRMENU, OBJ.BMG5030) como pendientes de "validar manualmente" a qué módulo pertenecen. Recomendación: confirmar el módulo real de los 9 objetos y asignar responsable antes de incorporarlos al ciclo normal de pruebas — mientras tanto siguen contando como pendientes puros.</p>
       </article>
       <article class="segmento-recomendacion segmento-amarillo">
-        <h3>SOLICITUDES — sin mejora en aprobados; el mismo rechazo cumple tres cortes sin cerrar</h3>
-        <p>Se mantiene en 55.3% de aceptación real (21 de 38 aprobados, igual que el 12/10/2026). El único cambio es que 1 objeto pasó de "Pendiente" a "En proceso" (OBJ.BSP0098, Cierre Diario). El rechazo en "Análisis de Factibilidad" (OBJ.BSP3203, Transacciones) lleva tres cortes seguidos sin resolverse (23/09, 12/10 y 16/10/2026) y el Excel registra su encargado como "NO USUARIO". Quedan 15 pendientes, concentrados en "Transacciones" (5) y "Mantenimientos" (3). Recomendación: asignar un responsable de negocio al rechazo de OBJ.BSP3203 — es el punto más antiguo sin resolver del módulo.</p>
+        <h3>BRANCH — sin movimiento en 12 días, el módulo más rezagado con pruebas activas</h3>
+        <p>Sin cambios de estado: 58.7% de aceptación real (37 de 63), igual que el 16/10/2026. El rechazo en OBJ.BGM0130 (Captura Manual de Asientos Cont.) sigue sin corregirse (segundo corte). Quedan 23 pendientes, concentrados en "Atención en Ventanilla" (7), "Servicio al Cliente - Aperturas" (5) y "Servicio al Cliente - Consultas" (3), más 2 objetos en proceso (OBJ.BAV6002.RDF y OBJ.BAV3333). Recomendación: retomar la ejecución en Ventanilla y Aperturas y corregir OBJ.BGM0130 junto con OBJ.BPR0777 de COLOCACIÓN, ambos de asientos contables.</p>
       </article>
       <article class="segmento-recomendacion segmento-amarillo">
-        <h3>BRANCH — avanza, pero aparece un rechazo nuevo en asientos contables</h3>
-        <p>De 55.6% a 58.7% de aceptación real (+3.1 puntos): se aprobaron 2 objetos (OBJ.BGM1120 Reporte de Asientos Contables y OBJ.BAV0000 Atención en Ventanilla). En paralelo, OBJ.BGM0130 (Captura Manual de Asientos Cont.) quedó rechazado — es el primer rechazo que registra el módulo desde el corte del 18/09/2026. Los 23 pendientes se concentran en "Atención en Ventanilla" (7) y "Servicio al Cliente - Aperturas" (5), más 2 objetos en proceso. Recomendación: sostener el ritmo de aprobación en Ventanilla y Aperturas, y corregir OBJ.BGM0130 junto con el rechazo equivalente de COLOCACIÓN (ver abajo).</p>
+        <h3>SOLICITUDES — fuerte avance en aprobados, pero los rechazos pasan de 1 a 5 filas</h3>
+        <p>De 55.3% a 68.4% de aceptación real (+13.1 puntos; 26 de 38 aprobados): se aprobaron 5 filas (OBJ.BSP0068, OBJ.BSP0111, OBJ.BSP0092 y OBJ.BSP0100 en dos filas). En paralelo quedaron rechazadas 4 filas nuevas que corresponden a solo 2 objetos: OBJ.BSP0133 (Reversión de Mvtos Relacionados a la Solicitud y Reversión de Transacciones) y OBJ.BSP0103 (Por Provincia y Operaciones Formalizadas x Provincia, ambas con la observación "DOCUMENTADO EN MIRO"). El rechazo de OBJ.BSP3203 (Análisis de Factibilidad) lleva 5 cortes consecutivos sin resolverse (desde el 18/09/2026) y el Excel registra su encargado como "NO USUARIO". Quedan 5 pendientes (Transacciones 3, Mantenimientos 1, Autorizaciones 1) y 2 en proceso (OBJ.BMG3303 y OBJ.BSP0098). Recomendación: asignar un responsable de negocio a OBJ.BSP3203 y tratar OBJ.BSP0133 y OBJ.BSP0103 como un solo defecto cada uno, ya que repiten objeto en dos filas.</p>
       </article>
       <article class="segmento-recomendacion segmento-amarillo">
-        <h3>GARANTÍAS — sin cambio real, el mismo rechazo cumple tres cortes (ahora escalado)</h3>
-        <p>69.4% de aceptación real, idéntico a los cortes del 23/09 y 12/10/2026 (34 de 49 aprobados). El único rechazo, "Proceso automático de variación de seguro" (OBJ.BPR0259, Control de Pólizas), permanece con la observación "ESCALADA" (en el corte del 23/09 figuraba como "documentada en Miro"). Quedan 13 pendientes y 1 en proceso, con "Control de Pólizas" (3) y "Relación con Créditos" (3) como bloques mayores. Recomendación: dar seguimiento a la escalación — es el único bloqueo real del módulo y no se ha movido en tres cortes.</p>
+        <h3>GENERALES — sin avance en aprobados y aparecen sus primeros 2 rechazos</h3>
+        <p>74.5% de aceptación real, sin cambio (82 de 110). Dos objetos pasaron de "Pendiente" a "Rechazado": OBJ.BMG065 (Parámetros Generales) y OBJ.BMG1017 (Malos Deudores, observación del Excel: "REVISAR PERMISOS DE ABANKS"). Conserva 24 pendientes — la mayor cantidad absoluta del proyecto — concentrados en "Parámetros &Generales" (4), "Sicotropicos" (4), "Apertura" (4) y "Carga de archivos" (3), más 2 en proceso. Recomendación: validar si el rechazo de OBJ.BMG1017 es un tema de configuración de roles (se cruza con la fase de pruebas por roles, en 0%) y retomar el ritmo de ejecución para que el módulo no sea el cuello de botella del cierre.</p>
       </article>
       <article class="segmento-recomendacion segmento-amarillo">
-        <h3>COLOCACIÓN — avance leve, con un rechazo nuevo en generación de asientos contables</h3>
-        <p>De 82.9% a 83.8% de aceptación real (+0.9 puntos): se aprobó OBJ.BPR0778 (Pase a la Contabilidad), pero OBJ.BPR0777 (Generación de Asientos Contables) quedó rechazado, y OBJ.BPR0066 (Procesos de Cierre) y OBJ.BPR0577 (Control Diario de Cartera) pasaron a "En proceso". Quedan 14 pendientes: "Servicios al Cliente" (6), "Ventanilla" (5) y "Servicios Gerenciales" (3). Recomendación: corregir y re-probar OBJ.BPR0777 revisándolo en conjunto con OBJ.BGM0130 de BRANCH, ya que ambos son objetos de asientos contables.</p>
+        <h3>GARANTÍAS — mayor avance del corte, con una regresión y 3 rechazos nuevos</h3>
+        <p>De 69.4% a 83.7% de aceptación real (+14.3 puntos; 41 de 49): 8 objetos pasaron a "Aprobado" (OBJ.BMG0008, OBJ.BGA0004, OBJ.BGA0055, OBJ.BGA0031, OBJ.BGA0036, OBJ.BGA0041, OBJ.BGA0250 y OBJ.BGA0259). A la vez, OBJ.BGA0026 (Mantenimiento de Garantias) pasó de "Aprobado" a "Rechazado" — es la única regresión del corte — y se sumaron OBJ.BGA0053 ("DOCUMENTADO EN MIRO") y OBJ.BGA0252 (Cambio de Tasa: "NO SE LOGRA PONER EL NUMERO DE PÓLIZA"). OBJ.BPR0259 sigue "ESCALADA" y lleva 5 cortes rechazado. Hecho verificable: entre los aprobados, OBJ.BGA0036 y OBJ.BGA0041 tienen la observación "DESUSO", OBJ.BGA0031 "FALLAS EN AMBOS AMBIENTES" y OBJ.BGA0250 "Revisar con usuario funcional". Recomendación: validar esas 4 aprobaciones con el usuario funcional antes de darlas por cerradas. Quedan 2 pendientes y 2 en proceso (OBJ.BGA0038 "CONFIRMAR EL USO" y OBJ.BGA0255).</p>
       </article>
       <article class="segmento-recomendacion segmento-amarillo">
-        <h3>BANCOS — mejora, con un rechazo nuevo en conciliaciones</h3>
-        <p>De 80.0% a 82.5% de aceptación real (+2.5 puntos): se aprobó OBJ.BMG076 (Control Proceso) y OBJ.BBC0229 (Captura del Extracto Manual, Conciliaciones) quedó rechazado. Quedan 6 pendientes distribuidos en 5 secciones (el mayor es "Mantenimientos Generales" con 2). Recomendación: corregir y re-probar OBJ.BBC0229; el resto del módulo es manejable con pocos pendientes por sección.</p>
+        <h3>COLOCACIÓN — sin cambios, el rechazo en asientos contables sigue abierto</h3>
+        <p>83.8% de aceptación real (88 de 105), igual que el 16/10/2026. OBJ.BPR0777 (Generación de Asientos Contables) continúa rechazado (segundo corte) y no cambió el estado de OBJ.BPR0066 ni OBJ.BPR0577 (siguen en proceso). Quedan 14 pendientes: "Servicios al Cliente" (6), "Ventanilla" (5) y "Servicios Gerenciales" (3). Recomendación: corregir y re-probar OBJ.BPR0777 revisándolo en conjunto con OBJ.BGM0130 de BRANCH.</p>
       </article>
-      <article class="segmento-recomendacion segmento-verde">
-        <h3>GENERALES — sin movimiento en 4 días, aún el módulo con más pendientes</h3>
-        <p>Sin cambios: 74.5% de aceptación real (82 de 110), cero rechazos, 2 en proceso. Conserva 26 pendientes — la mayor cantidad absoluta del proyecto, por encima de BRANCH (23) — concentrados en "Parámetros & Generales" (6), "Apertura" (5), "Sicotrópicos" (4) y "Carga de archivos" (3). Recomendación: sin riesgo de calidad activo, pero requiere retomar el ritmo de ejecución para no quedar como cuello de botella del cierre.</p>
+      <article class="segmento-recomendacion segmento-amarillo">
+        <h3>BANCOS — mejora leve, pero los rechazos pasan de 1 a 3</h3>
+        <p>De 82.5% a 85.0% de aceptación real (+2.5 puntos; 34 de 40): se aprobó OBJ.BBC0038 (Pignoración / Levantamiento Cuentas de Bancos), con la observación de que se comporta igual que en 6i y no hay más contexto de la pantalla. Se sumaron 2 rechazos: OBJ.BBC0004 (Conceptos por Transacción, observación "PROBAR CON TATIANA MURILLO") y OBJ.BBC0045 (Conciliación de Cheque Propio); OBJ.BBC0229 sigue rechazado (segundo corte). Quedan solo 3 pendientes, uno en "Mantenimientos Generales", otro en "Transacciones" y otro en "Procesos Fin de Día". Recomendación: corregir y re-probar los 3 rechazos; con tan pocos pendientes el módulo puede cerrar pronto.</p>
       </article>
       <article class="segmento-recomendacion segmento-verde">
         <h3>MAYOR — sin cambios, prácticamente cerrado</h3>
-        <p>95.3% de aceptación real (61 de 64), sin rechazos. Quedan solo 2 pendientes y 1 en proceso, todos en "Procesos". Recomendación: cerrar los 3 objetos restantes; sin otras acciones.</p>
+        <p>95.3% de aceptación real (61 de 64), sin rechazos. Quedan solo 2 pendientes y 1 en proceso (OBJ.BGM1380), todos en "Procesos". Recomendación: cerrar los 3 objetos restantes; sin otras acciones.</p>
       </article>
       <article class="segmento-recomendacion segmento-verde">
         <h3>CAPTACIÓN — cerrado, usar como línea base</h3>
@@ -172,12 +172,12 @@
       <h2 style="margin:0">Recomendaciones transversales</h2>
     </div>
     <ul>
-      <li><strong>El plazo formal sigue vencido:</strong> el 30/09/2026 pasó hace 16 días sin cierre del plan de pruebas, y ninguna de las 7 tareas de la Epic en Jira tiene su fecha límite extendida — siguen registradas con el mismo 30/09/2026.</li>
-      <li><strong>El ritmo de aprobación se desaceleró:</strong> en 4 días el avance fue de +0.8 puntos (75.5%→76.3%; 4 objetos más aprobados), frente a +8.2 puntos en los 19 días anteriores. Faltan 122 objetos sin cerrar (108 pendientes + 9 en proceso + 5 rechazados). <em>Estimación lineal, no proyección oficial:</em> al ritmo de este corte (4 objetos en 4 días) cerrar el catálogo tomaría del orden de 120 días, lo que hace necesario un plan de aceleración o una nueva fecha comprometida.</li>
-      <li><strong>Los rechazos volvieron a subir (de 2 a 5):</strong> los 3 nuevos están en COLOCACIÓN (OBJ.BPR0777), BANCOS (OBJ.BBC0229) y BRANCH (OBJ.BGM0130). Hecho verificable: dos de los tres son objetos de asientos contables (generación y captura manual). Recomendación técnica: revisar si ambos comparten causa en la capa contable antes de corregirlos por separado; el pase a contabilidad en sí no parece ser el origen, ya que OBJ.BPR0778 (Pase a la Contabilidad) se aprobó en este mismo corte.</li>
-      <li>Los rechazos de <strong>SOLICITUDES</strong> (OBJ.BSP3203) y <strong>GARANTÍAS</strong> (OBJ.BPR0259) cumplen tres cortes seguidos sin resolverse (23/09, 12/10 y 16/10/2026); el segundo figura como "escalado".</li>
+      <li><strong>El plazo formal sigue vencido:</strong> el 30/09/2026 pasó hace 28 días sin cierre del plan de pruebas, y las tareas abiertas de la Epic en Jira que tienen fecha límite (DES-1743, DES-1744, DES-1745, DES-1748 y DES-1753) siguen registradas con el mismo 30/09/2026, sin extensión.</li>
+      <li><strong>El ritmo de aprobación se mantiene bajo:</strong> en 12 días el avance fue de +2.5 puntos (76.3%→78.8%; 13 objetos más aprobados en términos netos: 14 nuevos menos 1 regresión), unos 0.2 puntos por día — igual que el corte anterior y por debajo de los ~0.43 puntos por día de los 19 días previos al 12/10. Faltan 109 objetos sin cerrar (82 pendientes + 11 en proceso + 16 rechazados). <em>Estimación lineal, no proyección oficial:</em> a 13 objetos en 12 días, cerrar el catálogo tomaría del orden de 100 días, lo que hace necesario un plan de aceleración o una nueva fecha comprometida.</li>
+      <li><strong>Los rechazos pasaron de 5 a 16 (3.1% del catálogo):</strong> 11 nuevos — BANCOS 2, GARANTÍAS 3 (uno es la regresión de OBJ.BGA0026), SOLICITUDES 4 filas (2 objetos) y GENERALES 2. Las 16 filas rechazadas corresponden a 14 objetos únicos. Hecho verificable: de los 24 objetos que pasaron de "Pendiente" a evaluado en este corte, 10 (42%) quedaron rechazados, y ninguno de los 5 rechazos del corte anterior fue corregido. Recomendación: definir para cada rechazo un responsable y una fecha de corrección y re-prueba; sin ese ciclo, cada ronda de pruebas agrega rechazos sin reducir los abiertos.</li>
+      <li>Los rechazos de <strong>SOLICITUDES</strong> (OBJ.BSP3203) y <strong>GARANTÍAS</strong> (OBJ.BPR0259) llevan 5 cortes consecutivos sin resolverse (18/09, 23/09, 12/10, 16/10 y 28/10/2026, 40 días desde el primer Excel disponible); el segundo figura como "escalado". Los rechazos de OBJ.BPR0777 (COLOCACIÓN), OBJ.BBC0229 (BANCOS) y OBJ.BGM0130 (BRANCH) cumplen 2 cortes.</li>
       <li><strong>RECOMPILADOS</strong> sigue igual: 9 objetos (0% aprobado) que ampliaron el catálogo de 504 a 515 y de los que 2 aún no tienen módulo confirmado. Esto resta certeza sobre cuál es el número final real de objetos del proyecto.</li>
-      <li>Infraestructura de producción y pruebas por roles de usuario siguen en "por hacer" en Jira, sin cambio desde al menos el corte del 23/09/2026 (23 días). Con el plazo ya vencido, estos dos frentes necesitan arrancar en paralelo a lo que falta del plan de pruebas, no después.</li>
+      <li>Infraestructura de producción y pruebas por roles de usuario siguen en "por hacer" en Jira, sin cambio desde al menos el corte del 23/09/2026 (35 días). Con el plazo ya vencido, estos dos frentes necesitan arrancar en paralelo a lo que falta del plan de pruebas, no después; el rechazo de OBJ.BMG1017 por permisos refuerza la necesidad de las pruebas por roles.</li>
       <li>El pendiente de coordinación de infraestructura ya está actualizado con los 3 issues puntuales (servidores, componentes, Virtualizador de Oracle) en vez de referenciar solo la Épica — ver seguimiento interno registrado en Reportes y seguimientos.</li>
     </ul>
   </div>
@@ -203,7 +203,7 @@
 
   <button class="btn-consulta"
           data-titulo="Migración de Core Financiero - Forms 14c"
-          data-resumen="Proyecto mas critico de TI: migracion del nucleo financiero a Oracle Forms 14C. El plazo del 30/09/2026 sigue vencido (hace 16 dias) sin cierre. CAFSA subio de 75.5% a 76.3% de aprobacion real en 4 dias (393 de 515 objetos); el proveedor se mantiene en 95% migrado. Los rechazos subieron de 2 a 5: 3 nuevos en COLOCACION, BANCOS y BRANCH (dos en objetos de asientos contables); persisten los de SOLICITUDES y GARANTIAS desde hace tres cortes. RECOMPILADOS (9 objetos) sigue sin modulo confirmado. Infraestructura de produccion y pruebas por roles siguen en 0%."
+          data-resumen="Proyecto mas critico de TI: migracion del nucleo financiero a Oracle Forms 14C. El plazo del 30/09/2026 sigue vencido (hace 28 dias) sin cierre. CAFSA subio de 76.3% a 78.8% de aprobacion real en 12 dias (406 de 515 objetos); el proveedor se mantiene en 95% migrado. Los rechazos subieron de 5 a 16: 11 nuevos en BANCOS, GARANTIAS, SOLICITUDES y GENERALES, y ninguno de los 5 anteriores se corrigio; los de SOLICITUDES y GARANTIAS llevan 5 cortes sin resolverse. GARANTIAS y SOLICITUDES fueron los modulos con mayor avance. RECOMPILADOS (9 objetos) sigue sin modulo confirmado. Infraestructura de produccion y pruebas por roles siguen en 0%."
           onclick="enviarConsulta(this)">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
       <rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/>
@@ -229,7 +229,7 @@
       labels: ["Seleccion de proveedor", "Migracion y pruebas de modulos/objetos Abanks", "Pruebas por roles de usuario", "Infraestructura de produccion", "Coordinacion y seguimiento tecnico con BestResource"],
       datasets: [{
         label: '% avance',
-        data: [100, 76, 0, 0, 50],
+        data: [100, 79, 0, 0, 50],
         backgroundColor: ["#2e7d32", "#b8860b", "#9a9a9a", "#9a9a9a", "#b8860b"]
       }]
     },
