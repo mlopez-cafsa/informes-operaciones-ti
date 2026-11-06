@@ -6,24 +6,22 @@
 <title>Mapa de Contratos y Órdenes de Servicio — Quanto Soluciones</title>
 <style>
   :root{
-    /* Paleta CAFSA (misma de las demás fichas del sistema). Los nombres de
-       variable se conservan para no tocar el cuerpo del documento. */
     --bg:#f4f5f7;
     --panel:#ffffff;
     --ink:#2b2b2b;
-    --ink-soft:#5b6577;
+    --ink-soft:#4b5563;
     --border:#d8dee5;
     --accent:#0b3d63;
     --accent-soft:#e8f1f8;
     --ok:#1a7f4e;
-    --ok-soft:#e4f4ea;
+    --ok-soft:#e6f4ec;
     --warn:#b56a00;
-    --warn-soft:#fdf1e0;
+    --warn-soft:#fdf1dc;
     --danger:#a4282c;
     --danger-soft:#fbe9ea;
-    --risk:#0b3d63;
-    --risk-soft:#e8f1f8;
-    --acct:#5b3f8c;
+    --risk:#1d5f8a;
+    --risk-soft:#e3eef7;
+    --acct:#5b3a8c;
     --acct-soft:#efe9f7;
     --draft:#555b63;
     --draft-soft:#eceef0;
@@ -31,17 +29,19 @@
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  [id]{scroll-margin-top:16px;}
   body{
-    margin:0; background:#ffffff; color:var(--ink);
+    margin:0; background:var(--bg); color:var(--ink);
     font-family:"Segoe UI", Arial, sans-serif;
-    line-height:1.6; font-size:16.5px;
+    font-size:16.5px; line-height:1.6;
   }
 
   .page{
     display:flex; align-items:flex-start; gap:28px;
-    max-width:1200px; margin:0 auto; padding:32px 20px 72px;
+    max-width:1240px; margin:0 auto; padding:32px 20px 64px;
   }
 
+  /* ---- Índice lateral ---- */
   nav.toc{
     position:sticky; top:24px;
     width:250px; flex:0 0 250px;
@@ -50,22 +50,22 @@
     padding:18px 16px; max-height:calc(100vh - 48px); overflow-y:auto;
   }
   nav.toc .toc-title{
-    font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--ink-soft); margin:0 0 10px; padding:0 6px;
+    font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--accent); margin:0 0 10px; padding:0 6px;
   }
   nav.toc ul{list-style:none;margin:0;padding:0;}
-  nav.toc li.toc-sub a{padding-left:20px;font-size:13.5px;}
+  nav.toc li.toc-sub a{padding-left:22px;font-size:14px;}
   nav.toc a{
-    display:block; padding:7px 8px; border-radius:7px; font-size:14.5px;
+    display:block; padding:7px 9px; border-radius:7px; font-size:14.5px;
     color:var(--ink-soft); text-decoration:none; line-height:1.3; margin-bottom:2px;
   }
   nav.toc a:hover{background:var(--bg); color:var(--ink);}
   nav.toc a.active{background:var(--accent-soft); color:var(--accent); font-weight:700;}
 
   .content{flex:1; min-width:0;}
-  .wrap{max-width:920px;margin:0;}
+  .wrap{max-width:960px;margin:0;}
 
-  @media (max-width:860px){
+  @media (max-width:900px){
     .page{flex-direction:column;padding:16px 16px 48px;}
     nav.toc{
       position:static; width:100%; flex:none; max-height:none;
@@ -76,9 +76,7 @@
     nav.toc li.toc-sub{display:none;}
     nav.toc a{white-space:nowrap;margin-bottom:0;}
     .wrap{max-width:100%;}
-    .block,.mini-section{overflow-x:auto;}
-    table.compare{min-width:760px;}
-    table.inv-table{min-width:600px;}
+    table.compare{min-width:900px;}
   }
 
   a.btn-volver{
@@ -89,18 +87,20 @@
   }
   a.btn-volver:hover{background:#0a3252;}
 
+  /* ---- Encabezado del documento ---- */
   header.doc-header{
     background:var(--panel); border:1px solid var(--border); border-radius:10px;
     box-shadow:var(--sombra);
-    padding:26px 28px 22px; margin-bottom:22px; border-top:5px solid var(--accent);
+    padding:26px 28px 20px; margin-bottom:22px; border-top:5px solid var(--accent);
   }
-  .eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:13px;font-weight:700;color:var(--accent);margin:0 0 8px;}
-  h1{font-size:26px;margin:0 0 14px;color:var(--accent);}
-  table.meta{width:100%;border-collapse:collapse;font-size:15px;}
+  .eyebrow{text-transform:uppercase;letter-spacing:.07em;font-size:12.5px;font-weight:700;color:var(--accent);margin:0 0 8px;}
+  h1{font-size:26px;margin:0 0 14px;color:var(--accent);line-height:1.25;}
+  table.meta{width:100%;border-collapse:collapse;font-size:15.5px;}
   table.meta td{padding:7px 10px 7px 0;vertical-align:top;border-top:1px solid var(--border);}
   table.meta tr:first-child td{border-top:none;}
   table.meta td.label{color:var(--ink-soft);width:200px;font-weight:600;}
 
+  /* ---- Alerta ---- */
   .alert{
     background:var(--danger-soft); border:1px solid var(--danger); border-left-width:6px; border-radius:10px;
     padding:18px 22px; margin-bottom:26px;
@@ -111,21 +111,23 @@
   .alert ul{margin:8px 0 10px;padding-left:20px;font-size:15.5px;}
   .alert li{margin-bottom:5px;}
 
+  /* ---- Grupos ---- */
   .group-title{
-    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-    margin:34px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--accent);
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    margin:36px 0 12px;
   }
-  .group-title h2{font-size:20px; margin:0; color:var(--accent);}
+  .group-title h2{font-size:19px; margin:0; color:var(--ink);}
   .group-badge{
-    font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
-    padding:3px 11px; border-radius:20px; background:var(--draft-soft); color:var(--draft);
+    font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
+    padding:4px 11px; border-radius:20px; background:var(--draft-soft); color:var(--draft);
   }
-  .group-note{font-size:15px;color:var(--ink-soft);margin:0 0 16px;}
+  .group-note{font-size:15px;color:var(--ink-soft);margin:0 0 18px;}
 
+  /* ---- Tarjetas de contrato ---- */
   .card{
     background:var(--panel); border:1px solid var(--border); border-radius:10px;
     box-shadow:var(--sombra);
-    padding:20px 24px; margin-bottom:18px; scroll-margin-top:16px;
+    padding:20px 24px; margin-bottom:22px;
   }
   .card-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
   .card-head h3{margin:0;font-size:18px;color:var(--accent);}
@@ -138,64 +140,69 @@
   .badge.verificar{background:var(--warn-soft);color:var(--warn);}
   .badge.borrador{background:var(--draft-soft);color:var(--draft);}
   .badge.verificado{background:var(--ok-soft);color:var(--ok);}
+  .badge.vencido{background:var(--danger-soft);color:var(--danger);}
+  .badge.vigente{background:var(--ok-soft);color:var(--ok);}
 
+  .kv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;margin-bottom:14px;}
+  @media (max-width:700px){.kv-grid{grid-template-columns:1fr;}}
+  .kv{font-size:15.5px;}
+  .kv .k{color:var(--ink-soft);font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;margin-bottom:3px;}
+  .kv .v{color:var(--ink);}
+  .kv .v.danger{color:var(--danger);font-weight:700;}
+
+  .mini-section{margin-top:14px;}
+  .mini-section .mt{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--accent);margin-bottom:6px;}
+  .mini-section p{font-size:15.5px;margin:0 0 6px;}
+  .mini-section p:last-child{margin-bottom:0;}
+  .pill-note{
+    font-size:14.5px;padding:9px 13px;border-radius:8px;background:var(--bg);border:1px solid var(--border);margin-top:8px;
+  }
+
+  /* ---- Tablas ---- */
   table.inv-table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:4px;}
   table.inv-table th, table.inv-table td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
   table.inv-table th{background:var(--accent);color:#ffffff;font-size:12.5px;text-transform:uppercase;letter-spacing:.02em;}
   table.inv-table tbody tr:nth-child(even) td{background:#fafbfc;}
   table.inv-table tfoot td{background:var(--ok-soft);color:var(--ok);font-weight:700;}
 
-  .kv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin-bottom:14px;}
-  @media (max-width:640px){.kv-grid{grid-template-columns:1fr;}}
-  .kv{font-size:15.5px;}
-  .kv .k{color:var(--ink-soft);font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;margin-bottom:2px;}
-  .kv .v{color:var(--ink);}
-  .kv .v.danger{color:var(--danger);font-weight:700;}
-
-  .mini-section{margin-top:14px;}
-  .mini-section .mt{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--accent);margin-bottom:6px;}
-  .mini-section p{font-size:15.5px;margin:0 0 8px;}
-  .mini-section p:last-child{margin-bottom:0;}
-  .pill-note{
-    font-size:14.5px;padding:10px 14px;border-radius:8px;background:var(--bg);border:1px solid var(--border);border-left:4px solid var(--accent);margin-top:8px;
-  }
-
   table.compare{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:4px;}
   table.compare th, table.compare td{border:1px solid var(--border);padding:9px 10px;text-align:left;vertical-align:top;}
   table.compare th{background:var(--accent);color:#ffffff;font-size:12.5px;text-transform:uppercase;letter-spacing:.02em;}
   table.compare tbody tr:nth-child(even) td{background:#fafbfc;}
+  table.compare td:first-child{font-weight:700;color:var(--accent);}
   table.compare td.danger{color:var(--danger);font-weight:700;}
+  table.compare td.ok{color:var(--ok);font-weight:700;}
 
+  /* ---- Puntos clave ---- */
   ul.decision-list{margin:0;padding-left:0;list-style:none;}
   ul.decision-list li{
     position:relative;padding:13px 16px 13px 44px;margin-bottom:10px;border:1px solid var(--border);border-radius:10px;font-size:15.5px;background:var(--panel);
   }
   ul.decision-list li:last-child{margin-bottom:0;}
-  ul.decision-list li strong{display:block;margin-bottom:3px;font-size:15.5px;color:var(--accent);}
+  ul.decision-list li strong{display:block;margin-bottom:3px;font-size:16px;color:var(--accent);}
   ul.decision-list li::before{
     content:"★"; position:absolute; left:13px; top:14px; width:20px;height:20px;border-radius:5px;
     background:var(--accent); color:#fff; font-size:12px; display:flex;align-items:center;justify-content:center;
   }
 
-  section.block{background:var(--panel);border:1px solid var(--border);border-radius:10px;box-shadow:var(--sombra);padding:22px 26px;margin-bottom:22px;scroll-margin-top:16px;}
-  section.block h2{font-size:20px;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--accent);color:var(--accent);}
+  section.block{background:var(--panel);border:1px solid var(--border);border-radius:10px;box-shadow:var(--sombra);padding:22px 26px;margin-bottom:22px;}
+  section.block h2{font-size:19px;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--accent);color:var(--accent);}
+  @media (max-width:900px){.block,.mini-section{overflow-x:auto;}}
 
-  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin:6px 0 0;}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-soft);margin:6px 0 0;}
   .legend span{display:inline-flex;align-items:center;gap:6px;}
   .dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
 
-  footer{text-align:center;color:var(--ink-soft);font-size:13.5px;margin-top:30px;padding-top:14px;border-top:1px solid var(--border);}
+  footer{text-align:center;color:var(--ink-soft);font-size:13.5px;margin-top:28px;}
 
-
-  /* ---- Grupos A y B: cada grupo tiene su color y se aplica a su banner,
-     nota, y a todas las tarjetas de contrato que contiene, para ubicar de
-     un vistazo a qué línea pertenece cada contrato. ---- */
+  /* ---- Grupos A y B: cada grupo tiene su color, aplicado a su banner,
+     nota y a todas sus tarjetas, para ubicar de un vistazo a qué línea
+     pertenece cada contrato. ---- */
   .grupo-a{--g:#0b3d63;--g-soft:#dcebf6;--g-bg:#f4f9fd;}
   .grupo-b{--g:#14656b;--g-soft:#d9eeef;--g-bg:#f2f9f9;}
 
   .group-title.grupo-a,.group-title.grupo-b{
-    background:var(--g); border:none; border-radius:10px;
-    padding:14px 20px; margin:36px 0 12px;
+    background:var(--g); border-radius:10px; padding:14px 20px; margin:36px 0 12px;
     box-shadow:var(--sombra);
   }
   .group-title.grupo-a h2,.group-title.grupo-b h2{color:#ffffff;}
@@ -209,11 +216,11 @@
 
   .card.grupo-a,.card.grupo-b{
     background:var(--g-bg); border:1px solid var(--g-soft); border-left:6px solid var(--g);
-    margin-bottom:22px;
+    overflow:hidden;
   }
   .card.grupo-a .card-head,.card.grupo-b .card-head{
     background:var(--g-soft); margin:-20px -24px 18px; padding:14px 24px;
-    border-bottom:2px solid var(--g); border-radius:0 8px 0 0;
+    border-bottom:2px solid var(--g);
   }
   .card.grupo-a .card-head h3,.card.grupo-b .card-head h3{color:var(--g);font-size:19px;}
   .card.grupo-a .kv,.card.grupo-b .kv{
@@ -224,15 +231,14 @@
     background:#ffffff; border:1px solid var(--g-soft); border-radius:8px; padding:12px 16px; margin-top:12px;
   }
   .card.grupo-a .mini-section .mt,.card.grupo-b .mini-section .mt{color:var(--g);}
-  .card.grupo-a .pill-note,.card.grupo-b .pill-note{background:#ffffff;border-left-color:var(--g);}
-  @media (max-width:640px){
+  .card.grupo-a .pill-note,.card.grupo-b .pill-note{background:#ffffff;border-left:4px solid var(--g);}
+  @media (max-width:700px){
     .card.grupo-a .card-head,.card.grupo-b .card-head{margin:-20px -16px 16px;padding:12px 16px;}
   }
 
-  [id]{scroll-margin-top:16px;}
   @media print{
     nav.toc,a.btn-volver{display:none;}
-    body{font-size:12px;}
+    body{font-size:12px;background:#ffffff;}
     .page{display:block;padding:0;}
     .card,.alert,section.block{break-inside:avoid;box-shadow:none;}
   }
@@ -270,18 +276,17 @@
       <tr><td class="label">Administrador (Quanto)</td><td>Lizbeth Calderón Mata — lizbeth.calderon@quantosoluciones.com · soporte@quantosoluciones.com</td></tr>
       <tr><td class="label">Responsable interno (CAFSA)</td><td>Luis Aguilar Morales — laguilar@cafsa.fi.cr</td></tr>
       <tr><td class="label">Elaborado por</td><td>Marco Vinicio López Zamora — Ingeniero de Operaciones de TI</td></tr>
-      <tr><td class="label">Fecha de análisis</td><td>27/10/2026</td></tr>
+      <tr><td class="label">Fecha de análisis</td><td>30/10/2026</td></tr>
     </table>
   </header>
 
   <div class="alert" id="alerta">
-    <h3>⚠ Alerta crítica — verificar vigencia real antes de cualquier decisión</h3>
-    <p>Los dos contratos SaaS firmados (QR Crédito y QR EC14-21) tienen un plazo de <strong>30 meses contados desde el "acta de inicio del proyecto"</strong>, documento que no está en el expediente digital revisado. Como referencia (no como hecho confirmado), si el plazo se contara desde la fecha de firma:</p>
+    <h3>⚠ Vigencia calculada con base en la facturación</h3>
+    <p>Los dos contratos SaaS firmados (QR Crédito y QR EC14-21) tienen un plazo de 30 meses contados desde el "acta de inicio del proyecto" que en este caso se toma como acta de inicio, la última factura de implementación del servicio. A partir de esta fecha, se comienzan los pagos mensuales.</p>
     <ul>
-      <li><strong>QR Crédito</strong> (firmado 28/12/2023) habría vencido el <strong>28/06/2026</strong> — hace aproximadamente 4 meses.</li>
-      <li><strong>QR EC14-21</strong> (firmado 14/03/2024) habría vencido el <strong>14/09/2026</strong> — hace aproximadamente 6 semanas.</li>
+      <li><strong>QR Crédito</strong>: única factura de implementación, 28/12/2023 (100% a la firma, sin cuotas) → el plazo de 30 meses habría vencido el <strong>28/06/2026</strong> — hace aproximadamente 4 meses.</li>
+      <li><strong>QR EC14-21</strong>: última factura de implementación, 03/12/2025 (cuota final del 50%, la que marca la entrega final) → el plazo de 30 meses vence el <strong>03/06/2028</strong> — quedan aproximadamente 19 meses.</li>
     </ul>
-    <p>Esto es una estimación, no un hecho verificado: el plazo corre desde el acta de inicio, no desde la firma, y ambos contratos incluyen un período de implementación previo (6 meses y 13 semanas respectivamente) que normalmente desplaza esa fecha hacia adelante. <strong>Se recomienda solicitar a Quanto o confirmar internamente la fecha exacta del acta de inicio de cada contrato y si existe addenda de prórroga</strong>, antes de asumir que ambos servicios siguen activos bajo los términos originales.</p>
   </div>
 
   <!-- GRUPO A -->
@@ -302,6 +307,7 @@
     <div class="kv-grid">
       <div class="kv"><div class="k">Función</div><div class="v">Define tiempos de servicio (L-V, 8:00am-5:00pm), prioridades de incidente, escalamiento y mantenimiento/garantía para los Sistemas QR contratados.</div></div>
       <div class="kv"><div class="k">Vigencia propia</div><div class="v">No tiene plazo independiente: corre atada a la vigencia del contrato principal de cada módulo que lo anexa.</div></div>
+      <div class="kv"><div class="k">Renovación automática</div><div class="v">No aplica — no tiene plazo ni mecanismo de renovación propio; depende de la prórroga del contrato principal que anexa.</div></div>
     </div>
     <div class="mini-section pill-note">No contiene cláusula de terminación propia ni penalidades económicas. Al cerrar un módulo SaaS, debe darse por cerrado explícitamente junto con ese contrato en el convenio de finiquito respectivo.</div>
   </div>
@@ -315,14 +321,15 @@
       <div class="badges">
         <span class="badge riesgo">Riesgo de cartera</span>
         <span class="badge contabilidad">Contabilidad</span>
-        <span class="badge verificar">Vigencia a verificar</span>
+        <span class="badge vencido">Vigencia vencida (estimada)</span>
         <span class="badge verificado">Facturación verificada</span>
       </div>
     </div>
     <div class="kv-grid">
       <div class="kv"><div class="k">Objeto</div><div class="v">Administración del riesgo de la cartera de préstamos: estadísticas de cartera, seguimiento de límites, cosechas, PD/LGD, pérdida esperada, VaR, backtesting.</div></div>
       <div class="kv"><div class="k">Función contable</div><div class="v">Incluye "comprobación de cuentas contables con respecto al balance" como parte del módulo básico — es la única función explícitamente contable entre los servicios de Quanto.</div></div>
-      <div class="kv"><div class="k">Plazo (Cláusula Octava)</div><div class="v">30 meses desde el acta de inicio del proyecto. Implementación: 6 meses. Prórroga solo por acuerdo escrito.</div></div>
+      <div class="kv"><div class="k">Plazo (Cláusula Octava)</div><div class="v danger">30 meses desde el acta de inicio del proyecto (no firmada). Tomando como inicio la única factura de implementación (28/12/2023), confirmada por correo electrónico según indicación del usuario: vigencia estimada hasta 28/06/2026 — ya vencida. Prórroga solo por acuerdo escrito.</div></div>
+      <div class="kv"><div class="k">Renovación automática</div><div class="v danger">No. La Cláusula Octava solo permite prórroga por acuerdo escrito de ambas partes; sin él, "el contrato se tendrá por finalizado para todos los efectos legales" al concluir el plazo. No se identifica ninguna adenda de prórroga en el expediente revisado.</div></div>
       <div class="kv"><div class="k">Precio</div><div class="v">Implementación: $19,893.65 (único, IVA incl.). Mensualidad: $1,853.20 (IVA incl.), pago anticipado.</div></div>
     </div>
     <div class="mini-section">
@@ -363,14 +370,15 @@
       </div>
       <div class="badges">
         <span class="badge riesgo">Riesgo / Regulatorio</span>
-        <span class="badge verificar">Vigencia a verificar</span>
+        <span class="badge vigente">Vigente (estimada)</span>
         <span class="badge verificado">Facturación verificada</span>
       </div>
     </div>
     <div class="kv-grid">
       <div class="kv"><div class="k">Objeto</div><div class="v">Licencia y acceso web al sistema QR EC14-21 para el cálculo de estimaciones crediticias bajo la Metodología Estándar y de Sensibilización del Acuerdo CONASSIF 14-21.</div></div>
       <div class="kv"><div class="k">Categoría</div><div class="v">Riesgo de crédito / cumplimiento regulatorio ante SUGEF-CONASSIF. No incluye función de conciliación contable explícita (a diferencia de QR Crédito), aunque sus resultados alimentan estimaciones que luego se registran contablemente.</div></div>
-      <div class="kv"><div class="k">Plazo (Cláusula Octava)</div><div class="v">30 meses desde el acta de inicio del proyecto. Implementación: 13 semanas. Prórroga solo por acuerdo escrito.</div></div>
+      <div class="kv"><div class="k">Plazo (Cláusula Octava)</div><div class="v">30 meses desde el acta de inicio del proyecto (no firmada). Tomando como inicio la última factura de implementación — cuota final del 50%, 03/12/2025 —, confirmada por correo electrónico según indicación del usuario: vigencia estimada hasta 03/06/2028 (quedan ~19 meses). Prórroga solo por acuerdo escrito.</div></div>
+      <div class="kv"><div class="k">Renovación automática</div><div class="v">No. Misma Cláusula Octava que QR Crédito: solo se prorroga por acuerdo escrito de ambas partes; sin él, el contrato finaliza automáticamente al concluir el plazo (03/06/2028). Aún no aplica, pero no hay adenda de prórroga pactada de antemano.</div></div>
       <div class="kv"><div class="k">Precio</div><div class="v">Implementación: $14,113.70 (único, IVA incl.). Mensualidad: $2,180.90 (IVA incl.), pago anticipado.</div></div>
     </div>
     <div class="mini-section">
@@ -444,6 +452,7 @@
           <th>Categoría</th>
           <th>Estado</th>
           <th>Vigencia / plazo</th>
+          <th>¿Renovación automática?</th>
           <th>¿CAFSA puede terminar sin causa?</th>
           <th>Penalidades SLA</th>
           <th>Devolución de datos al salir</th>
@@ -453,8 +462,9 @@
         <tr>
           <td>QR Crédito (SaaS)</td>
           <td>Riesgo + Contabilidad</td>
-          <td class="danger">Vigencia a verificar</td>
-          <td>30 meses desde acta de inicio</td>
+          <td class="danger">Vigencia vencida (estimada)</td>
+          <td>30 meses desde última factura de implementación (28/12/2023) → venció 28/06/2026</td>
+          <td class="danger">No — requiere adenda, sin una identificada</td>
           <td>No — solo mutuo acuerdo</td>
           <td>No definidas</td>
           <td>No contemplada</td>
@@ -462,8 +472,9 @@
         <tr>
           <td>QR EC14-21 (SaaS)</td>
           <td>Riesgo / Regulatorio</td>
-          <td class="danger">Vigencia a verificar</td>
-          <td>30 meses desde acta de inicio</td>
+          <td class="ok">Vigente (estimada)</td>
+          <td>30 meses desde última factura de implementación (03/12/2025) → vence 03/06/2028</td>
+          <td>No — requiere adenda (aún no aplica, vence en 2028)</td>
           <td>No — solo mutuo acuerdo</td>
           <td>No definidas</td>
           <td>No contemplada</td>
@@ -473,6 +484,7 @@
           <td>Riesgo / Finanzas / Tesorería</td>
           <td>Borrador — en validación con Legal</td>
           <td>1 año desde firma (prevista)</td>
+          <td>No — prórroga solo por adenda escrita (no automática)</td>
           <td>Sí — sin causa (versión en validación)</td>
           <td>No definidas</td>
           <td>Sí — Plan de Salida y Transición</td>
@@ -484,7 +496,9 @@
   <section class="block" id="puntos-clave">
     <h2>Puntos clave para la decisión de Gerencia</h2>
     <ul class="decision-list">
-      <li><strong>Confirmar vigencia real antes de cualquier decisión.</strong> Solicitar a Quanto (Lizbeth Calderón) o verificar internamente la fecha de acta de inicio de QR Crédito y QR EC14-21: con los cálculos desde la fecha de firma, ambos contratos ya estarían fuera de su plazo original de 30 meses.</li>
+      <li><strong>QR Crédito ya habría superado su plazo de 30 meses</strong> (vencido el 28/06/2026), tomando como inicio su única factura de implementación (28/12/2023), ya que no existe acta de inicio firmada y solo hay una autorización por correo electrónico para proceder con la facturación. Se recomienda formalizar esa fecha por escrito con Quanto y decidir si se renueva mediante adenda, continúa de forma tácita, o se inicia el proceso de salida.</li>
+      <li><strong>Ninguno de los dos contratos SaaS tiene renovación automática</strong> (Cláusula Octava: requiere acuerdo escrito de ambas partes; sin él, el contrato "se tendrá por finalizado para todos los efectos legales"). En el caso de QR Crédito, al no identificarse ninguna adenda de prórroga, el servicio se sigue facturando y pagando mensualmente sin un contrato formalmente vigente que lo respalde — es el hallazgo de mayor urgencia de este análisis.</li>
+      <li><strong>QR EC14-21 sigue vigente bajo el mismo criterio</strong>, con vencimiento estimado el 03/06/2028 (quedan ~19 meses), tomando como inicio su última factura de implementación (cuota final del 50%, 03/12/2025). Misma salvedad: se basa en autorización por correo, no en acta de inicio firmada.</li>
       <li><strong>Ningún contrato SaaS da a CAFSA el derecho de terminar sin causa.</strong> Si Gerencia decide prescindir de alguno de los dos servicios sin que medie incumplimiento de Quanto, se requiere negociar la salida por mutuo acuerdo — no es una decisión unilateral de CAFSA bajo el texto actual.</li>
       <li><strong>Ninguno de los tres contratos tiene penalidades económicas por incumplimiento de SLA.</strong> Es un vacío transversal a toda la relación con este proveedor, no exclusivo de un servicio.</li>
       <li><strong>Los contratos SaaS no garantizan la recuperación de los datos</strong> de cartera de créditos ni de las cuentas contables conciliadas en caso de salida. Esto debe negociarse explícitamente en cualquier convenio de finiquito.</li>

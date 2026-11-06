@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de decisión — MONEX: Jansen vs. BD Finance</title>
+<style>
+  :root{--azul-cafsa:#0b3d63;--azul-claro:#e8f1f8;--gris-texto:#2b2b2b;--borde:#d8dee5;--gris-claro:#f4f5f7;--ja:#5b4a8a;--jab:#efecf7;--bdf:#0f6b73;--bdb:#e3f3f4;--verde-hecho:#1a7f4e;--okb:#e4f4ea;--naranja-recom:#b56a00;--wab:#fdf1e0;--rojo-pendiente:#a4282c;--rdb:#fbe9ea}
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",Arial,sans-serif;color:var(--gris-texto);background:#fff;margin:0;line-height:1.6;font-size:16.5px}
+  .wrapper{max-width:960px;margin:0 auto;padding:32px 28px 80px}
+  header.doc-header{border-bottom:4px solid var(--azul-cafsa);padding-bottom:16px;margin-bottom:22px}
+  header.doc-header h1{color:var(--azul-cafsa);font-size:26px;margin:0 0 6px}
+  .sub{color:#555;margin:0;font-size:15.5px}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 22px;background:var(--gris-claro);border:1px solid var(--borde);border-radius:6px;padding:10px 14px;font-size:15px;margin-bottom:18px}
+  .meta b{color:var(--azul-cafsa)}
+  h2{color:var(--azul-cafsa);font-size:20px;border-bottom:2px solid var(--azul-claro);padding-bottom:5px;margin:30px 0 12px}
+  .box{border-radius:8px;padding:14px 18px;margin:12px 0;border:1px solid}
+  .box.dec{background:var(--azul-claro);border-color:#b7d1e5}
+  .box.dec h3{margin:0 0 6px;color:var(--azul-cafsa);font-size:18px}
+  .box.warn{background:var(--wab);border-color:#efd3a0}
+  .box p{margin:6px 0}
+  .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin:0 4px 0 0;vertical-align:1px}
+  .t-h{background:var(--okb);color:var(--verde-hecho);border:1px solid #b8e0c8}
+  .t-r{background:var(--wab);color:var(--naranja-recom);border:1px solid #efd3a0}
+  .t-p{background:var(--rdb);color:var(--rojo-pendiente);border:1px solid #eec2c4}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  .card{border:1px solid var(--borde);border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(11,61,99,.05), 0 4px 12px rgba(11,61,99,.07)}
+  .card header{padding:10px 14px;color:#fff}
+  .card header h3{margin:0;font-size:17.5px}
+  .card header small{opacity:.9;font-size:13.5px}
+  .card.ja header{background:var(--ja)} .card.bdf header{background:var(--bdf)}
+  .card dl{margin:0;padding:6px 14px 10px}
+  .card dt{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:9px}
+  .card.ja dt{color:var(--ja)} .card.bdf dt{color:var(--bdf)}
+  .card dd{margin:2px 0 0;font-size:15.5px}
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+  @media(max-width:640px){.pc{grid-template-columns:1fr}}
+  .pro,.con{border-radius:6px;padding:8px 12px;font-size:15.5px}
+  .pro{background:var(--okb);border:1px solid #b8e0c8}
+  .con{background:var(--rdb);border:1px solid #eec2c4}
+  .pro b{color:var(--verde-hecho)} .con b{color:var(--rojo-pendiente)}
+  .pc ul{margin:4px 0 0;padding-left:18px}
+  .pc li{margin-bottom:3px}
+  .blk{margin-top:16px}
+  .blk h3{margin:0 0 4px;font-size:17px}
+  .blk.ja h3{color:var(--ja)} .blk.bdf h3{color:var(--bdf)}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:8px 0}
+  th{background:var(--azul-cafsa);color:#fff;text-align:left;padding:7px 9px}
+  td{border:1px solid var(--borde);padding:7px 9px;vertical-align:top}
+  tr:nth-child(even) td{background:#fafbfc}
+  .tw{overflow-x:auto}
+  ul{padding-left:20px;margin:6px 0}
+  li{margin-bottom:4px}
+  code{background:#eef1f4;padding:1px 5px;border-radius:3px;font-size:14px}
+  footer{margin-top:36px;padding-top:12px;border-top:1px solid var(--borde);font-size:13.5px;color:#666}
+  a.btn-volver{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:18px;
+    padding:8px 16px;
+    background:var(--azul-cafsa);
+    color:#ffffff;
+    border-radius:6px;
+    font-size:14.5px;
+    font-weight:600;
+    text-decoration:none;
+  }
+  a.btn-volver:hover{background:#0a3252}
+  @media print{body{font-size:12px}.wrapper{padding:0}a.btn-volver{display:none}h2{break-after:avoid}.box,tr,.card,.blk{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<a class="btn-volver" href="../index.html">&larr; Volver al seguimiento de Cristopher Pérez Ugalde</a>
+
+<header class="doc-header">
+
+<h1>MONEX: servicio actual (Jansen) vs. módulo ARM (BD Finance)</h1>
+<p class="sub">Informe para decidir si el envío de reportes MONEX se mantiene con Jansen o se migra a la plataforma /gx</p>
+</header>
+
+<div class="meta">
+  <span><b>Para:</b> Cristopher Pérez Ugalde, Jefe de TI</span>
+  <span><b>De:</b> Marco V. López Zamora, Operaciones de TI</span>
+  <span><b>Fecha:</b> 6 de noviembre de 2026</span>
+</div>
+
+<div class="box dec">
+  <h3>Resumen</h3>
+  <p><span class="tag t-h">Hecho</span> CAFSA ya reporta a MONEX con software de Jansen Viñas Espinoza. BD Finance ofrece el mismo tipo de servicio con su módulo ARM, que ya existe en /gx pero no está habilitado ni contratado.</p>
+  <p><span class="tag t-r">Recomendación</span> Mantener a Jansen por ahora y pedir dos cosas antes de renovar su contrato (vence el 31-dic-2026): la propuesta comercial de ARM a BD y el plan de adaptación al API REST de SINPE a Jansen. Con ambas respuestas se decide con costo y riesgo a la vista.</p>
+</div>
+
+<h2>1. Los dos servicios, lado a lado</h2>
+<div class="two">
+  <div class="card ja">
+    <header><h3>MONEX actual — Jansen Viñas Espinoza</h3><small>Contrato JMVE-13012026 · en operación</small></header>
+    <dl>
+      <dt>Qué es</dt><dd>Software a medida que envía reportes y transacciones al servicio MONEX del SINPE, con replicación de datos desde Abanks. El contrato no detalla qué reportes cubre.</dd>
+      <dt>Quién lo presta</dt><dd>Una persona física, consultor de sistemas. El contrato prohíbe subcontratar.</dd>
+      <dt>Dónde corre</dt><dd>Infraestructura de CAFSA. El proveedor no responde por su disponibilidad ni seguridad.</dd>
+      <dt>Costo</dt><dd>US$1.500/mes + IVA, monto único para 4 sistemas: MONEX, ITM, replicación Abanks→Sentinel y Tributa Express. No hay desglose por sistema.</dd>
+      <dt>Vigencia</dt><dd>Anual (1-ene a 31-dic). Renovación automática por adenda. Terminación con 30 días de aviso.</dd>
+      <dt>Soporte</dt><dd>Lunes a viernes, 8:00 a 17:30. Respuesta crítica 1 h, resolución crítica 2 h. Multa de 1% del mes por hora de retraso, máximo 15%.</dd>
+      <dt>Cambios de SINPE</dt><dd><span class="tag t-p">Pendiente</span> Incluye "actualizaciones funcionales y de seguridad según lo definido", sin mención expresa a comunicados de SINPE ni al API REST.</dd>
+      <dt>Salida</dt><dd>Hasta 20 horas gratis de transferencia de conocimiento. Devolución de información en 5 días hábiles.</dd>
+    </dl>
+  </div>
+  <div class="card bdf">
+    <header><h3>MONEX ARM — BD Finance (/gx)</h3><small>Anexo 1, sección 7.11 · no habilitado ni contratado</small></header>
+    <dl>
+      <dt>Qué es</dt><dd>Módulo de /gx que recibe los datos cambiarios, los valida contra las normas del BCCR y envía los cinco reportes al SINPE: tipos de cambio, posición autorizada de divisas, acumulado con el público, transacciones una a una y reversiones.</dd>
+      <dt>Quién lo presta</dt><dd>BD Finance, empresa con equipo, plan de continuidad (BCP/DRP) y protocolo de soporte 24x7 para casos críticos (Anexo 4).</dd>
+      <dt>Dónde corre</dt><dd>Plataforma /gx en la nube de BD, más el interlocutor en los servidores de CAFSA, igual que los servicios actuales.</dd>
+      <dt>Costo</dt><dd><span class="tag t-p">Pendiente</span> Sin propuesta. No está en el objeto del contrato BDDL-0924, así que implica ampliación por control de cambios.</dd>
+      <dt>Vigencia</dt><dd>Se sumaría a la suscripción vigente de 36 meses. <span class="tag t-p">Pendiente</span> Fechas de inicio y fin.</dd>
+      <dt>Funciones clave</dt><dd>Integración por webservice y digitación por pantalla, reintento automático, edición de reportes no enviados, modificaciones de reportes ya enviados e historial por reporte.</dd>
+      <dt>Cambios de SINPE</dt><dd><span class="tag t-h">Hecho</span> BD los incorpora en la plataforma desde la versión 7. La versión 8 ya se conecta por API REST de SINPE y mantiene el servicio web actual en paralelo.</dd>
+      <dt>Requisito técnico</dt><dd>.NET 10 en los servidores de interlocutores para el API REST. DEV/QA ya lo tiene; producción solo .NET 8 (build preview).</dd>
+    </dl>
+  </div>
+</div>
+
+<h2>2. Pros y contras</h2>
+<div class="blk ja"><h3>Mantener MONEX con Jansen</h3>
+  <div class="pc">
+    <div class="pro"><b>Pros</b><ul>
+      <li>Ya funciona y ya está integrado con Abanks.</li>
+      <li>Sin cambio operativo ni costo nuevo.</li>
+      <li>Sin riesgo de migrar un reporte regulatorio en operación.</li></ul></div>
+    <div class="con"><b>Contras</b><ul>
+      <li>Depende de una sola persona, sin respaldo ni subcontratación.</li>
+      <li>No consta compromiso de adaptarse a SINPE ni al API REST.</li>
+      <li>Soporte solo en horario laboral.</li>
+      <li>Costo sin desglose, difícil de comparar.</li></ul></div>
+  </div></div>
+<div class="blk bdf"><h3>Migrar a ARM de BD Finance</h3>
+  <div class="pc">
+    <div class="pro"><b>Pros</b><ul>
+      <li>Proveedor institucional con continuidad y soporte 24x7 crítico.</li>
+      <li>Cambios regulatorios y API REST de SINPE ya incluidos en el producto.</li>
+      <li>Concentra otro servicio SINPE en una sola plataforma y un solo proveedor.</li></ul></div>
+    <div class="con"><b>Contras</b><ul>
+      <li>Costo desconocido y ampliación contractual.</li>
+      <li>Hay que construir la interfaz Abanks→/gx.</li>
+      <li>Requiere .NET 10 en producción y un periodo en paralelo con pruebas en SINPE.</li>
+      <li>El pago a Jansen no baja solo: cubre otros 3 sistemas.</li></ul></div>
+  </div></div>
+
+<h2>3. Consideraciones con los servicios actuales de /gx</h2>
+<ul>
+<li><b>Sin solapamiento funcional:</b> ARM es independiente de DTR saliente, Créditos Directos entrantes y Pagos Inmediatos entrantes. Adquirirlo no modifica esos flujos.</li>
+<li><b>Infraestructura compartida:</b> los interlocutores corren en <code>192.168.1.23</code> (DEV/QA) y <code>192.168.1.22</code> (producción). El .NET 10 en producción ya es un pendiente crítico por la versión 8, y cualquier piloto de ARM debe esperarlo.</li>
+<li><b>Certificado SINPE y GAUDI:</b> /gx ya los usa. El API REST cambia cómo se lee el certificado, lo que facilita un piloto en ambientes de prueba.</li>
+</ul>
+
+<footer>
+  Informe de decisión preparado para Cristopher Pérez Ugalde — CAFSA, Operaciones de TI, 6 de noviembre de 2026.
+</footer>
+
+</div>
+</body>
+</html>

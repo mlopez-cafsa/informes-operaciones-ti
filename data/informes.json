@@ -128,7 +128,7 @@
   {
     "id": "2026-08-21-migracion-de-core-financiero-forms-14c",
     "titulo": "Migración de Core Financiero - Forms 14c",
-    "fecha": "2026-10-28",
+    "fecha": "2026-11-01",
     "categoria": "core-financiero",
     "orden_atencion": 1,
     "prioridad": "alta",
@@ -144,7 +144,7 @@
       },
       {
         "nombre": "Migracion y pruebas de modulos/objetos Abanks",
-        "avance": 79
+        "avance": 80
       },
       {
         "nombre": "Pruebas por roles de usuario",
@@ -193,7 +193,7 @@
         "url": "https://cafsagroup.atlassian.net/browse/DES-2707"
       }
     ],
-    "resumen": "Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 28/10/2026: 78.8% aprobado por CAFSA (406 de 515 objetos), +2.5 puntos en 12 dias. El plazo del 30/09/2026 sigue vencido (hace 28 dias) sin cierre. Los rechazos subieron de 5 a 16 (11 nuevos en BANCOS, GARANTIAS, SOLICITUDES y GENERALES; ninguno de los 5 anteriores se corrigio); los de SOLICITUDES y GARANTIAS llevan 5 cortes sin resolverse. RECOMPILADOS (9 objetos) sigue sin modulo confirmado. Detalle completo por modulo en el informe.",
+    "resumen": "Proyecto mas critico de TI: migracion del core financiero a Oracle Forms 14C. Corte 01/11/2026: 80.0% aprobado por CAFSA (412 de 515 objetos), +1.2 puntos en 4 dias (6 aprobados mas en BRANCH y GENERALES). El plazo del 30/09/2026 sigue vencido (hace 32 dias) sin cierre. Los rechazos subieron de 16 a 17 (el nuevo es OBJ.BMG0008 en GENERALES; ninguno de los anteriores se corrigio); los de SOLICITUDES y GARANTIAS llevan 6 cortes sin resolverse. RECOMPILADOS (9 objetos) sigue sin modulo confirmado. Detalle completo por modulo en el informe.",
     "ruta": "informes/core-financiero/migracion-de-core-financiero-forms-14c.html",
     "destacado": true,
     "personalizado": true,

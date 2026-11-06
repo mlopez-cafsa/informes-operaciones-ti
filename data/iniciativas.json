@@ -1,5 +1,14 @@
 [
   {
+    "id": "cristopher-perez-ugalde-2026-11-06-monex-servicio-actual-jansen-vs-modulo-arm-bd-fina",
+    "persona_slug": "cristopher-perez-ugalde",
+    "titulo": "MONEX: servicio actual (Jansen) vs. módulo ARM (BD Finance)",
+    "fecha": "2026-11-06",
+    "categoria": "Decisión de proveedor",
+    "resumen": "Comparativo del servicio MONEX actual (Jansen) y el módulo ARM de BD Finance en /gx, con pros y contras, y la recomendación de mantener a Jansen hasta recibir la propuesta de ARM y el plan de adaptación al API REST de SINPE (el contrato vence el 31-dic-2026).",
+    "ruta": "reportes/cristopher-perez-ugalde/iniciativas/06-11-2026-INFORME-MONEX-ARM-decision.html"
+  },
+  {
     "id": "alvaro-guevara-2026-10-27-mapa-de-contratos-y-ordenes-de-servicio-quanto-sol",
     "persona_slug": "alvaro-guevara",
     "titulo": "Mapa de Contratos y Órdenes de Servicio — Quanto Soluciones",
